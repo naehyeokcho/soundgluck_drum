@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOUNDGLUCK | DRUM TULZ v4.1.0 Ultimate Edition</title>
+    <title>SOUNDGLUCK | DRUM TULZ v4.2.0 Ultimate Edition</title>
     <!-- Tailwind CSS 및 FontAwesome 아이콘 로드 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -401,7 +401,7 @@
             
             <!-- 타이틀 줄바꿈 강제 억제(whitespace-nowrap) -->
             <h2 class="text-2xl font-black tracking-widest text-white mb-2 uppercase whitespace-nowrap">SOUNDGLUCK &nbsp;|&nbsp; DRUM TULZ</h2>
-            <p class="text-[11px] text-[#ff007f] font-mono tracking-wider uppercase mb-8">l &nbsp; Drum Tulz v4.1.0 Ultimate</p>
+            <p class="text-[11px] text-[#ff007f] font-mono tracking-wider uppercase mb-8">l &nbsp; Drum Tulz v4.2.0 Ultimate</p>
             
             <form onsubmit="handleLogin(event)" class="space-y-6">
                 <div class="text-left">
@@ -426,7 +426,7 @@
                     <i class="fa-solid fa-cloud-arrow-up text-[10px]"></i> Google Sheets Cloud Security Enabled
                 </span>
             </div>
-            <p class="text-[10px] text-gray-600 mt-6 font-mono">AUTHORIZED PERSONNEL ONLY // v4.1.0</p>
+            <p class="text-[10px] text-gray-600 mt-6 font-mono">AUTHORIZED PERSONNEL ONLY // v4.2.0</p>
         </div>
     </div>
 
@@ -539,35 +539,39 @@
 
                     <div class="flex justify-between pt-2">
                         <button onclick="nextWizardStep(2)" class="px-4 py-2 bg-slate-900 border border-slate-700 text-xs rounded-lg font-bold"><i class="fa-solid fa-arrow-left mr-1"></i> 이전</button>
-            <!-- 사운드 프리셋 셀렉터 (16종 확장판) -->
-            <div class="bg-black/30 border border-gray-800 p-3 rounded-xl flex flex-col md:flex-row items-start md:items-center gap-3">
-                <span class="text-[11px] font-black text-[#ffe600] uppercase tracking-wider flex items-center gap-1 whitespace-nowrap">
-                    <i class="fa-solid fa-compact-disc"></i> 🥁 SOUND LIBRARY PRESET (16 KITS):
-                </span>
-                <div class="flex flex-wrap gap-1.5 w-full md:w-auto">
-                    <button onclick="loadDrumKitPreset('acoustic')" class="px-2.5 py-1 bg-cyan-950/40 hover:bg-cyan-900 border border-cyan-800 text-[10.5px] text-cyan-300 font-bold rounded-lg transition">Acoustic Studio</button>
-                    <button onclick="loadDrumKitPreset('trap808')" class="px-2.5 py-1 bg-pink-950/40 hover:bg-pink-900 border border-pink-800 text-[10.5px] text-pink-300 font-bold rounded-lg transition">Deep Sub 808</button>
-                    <button onclick="loadDrumKitPreset('retro80s')" class="px-2.5 py-1 bg-purple-950/40 hover:bg-purple-900 border border-purple-800 text-[10.5px] text-purple-300 font-bold rounded-lg transition">Cyber Retro 80s</button>
-                    <button onclick="loadDrumKitPreset('metal')" class="px-2.5 py-1 bg-yellow-950/40 hover:bg-yellow-900 border border-yellow-800 text-[10.5px] text-yellow-400 font-bold rounded-lg transition">Industrial Metal</button>
-                    <button onclick="loadDrumKitPreset('vintagePop')" class="px-2.5 py-1 bg-slate-950/40 hover:bg-slate-900 border border-slate-800 text-[10.5px] text-slate-300 font-bold rounded-lg transition">Vintage Pop</button>
-                    <button onclick="loadDrumKitPreset('jazzLoFi')" class="px-2.5 py-1 bg-amber-950/40 hover:bg-amber-900 border border-amber-800 text-[10.5px] text-amber-300 font-bold rounded-lg transition">Lo-Fi Jazz</button>
-                    <button onclick="loadDrumKitPreset('electroHouse')" class="px-2.5 py-1 bg-green-950/40 hover:bg-green-900 border border-green-800 text-[10.5px] text-green-300 font-bold rounded-lg transition">Electro House</button>
-                    <button onclick="loadDrumKitPreset('stadiumRock')" class="px-2.5 py-1 bg-red-950/40 hover:bg-red-900 border border-red-800 text-[10.5px] text-red-300 font-bold rounded-lg transition">Stadium Rock</button>
-                    <button onclick="loadDrumKitPreset('dubStep')" class="px-2.5 py-1 bg-teal-950/40 hover:bg-teal-900 border border-teal-800 text-[10.5px] text-teal-300 font-bold rounded-lg transition">Dubstep Heavy</button>
-                    <button onclick="loadDrumKitPreset('latinPerc')" class="px-2.5 py-1 bg-orange-950/40 hover:bg-orange-900 border border-orange-800 text-[10.5px] text-orange-300 font-bold rounded-lg transition">Latin Percussion</button>
-                    <button onclick="loadDrumKitPreset('synthWave')" class="px-2.5 py-1 bg-indigo-950/40 hover:bg-indigo-900 border border-indigo-800 text-[10.5px] text-indigo-300 font-bold rounded-lg transition">Outrun Wave</button>
-                    <button onclick="loadDrumKitPreset('dnbBreak')" class="px-2.5 py-1 bg-emerald-950/40 hover:bg-emerald-900 border border-emerald-800 text-[10.5px] text-emerald-300 font-bold rounded-lg transition">Fast D&B Break</button>
-                    <button onclick="loadDrumKitPreset('ukDrill')" class="px-2.5 py-1 bg-blue-950/40 hover:bg-blue-900 border border-blue-800 text-[10.5px] text-blue-300 font-bold rounded-lg transition">UK Drill Heavy</button>
-                    <button onclick="loadDrumKitPreset('afrobeats')" class="px-2.5 py-1 bg-orange-900/30 hover:bg-orange-900/60 border border-orange-700 text-[10.5px] text-orange-200 font-bold rounded-lg transition">Afrobeat Swing</button>
-                    <button onclick="loadDrumKitPreset('phonk')" class="px-2.5 py-1 bg-yellow-950/30 hover:bg-yellow-950/60 border border-yellow-800 text-[10.5px] text-yellow-300 font-bold rounded-lg transition">Phonk Cowbell</button>
-                    <button onclick="loadDrumKitPreset('cyberpunk')" class="px-2.5 py-1 bg-red-900/20 hover:bg-red-900/50 border border-red-700 text-[10.5px] text-red-200 font-bold rounded-lg transition">Cyberpunk Indus</button>
+                        <button onclick="skipActiveWizardPad()" class="px-4 py-2 bg-amber-950 border border-amber-900 text-xs rounded-lg font-bold text-amber-300">이번 파트 건너뛰기</button>
+                    </div>
+                </div>
+
+                <!-- Wizard Step 4: Finished Setup Success -->
+                <div id="wizard-step-4" class="hidden space-y-5 text-center">
+                    <div class="w-14 h-14 rounded-full bg-green-950/50 border border-green-500 flex items-center justify-center mx-auto text-green-400 text-2xl animate-pulse">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                    <div class="space-y-1">
+                        <h4 class="text-base font-black text-white">하드웨어 자동 맵핑 성공!</h4>
+                        <p class="text-xs text-gray-400 leading-relaxed">
+                            보유하신 실제 전자드럼의 패트 트리거 미디 신호가 SoundGluck Studio 전용 매핑 테이블에 안정적으로 바인딩되었습니다.
+                        </p>
+                    </div>
+
+                    <div class="p-3 bg-black/40 border border-gray-800 rounded-xl text-left space-y-1.5 text-[11px] text-gray-400">
+                        <span class="font-bold text-white text-[11px]"><i class="fa-solid fa-floppy-disk text-cyan-400"></i> 중요 기기 셋업 보존 수칙</span>
+                        <p>1. 완성된 설정은 로컬 컴퓨터 브라우저 캐시에 반영구 고정 저장됩니다.</p>
+                        <p>2. 추후 브라우저 캐시 삭제 시 소실을 방지하기 위해 [컨트롤러 맵핑] 탭에서 **[맵핑 설정 저장]**을 통해 파일로 백업할 것을 권장합니다.</p>
+                    </div>
+
+                    <div class="flex justify-center gap-3 pt-2">
+                        <button onclick="saveMidiSetupLocalStorage()" class="px-4 py-2 bg-slate-900 border border-slate-700 text-xs rounded-lg font-bold text-gray-300">현재 브라우저에 임시 기억</button>
+                        <button onclick="enterStudioCompleted()" class="px-6 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-xs rounded-lg font-bold text-white">스튜디오 믹싱룸 입장</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- 💻 3단계: 메인 어플리케이션 본체 (견적히스토리2.JPG 밀림 및 쪼개짐 해결) -->
-    <div id="app-container">
+    <div id="app-container" class="w-full">
         
         <!-- 통합 제어 헤더 (xl:flex-nowrap 및 whitespace-nowrap 적용으로 모니터 한 화면 고정 확보) -->
         <header class="flex flex-col xl:flex-row justify-between items-center bg-[#07071c]/95 border-2 border-[#151538] rounded-2xl p-4 gap-4 w-full">
@@ -577,7 +581,7 @@
                 </div>
                 <div class="whitespace-nowrap">
                     <h1 class="text-xl font-black tracking-widest text-white flex items-center gap-2">
-                        SOUNDGLUCK <span class="text-cyan-500 font-light">|</span> DRUM TULZ <span class="text-[#ff007f] font-mono text-[10px] border border-pink-900 px-2 py-0.5 rounded">V4.1.0</span>
+                        SOUNDGLUCK <span class="text-cyan-500 font-light">|</span> DRUM TULZ <span class="text-[#ff007f] font-mono text-[10px] border border-pink-900 px-2 py-0.5 rounded">V4.2.0</span>
                     </h1>
                     <p class="text-[10px] text-gray-500 font-mono">Analog Synthesizer & Pro-Mixing Studio Module</p>
                 </div>
@@ -617,7 +621,7 @@
             <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center border-b border-[#1c1c3f] pb-4 gap-4">
                 <div>
                     <h2 class="text-sm font-black text-[#00f3ff] tracking-widest uppercase flex items-center gap-1.5">
-                        <i class="fa-solid fa-wave-square text-cyan-400"></i> SoundGluck Performance Workspace v4.1.0
+                        <i class="fa-solid fa-wave-square text-cyan-400"></i> SoundGluck Performance Workspace v4.2.0
                     </h2>
                     <p class="text-[11px] text-gray-400 mt-1 font-sans">고밀도 신디사이저 믹싱 및 사운드 조율 워크플레이스</p>
                 </div>
@@ -659,10 +663,10 @@
                 </div>
             </div>
 
-            <!-- 사운드 프리셋 셀렉터 (12종 확장판) -->
+            <!-- 사운드 프리셋 셀렉터 (16종 확장판) -->
             <div class="bg-black/30 border border-gray-800 p-3 rounded-xl flex flex-col md:flex-row items-start md:items-center gap-3">
                 <span class="text-[11px] font-black text-[#ffe600] uppercase tracking-wider flex items-center gap-1 whitespace-nowrap">
-                    <i class="fa-solid fa-compact-disc"></i> 🥁 SOUND LIBRARY PRESET (12 KITS):
+                    <i class="fa-solid fa-compact-disc"></i> 🥁 SOUND LIBRARY PRESET (16 KITS):
                 </span>
                 <div class="flex flex-wrap gap-1.5 w-full md:w-auto">
                     <button onclick="loadDrumKitPreset('acoustic')" class="px-2.5 py-1 bg-cyan-950/40 hover:bg-cyan-900 border border-cyan-800 text-[10.5px] text-cyan-300 font-bold rounded-lg transition">Acoustic Studio</button>
@@ -677,6 +681,10 @@
                     <button onclick="loadDrumKitPreset('latinPerc')" class="px-2.5 py-1 bg-orange-950/40 hover:bg-orange-900 border border-orange-800 text-[10.5px] text-orange-300 font-bold rounded-lg transition">Latin Percussion</button>
                     <button onclick="loadDrumKitPreset('synthWave')" class="px-2.5 py-1 bg-indigo-950/40 hover:bg-indigo-900 border border-indigo-800 text-[10.5px] text-indigo-300 font-bold rounded-lg transition">Outrun Wave</button>
                     <button onclick="loadDrumKitPreset('dnbBreak')" class="px-2.5 py-1 bg-emerald-950/40 hover:bg-emerald-900 border border-emerald-800 text-[10.5px] text-emerald-300 font-bold rounded-lg transition">Fast D&B Break</button>
+                    <button onclick="loadDrumKitPreset('ukDrill')" class="px-2.5 py-1 bg-blue-950/40 hover:bg-blue-900 border border-blue-800 text-[10.5px] text-blue-300 font-bold rounded-lg transition">UK Drill Heavy</button>
+                    <button onclick="loadDrumKitPreset('afrobeats')" class="px-2.5 py-1 bg-orange-900/30 hover:bg-orange-900/60 border border-orange-700 text-[10.5px] text-orange-200 font-bold rounded-lg transition">Afrobeat Swing</button>
+                    <button onclick="loadDrumKitPreset('phonk')" class="px-2.5 py-1 bg-yellow-950/30 hover:bg-yellow-950/60 border border-yellow-800 text-[10.5px] text-yellow-300 font-bold rounded-lg transition">Phonk Cowbell</button>
+                    <button onclick="loadDrumKitPreset('cyberpunk')" class="px-2.5 py-1 bg-red-900/20 hover:bg-red-900/50 border border-red-700 text-[10.5px] text-red-200 font-bold rounded-lg transition">Cyberpunk Indus</button>
                 </div>
             </div>
 
@@ -870,21 +878,6 @@
 
             <!-- 🎮 게임 플레이 전용 오디오 콘솔 데스크 (수동 리듬 구동) -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-3 bg-[#0a0a20] border-2 border-cyan-500/30 rounded-xl p-3">
-                <div class="flex flex-col justify-center gap-1 bg-black/40 p-2 rounded border border-gray-800">
-                    <span class="text-[9px] font-black text-cyan-300 uppercase">드롭 리듬 패턴 프리셋 (9종)</span>
-                    <select id="rhythm-preset-select" onchange="changeRhythmPreset(this.value)" class="text-xs bg-black text-white font-extrabold p-1.5 rounded border border-gray-800 outline-none">
-                        <option value="eight_go">표준 8비트 고고 그루브 (디폴트)</option>
-                        <option value="sixteen_funk">16비트 복합 펑키 비트 (스네어/킥 연타)</option>
-                        <option value="shuffle">셔플 블루스 그루브 (하이햇 바운스)</option>
-                        <option value="quarter">4비트 표준 메트로놈 연습</option>
-                        <option value="bossa_beat">싱코페이션 보사노바 리듬</option>
-                        <option value="dnb_frenzy">D&B 초고속 비트 챌린지</option>
-                        <option value="retro_disco">디스코 네온 백비트</option>
-                        <option value="metal_blast">더블베이스 메탈 블래스트 비트</option>
-                        <option value="random">완전 무작위 멀티패드 순발력 훈련</option>
-                    </select>
-            <!-- 🎮 게임 플레이 전용 오디오 콘솔 데스크 (수동 리듬 구동 - 기존 셀렉트박스 영역 제거) -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-3 bg-[#0a0a20] border-2 border-cyan-500/30 rounded-xl p-3">
                 <div class="flex items-center justify-center gap-2 col-span-3 bg-black/60 p-2 rounded-lg border border-gray-800/80">
                     <button onclick="startGameEngine()" class="px-4 py-2 bg-green-950 hover:bg-green-900 text-green-300 border border-green-800 text-xs font-black rounded-lg transition flex items-center gap-1.5 shadow-md shadow-green-950">
                         <i class="fa-solid fa-play"></i> PLAY
@@ -1024,7 +1017,7 @@
         <div id="content-help" class="hidden bg-[#06061a]/95 border border-[#141432] rounded-2xl p-6">
             <div class="border-b border-gray-800 pb-4 mb-6">
                 <h2 class="text-base font-black text-[#00f3ff] tracking-widest uppercase flex items-center gap-2">
-                    <i class="fa-solid fa-circle-info text-cyan-400"></i> SOUNDGLUCK DRUMTULZ v4.1.0 초보자 맞춤형 정밀 가이드
+                    <i class="fa-solid fa-circle-info text-cyan-400"></i> SOUNDGLUCK DRUMTULZ v4.2.0 초보자 맞춤형 정밀 가이드
                 </h2>
                 <p class="text-xs text-gray-400 mt-1">전자드럼 최초 결속부터 오디오 성능을 300% 극대화하는 전문가 셋업 노하우까지 한눈에 확인하세요.</p>
             </div>
@@ -1079,7 +1072,7 @@
                     <div class="text-xs text-gray-300 space-y-3 leading-relaxed">
                         <p>
                             <b class="text-white">🎛️ 공간계 가상 앰프 튜닝:</b><br>
-                            [Performance Mode]에서 12가지 장르별 드럼 프리셋 라이브러리 중 원하는 패치를 로드하고, 오른쪽 스튜디오 아웃 랙의 <span class="text-yellow-400 font-bold">Ambient Room Bleed</span> 및 <span class="text-pink-400 font-bold">Reverb Size/Mix</span> 다이얼을 올려 대형 스타디움 콘서트 콘셉트의 울림을 튜닝해 연주할 수 있습니다.
+                            [Performance Mode]에서 16가지 장르별 드럼 프리셋 라이브러리 중 원하는 패치를 로드하고, 오른쪽 스튜디오 아웃 랙의 <span class="text-yellow-400 font-bold">Ambient Room Bleed</span> 및 <span class="text-pink-400 font-bold">Reverb Size/Mix</span> 다일얼을 올려 대형 스타디움 콘서트 콘셉트의 울림을 튜닝해 연주할 수 있습니다.
                         </p>
                         <p>
                             <b class="text-white">🥁 다채널 동시 드롭 리듬 훈련:</b><br>
@@ -1614,11 +1607,6 @@
                                 <span class="text-[7px] text-gray-400 font-mono mt-0.5" id="label-${chan.id}-eqMid">${synthParams[chan.id].eqMid}dB</span>
                             </div>
                             <div class="flex flex-col items-center">
-                                <span class="text-[7px] text-gray-500 font-bold mb-0.5">High</span>
-                                <div class="rotary-knob" data-instrument="${chan.id}" data-param="eqHigh" data-min="-12" data-max="12" data-value="${synthParams[chan.id].eqHigh}" data-unit="dB">
-                                    <div class="rotary-knob-pointer"></div>
-                                    <svg class="rotary-knob-svg"><path class="rotary-knob-arc" stroke="${chan.color}" d="M 9.7 32.3 A 16 16 0 1 1 32.3 32.3" /></svg>
-                                </div>
                                 <span class="text-[7px] text-gray-400 font-mono mt-0.5" id="label-${chan.id}-eqHigh">${synthParams[chan.id].eqHigh}dB</span>
                             </div>
                         </div>
@@ -2546,7 +2534,7 @@
         function exportToJsonFile() {
             if (recordedSequence.length === 0) return;
             const fileData = {
-                generator: "SoundGluck Drum Engine v4.1.0 Ultimate Edition",
+                generator: "SoundGluck Drum Engine v4.2.0 Ultimate Edition",
                 lanes: currentLanes,
                 tempo: bpm,
                 sequence: recordedSequence
@@ -3382,7 +3370,7 @@
         });
 
         /* ===================================================================
-           12. 공통 인프라 인터페이스 바인딩 (12종 다채널 사운드 프리셋 라이브러리)
+           12. 공통 인프라 인터페이스 바인딩 (16종 다채널 사운드 프리셋 라이브러리)
            =================================================================== */
         const drumKitLibrary = {
             acoustic: {
