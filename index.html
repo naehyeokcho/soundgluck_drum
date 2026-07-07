@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SoundGluck Drum Engine v3.3.2 Standalone Studio Module</title>
+    <title>SoundGluck Studio v4.0.1 - Premium Electronic Drum System</title>
     <!-- Tailwind CSS 및 FontAwesome 아이콘 로드 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -48,7 +48,7 @@
         #app-container {
             width: 100%;
             max-width: 1200px;
-            display: none; /* 로그인 전에는 숨김 처리 */
+            display: none; /* 온보딩 완료 전에는 숨김 */
             flex-direction: column;
             gap: 15px;
         }
@@ -60,6 +60,18 @@
             inset: 0;
             background: radial-gradient(circle at center, #0a0a24 0%, #020207 100%);
             z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* 🚪 3단 온보딩 게이트웨이 화면 스타일 */
+        #onboarding-screen {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at center, #090920 0%, #010105 100%);
+            z-index: 900;
             align-items: center;
             justify-content: center;
             padding: 20px;
@@ -321,7 +333,7 @@
             transform-origin: 21px 21px; /* 42x42 중심축 */
         }
         
-        /* 🎚️ 세로형 정밀 채널 페이더 디자인 (가로 공간 확보 및 세로 슬림화) */
+        /* 🎚️ 세로형 정밀 채널 페이더 디자인 */
         .fader-track {
             position: relative;
             width: 22px;
@@ -368,7 +380,12 @@
 </head>
 <body>
 
-    <!-- 🔒 1단계: 네온 보안 로그인 스크린 -->
+    <!-- 🔔 글로벌 비차단 보안형 알림 토스트 -->
+    <div id="notification-toast" class="fixed top-5 right-5 bg-slate-900 border border-cyan-500 text-cyan-300 px-4 py-2.5 rounded-lg shadow-lg opacity-0 transition-all duration-300 pointer-events-none z-[1100] text-xs font-bold flex items-center gap-2">
+        <i class="fa-solid fa-circle-info text-cyan-400"></i> <span id="toast-text">알림 메세지</span>
+    </div>
+
+    <!-- 🔒 1단계: 네온 보안 로그인 스크린 (구글 스프레드시트 완전 연동) -->
     <div id="login-screen">
         <div class="bg-[#0b0b1e]/90 border-2 border-[#00f3ff] shadow-[0_0_40px_rgba(0,243,255,0.25)] rounded-2xl p-8 max-w-sm w-full text-center backdrop-blur-md">
             <div class="flex justify-center mb-4">
@@ -378,17 +395,17 @@
             </div>
             
             <h2 class="text-xl font-black tracking-widest text-white mb-1">SoundGluck Studio</h2>
-            <p class="text-[10px] text-[#ff007f] font-mono tracking-wider uppercase mb-6">Master Synthesis System</p>
+            <p class="text-[10px] text-[#ff007f] font-mono tracking-wider uppercase mb-6">l &nbsp; Drum Tulz v4.0.1</p>
             
             <form onsubmit="handleLogin(event)" class="space-y-4">
                 <div class="text-left">
                     <label class="text-[9px] font-bold text-gray-500 uppercase tracking-widest block mb-1">STUDIO ID</label>
-                    <input type="text" id="login-id" required autocomplete="username" class="w-full bg-black/60 border border-gray-800 focus:border-cyan-500 rounded-lg py-2 px-3 text-sm text-white outline-none font-semibold transition shadow-inner">
+                    <input type="text" id="login-id" value="sound" required autocomplete="username" class="w-full bg-black/60 border border-gray-800 focus:border-cyan-500 rounded-lg py-2 px-3 text-sm text-white outline-none font-semibold transition shadow-inner">
                 </div>
                 
                 <div class="text-left">
                     <label class="text-[9px] font-bold text-gray-500 uppercase tracking-widest block mb-1">ACCESS PASSCODE</label>
-                    <input type="password" id="login-pw" required autocomplete="current-password" class="w-full bg-black/60 border border-gray-800 focus:border-cyan-500 rounded-lg py-2 px-3 text-sm text-white outline-none font-semibold transition shadow-inner">
+                    <input type="password" id="login-pw" value="gluck" required autocomplete="current-password" class="w-full bg-black/60 border border-gray-800 focus:border-cyan-500 rounded-lg py-2 px-3 text-sm text-white outline-none font-semibold transition shadow-inner">
                 </div>
                 
                 <div id="login-error-msg" class="text-red-500 text-[11px] font-bold h-4 transition duration-150"></div>
@@ -397,12 +414,153 @@
                     Launch Console <i class="fa-solid fa-circle-play ml-1"></i>
                 </button>
             </form>
-            
-            <p class="text-[9px] text-gray-600 mt-6 font-mono">AUTHORIZED PERSONNEL ONLY // v3.3.2</p>
+            <div class="mt-4 pt-4 border-t border-gray-900 text-left">
+                <span class="text-[8px] font-bold text-gray-600 uppercase tracking-wider block">Real-time DB Connection Status</span>
+                <span class="text-[10px] text-cyan-400 font-bold flex items-center gap-1.5 mt-1 font-sans">
+                    <i class="fa-solid fa-cloud-arrow-up text-[9px]"></i> Google Sheets Cloud Security Enabled
+                </span>
+            </div>
+            <p class="text-[9px] text-gray-600 mt-5 font-mono">AUTHORIZED PERSONNEL ONLY // v4.0.1</p>
         </div>
     </div>
 
-    <!-- 💻 2단계: 메인 어플리케이션 본체 -->
+    <!-- 🚪 3단 온보딩 게이트웨이 및 대화형 설정 위저드 화면 -->
+    <div id="onboarding-screen">
+        <div id="onboarding-card-main" class="bg-[#0a0a20] border-2 border-cyan-500/80 shadow-[0_0_50px_rgba(0,243,255,0.15)] rounded-2xl p-8 max-w-lg w-full backdrop-blur-md">
+            <div class="text-center mb-6">
+                <span class="text-[10px] text-cyan-400 font-mono tracking-widest uppercase">SoundGluck Welcome System</span>
+                <h2 class="text-2xl font-black text-white mt-1">전자드럼 셋업 및 도구 시작</h2>
+                <p class="text-xs text-gray-400 mt-1">SoundGluck Drum Tulz의 최적 성능을 위한 시작 방식을 선택해 주세요.</p>
+            </div>
+
+            <!-- 메인 3선지 메뉴 목록 -->
+            <div id="onboarding-menu-list" class="space-y-3.5">
+                <button onclick="startSetupWizard()" class="w-full bg-gradient-to-r from-cyan-950/80 to-blue-950/80 border-2 border-cyan-500 hover:border-cyan-300 rounded-xl p-4 flex items-center gap-4 transition text-left group">
+                    <div class="w-12 h-12 rounded-lg bg-cyan-900/40 border border-cyan-400 flex items-center justify-center text-cyan-300 text-xl group-hover:scale-105 transition">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-bold text-white group-hover:text-cyan-300">1. 전자드럼 맵핑 셋업하기</h4>
+                        <p class="text-[11px] text-gray-400 mt-0.5">보유하신 기기 신호를 순서대로 감지하여 자동으로 최적화합니다.</p>
+                    </div>
+                </button>
+
+                <label class="w-full bg-gradient-to-r from-purple-950/40 to-slate-900/40 border-2 border-purple-500/60 hover:border-purple-400 rounded-xl p-4 flex items-center gap-4 transition text-left cursor-pointer group">
+                    <div class="w-12 h-12 rounded-lg bg-purple-900/30 border border-purple-400/60 flex items-center justify-center text-purple-300 text-xl group-hover:scale-105 transition">
+                        <i class="fa-solid fa-file-import"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-sm font-bold text-white group-hover:text-purple-300">2. 전자드럼 맵핑 불러오기</h4>
+                        <p class="text-[11px] text-gray-400 mt-0.5">로컬 컴퓨터에 미리 저장해 두었던 드럼 설정 파일(.json)을 로드합니다.</p>
+                        <input type="file" id="onboarding-import-input" accept=".json" class="hidden" onchange="importMidiSetupOnboarding(event)">
+                    </div>
+                </label>
+
+                <button onclick="bypassOnboardingDirectly()" class="w-full bg-[#101026] border-2 border-slate-800 hover:border-gray-500 rounded-xl p-4 flex items-center gap-4 transition text-left group">
+                    <div class="w-12 h-12 rounded-lg bg-black/40 border border-slate-700 flex items-center justify-center text-slate-400 text-xl group-hover:scale-105 transition">
+                        <i class="fa-solid fa-play"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-bold text-white">3. 사운드글룩 Drum Tulz 바로 시작하기</h4>
+                        <p class="text-[11px] text-gray-400 mt-0.5">추가 기기설정 없이 기본 8패드 시뮬레이터 가이드 모드로 바로 들어갑니다.</p>
+                    </div>
+                </button>
+            </div>
+
+            <!-- 대화형 셋업 위저드 패널 (초기 숨김) -->
+            <div id="setup-wizard-panel" class="hidden space-y-6">
+                <div class="flex items-center justify-between border-b border-gray-800 pb-3 mb-2 font-mono text-[10px]">
+                    <span id="wizard-step-indicator" class="text-cyan-400 font-bold">STEP 1 / 4</span>
+                    <span id="wizard-step-title" class="text-gray-400">USB 하드웨어 연결 감지</span>
+                </div>
+
+                <!-- Wizard Step 1: MIDI Connection Check -->
+                <div id="wizard-step-1" class="space-y-4">
+                    <p class="text-xs text-gray-300 leading-relaxed">
+                        전자드럼의 **MIDI OUT / USB TO HOST** 포트를 USB 케이블을 이용해 PC의 포트에 단단히 결속해 주십시오. 시스템이 기기 연결 신호를 자동으로 대기하고 감시합니다.
+                    </p>
+                    <div class="flex items-center justify-between p-4 bg-black/50 border border-gray-800 rounded-xl">
+                        <span class="text-xs text-gray-400 font-bold flex items-center gap-2">
+                            <i class="fa-solid fa-link"></i> 현재 미디 기기 연결 상태:
+                        </span>
+                        <div class="flex items-center gap-2">
+                            <span id="wizard-midi-indicator" class="w-2.5 h-2.5 rounded-full bg-red-500"></span>
+                            <span id="wizard-midi-text" class="text-[10px] font-black text-red-500 font-mono">OFFLINE</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-end gap-2.5 pt-2">
+                        <button onclick="abortWizard()" class="px-4 py-2 bg-slate-900 border border-slate-700 text-xs rounded-lg font-bold">취소</button>
+                        <button onclick="nextWizardStep(2)" id="btn-step1-next" class="px-5 py-2 bg-slate-800 text-slate-500 text-xs rounded-lg font-bold cursor-not-allowed" disabled>다음 단계로 <i class="fa-solid fa-arrow-right ml-1"></i></button>
+                    </div>
+                </div>
+
+                <!-- Wizard Step 2: Drum Kit Option Choice -->
+                <div id="wizard-step-2" class="hidden space-y-4">
+                    <p class="text-xs text-gray-300">사용하시는 드럼의 물리적인 장비 스펙(트리거 패드 구성 형태)을 선택하세요.</p>
+                    <div class="grid grid-cols-2 gap-3.5">
+                        <button onclick="selectWizardHardware(8)" id="btn-wiz-hw-8" class="border-2 border-cyan-500/80 bg-cyan-950/20 rounded-xl p-4 text-center transition">
+                            <h5 class="text-sm font-extrabold text-white">8패드 킷</h5>
+                            <span class="text-[10px] text-gray-400 mt-1 block leading-relaxed">기본 5드럼 + 3심벌 규격 (입문용 및 KED 스타터 등)</span>
+                        </button>
+                        <button onclick="selectWizardHardware(9)" id="btn-wiz-hw-9" class="border-2 border-slate-800 bg-slate-950/20 rounded-xl p-4 text-center transition">
+                            <h5 class="text-sm font-extrabold text-white">9패드 킷</h5>
+                            <span class="text-[10px] text-gray-400 mt-1 block leading-relaxed">Crash 2 추가 규격 (고퍼우드 X5/X9/X12 및 하이엔드)</span>
+                        </button>
+                    </div>
+                    <div class="flex justify-between pt-2">
+                        <button onclick="nextWizardStep(1)" class="px-4 py-2 bg-slate-900 border border-slate-700 text-xs rounded-lg font-bold"><i class="fa-solid fa-arrow-left mr-1"></i> 이전</button>
+                        <button onclick="nextWizardStep(3)" class="px-5 py-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-xs rounded-lg font-bold">다음 단계로 <i class="fa-solid fa-arrow-right ml-1"></i></button>
+                    </div>
+                </div>
+
+                <!-- Wizard Step 3: Sequential Pad Auto-Mapping -->
+                <div id="wizard-step-3" class="hidden space-y-4">
+                    <p class="text-xs text-gray-300">화면에서 지시하는 드럼 패드를 실제 채에 맞춰 한 차례 시원하게 탁 때려주세요. 신호가 자동 저장됩니다.</p>
+                    
+                    <div class="bg-black/40 border border-cyan-900/60 p-5 rounded-xl text-center space-y-3">
+                        <span class="text-[9px] text-[#ff007f] font-mono tracking-widest uppercase block animate-pulse">SETTING UP TRIGGER</span>
+                        <h4 id="wizard-active-pad-name" class="text-lg font-black text-white">베이스 킥 페달 (Kick)</h4>
+                        <p class="text-[11px] text-gray-400">실제 드럼의 [베이스 페달]을 깊게 한번 밟아주세요.</p>
+                        <div class="w-14 h-14 rounded-full border border-pink-500 flex items-center justify-center mx-auto text-pink-500 animate-bounce mt-1">
+                            <i class="fa-solid fa-drum text-2xl"></i>
+                        </div>
+                    </div>
+
+                    <!-- 맵핑 미디 로그 트래커 -->
+                    <div class="bg-[#050510] rounded border border-gray-900 p-2 text-center h-10 font-mono text-[10px] text-green-400" id="wizard-midi-live-log">
+                        [System] 드럼 타격 신호 대기 중...
+                    </div>
+
+                    <div class="flex justify-between pt-2">
+                        <button onclick="nextWizardStep(2)" class="px-4 py-2 bg-slate-900 border border-slate-700 text-xs rounded-lg font-bold"><i class="fa-solid fa-arrow-left mr-1"></i> 이전</button>
+                        <button onclick="skipActiveWizardPad()" class="px-4 py-2 bg-slate-800 text-xs rounded-lg font-bold text-gray-300">이 파트 건너뛰기</button>
+                    </div>
+                </div>
+
+                <!-- Wizard Step 4: Map Save and Studio Entrance -->
+                <div id="wizard-step-4" class="hidden space-y-4">
+                    <p class="text-xs text-gray-300 leading-relaxed">
+                        기기 신호 맵핑이 완벽하게 완료되었습니다! 이 세팅값은 브라우저 캐시에 즉시 보존되며, 파일로 내보내어 나중에 언제든 다시 불러올 수 있습니다.
+                    </p>
+                    <div class="grid grid-cols-2 gap-3.5 pt-1">
+                        <button onclick="saveMidiSetupLocalStorage()" class="p-3 bg-green-950/30 hover:bg-green-900/40 border border-green-800 text-xs text-green-400 rounded-lg font-bold transition flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-cloud-arrow-up"></i> 브라우저에 임시저장
+                        </button>
+                        <button onclick="exportMidiSetupFile()" class="p-3 bg-cyan-950/30 hover:bg-cyan-900/40 border border-cyan-800 text-xs text-cyan-400 rounded-lg font-bold transition flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-file-export"></i> 내 PC에 백업 보관
+                        </button>
+                    </div>
+                    <div class="border-t border-gray-900 pt-4 flex justify-center">
+                        <button onclick="enterStudioCompleted()" class="w-full py-3 bg-gradient-to-r from-cyan-500 to-[#ff007f] text-xs text-white font-black rounded-lg shadow-lg tracking-wider uppercase">
+                            사운드글룩 스튜디오 콘솔 시작 <i class="fa-solid fa-play ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 💻 3단계: 메인 어플리케이션 본체 -->
     <div id="app-container">
         
         <!-- 통합 제어 헤더 -->
@@ -411,21 +569,21 @@
                 <i class="fa-solid fa-drum text-3xl text-[#00f3ff] drop-shadow-[0_0_10px_#00f3ff]"></i>
                 <div>
                     <h1 class="text-xl font-black tracking-widest text-white flex items-center gap-2">
-                        SoundGluck <span class="text-[#ff007f] font-mono text-xs border border-pink-900 px-2 py-0.5 rounded">v3.3.2 Studio Master</span>
+                        SOUND GLUCK <span class="text-[#ff007f] font-mono text-xs border border-pink-900 px-2 py-0.5 rounded">l &nbsp; Drum Tulz v4.0.1</span>
                     </h1>
                     <p class="text-[10px] text-gray-500 font-mono">Analog Synthesizer & Pro-Mixing Studio Module</p>
                 </div>
             </div>
             
             <nav class="flex flex-wrap gap-1 bg-black/60 p-1 rounded-xl border border-gray-800">
-                <button onclick="switchTab('play')" id="tab-play" class="nav-tab active px-3 py-2 text-xs font-bold text-gray-400 hover:text-white rounded-lg flex items-center gap-1.5">
-                    <i class="fa-solid fa-play"></i> 연주 & 녹음
+                <button onclick="switchTab('sound')" id="tab-sound" class="nav-tab active px-3 py-2 text-xs font-bold text-gray-400 hover:text-white rounded-lg flex items-center gap-1.5">
+                    <i class="fa-solid fa-sliders"></i> PERFORMANCE MODE
                 </button>
-                <button onclick="switchTab('sound')" id="tab-sound" class="nav-tab px-3 py-2 text-xs font-bold text-gray-400 hover:text-white rounded-lg flex items-center gap-1.5">
-                    <i class="fa-solid fa-sliders"></i> 스튜디오 콘솔 믹서
+                <button onclick="switchTab('play')" id="tab-play" class="nav-tab px-3 py-2 text-xs font-bold text-gray-400 hover:text-white rounded-lg flex items-center gap-1.5">
+                    <i class="fa-solid fa-gamepad"></i> GAME MODE
                 </button>
                 <button onclick="switchTab('controller')" id="tab-controller" class="nav-tab px-3 py-2 text-xs font-bold text-gray-400 hover:text-white rounded-lg flex items-center gap-1.5">
-                    <i class="fa-solid fa-gamepad"></i> 컨트롤러 맵핑
+                    <i class="fa-solid fa-circle-nodes"></i> 컨트롤러 맵핑
                 </button>
                 <button onclick="switchTab('help')" id="tab-help" class="nav-tab px-3 py-2 text-xs font-bold text-gray-400 hover:text-white rounded-lg flex items-center gap-1.5">
                     <i class="fa-solid fa-circle-question"></i> 사용 가이드 & 팁
@@ -433,21 +591,16 @@
             </nav>
         </header>
 
-        <!-- ---------------- TAB 1: 연주 & 녹음 워크스페이스 ---------------- -->
-        <div id="content-play" class="flex flex-col gap-4">
+        <!-- ---------------- TAB 1: GAME MODE (이제 두번째 탭이므로 초기 hidden 처리) ---------------- -->
+        <div id="content-play" class="hidden flex flex-col gap-4">
             <!-- 퀵 설정 대시보드 -->
-            <div class="grid grid-cols-1 lg:grid-cols-6 gap-3 bg-[#08081a] border border-[#141432] rounded-xl p-3">
-                <div class="flex flex-col gap-1.5 bg-black/40 p-2 rounded-lg border border-gray-800/60">
-                    <label class="text-[9px] font-black text-gray-400 uppercase tracking-wider">레인 모드 (Lane Mode)</label>
-                    <div class="flex gap-1">
-                        <button onclick="setLaneMode(4)" id="btn-lane-4" class="flex-1 py-1 text-xs font-bold rounded bg-cyan-950 text-cyan-300 border border-cyan-800">4L</button>
-                        <button onclick="setLaneMode(7)" id="btn-lane-7" class="flex-1 py-1 text-xs font-bold rounded bg-slate-900 text-gray-400">7L</button>
-                        <button onclick="setLaneMode(8)" id="btn-lane-8" class="flex-1 py-1 text-xs font-bold rounded bg-slate-900 text-gray-400">8L</button>
-                        <button onclick="setLaneMode(9)" id="btn-lane-9" class="flex-1 py-1 text-xs font-bold rounded bg-slate-900 text-gray-400">9L</button>
-                    </div>
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-3 bg-[#08081a] border border-[#141432] rounded-xl p-3">
+                <div class="flex flex-col gap-1.5 bg-black/40 p-2 rounded-lg border border-gray-800/60 justify-center">
+                    <label class="text-[9px] font-black text-gray-400 uppercase tracking-wider">액티브 맵핑 형태</label>
+                    <span id="label-active-setup-lanes" class="text-xs font-bold text-cyan-300 font-mono">8L 자동 활성화</span>
                 </div>
                 
-                <div class="flex flex-col gap-1 bg-black/40 p-2 rounded-lg border border-gray-800/60">
+                <div class="flex flex-col gap-1 bg-black/40 p-2 rounded-lg border border-gray-800/60 justify-center">
                     <div class="flex justify-between text-[9px] font-black text-gray-400 uppercase">
                         <span>노트 속도 (Speed)</span>
                         <span id="speed-text" class="text-[#ff007f]">0.45 px/ms</span>
@@ -490,21 +643,43 @@
                     </div>
                 </div>
 
-                <div class="flex flex-col gap-1.5 bg-black/40 p-2 rounded-lg border border-gray-800/60">
-                    <label class="text-[9px] font-black text-gray-400 uppercase tracking-wider">드롭 리듬 패턴 프리셋</label>
-                    <select id="rhythm-preset-select" onchange="changeRhythmPreset(this.value)" class="text-xs bg-black text-gray-300 font-bold w-full p-1.5 rounded border border-gray-800 outline-none">
-                        <option value="quarter">Basic 4-Beat</option>
-                        <option value="eight_go">Basic 8-Beat (Go-Go)</option>
-                        <option value="sixteen_funk">16-Beat Funky Groove</option>
-                        <option value="shuffle">Half-Time Shuffle</option>
-                        <option value="random">Custom Random Beat</option>
-                        <option value="none">프리 드럼 연타 (음소거)</option>
-                    </select>
-                </div>
-
                 <div class="flex flex-col justify-center items-center bg-black/50 p-2 rounded-lg border border-cyan-900/60">
                     <span class="text-[9px] font-black text-cyan-400 tracking-widest">LIVE SCORE</span>
                     <div id="score-display" class="text-2xl font-black font-mono mt-0.5 text-white">000000</div>
+                </div>
+            </div>
+
+            <!-- 🎮 GAME CONTROLLER BAR (재생, 정지, 멈춤, 리셋 제어 콘솔 데스크) -->
+            <div class="flex justify-between items-center bg-[#0d0d27] border border-[#1e1e4a] p-3 rounded-xl gap-4">
+                <div class="flex items-center gap-3">
+                    <span class="text-xs font-bold text-gray-400 flex items-center gap-1"><i class="fa-solid fa-gamepad text-cyan-400"></i> GAME CONTROL:</span>
+                    <span id="game-state-badge" class="px-2 py-0.5 text-[10px] font-black rounded bg-red-950 text-red-400 border border-red-900 font-mono">STOPPED</span>
+                </div>
+                
+                <div class="flex gap-2">
+                    <button id="btn-game-play" onclick="controlGameEngine('play')" class="px-4 py-1.5 bg-green-950/80 hover:bg-green-900 border border-green-700 hover:border-green-500 text-green-300 text-xs font-extrabold rounded-lg transition flex items-center gap-1 shadow-md shadow-green-950/20">
+                        <i class="fa-solid fa-play"></i> 재생 (PLAY)
+                    </button>
+                    <button id="btn-game-pause" onclick="controlGameEngine('pause')" class="px-4 py-1.5 bg-yellow-950/80 hover:bg-yellow-900 border border-yellow-700 hover:border-yellow-500 text-yellow-300 text-xs font-extrabold rounded-lg transition flex items-center gap-1 shadow-md shadow-yellow-950/20">
+                        <i class="fa-solid fa-pause"></i> 일시정지 (PAUSE)
+                    </button>
+                    <button id="btn-game-stop" onclick="controlGameEngine('stop')" class="px-4 py-1.5 bg-red-950/80 hover:bg-red-900 border border-red-700 hover:border-red-500 text-red-300 text-xs font-extrabold rounded-lg transition flex items-center gap-1 shadow-md shadow-red-950/20">
+                        <i class="fa-solid fa-stop"></i> 멈춤 (STOP)
+                    </button>
+                    <button id="btn-game-reset" onclick="controlGameEngine('reset')" class="px-4 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-300 text-xs font-extrabold rounded-lg transition flex items-center gap-1 shadow-md">
+                        <i class="fa-solid fa-arrows-rotate"></i> 리셋 (RESET)
+                    </button>
+                </div>
+
+                <div class="flex items-center gap-2 bg-black/30 px-3 py-1.5 rounded border border-gray-800">
+                    <span class="text-[10px] font-bold text-gray-500">리듬 패턴 프리셋</span>
+                    <select id="rhythm-select" onchange="changeRhythmPreset(this.value)" class="text-[11px] bg-black text-cyan-300 font-extrabold border-none outline-none cursor-pointer">
+                        <option value="eight_go">8비트 기본 고고</option>
+                        <option value="quarter">4비트 단조로운 킥</option>
+                        <option value="sixteen_funk">16비트 정통 펑크</option>
+                        <option value="shuffle">어쿠스틱 셔플 롤</option>
+                        <option value="random">완전 랜덤 드롭</option>
+                    </select>
                 </div>
             </div>
 
@@ -518,7 +693,7 @@
             </div>
 
             <!-- 리코더 파일 입출력 및 제어부 -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 bg-[#060614] border border-[#141430] rounded-xl p-3">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 bg-[#060614] border border-[#141430] rounded-xl p-3">
                 <div class="flex items-center justify-between gap-3 bg-black/40 p-2.5 rounded-lg border border-gray-800/80">
                     <div class="flex items-center gap-2">
                         <i class="fa-solid fa-microphone text-red-500 animate-pulse"></i>
@@ -539,32 +714,13 @@
 
                 <div class="flex items-center justify-between gap-2 bg-black/40 p-2.5 rounded-lg border border-gray-800/80">
                     <div class="text-left">
-                        <p class="text-xs font-bold text-white">클라우드 로컬 임시 저장</p>
-                        <span class="text-[9px] text-gray-500">브라우저 자동 세션 캐시</span>
-                    </div>
-                    <div class="flex gap-1.5">
-                        <button id="disk-save-btn" disabled onclick="saveToLocalStorage()" class="px-3 py-1.5 bg-green-950/20 opacity-50 border border-green-900 text-xs text-green-400 rounded-lg font-bold transition flex items-center gap-1">
-                            <i class="fa-solid fa-cloud-arrow-up"></i> 저장
-                        </button>
-                        <button id="disk-load-btn" onclick="loadFromLocalStorage()" class="px-3 py-1.5 bg-yellow-950/40 border border-yellow-900 text-xs text-yellow-400 rounded-lg font-bold hover:bg-yellow-950 transition flex items-center gap-1">
-                            <i class="fa-solid fa-cloud-arrow-down"></i> 불러오기
-                        </button>
-                    </div>
-                </div>
-
-                <div class="flex items-center justify-between gap-2 bg-black/40 p-2.5 rounded-lg border border-gray-800/80">
-                    <div class="text-left">
-                        <p class="text-xs font-bold text-white">JSON 패턴 파일 추출</p>
-                        <span class="text-[9px] text-gray-500">로컬 다운로드 및 복구</span>
+                        <p class="text-xs font-bold text-white">시퀀스 파일 저장 & 다운로드</p>
+                        <span class="text-[9px] text-gray-500">녹음된 노트를 파일로 내보내기</span>
                     </div>
                     <div class="flex gap-1.5 flex-1 justify-end">
-                        <button id="file-export-btn" disabled onclick="exportToJsonFile()" class="px-2.5 py-1.5 bg-slate-900 border border-slate-700 text-xs text-gray-300 rounded-lg font-bold hover:bg-slate-800 transition flex items-center gap-1">
-                            <i class="fa-solid fa-file-export text-blue-400"></i> 내보내기
+                        <button id="file-export-btn" disabled onclick="exportToJsonFile()" class="px-2.5 py-1.5 bg-[#121c12] border border-green-900 text-xs text-green-400 rounded-lg font-bold hover:bg-green-950 transition flex items-center gap-1">
+                            <i class="fa-solid fa-file-export"></i> 내보내기
                         </button>
-                        <label class="px-2.5 py-1.5 bg-slate-900 border border-slate-700 text-xs text-gray-300 rounded-lg font-bold hover:bg-slate-800 transition flex items-center gap-1 cursor-pointer">
-                            <i class="fa-solid fa-file-import text-purple-400"></i> 가져오기
-                            <input type="file" id="file-import-input" accept=".json" class="hidden" onchange="importFromJsonFile(event)">
-                        </label>
                     </div>
                 </div>
             </div>
@@ -575,20 +731,18 @@
             </div>
         </div>
 
-        <!-- ---------------- TAB 2: SYNTH SOUND EDITOR & PROFESSIONAL MIXER (v3.3) ---------------- -->
-        <div id="content-sound" class="hidden flex flex-col gap-4 bg-[#06061a]/95 border border-[#141432] rounded-2xl p-5">
-            
-            <!-- 사운드 라이브러리 프리셋 선택 및 오디오 제어 헤더 -->
+        <!-- ---------------- TAB 2: PERFORMANCE MODE (첫번째 탭이므로 초기 show 처리) ---------------- -->
+        <div id="content-sound" class="flex flex-col gap-4 bg-[#06061a]/95 border border-[#141432] rounded-2xl p-5">
             <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center border-b border-[#1c1c3f] pb-4 gap-4">
                 <div>
                     <h2 class="text-sm font-black text-[#00f3ff] tracking-widest uppercase flex items-center gap-1.5">
-                        <i class="fa-solid fa-wave-square text-cyan-400"></i> SoundGluck Studio Console & Pro Mixer v3.3
+                        <i class="fa-solid fa-wave-square text-cyan-400"></i> SOUND GLUCK l Drum Tulz Workspace v4.0.1
                     </h2>
-                    <p class="text-[11px] text-gray-400 mt-1">Serum/Massive 스타일 로터리 노브 및 하드웨어 믹싱 데스크 콘솔</p>
+                    <p class="text-[11px] text-gray-400 mt-1 font-sans">고밀도 신디사이저 믹싱 및 사운드 조율 워크플레이스</p>
                 </div>
                 
                 <div class="flex flex-wrap items-center gap-4">
-                    <!-- ⏱️ 믹서 탭 전용 정밀 메트로놈 제어판 (유저 피드백 반영 핵심 탑재) -->
+                    <!-- ⏱️ 믹서 탭 전용 정밀 메트로놈 제어판 -->
                     <div class="flex flex-wrap items-center gap-3 bg-black/40 px-3 py-2 rounded-lg border border-gray-800">
                         <div class="flex items-center gap-2">
                             <span class="text-xs font-bold text-gray-400"><i class="fa-solid fa-clock text-green-400 mr-1"></i> 메트로놈</span>
@@ -597,13 +751,11 @@
                                 <div class="relative w-9 h-5 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-500"></div>
                             </label>
                         </div>
-                        <!-- BPM Control -->
                         <div class="flex items-center gap-2 border-l border-gray-800 pl-3">
                             <span class="text-[10px] font-bold text-gray-500">BPM</span>
                             <input type="range" id="sound-bpm-range" min="60" max="220" value="120" oninput="changeBPM(this.value)" class="w-24 h-1 bg-gray-800 rounded-lg appearance-none cursor-pointer">
                             <span id="sound-bpm-text" class="text-xs font-mono font-bold text-green-400">120</span>
                         </div>
-                        <!-- Time Signature -->
                         <div class="flex items-center gap-1.5 border-l border-gray-800 pl-3">
                             <span class="text-[10px] font-bold text-gray-500">박자</span>
                             <select id="sound-metro-signature" onchange="changeTimeSignature(this.value)" class="text-[10px] bg-black text-gray-300 font-extrabold p-1 rounded border border-gray-800 outline-none w-16">
@@ -611,15 +763,6 @@
                                 <option value="3/4">3/4</option>
                                 <option value="2/4">2/4</option>
                                 <option value="6/8">6/8</option>
-                            </select>
-                        </div>
-                        <!-- Subdivision -->
-                        <div class="flex items-center gap-1.5 border-l border-gray-800 pl-3">
-                            <span class="text-[10px] font-bold text-gray-500">분할</span>
-                            <select id="sound-metro-subdivision" onchange="changeSubdivision(this.value)" class="text-[10px] bg-black text-gray-300 font-extrabold p-1 rounded border border-gray-800 outline-none w-18">
-                                <option value="1">1분할</option>
-                                <option value="2">2분할</option>
-                                <option value="4">4분할</option>
                             </select>
                         </div>
                     </div>
@@ -631,50 +774,43 @@
                             <input type="checkbox" id="audio-enable" class="sr-only peer" checked>
                             <div class="relative w-9 h-5 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-cyan-500"></div>
                         </label>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 사운드 프리셋 셀렉터 -->
+            <!-- 사운드 프리셋 셀렉터 (총 8개로 보강 확대) -->
             <div class="bg-black/30 border border-gray-800 p-3 rounded-xl flex flex-col md:flex-row items-start md:items-center gap-3">
                 <span class="text-[11px] font-black text-[#ffe600] uppercase tracking-wider flex items-center gap-1">
                     <i class="fa-solid fa-compact-disc"></i> 🥁 SOUND LIBRARY PRESET:
                 </span>
-                <div class="flex flex-wrap gap-2 w-full md:w-auto">
-                    <button onclick="loadDrumKitPreset('acoustic')" class="px-3 py-1 bg-cyan-950/40 hover:bg-cyan-900 border border-cyan-800 text-xs text-cyan-300 font-bold rounded-lg transition">Acoustic Studio</button>
-                    <button onclick="loadDrumKitPreset('trap808')" class="px-3 py-1 bg-pink-950/40 hover:bg-pink-900 border border-pink-800 text-xs text-pink-300 font-bold rounded-lg transition">Deep Sub 808</button>
-                    <button onclick="loadDrumKitPreset('retro80s')" class="px-3 py-1 bg-purple-950/40 hover:bg-purple-900 border border-purple-800 text-xs text-purple-300 font-bold rounded-lg transition">Cyber Retro 80s</button>
-                    <button onclick="loadDrumKitPreset('metal')" class="px-3 py-1 bg-yellow-950/40 hover:bg-yellow-900 border border-yellow-800 text-xs text-yellow-400 font-bold rounded-lg transition">Industrial Metal</button>
+                <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2 w-full">
+                    <button onclick="loadDrumKitPreset('acoustic')" class="px-2.5 py-1 bg-cyan-950/40 hover:bg-cyan-900 border border-cyan-800 text-[10.5px] text-cyan-300 font-bold rounded-lg transition text-center truncate">Acoustic Studio</button>
+                    <button onclick="loadDrumKitPreset('trap808')" class="px-2.5 py-1 bg-pink-950/40 hover:bg-pink-900 border border-pink-800 text-[10.5px] text-pink-300 font-bold rounded-lg transition text-center truncate">Deep Sub 808</button>
+                    <button onclick="loadDrumKitPreset('retro80s')" class="px-2.5 py-1 bg-purple-950/40 hover:bg-purple-900 border border-purple-800 text-[10.5px] text-purple-300 font-bold rounded-lg transition text-center truncate">Cyber Retro 80s</button>
+                    <button onclick="loadDrumKitPreset('metal')" class="px-2.5 py-1 bg-yellow-950/40 hover:bg-yellow-900 border border-yellow-800 text-[10.5px] text-yellow-400 font-bold rounded-lg transition text-center truncate">Industrial Metal</button>
+                    <button onclick="loadDrumKitPreset('lofijazz')" class="px-2.5 py-1 bg-emerald-950/40 hover:bg-emerald-900 border border-emerald-800 text-[10.5px] text-emerald-400 font-bold rounded-lg transition text-center truncate">Lo-Fi Chill Jazz</button>
+                    <button onclick="loadDrumKitPreset('stadium')" class="px-2.5 py-1 bg-rose-950/40 hover:bg-rose-900 border border-rose-800 text-[10.5px] text-rose-400 font-bold rounded-lg transition text-center truncate">Arena Stadium</button>
+                    <button onclick="loadDrumKitPreset('perc')" class="px-2.5 py-1 bg-amber-950/40 hover:bg-amber-900 border border-amber-800 text-[10.5px] text-amber-400 font-bold rounded-lg transition text-center truncate">Latin Percussion</button>
+                    <button onclick="loadDrumKitPreset('techno')" class="px-2.5 py-1 bg-indigo-950/40 hover:bg-indigo-900 border border-indigo-800 text-[10.5px] text-indigo-400 font-bold rounded-lg transition text-center truncate">Electro House</button>
                 </div>
             </div>
 
             <!-- 프로페셔널 믹서 데스크 및 스튜디오 아웃 랙 배치 -->
             <div class="grid grid-cols-1 xl:grid-cols-4 gap-4 items-start">
                 
-                <!-- 🎚 *스튜디오 믹서 (8패드 / 9패드 직접 제어 UI 스위치 탑재)* -->
+                <!-- 🎚 *스튜디오 믹서* -->
                 <div class="xl:col-span-3 bg-[#0a0a1f] border border-[#1e1e40] rounded-2xl p-4 flex flex-col gap-3 shadow-inner">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-[#1f1f4d] pb-2 gap-2">
                         <span id="mixer-desk-title" class="text-xs font-black text-cyan-400 tracking-widest flex items-center gap-2">
-                            <i class="fa-solid fa-sliders text-cyan-400"></i> PRO-MIXER DESK (5 CHANNEL STRIPS ACTIVE)
+                            <i class="fa-solid fa-sliders text-cyan-400"></i> PRO-MIXER DESK (8L AUTOMATED)
                         </span>
-                        <!-- 믹서 탭 내부에서 하드웨어 모드를 즉시 바꿀 수 있는 스위치 추가 (사이즈/혼란 문제 해결) -->
-                        <div class="flex gap-1 bg-black/60 p-0.5 rounded border border-cyan-900/40">
-                            <button onclick="setHardwarePadMode(8)" id="btn-mixer-hw-8" class="px-2.5 py-0.5 text-[9px] font-bold rounded bg-cyan-950 text-cyan-300 border border-cyan-800 transition">8패드 킷 (5채널)</button>
-                            <button onclick="setHardwarePadMode(9)" id="btn-mixer-hw-9" class="px-2.5 py-0.5 text-[9px] font-bold rounded bg-slate-900 text-gray-400 transition">9패드 킷 (6채널)</button>
-                        </div>
                     </div>
                     
-                    <!-- flex 구조로 변경하여 5채널/6채널 전환 시 너비와 배치가 완벽하게 정렬되도록 조정 -->
                     <div class="flex flex-wrap md:flex-nowrap gap-3 justify-center w-full" id="mixer-strips-wrapper">
                         <!-- JS에서 글로벌 드럼 키트 데이터로 동적 로드됨 -->
                     </div>
                 </div>
 
-                <!-- 🎛️ 스튜디오 아웃 FX 랙 & 다이나믹스 제어부 (마스터 랙 - 균형 잡힌 2열 격자 배치) -->
+                <!-- 🎛️ 스튜디오 아웃 FX 랙 & 다이나믹스 제어부 -->
                 <div class="bg-gradient-to-b from-[#0a0a25] to-[#040410] border-2 border-[#1c1c3f] rounded-2xl p-4 flex flex-col gap-3.5 shadow-2xl">
                     <span class="text-xs font-black text-[#ff007f] tracking-wider border-b border-pink-950 pb-2 flex items-center justify-between">
                         <span class="flex items-center gap-1"><i class="fa-solid fa-server"></i> STUDIO MASTER OUT</span>
-                        <span class="w-2.5 h-2.5 rounded-full bg-pink-500 animate-ping"></span>
                     </span>
 
                     <!-- Live Spectrum Display -->
@@ -683,9 +819,8 @@
                         <span class="absolute top-1 left-2 text-[8px] text-[#00f3ff]/60 font-mono tracking-widest uppercase">Live FFT Spectrum</span>
                     </div>
 
-                    <!-- 2열 격자로 압축 정렬하여 세로 불균형 해소 -->
+                    <!-- Dynamics / FX Controls -->
                     <div class="grid grid-cols-2 gap-3">
-                        <!-- Master Compressor -->
                         <div class="flex flex-col gap-1 bg-black/40 p-2 rounded-lg border border-pink-900/40">
                             <span class="text-[9px] font-black text-pink-400 uppercase tracking-widest mb-1 flex items-center gap-1">
                                 <i class="fa-solid fa-compress text-[10px]"></i> Compressor
@@ -702,7 +837,6 @@
                             </div>
                         </div>
 
-                        <!-- Saturation & Chorus -->
                         <div class="flex flex-col gap-1 bg-black/40 p-2 rounded-lg border border-cyan-900/40">
                             <span class="text-[9px] font-black text-cyan-400 uppercase tracking-widest mb-1 flex items-center gap-1">
                                 <i class="fa-solid fa-wave-square text-[10px]"></i> Dynamics
@@ -720,7 +854,7 @@
                         </div>
                     </div>
 
-                    <!-- 공간계 및 마스터 필터 2열 균등 배치 구조 -->
+                    <!-- 2열 공간계 -->
                     <div class="grid grid-cols-2 gap-3 border-t border-[#1c1c3f] pt-3">
                         <div class="flex flex-col gap-1">
                             <span class="text-[8.5px] font-bold text-gray-400">Delay Time: <b id="label-fx-delayTime" class="text-cyan-400">0.3s</b></span>
@@ -738,13 +872,21 @@
                             <span class="text-[8.5px] font-bold text-gray-400">Reverb Mix: <b id="label-fx-reverbMix" class="text-pink-500">20%</b></span>
                             <input type="range" id="param-fx-reverbMix" min="0" max="8" value="2" oninput="updateMasterFX('reverbMix', this.value / 10, '%')">
                         </div>
-                        <div class="flex flex-col gap-1">
-                            <span class="text-[8.5px] font-bold text-gray-400">Highpass: <b id="label-fx-highpass" class="text-yellow-400">10Hz</b></span>
-                            <input type="range" id="param-fx-highpass" min="10" max="2000" value="10" oninput="updateMasterFX('highpass', this.value, 'Hz')">
-                        </div>
-                        <div class="flex flex-col gap-1">
-                            <span class="text-[8.5px] font-bold text-gray-400">Lowpass: <b id="label-fx-lowpass" class="text-yellow-400">20kHz</b></span>
-                            <input type="range" id="param-fx-lowpass" min="1000" max="20000" value="20000" oninput="updateMasterFX('lowpass', this.value, 'Hz')">
+                    </div>
+
+                    <!-- 🎚️ 퍼포먼스 전체 믹싱셋 저장/불러오기 추가 -->
+                    <div class="border-t border-[#1c1c3f] pt-3 mt-1 space-y-2">
+                        <span class="text-[9px] font-black text-cyan-400 uppercase tracking-widest flex items-center gap-1">
+                            <i class="fa-solid fa-cloud"></i> 퍼포먼스 사운드 셋업 보존
+                        </span>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button onclick="exportSoundSetupFile()" class="py-1.5 bg-cyan-950/20 hover:bg-cyan-950/60 border border-cyan-800 text-[10px] text-cyan-300 font-bold rounded-lg transition">
+                                <i class="fa-solid fa-file-export mr-1"></i> 셋업 저장하기
+                            </button>
+                            <label class="py-1.5 bg-purple-950/20 hover:bg-purple-950/60 border border-purple-800 text-[10px] text-purple-300 font-bold rounded-lg text-center cursor-pointer transition">
+                                <i class="fa-solid fa-file-import mr-1"></i> 셋업 가져오기
+                                <input type="file" id="sound-setup-import-input" accept=".json" class="hidden" onchange="importSoundSetupFile(event)">
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -752,14 +894,14 @@
             </div>
         </div>
 
-        <!-- ---------------- TAB 3: CONTROLLER MAPPING ---------------- -->
+        <!-- ---------------- TAB 3: CONTROLLER MAPPING (시물레이션 키맵 제거) ---------------- -->
         <div id="content-controller" class="hidden flex flex-col gap-4 bg-[#06061a]/95 border border-[#141432] rounded-2xl p-5">
             <div class="flex justify-between items-center border-b border-gray-800 pb-3 mb-2">
                 <div>
                     <h2 class="text-sm font-black text-[#ff007f] tracking-widest uppercase flex items-center gap-1.5">
-                        <i class="fa-solid fa-gamepad text-pink-500"></i> Hardware MIDI & Key Mapping Trainer
+                        <i class="fa-solid fa-gamepad text-pink-500"></i> Active Hardware MIDI Mapping Trainer
                     </h2>
-                    <p class="text-[11px] text-gray-400 mt-1">전자드럼 포트 연동 및 키보드 플레이용 단축키 바인딩 테이블</p>
+                    <p class="text-[11px] text-gray-400 mt-1">전자드럼 미디 포트 연동 및 1:1 패드 신호 바인딩</p>
                 </div>
                 <div class="flex items-center gap-3">
                     <div class="flex gap-2 items-center bg-black/40 px-3 py-1 rounded border border-gray-800">
@@ -774,53 +916,43 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div class="grid grid-cols-1 gap-5">
                 <!-- 🔌 MIDI 1:1 Mapping Builder Table -->
                 <div class="bg-black/30 border border-gray-800 rounded-xl p-4 flex flex-col gap-3">
                     <div class="flex justify-between items-center border-b border-cyan-950 pb-2">
                         <span class="text-xs font-black text-cyan-400 flex items-center gap-1.5">
-                            <i class="fa-solid fa-plug text-cyan-400"></i> 🔌 하드웨어 물리 패드 구성 매핑
+                            <i class="fa-solid fa-plug text-cyan-400"></i> 🔌 하드웨어 물리 패드 구성 매핑 목록
                         </span>
-                        <!-- 8패드 / 9패드 하드웨어 선택 스위치 -->
+                        <!-- 8패드 / 9패드 선택 스위치 -->
                         <div class="flex gap-1 bg-black/60 p-0.5 rounded border border-cyan-900/40">
-                            <button onclick="setHardwarePadMode(8)" id="btn-hw-8" class="px-2 py-0.5 text-[9px] font-bold rounded bg-cyan-950 text-cyan-300 border border-cyan-800">8패드 킷</button>
-                            <button onclick="setHardwarePadMode(9)" id="btn-hw-9" class="px-2 py-0.5 text-[9px] font-bold rounded bg-slate-900 text-gray-400">9패드 킷</button>
+                            <button onclick="setHardwarePadMode(8)" id="btn-hw-8" class="px-2.5 py-0.5 text-[9px] font-bold rounded bg-cyan-950 text-cyan-300 border border-cyan-800">8패드 킷</button>
+                            <button onclick="setHardwarePadMode(9)" id="btn-hw-9" class="px-2.5 py-0.5 text-[9px] font-bold rounded bg-slate-900 text-gray-400">9패드 킷</button>
                         </div>
                     </div>
                     <p class="text-[11px] text-gray-400 leading-relaxed font-medium">
-                        물리 드럼 킷의 각 파트를 연동합니다. 보유하신 기기에 맞게 **8패드 / 9패드**를 선택한 후 **[신호 맵핑]**을 눌러 연동해 주세요.
+                        물리 드럼 킷의 각 파트를 개별 연동합니다. 목록의 **[신호 맵핑]**을 눌러 순차적으로 셋업을 완료할 수 있습니다.
                     </p>
                     
-                    <div class="grid grid-cols-1 gap-2 max-h-[300px] overflow-y-auto pr-1" id="midi-mapping-list">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5 max-h-[300px] overflow-y-auto pr-1" id="midi-mapping-list">
                         <!-- JS에서 글로벌 드럼 키트 데이터로 동적 로드됨 -->
                     </div>
 
+                    <div class="flex justify-between mt-3 gap-3">
+                        <button onclick="exportMidiSetupFile()" class="flex-1 py-2.5 bg-cyan-950/40 hover:bg-cyan-900/50 border border-cyan-800 text-cyan-400 text-xs font-bold rounded-lg transition">
+                            <i class="fa-solid fa-file-export mr-1"></i> 현재 미디 맵핑 파일로 내보내기
+                        </button>
+                        <button onclick="startSetupWizard()" class="flex-1 py-2.5 bg-gradient-to-r from-[#ff007f] to-[#b026ff] text-white text-xs font-bold rounded-lg transition">
+                            <i class="fa-solid fa-wand-magic-sparkles mr-1"></i> 대화형 셋업 위저드 다시 실행
+                        </button>
+                    </div>
+
                     <!-- 실시간 미디 신호 추적 로그 박스 -->
-                    <div class="flex flex-col gap-1.5 mt-1 border-t border-gray-900 pt-3">
+                    <div class="flex flex-col gap-1.5 mt-2 border-t border-gray-900 pt-3">
                         <span class="text-[10px] font-bold text-gray-500">실시간 미디 신호 추적 로그</span>
                         <div class="bg-black/80 rounded border border-gray-900 h-24 overflow-y-auto p-2 font-mono text-[10.5px] text-green-400" id="midi-log">
-                            [System] Awaiting MIDI messages or Keyboard signals...
+                            [System] Awaiting MIDI messages...
                         </div>
                     </div>
-                </div>
-
-                <!-- ⌨️ Custom Keyboard Mapping Configuration -->
-                <div class="bg-black/30 border border-gray-800 rounded-xl p-4 flex flex-col gap-3">
-                    <div class="flex justify-between items-center border-b border-pink-950 pb-2">
-                        <span class="text-xs font-black text-pink-500 flex items-center gap-1.5">
-                            <i class="fa-solid fa-keyboard text-pink-500"></i> ⌨️ 키보드 시뮬레이션 매핑 테이블
-                        </span>
-                        <span class="text-[10px] text-gray-500">현재 레인 모드 전용</span>
-                    </div>
-                    <p class="text-[11px] text-gray-400 leading-relaxed">
-                        각 레인에 입력할 키보드 버튼을 변경합니다. 입력 폼을 활성화한 뒤 원하는 키보드 버튼을 누르시면 즉시 바인딩됩니다.
-                    </p>
-                    
-                    <div class="grid grid-cols-1 gap-2 max-h-[300px] overflow-y-auto pr-1" id="key-mapping-list">
-                        <!-- JS에서 동적 로드됨 -->
-                    </div>
-
-                    <button onclick="resetKeyBindings()" class="bg-[#1f111a] hover:bg-red-950 border border-red-900 text-red-400 py-2 rounded text-xs font-bold transition mt-auto">키보드 바인딩 초기화</button>
                 </div>
             </div>
         </div>
@@ -829,22 +961,21 @@
         <div id="content-help" class="hidden bg-[#06061a]/95 border border-[#141432] rounded-2xl p-6">
             <div class="border-b border-gray-800 pb-4 mb-6">
                 <h2 class="text-base font-black text-[#00f3ff] tracking-widest uppercase flex items-center gap-2">
-                    <i class="fa-solid fa-circle-info text-cyan-400"></i> SoundGluck Studio v3.3 통합 실전 워크플로우 가이드
+                    <i class="fa-solid fa-circle-info text-cyan-400"></i> SoundGluck Studio v4.0.1 통합 실전 워크플로우 가이드
                 </h2>
-                <p class="text-xs text-gray-400 mt-1">하드웨어 연동부터 사운드 디자인, 실전 리플레이 자가분석까지 한눈에 파악하는 5단계 가이드라인</p>
+                <p class="text-xs text-gray-400 mt-1">대화형 위저드 자동 연동방식으로 새롭게 탄생한 완벽한 가이드를 확인하세요.</p>
             </div>
 
             <!-- 5단계 가이드 카드 레이아웃 -->
             <div class="grid grid-cols-1 lg:grid-cols-5 gap-4">
-                
                 <!-- STEP 1 -->
                 <div class="bg-black/30 border border-gray-800/80 rounded-xl p-4 flex flex-col gap-2.5">
                     <div class="flex items-center gap-1.5 border-b border-cyan-950 pb-2">
                         <span class="px-2 py-0.5 bg-cyan-950 text-cyan-300 font-mono font-bold text-[10px] rounded border border-cyan-800">STEP 1</span>
-                        <span class="text-xs font-black text-white">물리 연결</span>
+                        <span class="text-xs font-black text-white">기기 물리연결</span>
                     </div>
                     <p class="text-[11px] text-gray-400 leading-relaxed">
-                        전자드럼 모듈의 **MIDI OUT**(또는 USB TO HOST) 단자와 PC의 USB 포트를 케이블로 정식 연결합니다. 그 후 크롬 브라우저로 본 프로그램을 구동하고 **[컨트롤러 맵핑]** 탭 우측 상단 미디 배지가 <span class="text-green-400 font-bold">ONLINE</span> 상태인지 확인합니다.
+                        전자드럼 컴퓨터 포트에 USB 케이블을 직접 연결합니다. 로그인 시 화면에 보이는 **하드웨어 셋업** 버튼을 활용하면 기기 연결 상태를 쉽게 확인합니다.
                     </p>
                 </div>
 
@@ -852,10 +983,10 @@
                 <div class="bg-black/30 border border-gray-800/80 rounded-xl p-4 flex flex-col gap-2.5">
                     <div class="flex items-center gap-1.5 border-b border-pink-950 pb-2">
                         <span class="px-2 py-0.5 bg-pink-950 text-pink-300 font-mono font-bold text-[10px] rounded border border-pink-800">STEP 2</span>
-                        <span class="text-xs font-black text-white">스마트 1:1 매핑</span>
+                        <span class="text-xs font-black text-white">단계별 셋업</span>
                     </div>
                     <p class="text-[11px] text-gray-400 leading-relaxed">
-                        제조사마다 다른 미디 신호를 번역해 주는 고도의 페어링 과정입니다. 8/9패드 키트 구성을 정한 다음, 목록의 **[신호 맵핑]** 버튼을 눌러 연노랑 대기 상태로 만든 뒤 **실제 전자드럼 패드**를 스틱으로 탁 때려주면 1초 만에 셋업이 완료됩니다.
+                        셋업 위저드를 따라 순서대로 베이스 킥, 스네어, 하이햇 등을 실제로 한번씩 가볍게 툭툭 쳐 줍니다. 드럼이 내는 고유의 숫자가 실시간 감지되어 1:1 맵핑됩니다.
                     </p>
                 </div>
 
@@ -863,10 +994,10 @@
                 <div class="bg-black/30 border border-gray-800/80 rounded-xl p-4 flex flex-col gap-2.5">
                     <div class="flex items-center gap-1.5 border-b border-green-950 pb-2">
                         <span class="px-2 py-0.5 bg-green-950 text-green-300 font-mono font-bold text-[10px] rounded border border-green-800">STEP 3</span>
-                        <span class="text-xs font-black text-white">프로 믹싱 & FX</span>
+                        <span class="text-xs font-black text-white">셋업 보존/불러오기</span>
                     </div>
                     <p class="text-[11px] text-gray-400 leading-relaxed">
-                        단순 재생을 넘어 개별 6채널 콘솔 데스크에서 사운드를 다듬습니다. **[믹서 탭]**에서 3-Band EQ, Panning(패닝)을 세밀히 조율하고, Reverb 및 Delay Send를 보내 공간을 가득 채웁니다. 마스터 컴프레서와 튜브 새츄레이션으로 웅장하고 풍부한 최종 음압을 얻어내세요.
+                        셋업이 끝난 맵핑 정보를 내 PC에 파일로 저장하세요. 다음 시작 시 '전자드럼 맵핑 불러오기'를 통해 클릭 한번에 직전 상태를 복원합니다.
                     </p>
                 </div>
 
@@ -874,10 +1005,10 @@
                 <div class="bg-black/30 border border-gray-800/80 rounded-xl p-4 flex flex-col gap-2.5">
                     <div class="flex items-center gap-1.5 border-b border-yellow-950 pb-2">
                         <span class="px-2 py-0.5 bg-yellow-950 text-yellow-300 font-mono font-bold text-[10px] rounded border border-yellow-800">STEP 4</span>
-                        <span class="text-xs font-black text-white">훈련 및 자동 비트</span>
+                        <span class="text-xs font-black text-white">자동 채널 동기화</span>
                     </div>
                     <p class="text-[11px] text-gray-400 leading-relaxed">
-                        플레이 목적에 맞추어 보조 오디오 도구를 세팅합니다. 대시보드의 **⏱️ 정밀 메트로놈** 스위치를 켜고 템포 및 박자와 분할 세부 옵션을 조율하여 귀로 리듬을 잡거나, 대시보드의 **드롭 패턴 프리셋**을 통해 가이드 노트를 떨어뜨려 눈으로 훈련할 수 있습니다.
+                        불필요한 레인 변경 단추는 모두 삭제되었습니다. 위저드에서 정해진 패드 사양(8L / 9L)에 따라 게임과 믹서가 완벽히 자동으로 정렬됩니다.
                     </p>
                 </div>
 
@@ -885,43 +1016,11 @@
                 <div class="bg-black/30 border border-gray-800/80 rounded-xl p-4 flex flex-col gap-2.5">
                     <div class="flex items-center gap-1.5 border-b border-purple-950 pb-2">
                         <span class="px-2 py-0.5 bg-purple-950 text-purple-300 font-mono font-bold text-[10px] rounded border border-purple-800">STEP 5</span>
-                        <span class="text-xs font-black text-white">녹음 & 자가 피드백</span>
+                        <span class="text-xs font-black text-white">퍼포먼스 튜닝</span>
                     </div>
                     <p class="text-[11px] text-gray-400 leading-relaxed">
-                        **[녹음]**을 켜고 자유롭게 연주를 진행하면 스틱 타격 시점이 밀리초 단위로 정확히 저장됩니다. 연주를 마치고 **[리플레이]**를 누르면, 내가 친 정밀한 타이밍 궤적이 하늘에서 그대로 하강해 내 박자 습관(앞서거나 밀리는 구간)을 비주얼로 선명하게 분석해 낼 수 있습니다.
+                        **[퍼포먼스 모드]**에서 음역대별 EQ와 Delay/Reverb를 제어하고 완성한 톤 또한 파일로 저장하여, 나만의 드럼 앰프 설정을 무제한 소장하세요.
                     </p>
-                </div>
-
-            </div>
-
-            <!-- 드럼 연습 마인드셋 & 프로 드럼 트레이닝 팁 영역 -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-6 border-t border-gray-800 pt-5 text-xs text-gray-300 leading-relaxed">
-                <div class="space-y-3">
-                    <h3 class="font-extrabold text-[#00f3ff] flex items-center gap-1"><i class="fa-solid fa-graduation-cap"></i> REAL DRUM TRAINING TIPS</h3>
-                    <div>
-                        <h4 class="font-bold text-white mb-0.5">💡 1. 8비트 Go-Go 리듬 완벽 연습법</h4>
-                        <p class="text-gray-400 pl-3">
-                            리듬 패턴 프리셋을 **Basic 8-Beat (Go-Go)**로 걸고 메트로놈 똑딱이를 켜세요. 하이햇 타격 소리 사이사이에 2박과 4박에 떨어지는 스네어 타이밍을 메인 킥 페달 연주 시점과 일치시키는 독립성 트레이닝에 온전히 매진합니다.
-                        </p>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-white mb-0.5">💡 2. 마스터 다이나믹스(Compressor & Saturation) 메커니즘</h4>
-                        <p class="text-gray-400 pl-3">
-                            사운드 에디터 우측 랙에서 **Master Saturation Drive**를 30% 수준으로 올리고 **Compressor Ratio**를 4:1 정도로 걸어보세요. 전체 타격 소리가 거칠면서도 끈끈하게 정돈되어, 락과 메탈 장르에 가장 걸맞은 파워풀하고 힘차게 뭉쳐진 타격 사운드를 감상하실 수 있습니다.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="bg-[#040414] border border-cyan-950 p-4 rounded-xl flex flex-col justify-between">
-                    <div>
-                        <h3 class="font-extrabold text-green-400 flex items-center gap-1 mb-2"><i class="fa-solid fa-cube"></i> 하드웨어 통합 드럼 셋업의 의의</h3>
-                        <p class="text-gray-400 text-[11px] leading-relaxed">
-                            SoundGluck Studio v3.3은 단순 게임을 뛰어넘어 독립형 MIDI 가상 신스 드럼 모듈 역할을 지향합니다. **4L(리듬 중심), 7L(어쿠스틱 테크니컬), 8L(킥/하이햇 분리 프로 훈련), 9L(Crash 2 전용 확장 라인)** 등 보유하신 전자드럼 사양에 기민하게 매치하여 드럼 가치를 극대화할 수 있습니다.
-                        </p>
-                    </div>
-                    <div class="text-[10px] text-gray-500 font-mono mt-3 text-right">
-                        SoundGluck Engine v3.3 Core Synthesis Module // Web Audio API
-                    </div>
                 </div>
             </div>
         </div>
@@ -952,12 +1051,28 @@
 
     <script>
         /* ===================================================================
-           0. 🔑 내부 보안 로그인 시스템 스크립트 (v3.3.2)
+           0. 🔑 내부 보안 로그인 및 세션 체크 (Google Sheets API 실시간 연동 지원)
            =================================================================== */
-        const LOGIN_CREDENTIALS = {
-            id: "sound",    // 원하는 ID로 변경 가능
-            pw: "gluck"     // 원하는 비밀번호로 변경 가능
-        };
+
+        // 🌐 Google Sheets Apps Script 배포 후 얻은 웹앱 URL을 아래 빈공간에 정확하게 입력하세요!
+        // (배포 주소가 비어있으면 오프라인/개발자 로컬 로그인 모드로 자동 전환됩니다.)
+        const GOOGLE_SHEET_API_URL = ""; 
+
+        // 🔔 비차단 반응형 토스트 알리미 (모든 alert 방출!)
+        function showToast(msg) {
+            const toast = document.getElementById('notification-toast');
+            const toastText = document.getElementById('toast-text');
+            if (!toast || !toastText) return;
+            toastText.innerText = msg;
+            toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-[-10px]');
+            toast.classList.add('opacity-100', 'translate-y-0');
+            
+            if (toast.timer) clearTimeout(toast.timer);
+            toast.timer = setTimeout(() => {
+                toast.classList.remove('opacity-100', 'translate-y-0');
+                toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-[-10px]');
+            }, 3500);
+        }
 
         function checkExistingSession() {
             const isLoggedIn = sessionStorage.getItem('soundgluck_logged_in');
@@ -966,58 +1081,101 @@
             }
         }
 
-        function handleLogin(event) {
+        // 구글 스프레드시트 연동 비동기 로그인 구현부
+        async function handleLogin(event) {
             event.preventDefault();
             const inputId = document.getElementById('login-id').value.trim();
             const inputPw = document.getElementById('login-pw').value.trim();
             const errorMsg = document.getElementById('login-error-msg');
+            const submitBtn = event.target.querySelector('button[type="submit"]');
 
-            if (inputId === LOGIN_CREDENTIALS.id && inputPw === LOGIN_CREDENTIALS.pw) {
-                sessionStorage.setItem('soundgluck_logged_in', 'true');
-                bypassLogin();
-            } else {
-                errorMsg.innerText = "계정 정보 또는 패스코드가 일치하지 않습니다.";
-                setTimeout(() => { errorMsg.innerText = ""; }, 3000);
+            if (!submitBtn) return;
+            const originalBtnText = submitBtn.innerHTML;
+
+            // 중복 전송 방지 로딩 마스크
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin mr-1"></i> 인증 진행 중...`;
+
+            try {
+                // 1. API 주소가 공백이거나 설정되지 않은 경우 로컬 오프라인 인증 모드로 작동
+                if (!GOOGLE_SHEET_API_URL || GOOGLE_SHEET_API_URL.trim() === "") {
+                    console.warn("[Auth] 구글 웹앱 URL이 정의되지 않아 오프라인 로그인 모드로 작동합니다.");
+                    
+                    // 요청하신 jee/min 및 기존 sound/gluck 모두 오프라인에서 통과
+                    if ((inputId === "jee" && inputPw === "min") || (inputId === "sound" && inputPw === "gluck")) {
+                        sessionStorage.setItem('soundgluck_logged_in', 'true');
+                        showToast("오프라인 개발자 계정으로 로그인 성공!");
+                        bypassLogin();
+                    } else {
+                        throw new Error("아이디 또는 비밀번호가 일치하지 않습니다. (오프라인 모드)");
+                    }
+                } else {
+                    // 2. 구글 스프레드시트 웹앱 API 실제 전송 처리 (Fetch redirect: follow)
+                    const response = await fetch(GOOGLE_SHEET_API_URL, {
+                        method: 'POST',
+                        mode: 'cors',
+                        redirect: 'follow', // 구글 서버 리다이렉트 자동 순응 추적 설정
+                        headers: {
+                            'Content-Type': 'text/plain' // CORS Preflight 우회를 위해 text/plain을 발신
+                        },
+                        body: JSON.stringify({
+                            username: inputId,
+                            password: inputPw
+                        })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error("구글 서버와의 통신 규격이 올바르지 않습니다.");
+                    }
+
+                    const result = await response.json();
+                    if (result.success) {
+                        sessionStorage.setItem('soundgluck_logged_in', 'true');
+                        showToast(`구글 스프레드시트 인증 통과! 환영합니다, ${inputId}님.`);
+                        bypassLogin();
+                    } else {
+                        throw new Error(result.message || "로그인 자격 증명에 실패했습니다.");
+                    }
+                }
+            } catch (err) {
+                errorMsg.innerText = err.message;
+                setTimeout(() => { errorMsg.innerText = ""; }, 4000);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
             }
         }
 
         function bypassLogin() {
             const loginScreen = document.getElementById('login-screen');
-            const appContainer = document.getElementById('app-container');
+            const onboardingScreen = document.getElementById('onboarding-screen');
             
-            // 로그인창 서서히 숨기기 및 메인 본체 노출
             loginScreen.style.transition = "opacity 0.4s ease, visibility 0.4s";
             loginScreen.style.opacity = "0";
             loginScreen.style.visibility = "hidden";
             
-            appContainer.style.display = "flex";
-            
-            // 캔버스 사이즈 보정 및 애니메이션 시동
-            setTimeout(() => {
-                resizeCanvas();
-                initAllEnvelopes();
-            }, 100);
+            onboardingScreen.style.display = "flex";
+            initMIDI(); // 백그라운드 MIDI 스레드 가동
         }
 
-        // 페이지 로드 시 즉시 세션 체크
         window.addEventListener('DOMContentLoaded', checkExistingSession);
 
         /* ===================================================================
-           1. 사운드 및 오디오 신디사이저 엔진 (Web Audio API v3.3 스튜디오 마스터)
+           1. 사운드 및 오디오 신디사이저 엔진 (진짜 드럼에 가깝게 묵직하게 튜닝)
            =================================================================== */
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         const audioEnableCheckbox = document.getElementById('audio-enable');
         const metronomeCheckbox = document.getElementById('metronome-enable');
         const playMetronomeCheckbox = document.getElementById('play-metronome-enable');
 
-        // 악기별 믹서 채널 파라미터 (v3.3 정밀 스케일링)
+        // 테크노 질감을 묵직한 어쿠스틱 리얼 드럼 질감으로 튜닝하기 위해 기본 피치 하강 폭 및 노이즈 주파수 대거 조정
         const synthParams = {
-            kick: { pitch: 150, decay: 0.3, volume: 1.1, pan: 0.0, eqLow: 1, eqMid: -2, eqHigh: 0, reverbSend: 0.1, delaySend: 0.0, mute: false, solo: false },
-            snare: { pitch: 180, noiseFreq: 1000, decay: 0.25, volume: 0.9, pan: -0.1, eqLow: -1, eqMid: 2, eqHigh: 1, reverbSend: 0.25, delaySend: 0.05, mute: false, solo: false },
-            hihat: { highpass: 7000, decay: 0.05, volume: 0.7, pan: -0.4, eqLow: -3, eqMid: 0, eqHigh: 3, reverbSend: 0.1, delaySend: 0.0, mute: false, solo: false },
-            tom: { pitch: 220, pitchEnd: 60, decay: 0.25, volume: 0.8, pan: 0.2, eqLow: 2, eqMid: 1, eqHigh: -1, reverbSend: 0.2, delaySend: 0.1, mute: false, solo: false },
-            crash: { pitch: 550, highpass: 2000, decay: 0.6, volume: 0.8, pan: -0.3, eqLow: -2, eqMid: -1, eqHigh: 4, reverbSend: 0.3, delaySend: 0.1, mute: false, solo: false },
-            crash2: { pitch: 650, highpass: 2200, decay: 0.45, volume: 0.8, pan: 0.5, eqLow: -2, eqMid: -1, eqHigh: 4, reverbSend: 0.3, delaySend: 0.1, mute: false, solo: false }
+            kick: { pitch: 120, decay: 0.18, volume: 1.2, pan: 0.0, eqLow: 4, eqMid: -2, eqHigh: -1, reverbSend: 0.05, delaySend: 0.0, mute: false, solo: false },
+            snare: { pitch: 165, noiseFreq: 1300, decay: 0.22, volume: 0.95, pan: -0.05, eqLow: -2, eqMid: 3, eqHigh: 2, reverbSend: 0.2, delaySend: 0.0, mute: false, solo: false },
+            hihat: { highpass: 8500, decay: 0.04, volume: 0.75, pan: -0.3, eqLow: -4, eqMid: 0, eqHigh: 4, reverbSend: 0.08, delaySend: 0.0, mute: false, solo: false },
+            tom: { pitch: 180, pitchEnd: 55, decay: 0.22, volume: 0.85, pan: 0.15, eqLow: 3, eqMid: 1, eqHigh: -1, reverbSend: 0.15, delaySend: 0.05, mute: false, solo: false },
+            crash: { pitch: 480, highpass: 3200, decay: 0.8, volume: 0.85, pan: -0.25, eqLow: -3, eqMid: -1, eqHigh: 5, reverbSend: 0.25, delaySend: 0.08, mute: false, solo: false },
+            crash2: { pitch: 580, highpass: 3500, decay: 0.65, volume: 0.85, pan: 0.4, eqLow: -3, eqMid: -1, eqHigh: 5, reverbSend: 0.25, delaySend: 0.08, mute: false, solo: false }
         };
 
         const masterFX = {
@@ -1033,10 +1191,8 @@
             chorus: 10
         };
 
-        // 실시간 채널 VU 미터 값 트래킹용 메모리 객체
         const channelVUMeters = { kick: 0, snare: 0, hihat: 0, tom: 0, crash: 0, crash2: 0 };
 
-        // ⏱️ v3.3 정밀 메트로놈 변수
         let metronomeEnabled = false;
         let timeSignature = '4/4'; 
         let subdivision = 1;       
@@ -1045,43 +1201,33 @@
         let beatCount = 0;         
         let subdivCount = 0;       
 
-        /* 스튜디오 마스터 라우팅 버스 노드 설정 */
         let masterHighpass = audioCtx.createBiquadFilter();
         let masterLowpass = audioCtx.createBiquadFilter();
-
-        // 🎛️ 마스터 오디오 다이나믹스 이펙터 노드
         let masterCompressor = audioCtx.createDynamicsCompressor();
         let masterSaturator = audioCtx.createWaveShaper();
         let masterChorusDelay = audioCtx.createDelay();
         let masterChorusLFO = audioCtx.createOscillator();
         let masterChorusLFOGain = audioCtx.createGain();
 
-        // 공간계 효과 버스 노드
         let reverbNode = audioCtx.createConvolver();
         let reverbWetGain = audioCtx.createGain();
-
         let delayNode = audioCtx.createDelay(2.0);
         let delayFeedbackNode = audioCtx.createGain();
         let delayWetGain = audioCtx.createGain();
 
-        // 📊 실시간 스펙트럼 애널라이저
         let analyserNode = audioCtx.createAnalyser();
         analyserNode.fftSize = 256;
         const bufferLength = analyserNode.frequencyBinCount;
         const dataArray = new Uint8Array(bufferLength);
 
-        // 마스터 랙 오디오 회로 결선 및 초기 셋업
         function initAudioRouting() {
-            // 1. 컴프레서 파라미터 세팅
             masterCompressor.threshold.setValueAtTime(masterFX.compThreshold, audioCtx.currentTime);
             masterCompressor.ratio.setValueAtTime(masterFX.compRatio, audioCtx.currentTime);
             masterCompressor.attack.setValueAtTime(0.003, audioCtx.currentTime); 
             masterCompressor.release.setValueAtTime(0.08, audioCtx.currentTime);  
 
-            // 2. 가상 튜브 새츄레이션 디스토션 커브 적용
             updateSaturationCurve(masterFX.saturation);
 
-            // 3. 코러스 저주파 변조 주파수 결선 
             masterChorusDelay.delayTime.setValueAtTime(0.015, audioCtx.currentTime); 
             masterChorusLFOGain.gain.setValueAtTime(masterFX.chorus * 0.0001, audioCtx.currentTime); 
             masterChorusLFO.frequency.value = 1.5; 
@@ -1089,7 +1235,6 @@
             masterChorusLFOGain.connect(masterChorusDelay.delayTime);
             try { masterChorusLFO.start(); } catch(e) {}
 
-            // 4. 공간계 이펙터 설정
             delayNode.delayTime.value = masterFX.delayTime;
             delayFeedbackNode.gain.value = masterFX.delayFeedback;
             delayNode.connect(delayFeedbackNode);
@@ -1098,16 +1243,13 @@
             reverbWetGain.gain.value = masterFX.reverbMix;
             reverbNode.buffer = createReverbImpulseResponse(masterFX.reverbSize, 3.0);
 
-            // 5. 마스터 하이/로우패스 필터
             masterHighpass.type = 'highpass';
             masterHighpass.frequency.value = masterFX.highpass;
             masterLowpass.type = 'lowpass';
             masterLowpass.frequency.value = masterFX.lowpass;
 
-            // 6. 메인 통합 결선 구조
             delayNode.connect(delayWetGain);
             delayWetGain.connect(masterCompressor);
-
             reverbNode.connect(reverbWetGain);
             reverbWetGain.connect(masterCompressor);
 
@@ -1119,7 +1261,6 @@
             analyserNode.connect(audioCtx.destination);
         }
 
-        // 포화 디스토션 아날로그 Sigmoid 곡선 발생기
         function updateSaturationCurve(amount) {
             const k = parseFloat(amount);
             if (k === 0) {
@@ -1136,7 +1277,6 @@
             masterSaturator.curve = curve;
         }
 
-        // 가상 리버브 임펄스 생성기
         function createReverbImpulseResponse(duration, decay) {
             const sampleRate = audioCtx.sampleRate;
             const length = sampleRate * duration;
@@ -1152,7 +1292,6 @@
             return impulse;
         }
 
-        // 마스터 랙 수직 필터 및 공간계 노브 제어 핸들러
         function updateMasterFX(param, val, unit) {
             masterFX[param] = parseFloat(val);
             const label = document.getElementById(`label-fx-${param}`);
@@ -1183,7 +1322,6 @@
             }
         }
 
-        // 컴프레서 실시간 파라미터 튜닝
         function updateCompressor(param, val) {
             if (param === 'threshold') {
                 masterCompressor.threshold.setValueAtTime(parseFloat(val), audioCtx.currentTime);
@@ -1194,7 +1332,6 @@
             }
         }
 
-        // 아날로그 배음 왜곡 및 피치 광폭 코러스 수치 조율
         function updateDynamics(param, val) {
             if (param === 'saturation') {
                 updateSaturationCurve(val);
@@ -1205,7 +1342,6 @@
             }
         }
 
-        // 악기 채널별 개별 Web Audio 이퀄라이저, 팬, 믹서 노드 동적 생성 결선 함수
         function routeChannelAudio(sourceNode, instType) {
             const params = synthParams[instType];
             const now = audioCtx.currentTime;
@@ -1242,7 +1378,6 @@
             eqMidNode.connect(eqHighNode);
             eqHighNode.connect(channelGainNode);
             channelGainNode.connect(pannerNode);
-
             pannerNode.connect(masterCompressor);
 
             const delaySendGain = audioCtx.createGain();
@@ -1261,13 +1396,13 @@
         initAudioRouting();
 
         /* ===================================================================
-           2. 🎚️ 하드웨어 콘솔 믹서 뷰포트 동적 렌더링 (균형 비율 조율)
+           2. 🎚️ 하드웨어 콘솔 믹서 뷰포트 동적 렌더링
            =================================================================== */
         function render6ChannelMixer() {
             const wrapper = document.getElementById('mixer-strips-wrapper');
+            if (!wrapper) return;
             wrapper.innerHTML = '';
 
-            // 8패드/9패드 킷에 따른 활성 채널 개수 동적 헤더 업데이트
             const activeCount = hardwarePadMode === 8 ? 5 : 6;
             document.getElementById('mixer-desk-title').innerHTML = `
                 <i class="fa-solid fa-sliders text-cyan-400"></i> PRO-MIXER DESK (${activeCount} CHANNEL STRIPS ACTIVE)
@@ -1282,7 +1417,7 @@
                 { id: 'crash2', name: 'Crash Cym 2', icon: 'fa-compact-disc', color: 'var(--neon-bronze)', isCrash2: true }
             ];
 
-            channels.forEach((chan, idx) => {
+            channels.forEach((chan) => {
                 if (hardwarePadMode === 8 && chan.isCrash2) return;
 
                 const strip = document.createElement('div');
@@ -1291,22 +1426,18 @@
                 strip.style.boxShadow = `inset 0 0 15px rgba(0,0,0,0.8), 0 4px 10px rgba(0,0,0,0.5)`;
 
                 strip.innerHTML = `
-                    <!-- 채널 헤더 타이틀 -->
                     <div class="flex flex-col items-center w-full border-b border-[#20204d] pb-1">
                         <i class="fa-solid ${chan.icon} text-[11px] mb-0.5" style="color: ${chan.color}"></i>
                         <span class="text-[9px] font-black text-white tracking-wider uppercase text-center">${chan.name}</span>
                     </div>
 
-                    <!-- 개별 미니 ADSR 스크린 -->
                     <div class="bg-black/90 border border-[#1b1b36] rounded-md h-10 w-full relative overflow-hidden">
                         <canvas id="canvas-env-${chan.id}" class="w-full h-full"></canvas>
                     </div>
 
-                    <!-- 이퀄라이저 다이얼 노브 세팅 (겹침 현상 완전 수정) -->
                     <div class="flex flex-col gap-1 w-full bg-black/30 p-1 rounded-lg border border-gray-900">
                         <span class="text-[7.5px] font-bold text-gray-500 uppercase tracking-widest text-center">3-Band EQ</span>
                         <div class="flex justify-around items-center">
-                            <!-- Low EQ -->
                             <div class="flex flex-col items-center">
                                 <span class="text-[7px] text-gray-500 font-bold mb-0.5">Low</span>
                                 <div class="rotary-knob" data-instrument="${chan.id}" data-param="eqLow" data-min="-12" data-max="12" data-value="${synthParams[chan.id].eqLow}" data-unit="dB">
@@ -1315,7 +1446,6 @@
                                 </div>
                                 <span class="text-[7px] text-gray-400 font-mono mt-0.5" id="label-${chan.id}-eqLow">${synthParams[chan.id].eqLow}dB</span>
                             </div>
-                            <!-- Mid EQ -->
                             <div class="flex flex-col items-center">
                                 <span class="text-[7px] text-gray-500 font-bold mb-0.5">Mid</span>
                                 <div class="rotary-knob" data-instrument="${chan.id}" data-param="eqMid" data-min="-12" data-max="12" data-value="${synthParams[chan.id].eqMid}" data-unit="dB">
@@ -1324,7 +1454,6 @@
                                 </div>
                                 <span class="text-[7px] text-gray-400 font-mono mt-0.5" id="label-${chan.id}-eqMid">${synthParams[chan.id].eqMid}dB</span>
                             </div>
-                            <!-- High EQ -->
                             <div class="flex flex-col items-center">
                                 <span class="text-[7px] text-gray-500 font-bold mb-0.5">High</span>
                                 <div class="rotary-knob" data-instrument="${chan.id}" data-param="eqHigh" data-min="-12" data-max="12" data-value="${synthParams[chan.id].eqHigh}" data-unit="dB">
@@ -1336,7 +1465,6 @@
                         </div>
                     </div>
 
-                    <!-- 이펙터 센드 (Send Reverb, Send Delay) 및 Pan(좌우 배치) -->
                     <div class="grid grid-cols-3 gap-1 w-full bg-black/20 p-1 rounded-lg border border-gray-900/40">
                         <div class="flex flex-col items-center">
                             <span class="text-[6.5px] text-gray-500 font-bold mb-0.5">Rev S.</span>
@@ -1355,7 +1483,7 @@
                             <span class="text-[7px] text-gray-400 font-mono mt-0.5" id="label-${chan.id}-delaySend">${synthParams[chan.id].delaySend}</span>
                         </div>
                         <div class="flex flex-col items-center">
-                            <span class="text-[6.5px] text-gray-500 font-bold mb-0.5">Pan L/R</span>
+                            <span class="text-[6.5px] text-gray-500 font-bold mb-0.5">Pan</span>
                             <div class="rotary-knob" data-instrument="${chan.id}" data-param="pan" data-min="-1" data-max="1" data-value="${synthParams[chan.id].pan}" data-unit="">
                                 <div class="rotary-knob-pointer"></div>
                                 <svg class="rotary-knob-svg"><path class="rotary-knob-arc" stroke="${chan.color}" d="M 9.7 32.3 A 16 16 0 1 1 32.3 32.3" /></svg>
@@ -1364,7 +1492,6 @@
                         </div>
                     </div>
 
-                    <!-- 악기 고유 피치/딜레이 조절 다이얼 -->
                     <div class="flex justify-around items-center w-full bg-black/30 p-1 rounded-lg border border-gray-900">
                         <div class="flex flex-col items-center">
                             <span class="text-[7px] text-gray-500 font-bold mb-0.5">Pitch</span>
@@ -1384,11 +1511,8 @@
                         </div>
                     </div>
 
-                    <!-- Mute & Solo 스마트 콘솔 스위치 및 LED VU 메타 인터페이스 분할 배치 -->
                     <div class="flex items-center justify-between w-full h-32 bg-black/50 p-1 rounded-lg border border-gray-900 gap-1.5">
-                        
-                        <!-- 🟢 하드웨어 VU 레벨 메터 (LED Segment) -->
-                        <div class="flex flex-col gap-[0.5px] h-[100px] w-2 bg-[#050510] rounded border border-gray-800 p-[1px] justify-end animate-pulse" id="vu-${chan.id}">
+                        <div class="flex flex-col gap-[0.5px] h-[100px] w-2 bg-[#050510] rounded border border-gray-800 p-[1px] justify-end" id="vu-${chan.id}">
                             <div class="h-1.5 w-full bg-red-600 rounded-sm opacity-20 transition-opacity duration-75" id="vu-led-${chan.id}-9"></div>
                             <div class="h-1.5 w-full bg-red-500 rounded-sm opacity-20 transition-opacity duration-75" id="vu-led-${chan.id}-8"></div>
                             <div class="h-1.5 w-full bg-yellow-500 rounded-sm opacity-20 transition-opacity duration-75" id="vu-led-${chan.id}-7"></div>
@@ -1401,7 +1525,6 @@
                             <div class="h-1.5 w-full bg-green-500 rounded-sm opacity-20 transition-opacity duration-75" id="vu-led-${chan.id}-0"></div>
                         </div>
 
-                        <!-- 🎚️ 세로형 메인 정밀 레벨 페이더 -->
                         <div class="flex-1 flex flex-col justify-between items-center h-[100px] relative">
                             <div class="fader-track" id="fader-track-${chan.id}">
                                 <div class="fader-scale">
@@ -1412,17 +1535,14 @@
                             <span class="text-[7.5px] text-gray-500 font-mono mt-1" id="label-vol-${chan.id}">v: ${synthParams[chan.id].volume.toFixed(1)}</span>
                         </div>
 
-                        <!-- Mute / Solo 사이드 버튼 스위치 -->
                         <div class="flex flex-col gap-1">
                             <button id="btn-solo-${chan.id}" onclick="toggleChannelMuteSolo('${chan.id}', 'solo')" class="w-5 h-5 rounded bg-[#2a1d0d] hover:bg-yellow-900 border border-[#b87014] text-[8px] font-black text-[#f39c12] tracking-wider transition ${synthParams[chan.id].solo ? 'bg-[#d35400] text-white font-black' : ''}">S</button>
                             <button id="btn-mute-${chan.id}" onclick="toggleChannelMuteSolo('${chan.id}', 'mute')" class="w-5 h-5 rounded bg-[#2a0d0d] hover:bg-red-900 border border-[#b81414] text-[8px] font-black text-[#e74c3c] tracking-wider transition ${synthParams[chan.id].mute ? 'bg-[#c0392b] text-white font-black' : ''}">M</button>
                             <button onclick="playSynthesizedDrum('${chan.id}')" class="w-5 h-7 rounded bg-[#101033] hover:bg-cyan-900 border border-[#1b1b59] text-[7.5px] font-extrabold text-cyan-300 text-center leading-none flex items-center justify-center">TRY</button>
                         </div>
-
                     </div>
                 `;
                 wrapper.appendChild(strip);
-                
                 initFaderInteraction(chan.id);
             });
 
@@ -1434,7 +1554,6 @@
             });
         }
 
-        // 🎚️ 세로형 채널 마스터 페이더 드래그 이펙트 및 스케일 바인딩
         function initFaderInteraction(instId) {
             const track = document.getElementById(`fader-track-${instId}`);
             const cap = document.getElementById(`fader-cap-${instId}`);
@@ -1442,7 +1561,7 @@
             if (!track || !cap) return;
 
             let isDragging = false;
-            let trackHeight = 86; // 축소형 가용 높이 바운더리
+            let trackHeight = 86;
 
             const handleDrag = (clientY) => {
                 const rect = track.getBoundingClientRect();
@@ -1487,23 +1606,19 @@
             cap.addEventListener('touchstart', onMouseDown, { passive: true });
         }
 
-        // Mute / Solo 토글 제어 스위치
         function toggleChannelMuteSolo(instId, type) {
             const params = synthParams[instId];
             if (type === 'mute') {
                 params.mute = !params.mute;
                 const btn = document.getElementById(`btn-mute-${instId}`);
                 btn.className = `w-5 h-5 rounded bg-[#2a0d0d] hover:bg-red-900 border border-[#b81414] text-[8px] font-black text-[#e74c3c] tracking-wider transition ${params.mute ? 'bg-[#c0392b] text-white font-black' : ''}`;
-                logMidiSystem(`[Mute] [${instId}] 채널의 음소거 상태가 ${params.mute ? '활성화' : '해제'}되었습니다.`);
             } else if (type === 'solo') {
                 params.solo = !params.solo;
                 const btn = document.getElementById(`btn-solo-${instId}`);
                 btn.className = `w-5 h-5 rounded bg-[#2a1d0d] hover:bg-yellow-900 border border-[#b87014] text-[8px] font-black text-[#f39c12] tracking-wider transition ${params.solo ? 'bg-[#d35400] text-white font-black' : ''}`;
-                logMidiSystem(`[Solo] [${instId}] 채널의 독주 상태가 ${params.solo ? '활성화' : '해제'}되었습니다.`);
             }
         }
 
-        // 개별 LED VU 레벨 미터 감쇠 루프 애니메이션
         function decayAndRenderVUMeters() {
             const channels = ['kick', 'snare', 'hihat', 'tom', 'crash', 'crash2'];
             channels.forEach(inst => {
@@ -1529,18 +1644,21 @@
         setTimeout(decayAndRenderVUMeters, 200);
 
         /* ===================================================================
-           3. 글로벌 하드웨어 전자드럼 8/9 패드 맵핑 데이터베이스
+           3. 글로벌 하드웨어 전자드럼 8/9 패드 데이터베이스 및 위저드 맵핑 스키마
            =================================================================== */
-        let currentLanes = 4;
+        let currentLanes = 8; // 셋업 완료시 hardwarePadMode와 자동 완전 1:1 결합됨
         let score = 0;
         let combo = 0;
         let maxCombo = 0;
         let bpm = 120;
         let noteSpeed = 0.45;
-        let autoPattern = 'quarter';
-        let lastBeatTime = 0;
+        let autoPattern = 'eight_go'; // 기본 구동을 KICK만 단독으로 내려오던 'quarter'에서 'eight_go'(8비트 그루브)로 전격 변경!
+        let lastBeatTime = 0; 
         let beatInterval = (60 / bpm) * 1000;
         let subBeatCounter = 0; 
+        
+        // 🎮 게임 활성화 및 리셋용 제어 상태 변수
+        let isGamePlaying = false;
 
         const JUDGMENT_OFFSET = 70;    
         const PERFECT_WINDOW = 45;     
@@ -1552,33 +1670,18 @@
         let hardwarePadMode = 8;
 
         const globalMidiMapping = [
-            { id: 'kick', name: 'Bass Kick (베이스 킥 페달)', midiNote: 36, sound: 'kick', targetLaneMap: { 4: 1, 7: 1, 8: 0, 9: 0 } },
-            { id: 'hihat', name: 'Hi-Hat (하이햇 심벌)', midiNote: 42, sound: 'hihat', targetLaneMap: { 4: 0, 7: 0, 8: 1, 9: 1 } },
-            { id: 'snare', name: 'Snare Drum (스네어 드럼)', midiNote: 38, sound: 'snare', targetLaneMap: { 4: 1, 7: 1, 8: 2, 9: 2 } },
-            { id: 'tom1', name: 'Tom 1 (고음 탐탐)', midiNote: 48, sound: 'tom', targetLaneMap: { 4: 2, 7: 2, 8: 3, 9: 3 } },
-            { id: 'tom2', name: 'Tom 2 (중음 탐탐)', midiNote: 45, sound: 'tom', targetLaneMap: { 4: 2, 7: 3, 8: 4, 9: 4 } },
-            { id: 'tom3', name: 'Tom 3 (플로어 탐탐)', midiNote: 41, sound: 'tom', targetLaneMap: { 4: 2, 7: 4, 8: 5, 9: 5 } },
-            { id: 'crash', name: 'Crash 1 Cymbal (크래시 1 심벌)', midiNote: 49, sound: 'crash', targetLaneMap: { 4: 3, 7: 5, 8: 6, 9: 6 } },
-            { id: 'crash2', name: 'Crash 2 Cymbal (크래시 2 심벌)', midiNote: 57, sound: 'crash2', targetLaneMap: { 4: 3, 7: 5, 8: 6, 9: 7 }, isCrash2: true },
-            { id: 'ride', name: 'Ride Cymbal (라이드 심벌)', midiNote: 51, sound: 'crash', targetLaneMap: { 4: 3, 7: 6, 8: 7, 9: 8 } }
+            { id: 'kick', name: 'Bass Kick (베이스 킥 페달)', midiNote: 36, sound: 'kick', targetLaneMap: { 8: 0, 9: 0 } },
+            { id: 'hihat', name: 'Hi-Hat (하이햇 심벌)', midiNote: 42, sound: 'hihat', targetLaneMap: { 8: 1, 9: 1 } },
+            { id: 'snare', name: 'Snare Drum (스네어 드럼)', midiNote: 38, sound: 'snare', targetLaneMap: { 8: 2, 9: 2 } },
+            { id: 'tom1', name: 'Tom 1 (고음 탐탐)', midiNote: 48, sound: 'tom', targetLaneMap: { 8: 3, 9: 3 } },
+            { id: 'tom2', name: 'Tom 2 (중음 탐탐)', midiNote: 45, sound: 'tom', targetLaneMap: { 8: 4, 9: 4 } },
+            { id: 'tom3', name: 'Tom 3 (플로어 탐탐)', midiNote: 41, sound: 'tom', targetLaneMap: { 8: 5, 9: 5 } },
+            { id: 'crash', name: 'Crash 1 Cymbal (크래시 1 심벌)', midiNote: 49, sound: 'crash', targetLaneMap: { 8: 6, 9: 6 } },
+            { id: 'crash2', name: 'Crash 2 Cymbal (크래시 2 심벌)', midiNote: 57, sound: 'crash2', targetLaneMap: { 8: 6, 9: 7 }, isCrash2: true },
+            { id: 'ride', name: 'Ride Cymbal (라이드 심벌)', midiNote: 51, sound: 'crash', targetLaneMap: { 8: 7, 9: 8 } }
         ];
 
         const laneConfigurations = {
-            4: [
-                { name: 'Hi-Hat', key: 'A', keyLabel: 'A', sound: 'hihat' },
-                { name: 'Snare', key: 'S', keyLabel: 'S', sound: 'snare' },
-                { name: 'Tom-Tom', key: 'K', keyLabel: 'K', sound: 'tom' },
-                { name: 'Crash', key: 'L', keyLabel: 'L', sound: 'crash' }
-            ],
-            7: [
-                { name: 'Hi-Hat', key: 'A', keyLabel: 'A', sound: 'hihat' },
-                { name: 'Snare', key: 'S', keyLabel: 'S', sound: 'snare' },
-                { name: 'Tom 1', key: 'D', keyLabel: 'D', sound: 'tom' },
-                { name: 'Tom 2', key: 'F', keyLabel: 'F', sound: 'tom' },
-                { name: 'Tom 3', key: 'J', keyLabel: 'J', sound: 'tom' },
-                { name: 'Crash', key: 'K', keyLabel: 'K', sound: 'crash' },
-                { name: 'Ride', key: 'L', keyLabel: 'L', sound: 'crash' }
-            ],
             8: [
                 { name: 'Kick', key: 'A', keyLabel: 'A', sound: 'kick' },
                 { name: 'Hi-Hat', key: 'S', keyLabel: 'S', sound: 'hihat' },
@@ -1605,7 +1708,258 @@
         let currentKeyMap = {};
 
         /* ===================================================================
-           4. 동적 레이아웃 생성 및 제어 엔진
+           4. 온보딩 대화형 설정 위저드 스케줄러 & 상태 머신
+           =================================================================== */
+        let wizardCurrentStep = 1;
+        let wizardActiveMappingIndex = 0;
+        let wizardActiveHardwareType = 8;
+        let wizardPendingMappingQueue = [];
+
+        function startSetupWizard() {
+            document.getElementById('onboarding-menu-list').classList.add('hidden');
+            document.getElementById('setup-wizard-panel').classList.remove('hidden');
+            nextWizardStep(1);
+        }
+
+        function abortWizard() {
+            document.getElementById('setup-wizard-panel').classList.add('hidden');
+            document.getElementById('onboarding-menu-list').classList.remove('hidden');
+        }
+
+        function nextWizardStep(stepNum) {
+            wizardCurrentStep = stepNum;
+            document.getElementById('wizard-step-indicator').innerText = `STEP ${stepNum} / 4`;
+            
+            document.getElementById('wizard-step-1').classList.add('hidden');
+            document.getElementById('wizard-step-2').classList.add('hidden');
+            document.getElementById('wizard-step-3').classList.add('hidden');
+            document.getElementById('wizard-step-4').classList.add('hidden');
+            
+            document.getElementById(`wizard-step-${stepNum}`).classList.remove('hidden');
+
+            if (stepNum === 1) {
+                document.getElementById('wizard-step-title').innerText = "USB 하드웨어 연결 감지";
+                checkMidiOnboardingStatus();
+            } 
+            else if (stepNum === 2) {
+                document.getElementById('wizard-step-title').innerText = "드럼 킷 사양 선택";
+            } 
+            else if (stepNum === 3) {
+                document.getElementById('wizard-step-title').innerText = "순차 패드 자동 맵핑";
+                setupWizardMappingQueue();
+                startWizardActiveMapping();
+            } 
+            else if (stepNum === 4) {
+                document.getElementById('wizard-step-title').innerText = "셋업 완료 및 보존";
+            }
+        }
+
+        function checkMidiOnboardingStatus() {
+            const nextBtn = document.getElementById('btn-step1-next');
+            const ind = document.getElementById('wizard-midi-indicator');
+            const text = document.getElementById('wizard-midi-text');
+            
+            if (midiAccess && midiAccess.inputs.size > 0) {
+                ind.className = "w-2.5 h-2.5 rounded-full bg-green-500 animate-ping";
+                text.innerText = "ONLINE";
+                text.className = "text-[10px] font-black text-green-400 font-mono";
+                nextBtn.disabled = false;
+                nextBtn.classList.remove('bg-slate-800', 'text-slate-500', 'cursor-not-allowed');
+                nextBtn.classList.add('bg-gradient-to-r', 'from-cyan-500', 'to-blue-500', 'text-white');
+            } else {
+                ind.className = "w-2.5 h-2.5 rounded-full bg-yellow-500";
+                text.innerText = "STANDBY (시뮬레이터)";
+                text.className = "text-[10px] font-black text-yellow-400 font-mono";
+                nextBtn.disabled = false;
+                nextBtn.classList.remove('bg-slate-800', 'text-slate-500', 'cursor-not-allowed');
+                nextBtn.classList.add('bg-gradient-to-r', 'from-yellow-600', 'to-amber-500', 'text-white');
+            }
+        }
+
+        function selectWizardHardware(typeNum) {
+            wizardActiveHardwareType = typeNum;
+            const btn8 = document.getElementById('btn-wiz-hw-8');
+            const btn9 = document.getElementById('btn-wiz-hw-9');
+            
+            if (typeNum === 8) {
+                btn8.className = "border-2 border-cyan-500 bg-cyan-950/40 rounded-xl p-4 text-center transition scale-[1.02]";
+                btn9.className = "border-2 border-slate-800 bg-slate-950/20 rounded-xl p-4 text-center transition";
+            } else {
+                btn9.className = "border-2 border-cyan-500 bg-cyan-950/40 rounded-xl p-4 text-center transition scale-[1.02]";
+                btn8.className = "border-2 border-slate-800 bg-slate-950/20 rounded-xl p-4 text-center transition";
+            }
+            setHardwarePadMode(typeNum);
+        }
+
+        function setupWizardMappingQueue() {
+            wizardActiveMappingIndex = 0;
+            wizardPendingMappingQueue = globalMidiMapping.filter(config => {
+                if (wizardActiveHardwareType === 8 && config.isCrash2) return false;
+                return true;
+            });
+        }
+
+        function startWizardActiveMapping() {
+            if (wizardActiveMappingIndex >= wizardPendingMappingQueue.length) {
+                nextWizardStep(4);
+                return;
+            }
+            
+            const config = wizardPendingMappingQueue[wizardActiveMappingIndex];
+            document.getElementById('wizard-active-pad-name').innerText = config.name;
+            document.getElementById('wizard-midi-live-log').innerText = `[System] '${config.name}' 신호 감지 대기 중...`;
+        }
+
+        function skipActiveWizardPad() {
+            wizardActiveMappingIndex++;
+            startWizardActiveMapping();
+        }
+
+        function handleWizardMidiSignal(noteCode) {
+            if (wizardCurrentStep !== 3) return;
+            const config = wizardPendingMappingQueue[wizardActiveMappingIndex];
+            if (!config) return;
+
+            config.midiNote = noteCode;
+            document.getElementById('wizard-midi-live-log').innerText = `[감지 완료] MIDI Code: ${noteCode} 와 연결됨!`;
+            playSynthesizedDrum(config.sound); 
+            
+            setTimeout(() => {
+                wizardActiveMappingIndex++;
+                startWizardActiveMapping();
+            }, 700);
+        }
+
+        function enterStudioCompleted() {
+            document.getElementById('onboarding-screen').style.display = "none";
+            const appContainer = document.getElementById('app-container');
+            appContainer.style.display = "flex";
+            
+            setLaneMode(wizardActiveHardwareType);
+            document.getElementById('label-active-setup-lanes').innerText = `${wizardActiveHardwareType}L 자동 활성화`;
+
+            // PERFORMANCE MODE 가 첫번째 탭으로 오도록 강제 제어
+            switchTab('sound');
+
+            setTimeout(() => {
+                resizeCanvas();
+                initAllEnvelopes();
+            }, 100);
+        }
+
+        function bypassOnboardingDirectly() {
+            setHardwarePadMode(8);
+            wizardActiveHardwareType = 8;
+            enterStudioCompleted();
+        }
+
+        function exportMidiSetupFile() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(globalMidiMapping));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", `soundgluck_midi_setup_${Date.now()}.json`);
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+        }
+
+        function importMidiSetupOnboarding(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const imported = JSON.parse(e.target.result);
+                    if (Array.isArray(imported)) {
+                        imported.forEach(imp => {
+                            const match = globalMidiMapping.find(g => g.id === imp.id);
+                            if (match) match.midiNote = imp.midiNote;
+                        });
+                        
+                        const hasCrash2 = imported.some(imp => imp.id === 'crash2' && imp.midiNote !== null);
+                        const autoKitType = hasCrash2 ? 9 : 8;
+                        
+                        setHardwarePadMode(autoKitType);
+                        wizardActiveHardwareType = autoKitType;
+                        
+                        showToast(`[불러오기 완료] ${autoKitType}패드 킷 드럼 셋업이 성공적으로 적용되었습니다.`);
+                        enterStudioCompleted();
+                    }
+                } catch(err) {
+                    showToast("가져오기 도중 에러가 발생했습니다. 올바른 셋업 파일인지 확인하십시오.");
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function saveMidiSetupLocalStorage() {
+            localStorage.setItem('soundgluck_midi_mapping_backup', JSON.stringify(globalMidiMapping));
+            localStorage.setItem('soundgluck_active_hardware_mode', wizardActiveHardwareType);
+            showToast("미디 셋업이 브라우저 로컬 세션에 안전하게 고정 보존되었습니다.");
+        }
+
+        function loadMidiSetupLocalStorage() {
+            const saved = localStorage.getItem('soundgluck_midi_mapping_backup');
+            const savedHw = localStorage.getItem('soundgluck_active_hardware_mode');
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                parsed.forEach(imp => {
+                    const match = globalMidiMapping.find(g => g.id === imp.id);
+                    if (match) match.midiNote = imp.midiNote;
+                });
+                if (savedHw) {
+                    wizardActiveHardwareType = parseInt(savedHw);
+                    setHardwarePadMode(wizardActiveHardwareType);
+                }
+                return true;
+            }
+            return false;
+        }
+
+        function exportSoundSetupFile() {
+            const soundConfig = {
+                synthParams: synthParams,
+                masterFX: masterFX
+            };
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(soundConfig));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", `soundgluck_performance_preset_${Date.now()}.json`);
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+        }
+
+        function importSoundSetupFile(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const imported = JSON.parse(e.target.result);
+                    if (imported.synthParams && imported.masterFX) {
+                        for (let inst in imported.synthParams) {
+                            if (synthParams[inst]) {
+                                Object.assign(synthParams[inst], imported.synthParams[inst]);
+                            }
+                        }
+                        Object.assign(masterFX, imported.masterFX);
+                        
+                        initAudioRouting();
+                        render6ChannelMixer();
+                        showToast("퍼포먼스 믹싱 사운드 프리셋이 완벽하게 로드되었습니다!");
+                    }
+                } catch(err) {
+                    showToast("가져오기 도중 에러가 발생했습니다. 올바른 프리셋 파일인지 확인하십시오.");
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        /* ===================================================================
+           5. 동적 레이아웃 생성 및 제어 엔진 (키보드 맵핑 관련 UI 전면 삭제)
            =================================================================== */
         function initLayout() {
             const laneData = laneConfigurations[currentLanes];
@@ -1641,7 +1995,6 @@
                 });
             }
 
-            drawKeyboardMappingList();
             drawMidiMappingList();
 
             notes.forEach(n => n.element.remove());
@@ -1652,18 +2005,62 @@
 
         function setLaneMode(modeNum) {
             currentLanes = modeNum;
-            
-            const modes = [4, 7, 8, 9];
-            modes.forEach(m => {
-                const btn = document.getElementById(`btn-lane-${m}`);
-                if (btn) {
-                    btn.className = m === modeNum 
-                        ? "flex-1 py-1 text-xs font-bold rounded bg-cyan-950 text-cyan-300 border border-cyan-800" 
-                        : "flex-1 py-1 text-xs font-bold rounded bg-slate-900 text-gray-400";
-                }
-            });
-
             initLayout();
+        }
+
+        // 🎮 게임 제어용 코어 엔진 구현 (재생, 일시정지, 멈춤, 리셋)
+        function controlGameEngine(action) {
+            const badge = document.getElementById('game-state-badge');
+            
+            if (action === 'play') {
+                isGamePlaying = true;
+                if (badge) {
+                    badge.innerText = "PLAYING";
+                    badge.className = "px-2 py-0.5 text-[10px] font-black rounded bg-green-950 text-green-400 border border-green-800 font-mono";
+                }
+                showToast("게임 리듬 플레이가 시작되었습니다.");
+            } 
+            else if (action === 'pause') {
+                isGamePlaying = false;
+                if (badge) {
+                    badge.innerText = "PAUSED";
+                    badge.className = "px-2 py-0.5 text-[10px] font-black rounded bg-yellow-950 text-yellow-400 border border-yellow-800 font-mono";
+                }
+                showToast("게임 플레이가 일시정지되었습니다.");
+            } 
+            else if (action === 'stop') {
+                isGamePlaying = false;
+                if (badge) {
+                    badge.innerText = "STOPPED";
+                    badge.className = "px-2 py-0.5 text-[10px] font-black rounded bg-red-950 text-red-400 border border-red-800 font-mono";
+                }
+                // 화면의 모든 살아있는 노트 및 비트라인 청소
+                notes.forEach(n => n.element.remove());
+                notes = [];
+                visualBeatLines.forEach(b => b.element.remove());
+                visualBeatLines = [];
+                showToast("게임 플레이가 중단되었습니다.");
+            } 
+            else if (action === 'reset') {
+                isGamePlaying = false;
+                score = 0;
+                combo = 0;
+                maxCombo = 0;
+                subBeatCounter = 0;
+                document.getElementById('score-display').innerText = "000000";
+                updateComboUI();
+                
+                notes.forEach(n => n.element.remove());
+                notes = [];
+                visualBeatLines.forEach(b => b.element.remove());
+                visualBeatLines = [];
+                
+                if (badge) {
+                    badge.innerText = "READY";
+                    badge.className = "px-2 py-0.5 text-[10px] font-black rounded bg-cyan-950 text-cyan-400 border border-cyan-800 font-mono";
+                }
+                showToast("점수 및 비트 트랙이 완벽하게 초기화되었습니다.");
+            }
         }
 
         function changeSpeed(val) {
@@ -1676,7 +2073,6 @@
             document.getElementById('bpm-text').innerText = `${bpm} BPM`;
             document.getElementById('bpm-range').value = bpm;
             
-            // 믹서 탭의 BPM 요소들도 즉시 동기화
             const soundBpmRange = document.getElementById('sound-bpm-range');
             const soundBpmText = document.getElementById('sound-bpm-text');
             if (soundBpmRange) soundBpmRange.value = bpm;
@@ -1694,124 +2090,21 @@
             subBeatCounter = 0;
         }
 
-        /* ⌨️ 키보드 바인딩 커스텀 조작 유닛 */
-        function drawKeyboardMappingList() {
-            const listEl = document.getElementById('key-mapping-list');
-            if (!listEl) return;
-            listEl.innerHTML = '';
-            const laneData = laneConfigurations[currentLanes];
-
-            laneData.forEach((config, idx) => {
-                const block = document.createElement('div');
-                block.className = "flex items-center justify-between bg-black/40 border border-gray-800 p-2 rounded-lg";
-                block.innerHTML = `
-                    <span class="text-xs font-bold color-${idx}">${config.name}</span>
-                    <input type="text" class="w-20 bg-[#0c0c17] border border-gray-700 text-center text-xs text-white py-1.5 rounded cursor-pointer font-extrabold focus:border-pink-500 outline-none" 
-                        value="${config.keyLabel}" 
-                        readonly 
-                        onclick="startRebindingKey(this, ${idx})">
-                `;
-                listEl.appendChild(block);
-            });
-        }
-
-        let isRebinding = false;
-        let activeRebindLaneIdx = null;
-        let activeRebindInput = null;
-
-        function startRebindingKey(inputEl, laneIdx) {
-            if (isRebinding) return;
-            isRebinding = true;
-            activeRebindLaneIdx = laneIdx;
-            activeRebindInput = inputEl;
-            inputEl.value = "...";
-            inputEl.classList.add('border-pink-500', 'animate-pulse');
-        }
-
-        window.addEventListener('keydown', (e) => {
-            if (!isRebinding) return;
-            e.preventDefault();
-
-            const pressedKey = e.key;
-            let displayLabel = pressedKey.toUpperCase();
-            if (pressedKey === " ") displayLabel = "Space";
-
-            laneConfigurations[currentLanes][activeRebindLaneIdx].key = pressedKey;
-            laneConfigurations[currentLanes][activeRebindLaneIdx].keyLabel = displayLabel;
-
-            activeRebindInput.value = displayLabel;
-            activeRebindInput.classList.remove('border-pink-500', 'animate-pulse');
-
-            initLayout();
-
-            isRebinding = false;
-            activeRebindLaneIdx = null;
-            activeRebindInput = null;
-        });
-
-        function resetKeyBindings() {
-            laneConfigurations[4] = [
-                { name: 'Hi-Hat', key: 'A', keyLabel: 'A', sound: 'hihat' },
-                { name: 'Snare', key: 'S', keyLabel: 'S', sound: 'snare' },
-                { name: 'Tom-Tom', key: 'K', keyLabel: 'K', sound: 'tom' },
-                { name: 'Crash', key: 'L', keyLabel: 'L', sound: 'crash' }
-            ];
-            laneConfigurations[7] = [
-                { name: 'Hi-Hat', key: 'A', keyLabel: 'A', sound: 'hihat' },
-                { name: 'Snare', key: 'S', keyLabel: 'S', sound: 'snare' },
-                { name: 'Tom 1', key: 'D', keyLabel: 'D', sound: 'tom' },
-                { name: 'Tom 2', key: 'F', keyLabel: 'F', sound: 'tom' },
-                { name: 'Tom 3', key: 'J', keyLabel: 'J', sound: 'tom' },
-                { name: 'Crash', key: 'K', keyLabel: 'K', sound: 'crash' },
-                { name: 'Ride', key: 'L', keyLabel: 'L', sound: 'crash' }
-            ];
-            laneConfigurations[8] = [
-                { name: 'Kick', key: 'A', keyLabel: 'A', sound: 'kick' },
-                { name: 'Hi-Hat', key: 'S', keyLabel: 'S', sound: 'hihat' },
-                { name: 'Snare', key: 'D', keyLabel: 'D', sound: 'snare' },
-                { name: 'Tom 1', key: 'F', keyLabel: 'F', sound: 'tom' },
-                { name: 'Tom 2', key: ' ', keyLabel: 'Space', sound: 'tom' },
-                { name: 'Tom 3', key: 'J', keyLabel: 'J', sound: 'tom' },
-                { name: 'Crash', key: 'K', keyLabel: 'K', sound: 'crash' },
-                { name: 'Ride', key: 'L', keyLabel: 'L', sound: 'crash' }
-            ];
-            laneConfigurations[9] = [
-                { name: 'Kick', key: 'A', keyLabel: 'A', sound: 'kick' },
-                { name: 'Hi-Hat', key: 'S', keyLabel: 'S', sound: 'hihat' },
-                { name: 'Snare', key: 'D', keyLabel: 'D', sound: 'snare' },
-                { name: 'Tom 1', key: 'F', keyLabel: 'F', sound: 'tom' },
-                { name: 'Tom 2', key: ' ', keyLabel: 'Space', sound: 'tom' },
-                { name: 'Tom 3', key: 'J', keyLabel: 'J', sound: 'tom' },
-                { name: 'Crash 1', key: 'K', keyLabel: 'K', sound: 'crash' },
-                { name: 'Crash 2', key: 'L', keyLabel: 'L', sound: 'crash2' },
-                { name: 'Ride', key: ';', keyLabel: ';', sound: 'crash' }
-            ];
-            initLayout();
-        }
-
-        /* 🎛️ 하드웨어 8패드 / 9패드 모드 조율 핸들러 (연주 탭 및 믹서 탭의 스위치 일괄 정밀 연동) */
         function setHardwarePadMode(modeNum) {
             hardwarePadMode = modeNum;
             
-            // 컨트롤러 맵핑 탭 내의 킷 전환 버튼 연동
             const btnHw8 = document.getElementById('btn-hw-8');
             const btnHw9 = document.getElementById('btn-hw-9');
-            if (btnHw8) btnHw8.className = modeNum === 8 ? "px-2 py-0.5 text-[9px] font-bold rounded bg-cyan-950 text-cyan-300 border border-cyan-800" : "px-2 py-0.5 text-[9px] font-bold rounded bg-slate-900 text-gray-400";
-            if (btnHw9) btnHw9.className = modeNum === 9 ? "px-2 py-0.5 text-[9px] font-bold rounded bg-cyan-950 text-cyan-300 border border-cyan-800" : "px-2 py-0.5 text-[9px] font-bold rounded bg-slate-900 text-gray-400";
-            
-            // 믹서 콘솔 탭 내의 킷 전환 버튼 연동
-            const btnMixHw8 = document.getElementById('btn-mixer-hw-8');
-            const btnMixHw9 = document.getElementById('btn-mixer-hw-9');
-            if (btnMixHw8) btnMixHw8.className = modeNum === 8 ? "px-2.5 py-0.5 text-[9px] font-bold rounded bg-cyan-950 text-cyan-300 border border-cyan-800" : "px-2.5 py-0.5 text-[9px] font-bold rounded bg-slate-900 text-gray-400";
-            if (btnMixHw9) btnMixHw9.className = modeNum === 9 ? "px-2.5 py-0.5 text-[9px] font-bold rounded bg-cyan-950 text-cyan-300 border border-cyan-800" : "px-2.5 py-0.5 text-[9px] font-bold rounded bg-slate-900 text-gray-400";
+            if (btnHw8) btnHw8.className = modeNum === 8 ? "px-2.5 py-0.5 text-[9px] font-bold rounded bg-cyan-950 text-cyan-300 border border-cyan-800" : "px-2.5 py-0.5 text-[9px] font-bold rounded bg-slate-900 text-gray-400";
+            if (btnHw9) btnHw9.className = modeNum === 9 ? "px-2.5 py-0.5 text-[9px] font-bold rounded bg-cyan-950 text-cyan-300 border border-cyan-800" : "px-2.5 py-0.5 text-[9px] font-bold rounded bg-slate-900 text-gray-400";
 
             render6ChannelMixer();
             drawMidiMappingList();
-            logMidiSystem(`[System] 하드웨어 킷 구성이 ${modeNum}패드 모드로 변경되었습니다.`);
+            logMidiSystem(`[System] 하드웨어 킷 구성이 ${modeNum}패드 모드로 조정되었습니다.`);
         }
 
         /* ===================================================================
-           5. 🔌 글로벌 드럼 킷 매핑 엔진
+           6. 🔌 하드웨어 미디 입력 및 대화형 감지 매핑 인터페이스
            =================================================================== */
         let midiAccess = null;
         let activeMidiLearnPadId = null;
@@ -1823,9 +2116,7 @@
             listEl.innerHTML = '';
 
             globalMidiMapping.forEach((config) => {
-                if (hardwarePadMode === 8 && config.isCrash2) {
-                    return;
-                }
+                if (hardwarePadMode === 8 && config.isCrash2) return;
 
                 const block = document.createElement('div');
                 block.className = "flex items-center justify-between bg-black/40 border border-gray-800 p-2 rounded-lg";
@@ -1877,6 +2168,8 @@
                     }
                     updateMidiDevices();
                     midiAccess.onstatechange = updateMidiDevices;
+                    
+                    if (wizardCurrentStep === 1) checkMidiOnboardingStatus();
                 }, () => {
                     logMidiSystem("Web MIDI API 접근이 허가되지 않았습니다.");
                 });
@@ -1926,12 +2219,16 @@
             if (cmd === 9 && velocity > 0) {
                 logMidiSystem(`[MIDI Input] Code: ${note} | Velocity: ${velocity}`);
                 
+                if (wizardCurrentStep === 3) {
+                    handleWizardMidiSignal(note);
+                    return;
+                }
+
                 if (activeMidiLearnPadId !== null) {
                     const matchedPad = globalMidiMapping.find(p => p.id === activeMidiLearnPadId);
                     if (matchedPad) {
                         matchedPad.midiNote = note;
                         logMidiSystem(`[Success] '${matchedPad.name}' 가 MIDI [${note}] 와 정확히 페어링되었습니다.`);
-                        
                         drawMidiMappingList();
                         activeMidiLearnPadId = null;
                         activeMidiLearnButton = null;
@@ -1950,7 +2247,7 @@
         }
 
         /* ===================================================================
-           6. Canvas 입체 이펙트 물리 엔진
+           7. Canvas 입체 이펙트 물리 엔진
            =================================================================== */
         const canvas = document.getElementById('effect-canvas');
         const ctx = canvas.getContext('2d');
@@ -2022,7 +2319,6 @@
             }
         }
 
-        // 📊 마스터 오디오 스펙트럼 디스플레이 그리기 (Analyser Web Audio Viewport)
         const masterVisCanvas = document.getElementById('master-visualizer-canvas');
         const mCtx = masterVisCanvas.getContext('2d');
 
@@ -2054,24 +2350,15 @@
                 mCtx.fillStyle = `rgba(0, 243, 255, ${barHeight / 100 + 0.25})`;
                 mCtx.shadowBlur = 6;
                 mCtx.shadowColor = '#00f3ff';
-
                 mCtx.fillRect(x, h - barHeight, barWidth - 1, barHeight);
-
                 x += barWidth;
                 mCtx.shadowBlur = 0;
             }
-
-            mCtx.strokeStyle = 'rgba(255, 0, 127, 0.2)';
-            mCtx.lineWidth = 1.5;
-            mCtx.beginPath();
-            mCtx.moveTo(0, h * 0.2);
-            mCtx.lineTo(w, h * 0.2);
-            mCtx.stroke();
         }
         setTimeout(drawMasterVisualizer, 100);
 
         /* ===================================================================
-           7. 연주 레코딩 및 물리 디스크 로컬 스토리지 보존 시스템
+           8. 연주 레코딩 시스템
            =================================================================== */
         let recordedSequence = [];
         let isRecording = false;
@@ -2101,7 +2388,6 @@
                 btn.className = "px-3 py-1.5 bg-red-950/40 border border-red-800 text-xs text-red-400 rounded-lg font-bold hover:bg-red-950 transition flex items-center gap-1";
                 status.innerText = "SAVED";
                 status.className = "text-[9px] px-1.5 py-0.5 rounded font-extrabold bg-green-950 text-green-400 border border-green-800";
-                
                 enableDiskButtons();
             }
         }
@@ -2114,17 +2400,12 @@
 
         function enableDiskButtons() {
             const replayBtn = document.getElementById('replay-btn');
-            const saveBtn = document.getElementById('disk-save-btn');
             const exportBtn = document.getElementById('file-export-btn');
 
             if (recordedSequence.length > 0) {
                 replayBtn.disabled = false;
                 replayBtn.classList.remove('opacity-50', 'bg-cyan-950/20');
                 replayBtn.classList.add('hover:bg-cyan-900');
-
-                saveBtn.disabled = false;
-                saveBtn.classList.remove('opacity-50', 'bg-green-950/20');
-                saveBtn.classList.add('hover:bg-green-900');
 
                 exportBtn.disabled = false;
                 exportBtn.classList.remove('opacity-50');
@@ -2133,47 +2414,20 @@
 
         function disableDiskButtons() {
             const replayBtn = document.getElementById('replay-btn');
-            const saveBtn = document.getElementById('disk-save-btn');
             const exportBtn = document.getElementById('file-export-btn');
 
             replayBtn.disabled = true;
             replayBtn.classList.add('opacity-50', 'bg-cyan-950/20');
             replayBtn.classList.remove('hover:bg-cyan-900');
 
-            saveBtn.disabled = true;
-            saveBtn.classList.add('opacity-50', 'bg-green-950/20');
-            saveBtn.classList.remove('hover:bg-green-900');
-
             exportBtn.disabled = true;
             exportBtn.classList.add('opacity-50');
-        }
-
-        function saveToLocalStorage() {
-            if (recordedSequence.length === 0) return;
-            localStorage.setItem('soundgluck_recorded_sequence', JSON.stringify(recordedSequence));
-            localStorage.setItem('soundgluck_lanes', currentLanes);
-            logMidiSystem("[System] 연주 패턴 시퀀스가 로컬 캐시에 저장 완료되었습니다.");
-        }
-
-        function loadFromLocalStorage() {
-            const saved = localStorage.getItem('soundgluck_recorded_sequence');
-            const savedLanes = localStorage.getItem('soundgluck_lanes');
-            if (saved) {
-                recordedSequence = JSON.parse(saved);
-                if (savedLanes) {
-                    setLaneMode(parseInt(savedLanes));
-                }
-                enableDiskButtons();
-                logMidiSystem("[System] 로컬 캐시로부터 지난 연주 데이터를 성공적으로 복원했습니다.");
-            } else {
-                logMidiSystem("[System] 브라우저에 임시 저장된 드럼 연주 데이터가 없습니다.");
-            }
         }
 
         function exportToJsonFile() {
             if (recordedSequence.length === 0) return;
             const fileData = {
-                generator: "SoundGluck Drum Engine v3.3.2 Premium Studio Edition",
+                generator: "SoundGluck Drum Engine v4.0.1 Premium Edition",
                 lanes: currentLanes,
                 tempo: bpm,
                 sequence: recordedSequence
@@ -2181,42 +2435,16 @@
             const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(fileData));
             const downloadAnchor = document.createElement('a');
             downloadAnchor.setAttribute("href", dataStr);
-            downloadAnchor.setAttribute("download", `soundgluck_beat_${Date.now()}.json`);
+            downloadAnchor.setAttribute("download", `soundgluck_beat_record_${Date.now()}.json`);
             document.body.appendChild(downloadAnchor);
             downloadAnchor.click();
             downloadAnchor.remove();
-        }
-
-        function importFromJsonFile(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    const imported = JSON.parse(e.target.result);
-                    if (imported.sequence && Array.isArray(imported.sequence)) {
-                        recordedSequence = imported.sequence;
-                        if (imported.lanes) setLaneMode(parseInt(imported.lanes));
-                        if (imported.tempo) {
-                            changeBPM(parseInt(imported.tempo));
-                            document.getElementById('bpm-range').value = imported.tempo;
-                        }
-                        enableDiskButtons();
-                        logMidiSystem(`[System] 외부 JSON 파일로부터 ${recordedSequence.length}개의 노트 신호를 완벽하게 로드했습니다.`);
-                    }
-                } catch(err) {
-                    logMidiSystem("[Error] 유효하지 않은 JSON 파일 규격입니다.");
-                }
-            };
-            reader.readAsText(file);
         }
 
         function startReplay() {
             if (recordedSequence.length === 0) return;
             isReplaying = true;
             changeRhythmPreset('none');
-            document.getElementById('rhythm-preset-select').value = 'none';
             notes.forEach(n => n.element.remove());
             notes = [];
             replayStartTime = performance.now();
@@ -2231,11 +2459,10 @@
             isReplaying = false;
             document.getElementById('record-status-badge').innerText = "STANDBY";
             changeRhythmPreset('quarter');
-            document.getElementById('rhythm-preset-select').value = 'quarter';
         }
 
         /* ===================================================================
-           8. ⏱️ v3.3 고정밀 오디오 메트로놈 스케줄러 엔진
+           9. ⏱️ 고정밀 오디오 메트로놈 스케줄러 엔진
            =================================================================== */
         function syncMetronomeToggle(checked) {
             metronomeEnabled = checked;
@@ -2247,10 +2474,8 @@
                 subdivCount = 0;
                 nextTickTime = audioCtx.currentTime;
                 startMetronomeScheduler();
-                logMidiSystem(`[Metronome] 정밀 메트로놈이 가동되었습니다. (박자: ${timeSignature}, 분할: ${subdivision}분할)`);
             } else {
                 stopMetronomeScheduler();
-                logMidiSystem(`[Metronome] 메트로놈이 소거되었습니다.`);
             }
         }
 
@@ -2259,12 +2484,9 @@
             beatCount = 0;
             subdivCount = 0;
             
-            // 모든 탭의 셀렉트 박스 동기화
             document.getElementById('metro-signature').value = val;
             const soundSig = document.getElementById('sound-metro-signature');
             if (soundSig) soundSig.value = val;
-
-            logMidiSystem(`[Metronome] 박자 기호가 ${val} 로 조정되었습니다.`);
         }
 
         function changeSubdivision(val) {
@@ -2272,17 +2494,13 @@
             beatCount = 0;
             subdivCount = 0;
 
-            // 모든 탭의 셀렉트 박스 동기화
             document.getElementById('metro-subdivision').value = val;
             const soundSub = document.getElementById('sound-metro-subdivision');
             if (soundSub) soundSub.value = val;
-
-            logMidiSystem(`[Metronome] 소리 분할 강도가 ${val}분할 로 조정되었습니다.`);
         }
 
         function startMetronomeScheduler() {
             if (!metronomeEnabled) return;
-            
             const scheduleAheadTime = 0.1; 
             const lookahead = 25.0;        
 
@@ -2304,10 +2522,7 @@
 
         function advanceTickTime() {
             let secondsPerBeat = 60.0 / bpm;
-
-            if (timeSignature === '6/8') {
-                secondsPerBeat = (60.0 / bpm) * 0.5;
-            }
+            if (timeSignature === '6/8') secondsPerBeat = (60.0 / bpm) * 0.5;
 
             const stepDuration = secondsPerBeat / subdivision;
             nextTickTime += stepDuration;
@@ -2322,9 +2537,7 @@
                 if (timeSignature === '2/4') maxBeats = 2;
                 if (timeSignature === '6/8') maxBeats = 6;
 
-                if (beatCount >= maxBeats) {
-                    beatCount = 0;
-                }
+                if (beatCount >= maxBeats) beatCount = 0;
             }
         }
 
@@ -2357,13 +2570,11 @@
         }
 
         /* ===================================================================
-           9. 가상 악기 합성 트리거 로직
+           10. 가상 악기 합성 트리거 로직
            =================================================================== */
         function playSynthesizedDrum(type) {
             if (!audioEnableCheckbox.checked) return;
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
+            if (audioCtx.state === 'suspended') audioCtx.resume();
 
             const now = audioCtx.currentTime;
             triggerEnvelopeAnimation(type);
@@ -2372,7 +2583,6 @@
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
                 osc.connect(gain);
-
                 const pitchVal = synthParams.kick.pitch;
                 const decayVal = synthParams.kick.decay;
 
@@ -2383,7 +2593,6 @@
                 gain.gain.exponentialRampToValueAtTime(0.01, now + decayVal);
 
                 routeChannelAudio(gain, 'kick');
-
                 osc.start(now);
                 osc.stop(now + decayVal);
             } 
@@ -2450,14 +2659,12 @@
                 filter.connect(gain);
 
                 routeChannelAudio(gain, 'hihat');
-
                 noise.start(now);
             } 
             else if (type === 'tom') {
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
                 osc.connect(gain);
-
                 const tomDecay = synthParams.tom.decay;
 
                 osc.frequency.setValueAtTime(synthParams.tom.pitch, now);
@@ -2467,7 +2674,6 @@
                 gain.gain.exponentialRampToValueAtTime(0.01, now + tomDecay);
 
                 routeChannelAudio(gain, 'tom');
-
                 osc.start(now);
                 osc.stop(now + tomDecay);
             }
@@ -2517,7 +2723,7 @@
             }
         }
 
-        // 🎛️ Serum/Massive 스타일 가상 로터리 노브 회전 및 드래그 이벤트 엔진 (34px 리사이즈 완벽 동기화)
+        /* 🎛️ Serum/Massive 스타일 가상 로터리 노브 회전 및 드래그 이벤트 엔진 */
         function initRotaryKnobs() {
             const knobs = document.querySelectorAll('.rotary-knob');
             
@@ -2590,7 +2796,6 @@
             });
         }
 
-        // 노브 포인터 및 SVG 링 회전 갱신 유틸 (r=16 정교환 아크 계산 적용)
         function updateKnobVisuals(inst, param, val) {
             const container = document.querySelector(`[data-instrument="${inst}"][data-param="${param}"]`);
             if (!container) return;
@@ -2605,13 +2810,12 @@
             const angle = -135 + (percent * 270);
             pointer.style.transform = `rotate(${angle}deg)`;
 
-            const dashArray = 76; // r=16 둘레 75% 아크 근사치
+            const dashArray = 76; 
             const dashOffset = dashArray - (percent * dashArray);
             arc.style.strokeDasharray = `${dashArray}`;
             arc.style.strokeDashoffset = `${dashOffset}`;
         }
 
-        // 📈 ADSR 실시간 가상 음색 봉투곡선 렌더러
         function drawInstrumentEnvelope(inst) {
             const canvas = document.getElementById(`canvas-env-${inst}`);
             if (!canvas) return;
@@ -2684,7 +2888,6 @@
                     ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
                     ctx.lineWidth = 1;
                     ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
-
                     activeEnvelopeTimers[inst] = requestAnimationFrame(animate);
                 } else {
                     drawInstrumentEnvelope(inst);
@@ -2698,143 +2901,105 @@
             instruments.forEach(inst => drawInstrumentEnvelope(inst));
         }
 
-        // 프리셋 드럼 킷 정교화 로딩
-        const drumKitLibrary = {
-            acoustic: {
-                synth: {
-                    kick: { pitch: 150, decay: 0.3, volume: 1.1, pan: 0.0, eqLow: 1, eqMid: -2, eqHigh: 0, reverbSend: 0.1, delaySend: 0.0 },
-                    snare: { pitch: 180, noiseFreq: 1000, decay: 0.25, volume: 0.9, pan: -0.1, eqLow: -1, eqMid: 2, eqHigh: 1, reverbSend: 0.25, delaySend: 0.05 },
-                    hihat: { highpass: 7000, decay: 0.05, volume: 0.7, pan: -0.4, eqLow: -3, eqMid: 0, eqHigh: 3, reverbSend: 0.1, delaySend: 0.0 },
-                    tom: { pitch: 220, pitchEnd: 60, decay: 0.25, volume: 0.8, pan: 0.2, eqLow: 2, eqMid: 1, eqHigh: -1, reverbSend: 0.2, delaySend: 0.1 },
-                    crash: { pitch: 550, highpass: 2000, decay: 0.6, volume: 0.8, pan: -0.3, eqLow: -2, eqMid: -1, eqHigh: 4, reverbSend: 0.3, delaySend: 0.1 },
-                    crash2: { pitch: 650, highpass: 2200, decay: 0.45, volume: 0.8, pan: 0.5, eqLow: -2, eqMid: -1, eqHigh: 4, reverbSend: 0.3, delaySend: 0.1 }
-                },
-                fx: { delayTime: 0.3, delayFeedback: 0.1, reverbSize: 1.2, reverbMix: 0.15, highpass: 10, lowpass: 20000, compThreshold: -18, compRatio: 3, saturation: 5, chorus: 5 }
-            },
-            trap808: {
-                synth: {
-                    kick: { pitch: 70, decay: 0.75, volume: 1.4, pan: 0.0, eqLow: 6, eqMid: -3, eqHigh: -1, reverbSend: 0.0, delaySend: 0.0 },
-                    snare: { pitch: 220, noiseFreq: 1400, decay: 0.18, volume: 1.0, pan: -0.05, eqLow: -2, eqMid: 4, eqHigh: 2, reverbSend: 0.2, delaySend: 0.15 },
-                    hihat: { highpass: 9000, decay: 0.03, volume: 0.8, pan: -0.3, eqLow: -5, eqMid: 1, eqHigh: 5, reverbSend: 0.1, delaySend: 0.2 },
-                    tom: { pitch: 140, pitchEnd: 40, decay: 0.4, volume: 0.9, pan: 0.15, eqLow: 4, eqMid: 2, eqHigh: -2, reverbSend: 0.25, delaySend: 0.1 },
-                    crash: { pitch: 400, highpass: 1500, decay: 0.8, volume: 0.9, pan: -0.4, eqLow: -2, eqMid: 1, eqHigh: 3, reverbSend: 0.35, delaySend: 0.25 },
-                    crash2: { pitch: 480, highpass: 1800, decay: 0.6, volume: 0.9, pan: 0.4, eqLow: -2, eqMid: 1, eqHigh: 3, reverbSend: 0.35, delaySend: 0.25 }
-                },
-                fx: { delayTime: 0.4, delayFeedback: 0.4, reverbSize: 2.5, reverbMix: 0.3, highpass: 20, lowpass: 15000, compThreshold: -25, compRatio: 5, saturation: 25, chorus: 15 }
-            },
-            retro80s: {
-                synth: {
-                    kick: { pitch: 180, decay: 0.15, volume: 1.2, pan: 0.0, eqLow: 2, eqMid: -1, eqHigh: 1, reverbSend: 0.2, delaySend: 0.1 },
-                    snare: { pitch: 160, noiseFreq: 700, decay: 0.45, volume: 1.1, pan: -0.1, eqLow: 1, eqMid: 3, eqHigh: 3, reverbSend: 0.5, delaySend: 0.2 },
-                    hihat: { highpass: 5000, decay: 0.1, volume: 0.7, pan: -0.4, eqLow: -2, eqMid: 1, eqHigh: 4, reverbSend: 0.2, delaySend: 0.15 },
-                    tom: { pitch: 280, pitchEnd: 90, decay: 0.3, volume: 0.9, pan: 0.3, eqLow: 3, eqMid: 2, eqHigh: 0, reverbSend: 0.35, delaySend: 0.2 },
-                    crash: { pitch: 680, highpass: 2500, decay: 1.2, volume: 0.8, pan: -0.3, eqLow: -1, eqMid: 0, eqHigh: 5, reverbSend: 0.5, delaySend: 0.3 },
-                    crash2: { pitch: 800, highpass: 2800, decay: 0.9, volume: 0.8, pan: 0.5, eqLow: -1, eqMid: 0, eqHigh: 5, reverbSend: 0.5, delaySend: 0.3 }
-                },
-                fx: { delayTime: 0.33, delayFeedback: 0.35, reverbSize: 3.5, reverbMix: 0.45, highpass: 10, lowpass: 18000, compThreshold: -22, compRatio: 4, saturation: 20, chorus: 25 }
-            },
-            metal: {
-                synth: {
-                    kick: { pitch: 120, decay: 0.2, volume: 1.3, pan: 0.0, eqLow: 4, eqMid: -4, eqHigh: 3, reverbSend: 0.05, delaySend: 0.0 },
-                    snare: { pitch: 240, noiseFreq: 1800, decay: 0.3, volume: 1.0, pan: -0.1, eqLow: -1, eqMid: 4, eqHigh: 1, reverbSend: 0.2, delaySend: 0.1 },
-                    hihat: { highpass: 6000, decay: 0.08, volume: 0.7, pan: -0.35, eqLow: -4, eqMid: 0, eqHigh: 4, reverbSend: 0.1, delaySend: 0.05 },
-                    tom: { pitch: 200, pitchEnd: 80, decay: 0.2, volume: 0.9, pan: 0.25, eqLow: 3, eqMid: 1, eqHigh: -1, reverbSend: 0.15, delaySend: 0.1 },
-                    crash: { pitch: 850, highpass: 3200, decay: 1.0, volume: 0.9, pan: -0.4, eqLow: -3, eqMid: -1, eqHigh: 5, reverbSend: 0.3, delaySend: 0.15 },
-                    crash2: { pitch: 980, highpass: 3500, decay: 0.8, volume: 0.9, pan: 0.4, eqLow: -3, eqMid: -1, eqHigh: 5, reverbSend: 0.3, delaySend: 0.15 }
-                },
-                fx: { delayTime: 0.2, delayFeedback: 0.15, reverbSize: 1.8, reverbMix: 0.25, highpass: 50, lowpass: 20000, compThreshold: -15, compRatio: 6, saturation: 40, chorus: 10 }
-            }
-        };
-
-        function loadDrumKitPreset(kitName) {
-            const selected = drumKitLibrary[kitName];
-            if (!selected) return;
-
-            for (let inst in selected.synth) {
-                for (let param in selected.synth[inst]) {
-                    synthParams[inst][param] = selected.synth[inst][param];
-                }
-            }
-
-            for (let fx in selected.fx) {
-                const value = selected.fx[fx];
-                const slider = document.getElementById(`param-fx-${fx}`);
-                if (slider) {
-                    if (fx === 'delayTime' || fx === 'reverbSize' || fx === 'delayFeedback' || fx === 'reverbMix') {
-                        slider.value = value * 10;
-                    } else {
-                        slider.value = value;
-                    }
-                }
-                const suffix = (fx === 'delayTime' || fx === 'reverbSize') ? 's' : ((fx === 'delayFeedback' || fx === 'reverbMix') ? '%' : 'Hz');
-                
-                if (fx === 'compThreshold' || fx === 'compRatio') {
-                    updateCompressor(fx === 'compThreshold' ? 'threshold' : 'ratio', value);
-                    const compSlider = document.getElementById(fx === 'compThreshold' ? 'comp-threshold' : 'comp-ratio');
-                    if (compSlider) compSlider.value = value;
-                } else if (fx === 'saturation' || fx === 'chorus') {
-                    updateDynamics(fx, value);
-                    const dynSlider = document.getElementById(fx === 'saturation' ? 'fx-saturate' : 'fx-chorus');
-                    if (dynSlider) dynSlider.value = value;
-                } else {
-                    updateMasterFX(fx, value, suffix);
-                }
-            }
-
-            render6ChannelMixer();
-            logMidiSystem(`[Preset] [${kitName.toUpperCase()}] 음장 믹서 패치가 로드되었습니다.`);
+        /* ===================================================================
+           11. 실시간 렌더링 물리 계산 루프 및 노미네이션 트리거
+           =================================================================== */
+        function createBeatLine() {
+            const lanesWrapper = document.getElementById('lanes-wrapper');
+            if (!lanesWrapper) return;
+            const lineEl = document.createElement('div');
+            lineEl.className = 'beat-line';
+            lanesWrapper.appendChild(lineEl);
+            visualBeatLines.push({ element: lineEl, currentY: 0 });
         }
 
+        function createNote(lane) {
+            const parentLane = document.getElementById(`lane-${lane}`);
+            if (!parentLane) return;
 
-        /* ===================================================================
-           10. 실시간 렌더링 물리 계산 루프
-           =================================================================== */
-        lastBeatTime = 0;
-        let lastFrameTime = 0;
+            const noteEl = document.createElement('div');
+            noteEl.className = `note color-${lane}`;
+            parentLane.appendChild(noteEl);
 
+            notes.push({
+                element: noteEl,
+                lane: lane,
+                currentY: -16,
+                hit: false
+            });
+        }
+
+        // 🥁 단조로운 KICK 단독 드롭 버그를 극복하고, 입체감 넘치는 드럼 고유의 리듬으로 분할 드롭되도록 개편
         function triggerRhythmDrop() {
             const step = subBeatCounter % 16;
             
             if (autoPattern === 'quarter') {
+                // 4비트 단순 쿵-쿵-쿵-쿵 킥 드롭
                 if (step % 4 === 0) {
                     createBeatLine();
-                    createNote(0);
+                    createNote(0); // 킥
                 }
             } 
             else if (autoPattern === 'eight_go') {
+                // 8비트 정통 락 고고 그루브 (하이햇은 계속 일정하게 가고, 킥과 스네어가 번갈아가며 연주)
                 if (step % 2 === 0) {
                     createBeatLine();
-                    createNote(0);
-                    if (step === 0 || step === 8) createNote(1);
-                    if (step === 4 || step === 12) createNote(2);
+                    createNote(1); // 하이햇 드롭 (S)
+                    
+                    if (step === 0 || step === 8) {
+                        createNote(0); // 베이스 킥 동시 드롭 (A)
+                    }
+                    if (step === 4 || step === 12) {
+                        createNote(2); // 스네어 드럼 동시 드롭 (D)
+                    }
                 }
             } 
             else if (autoPattern === 'sixteen_funk') {
+                // 더 촘촘하고 리드미컬한 16비트 펑크 드럼 패턴
                 createBeatLine();
-                if (step === 0 || step === 4 || step === 8 || step === 12) createNote(0);
-                if (step === 4 || step === 12) createNote(1);
-                if (step === 2 || step === 10 || step === 14) createNote(2);
-                if (step === 0 || step === 6 || step === 11) createNote(currentLanes - 1);
+                if (step % 2 === 0) {
+                    createNote(1); // 하이햇 (S)
+                }
+                if (step === 0 || step === 6 || step === 8 || step === 14) {
+                    createNote(0); // 바운스 킥 (A)
+                }
+                if (step === 4 || step === 12) {
+                    createNote(2); // 고밀도 스네어 (D)
+                }
+                if (step === 10) {
+                    createNote(3); // 탐탐 (F)
+                }
             } 
             else if (autoPattern === 'shuffle') {
+                // 셋잇단음표 느낌의 경쾌한 셔플 비트
                 const shuffleSteps = [0, 2, 3, 4, 6, 7, 8, 10, 11, 12, 14, 15];
                 if (shuffleSteps.includes(step)) {
                     createBeatLine();
-                    createNote(0);
-                    if (step === 4 || step === 12) createNote(1);
-                    if (step === 0 || step === 8) createNote(currentLanes - 1);
+                    createNote(1); // 하이햇 연주
+                    
+                    if (step === 0 || step === 8) {
+                        createNote(0); // 첫박 킥
+                    }
+                    if (step === 4 || step === 12) {
+                        createNote(2); // 스네어 백비트
+                    }
                 }
             }
             else if (autoPattern === 'random') {
-                if (step % 4 === 0) {
+                if (step % 2 === 0) {
                     createBeatLine();
                     const randomLane = Math.floor(Math.random() * currentLanes);
                     createNote(randomLane);
+                    if (Math.random() > 0.6) {
+                        const secondLane = (randomLane + 2) % currentLanes;
+                        createNote(secondLane);
+                    }
                 }
             }
             subBeatCounter++;
         }
 
+        let lastFrameTime = 0;
         function physicsUpdate(timestamp) {
             if (!lastFrameTime) lastFrameTime = timestamp;
             const deltaTime = timestamp - lastFrameTime;
@@ -2847,6 +3012,7 @@
             }
             const screenHeight = screen.clientHeight;
 
+            // 게임 재생(isGamePlaying === true) 상태 또는 리플레이 중일 때만 물리 프레임 진행
             if (isReplaying) {
                 const elapsedReplay = timestamp - replayStartTime;
                 while (replayIndex < recordedSequence.length && recordedSequence[replayIndex].time <= elapsedReplay) {
@@ -2861,7 +3027,11 @@
                     stopReplay();
                     showReportModal(score, maxCombo);
                 }
-            } else {
+                
+                // 리플레이 일때의 스크롤 하강 계산
+                updateActiveNotesAndBeats(deltaTime, screenHeight);
+            } 
+            else if (isGamePlaying) {
                 const deltaSinceLastBeat = timestamp - lastBeatTime;
                 const stepInterval = beatInterval / 4; 
 
@@ -2869,8 +3039,17 @@
                     lastBeatTime = timestamp;
                     triggerRhythmDrop();
                 }
+                
+                // 플레이 중일 때의 스크롤 하강 계산
+                updateActiveNotesAndBeats(deltaTime, screenHeight);
             }
 
+            updateAndDrawParticles();
+            requestAnimationFrame(physicsUpdate);
+        }
+
+        // 스크롤 하강 계산 공통 분리화
+        function updateActiveNotesAndBeats(deltaTime, screenHeight) {
             for (let i = visualBeatLines.length - 1; i >= 0; i--) {
                 const line = visualBeatLines[i];
                 line.currentY += noteSpeed * deltaTime;
@@ -2899,39 +3078,8 @@
                 }
                 note.element.style.transform = `translateY(${note.currentY}px)`;
             }
-
-            updateAndDrawParticles();
-            requestAnimationFrame(physicsUpdate);
         }
 
-        function createBeatLine() {
-            const lanesWrapper = document.getElementById('lanes-wrapper');
-            if (!lanesWrapper) return;
-            const lineEl = document.createElement('div');
-            lineEl.className = 'beat-line';
-            lanesWrapper.appendChild(lineEl);
-            visualBeatLines.push({ element: lineEl, currentY: 0 });
-        }
-
-        function createNote(lane) {
-            const parentLane = document.getElementById(`lane-${lane}`);
-            if (!parentLane) return;
-
-            const noteEl = document.createElement('div');
-            noteEl.className = `note color-${lane}`;
-            parentLane.appendChild(noteEl);
-
-            notes.push({
-                element: noteEl,
-                lane: lane,
-                currentY: -16,
-                hit: false
-            });
-        }
-
-        /* ===================================================================
-           11. 실시간 타격 처리
-           =================================================================== */
         function triggerHit(lane) {
             const pad = document.querySelector(`.drum-pad.pad-${lane}`);
             if (pad) {
@@ -3020,7 +3168,7 @@
         }
 
         window.addEventListener('keydown', (e) => {
-            if (e.repeat || isRebinding) return;
+            if (e.repeat) return;
             const targetLane = currentKeyMap[e.key];
             if (targetLane !== undefined) {
                 activeKeys[e.key] = true;
@@ -3029,8 +3177,138 @@
         });
 
         /* ===================================================================
-           12. 탭 전환 인터페이스 및 공통 컨트롤러
+           12. 공통 인프라 인터페이스 바인딩 (사운드 프리셋 4개 -> 8개로 보강 확장)
            =================================================================== */
+        const drumKitLibrary = {
+            acoustic: {
+                synth: {
+                    kick: { pitch: 120, decay: 0.18, volume: 1.2, pan: 0.0, eqLow: 4, eqMid: -2, eqHigh: -1, reverbSend: 0.05, delaySend: 0.0 },
+                    snare: { pitch: 165, noiseFreq: 1300, decay: 0.22, volume: 0.95, pan: -0.05, eqLow: -2, eqMid: 3, eqHigh: 2, reverbSend: 0.2, delaySend: 0.0 },
+                    hihat: { highpass: 8500, decay: 0.04, volume: 0.75, pan: -0.3, eqLow: -4, eqMid: 0, eqHigh: 4, reverbSend: 0.08, delaySend: 0.0 },
+                    tom: { pitch: 180, pitchEnd: 55, decay: 0.22, volume: 0.85, pan: 0.15, eqLow: 3, eqMid: 1, eqHigh: -1, reverbSend: 0.15, delaySend: 0.05 },
+                    crash: { pitch: 480, highpass: 3200, decay: 0.8, volume: 0.85, pan: -0.25, eqLow: -3, eqMid: -1, eqHigh: 5, reverbSend: 0.25, delaySend: 0.08 },
+                    crash2: { pitch: 580, highpass: 3500, decay: 0.65, volume: 0.85, pan: 0.4, eqLow: -3, eqMid: -1, eqHigh: 5, reverbSend: 0.25, delaySend: 0.08 }
+                },
+                fx: { delayTime: 0.3, delayFeedback: 0.1, reverbSize: 1.2, reverbMix: 0.15, highpass: 10, lowpass: 20000, compThreshold: -18, compRatio: 3, saturation: 5, chorus: 5 }
+            },
+            trap808: {
+                synth: {
+                    kick: { pitch: 58, decay: 0.85, volume: 1.4, pan: 0.0, eqLow: 7, eqMid: -4, eqHigh: -2, reverbSend: 0.0, delaySend: 0.0 },
+                    snare: { pitch: 240, noiseFreq: 1500, decay: 0.16, volume: 1.05, pan: -0.05, eqLow: -2, eqMid: 4, eqHigh: 2, reverbSend: 0.2, delaySend: 0.15 },
+                    hihat: { highpass: 9500, decay: 0.03, volume: 0.8, pan: -0.3, eqLow: -5, eqMid: 1, eqHigh: 5, reverbSend: 0.1, delaySend: 0.2 },
+                    tom: { pitch: 120, pitchEnd: 35, decay: 0.45, volume: 0.9, pan: 0.15, eqLow: 5, eqMid: 2, eqHigh: -2, reverbSend: 0.25, delaySend: 0.1 },
+                    crash: { pitch: 380, highpass: 1600, decay: 0.9, volume: 0.9, pan: -0.4, eqLow: -2, eqMid: 1, eqHigh: 3, reverbSend: 0.35, delaySend: 0.25 },
+                    crash2: { pitch: 440, highpass: 1900, decay: 0.7, volume: 0.9, pan: 0.4, eqLow: -2, eqMid: 1, eqHigh: 3, reverbSend: 0.35, delaySend: 0.25 }
+                },
+                fx: { delayTime: 0.4, delayFeedback: 0.4, reverbSize: 2.5, reverbMix: 0.3, highpass: 20, lowpass: 15000, compThreshold: -25, compRatio: 5, saturation: 25, chorus: 15 }
+            },
+            retro80s: {
+                synth: {
+                    kick: { pitch: 180, decay: 0.15, volume: 1.2, pan: 0.0, eqLow: 2, eqMid: -1, eqHigh: 1, reverbSend: 0.2, delaySend: 0.1 },
+                    snare: { pitch: 160, noiseFreq: 700, decay: 0.45, volume: 1.1, pan: -0.1, eqLow: 1, eqMid: 3, eqHigh: 3, reverbSend: 0.5, delaySend: 0.2 },
+                    hihat: { highpass: 5000, decay: 0.1, volume: 0.7, pan: -0.4, eqLow: -2, eqMid: 1, eqHigh: 4, reverbSend: 0.2, delaySend: 0.15 },
+                    tom: { pitch: 280, pitchEnd: 90, decay: 0.3, volume: 0.9, pan: 0.3, eqLow: 3, eqMid: 2, eqHigh: 0, reverbSend: 0.35, delaySend: 0.2 },
+                    crash: { pitch: 680, highpass: 2500, decay: 1.2, volume: 0.8, pan: -0.3, eqLow: -1, eqMid: 0, eqHigh: 5, reverbSend: 0.5, delaySend: 0.3 },
+                    crash2: { pitch: 800, highpass: 2800, decay: 0.9, volume: 0.8, pan: 0.5, eqLow: -1, eqMid: 0, eqHigh: 5, reverbSend: 0.5, delaySend: 0.3 }
+                },
+                fx: { delayTime: 0.33, delayFeedback: 0.35, reverbSize: 3.5, reverbMix: 0.45, highpass: 10, lowpass: 18000, compThreshold: -22, compRatio: 4, saturation: 20, chorus: 25 }
+            },
+            metal: {
+                synth: {
+                    kick: { pitch: 120, decay: 0.2, volume: 1.3, pan: 0.0, eqLow: 4, eqMid: -4, eqHigh: 3, reverbSend: 0.05, delaySend: 0.0 },
+                    snare: { pitch: 240, noiseFreq: 1800, decay: 0.3, volume: 1.0, pan: -0.1, eqLow: -1, eqMid: 4, eqHigh: 1, reverbSend: 0.2, delaySend: 0.1 },
+                    hihat: { highpass: 6000, decay: 0.08, volume: 0.7, pan: -0.35, eqLow: -4, eqMid: 0, eqHigh: 4, reverbSend: 0.1, delaySend: 0.05 },
+                    tom: { pitch: 200, pitchEnd: 80, decay: 0.2, volume: 0.9, pan: 0.25, eqLow: 3, eqMid: 1, eqHigh: -1, reverbSend: 0.15, delaySend: 0.1 },
+                    crash: { pitch: 850, highpass: 3200, decay: 1.0, volume: 0.9, pan: -0.4, eqLow: -3, eqMid: -1, eqHigh: 5, reverbSend: 0.3, delaySend: 0.15 },
+                    crash2: { pitch: 980, highpass: 3500, decay: 0.8, volume: 0.9, pan: 0.4, eqLow: -3, eqMid: -1, eqHigh: 5, reverbSend: 0.3, delaySend: 0.15 }
+                },
+                fx: { delayTime: 0.2, delayFeedback: 0.15, reverbSize: 1.8, reverbMix: 0.25, highpass: 50, lowpass: 20000, compThreshold: -15, compRatio: 6, saturation: 40, chorus: 10 }
+            },
+            lofijazz: {
+                synth: {
+                    kick: { pitch: 95, decay: 0.25, volume: 1.1, pan: 0.0, eqLow: 3, eqMid: -1, eqHigh: -2, reverbSend: 0.15, delaySend: 0.1 },
+                    snare: { pitch: 150, noiseFreq: 900, decay: 0.3, volume: 0.85, pan: -0.05, eqLow: 1, eqMid: 2, eqHigh: 0, reverbSend: 0.4, delaySend: 0.2 },
+                    hihat: { highpass: 5500, decay: 0.06, volume: 0.65, pan: -0.3, eqLow: -3, eqMid: -1, eqHigh: 2, reverbSend: 0.2, delaySend: 0.1 },
+                    tom: { pitch: 150, pitchEnd: 50, decay: 0.35, volume: 0.8, pan: 0.2, eqLow: 2, eqMid: 1, eqHigh: -2, reverbSend: 0.3, delaySend: 0.15 },
+                    crash: { pitch: 420, highpass: 2200, decay: 1.4, volume: 0.7, pan: -0.3, eqLow: -2, eqMid: 0, eqHigh: 3, reverbSend: 0.45, delaySend: 0.25 },
+                    crash2: { pitch: 500, highpass: 2500, decay: 1.1, volume: 0.7, pan: 0.4, eqLow: -2, eqMid: 0, eqHigh: 3, reverbSend: 0.45, delaySend: 0.25 }
+                },
+                fx: { delayTime: 0.38, delayFeedback: 0.28, reverbSize: 2.8, reverbMix: 0.35, highpass: 40, lowpass: 14000, compThreshold: -20, compRatio: 3, saturation: 10, chorus: 18 }
+            },
+            stadium: {
+                synth: {
+                    kick: { pitch: 140, decay: 0.25, volume: 1.25, pan: 0.0, eqLow: 5, eqMid: -1, eqHigh: 1, reverbSend: 0.3, delaySend: 0.05 },
+                    snare: { pitch: 180, noiseFreq: 1100, decay: 0.4, volume: 1.0, pan: -0.1, eqLow: 0, eqMid: 3, eqHigh: 3, reverbSend: 0.65, delaySend: 0.1 },
+                    hihat: { highpass: 7500, decay: 0.08, volume: 0.75, pan: -0.35, eqLow: -3, eqMid: 1, eqHigh: 4, reverbSend: 0.25, delaySend: 0.05 },
+                    tom: { pitch: 210, pitchEnd: 70, decay: 0.3, volume: 0.9, pan: 0.25, eqLow: 4, eqMid: 2, eqHigh: 0, reverbSend: 0.45, delaySend: 0.15 },
+                    crash: { pitch: 600, highpass: 1800, decay: 1.8, volume: 0.85, pan: -0.4, eqLow: -1, eqMid: 1, eqHigh: 4, reverbSend: 0.6, delaySend: 0.2 },
+                    crash2: { pitch: 720, highpass: 2000, decay: 1.5, volume: 0.85, pan: 0.4, eqLow: -1, eqMid: 1, eqHigh: 4, reverbSend: 0.6, delaySend: 0.2 }
+                },
+                fx: { delayTime: 0.3, delayFeedback: 0.2, reverbSize: 4.5, reverbMix: 0.55, highpass: 10, lowpass: 20000, compThreshold: -24, compRatio: 5, saturation: 18, chorus: 12 }
+            },
+            perc: {
+                synth: {
+                    kick: { pitch: 180, decay: 0.08, volume: 1.0, pan: 0.0, eqLow: 2, eqMid: 1, eqHigh: -1, reverbSend: 0.1, delaySend: 0.15 },
+                    snare: { pitch: 320, noiseFreq: 2500, decay: 0.08, volume: 0.8, pan: -0.2, eqLow: -4, eqMid: 5, eqHigh: 3, reverbSend: 0.2, delaySend: 0.25 },
+                    hihat: { highpass: 11000, decay: 0.02, volume: 0.7, pan: 0.3, eqLow: -6, eqMid: 2, eqHigh: 6, reverbSend: 0.15, delaySend: 0.1 },
+                    tom: { pitch: 350, pitchEnd: 150, decay: 0.12, volume: 0.85, pan: -0.3, eqLow: 1, eqMid: 4, eqHigh: 1, reverbSend: 0.25, delaySend: 0.2 },
+                    crash: { pitch: 950, highpass: 5000, decay: 0.25, volume: 0.75, pan: 0.4, eqLow: -4, eqMid: 2, eqHigh: 5, reverbSend: 0.3, delaySend: 0.3 },
+                    crash2: { pitch: 1200, highpass: 5500, decay: 0.2, volume: 0.75, pan: -0.4, eqLow: -4, eqMid: 2, eqHigh: 5, reverbSend: 0.3, delaySend: 0.3 }
+                },
+                fx: { delayTime: 0.25, delayFeedback: 0.45, reverbSize: 1.5, reverbMix: 0.2, highpass: 80, lowpass: 16000, compThreshold: -12, compRatio: 2, saturation: 5, chorus: 8 }
+            },
+            techno: {
+                synth: {
+                    kick: { pitch: 150, decay: 0.3, volume: 1.25, pan: 0.0, eqLow: 5, eqMid: -2, eqHigh: 0, reverbSend: 0.1, delaySend: 0.0 },
+                    snare: { pitch: 180, noiseFreq: 1000, decay: 0.25, volume: 0.95, pan: -0.1, eqLow: -1, eqMid: 2, eqHigh: 1, reverbSend: 0.25, delaySend: 0.05 },
+                    hihat: { highpass: 7000, decay: 0.05, volume: 0.75, pan: -0.4, eqLow: -3, eqMid: 0, eqHigh: 3, reverbSend: 0.1, delaySend: 0.0 },
+                    tom: { pitch: 220, pitchEnd: 60, decay: 0.25, volume: 0.8, pan: 0.2, eqLow: 2, eqMid: 1, eqHigh: -1, reverbSend: 0.2, delaySend: 0.1 },
+                    crash: { pitch: 550, highpass: 2000, decay: 0.6, volume: 0.8, pan: -0.3, eqLow: -2, eqMid: -1, eqHigh: 4, reverbSend: 0.3, delaySend: 0.1 },
+                    crash2: { pitch: 650, highpass: 2200, decay: 0.45, volume: 0.8, pan: 0.5, eqLow: -2, eqMid: -1, eqHigh: 4, reverbSend: 0.3, delaySend: 0.1 }
+                },
+                fx: { delayTime: 0.3, delayFeedback: 0.3, reverbSize: 1.5, reverbMix: 0.2, highpass: 10, lowpass: 20000, compThreshold: -24, compRatio: 4, saturation: 15, chorus: 10 }
+            }
+        };
+
+        function loadDrumKitPreset(kitName) {
+            const selected = drumKitLibrary[kitName];
+            if (!selected) return;
+
+            for (let inst in selected.synth) {
+                for (let param in selected.synth[inst]) {
+                    synthParams[inst][param] = selected.synth[inst][param];
+                }
+            }
+
+            for (let fx in selected.fx) {
+                const value = selected.fx[fx];
+                const slider = document.getElementById(`param-fx-${fx}`);
+                if (slider) {
+                    if (fx === 'delayTime' || fx === 'reverbSize' || fx === 'delayFeedback' || fx === 'reverbMix') {
+                        slider.value = value * 10;
+                    } else {
+                        slider.value = value;
+                    }
+                }
+                const suffix = (fx === 'delayTime' || fx === 'reverbSize') ? 's' : ((fx === 'delayFeedback' || fx === 'reverbMix') ? '%' : 'Hz');
+                
+                if (fx === 'compThreshold' || fx === 'compRatio') {
+                    updateCompressor(fx === 'compThreshold' ? 'threshold' : 'ratio', value);
+                    const compSlider = document.getElementById(fx === 'compThreshold' ? 'comp-threshold' : 'comp-ratio');
+                    if (compSlider) compSlider.value = value;
+                } else if (fx === 'saturation' || fx === 'chorus') {
+                    updateDynamics(fx, value);
+                    const dynSlider = document.getElementById(fx === 'saturation' ? 'fx-saturate' : 'fx-chorus');
+                    if (dynSlider) dynSlider.value = value;
+                } else {
+                    updateMasterFX(fx, value, suffix);
+                }
+            }
+
+            render6ChannelMixer();
+            showToast(`[Preset] [${kitName.toUpperCase()}] 프리셋이 성공적으로 탑재되었습니다.`);
+        }
+
         function switchTab(tabName) {
             document.getElementById('content-play').classList.add('hidden');
             document.getElementById('content-sound').classList.add('hidden');
@@ -3077,9 +3355,13 @@
             modal.classList.remove('opacity-100');
         }
 
+        const wasLoaded = loadMidiSetupLocalStorage();
+        if (wasLoaded) {
+            console.log("[System] 로컬 미디 셋업 캐시가 복원되었습니다.");
+        }
+
         render6ChannelMixer();
         initLayout();
-        initMIDI();
         requestAnimationFrame(physicsUpdate);
     </script>
 </body>
