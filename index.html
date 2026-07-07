@@ -47,7 +47,7 @@
 
         #app-container {
             width: 100%;
-            max-width: 1200px;
+            max-width: 1440px; /* 견적히스토리2.JPG 가로폭 밀림 증상 해결을 위해 전체 폭 확장 */
             display: none; /* 온보딩 완료 전에는 숨김 */
             flex-direction: column;
             gap: 15px;
@@ -88,12 +88,17 @@
             text-shadow: 0 0 10px rgba(0, 243, 255, 0.4);
         }
 
-        /* 게임 보드 및 디스플레이 */
+        /* 🎮 게임 보드 및 디스플레이 (고풍스러운 드럼 키트 벡터 설계도 내장) */
         #game-screen {
             position: relative;
             width: 100%;
-            height: 48vh;
+            height: 52vh;
             background: linear-gradient(180deg, #050515 0%, #010105 100%);
+            /* 고해상도 드럼 아웃라인 청사진 백그라운드 이식 */
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 600' fill='none' stroke='rgba(0, 243, 255, 0.05)' stroke-width='1.5'><circle cx='500' cy='360' r='100' /><circle cx='380' cy='230' r='60' /><circle cx='620' cy='230' r='60' /><rect x='180' y='270' width='130' height='90' rx='5' /><rect x='690' y='270' width='130' height='90' rx='5' /><ellipse cx='500' cy='130' rx='120' ry='25' /><ellipse cx='230' cy='160' rx='90' ry='20' /><ellipse cx='770' cy='160' rx='90' ry='20' /><path d='M300 450 l-80 80 M700 450 l80 80 M500 460 v80 M380 290 l-50 160 M620 290 l50 160' /></svg>");
+            background-repeat: no-repeat;
+            background-position: center 70%;
+            background-size: contain;
             border: 2px solid #14142f;
             border-radius: 16px;
             box-shadow: 0 0 40px rgba(0, 243, 255, 0.05);
@@ -138,6 +143,7 @@
             width: 100%;
             height: 100%;
             position: relative;
+            background: transparent;
         }
 
         .lane {
@@ -266,7 +272,6 @@
         .pad-7.active { border-color: var(--neon-red); }
         .pad-8.active { border-color: var(--neon-bronze); }
 
-        /* 가로 세로 믹싱 페이더 구현을 위한 커스텀 트랙 */
         input[type="range"] {
             appearance: none;
             background: #090918;
@@ -381,50 +386,51 @@
 <body>
 
     <!-- 🔔 글로벌 비차단 보안형 알림 토스트 -->
-    <div id="notification-toast" class="fixed top-5 right-5 bg-slate-900 border border-cyan-500 text-cyan-300 px-4 py-2.5 rounded-lg shadow-lg opacity-0 transition-all duration-300 pointer-events-none z-[1100] text-xs font-bold flex items-center gap-2">
+    <div id="notification-toast" class="fixed top-5 right-5 bg-slate-900 border border-cyan-500 text-cyan-300 px-4 py-2.5 rounded-lg shadow-lg opacity-0 transition-all duration-300 pointer-events-none z-[1300] text-xs font-bold flex items-center gap-2">
         <i class="fa-solid fa-circle-info text-cyan-400"></i> <span id="toast-text">알림 메세지</span>
     </div>
 
-    <!-- 🔒 1단계: 네온 보안 로그인 스크린 (구글 스프레드시트 완전 연동) -->
+    <!-- 🔒 1단계: 네온 보안 로그인 스크린 (견적히스토리3.JPG 깨짐 현상 완전 해결) -->
     <div id="login-screen">
-        <div class="bg-[#070715]/95 border-2 border-[#00f3ff] shadow-[0_0_40px_rgba(0,243,255,0.2)] rounded-2xl p-8 max-w-sm w-full text-center backdrop-blur-md">
-            <div class="flex justify-center mb-4">
-                <div class="w-16 h-16 rounded-full bg-cyan-950/45 border border-cyan-500 flex items-center justify-center shadow-[0_0_15px_rgba(0,243,255,0.35)]">
-                    <i class="fa-solid fa-drum text-3xl text-[#00f3ff]"></i>
+        <div class="bg-[#070715]/95 border-2 border-[#00f3ff] shadow-[0_0_40px_rgba(0,243,255,0.2)] rounded-2xl p-10 max-w-lg w-full text-center backdrop-blur-md transition-all duration-300">
+            <div class="flex justify-center mb-6">
+                <div class="w-20 h-20 rounded-full bg-cyan-950/45 border-2 border-cyan-500 flex items-center justify-center shadow-[0_0_20px_rgba(0,243,255,0.35)]">
+                    <i class="fa-solid fa-drum text-4xl text-[#00f3ff]"></i>
                 </div>
             </div>
             
-            <h2 class="text-lg font-black tracking-widest text-white mb-1 uppercase">SOUNDGLUCK &nbsp; | &nbsp; DRUM TULZ</h2>
-            <p class="text-[10px] text-[#ff007f] font-mono tracking-wider uppercase mb-6">l &nbsp; Drum Tulz v4.1.0 Ultimate</p>
+            <!-- 타이틀 줄바꿈 강제 억제(whitespace-nowrap) -->
+            <h2 class="text-2xl font-black tracking-widest text-white mb-2 uppercase whitespace-nowrap">SOUNDGLUCK &nbsp;|&nbsp; DRUM TULZ</h2>
+            <p class="text-[11px] text-[#ff007f] font-mono tracking-wider uppercase mb-8">l &nbsp; Drum Tulz v4.1.0 Ultimate</p>
             
-            <form onsubmit="handleLogin(event)" class="space-y-4">
+            <form onsubmit="handleLogin(event)" class="space-y-6">
                 <div class="text-left">
-                    <label class="text-[9px] font-bold text-gray-500 uppercase tracking-widest block mb-1">STUDIO ID</label>
-                    <input type="text" id="login-id" value="sound" required autocomplete="username" class="w-full bg-black/60 border border-gray-800 focus:border-cyan-500 rounded-lg py-2 px-3 text-sm text-white outline-none font-semibold transition shadow-inner">
+                    <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest block mb-1.5">STUDIO ID</label>
+                    <input type="text" id="login-id" value="sound" required autocomplete="username" class="w-full bg-black/60 border border-gray-800 focus:border-cyan-500 rounded-lg py-2.5 px-4 text-base text-white outline-none font-semibold transition shadow-inner">
                 </div>
                 
                 <div class="text-left">
-                    <label class="text-[9px] font-bold text-gray-500 uppercase tracking-widest block mb-1">ACCESS PASSCODE</label>
-                    <input type="password" id="login-pw" value="gluck" required autocomplete="current-password" class="w-full bg-black/60 border border-gray-800 focus:border-cyan-500 rounded-lg py-2 px-3 text-sm text-white outline-none font-semibold transition shadow-inner">
+                    <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest block mb-1.5">ACCESS PASSCODE</label>
+                    <input type="password" id="login-pw" value="gluck" required autocomplete="current-password" class="w-full bg-black/60 border border-gray-800 focus:border-cyan-500 rounded-lg py-2.5 px-4 text-base text-white outline-none font-semibold transition shadow-inner">
                 </div>
                 
-                <div id="login-error-msg" class="text-red-500 text-[11px] font-bold h-4 transition duration-150"></div>
+                <div id="login-error-msg" class="text-red-500 text-xs font-bold h-4 transition duration-150"></div>
                 
-                <button type="submit" class="w-full bg-gradient-to-r from-cyan-500 to-[#ff007f] hover:opacity-90 text-white font-extrabold py-2.5 rounded-lg shadow-lg shadow-cyan-950 transition tracking-wider text-xs uppercase">
+                <button type="submit" class="w-full bg-gradient-to-r from-cyan-500 to-[#ff007f] hover:opacity-95 text-white font-extrabold py-3.5 rounded-lg shadow-lg shadow-cyan-950 transition tracking-wider text-sm uppercase">
                     Launch Console <i class="fa-solid fa-circle-play ml-1"></i>
                 </button>
             </form>
-            <div class="mt-4 pt-4 border-t border-gray-900 text-left">
-                <span class="text-[8px] font-bold text-gray-600 uppercase tracking-wider block">Real-time DB Connection Status</span>
-                <span class="text-[10px] text-cyan-400 font-bold flex items-center gap-1.5 mt-1 font-sans">
-                    <i class="fa-solid fa-cloud-arrow-up text-[9px]"></i> Google Sheets Cloud Security Enabled
+            <div class="mt-6 pt-6 border-t border-gray-900 text-left">
+                <span class="text-[9px] font-bold text-gray-600 uppercase tracking-wider block">Real-time DB Connection Status</span>
+                <span class="text-[11px] text-cyan-400 font-bold flex items-center gap-1.5 mt-1 font-sans">
+                    <i class="fa-solid fa-cloud-arrow-up text-[10px]"></i> Google Sheets Cloud Security Enabled
                 </span>
             </div>
-            <p class="text-[9px] text-gray-600 mt-5 font-mono">AUTHORIZED PERSONNEL ONLY // v4.1.0</p>
+            <p class="text-[10px] text-gray-600 mt-6 font-mono">AUTHORIZED PERSONNEL ONLY // v4.1.0</p>
         </div>
     </div>
 
-    <!-- 🚪 3단 온보딩 게이트웨이 및 대화형 설정 위저드 화면 -->
+    <!-- 🚪 2단계: 3단 온보딩 게이트웨이 및 대화형 설정 위저드 화면 -->
     <div id="onboarding-screen">
         <div id="onboarding-card-main" class="bg-[#0a0a20] border-2 border-cyan-500/80 shadow-[0_0_50px_rgba(0,243,255,0.15)] rounded-2xl p-8 max-w-lg w-full backdrop-blur-md">
             <div class="text-center mb-6">
@@ -560,67 +566,49 @@
         </div>
     </div>
 
-    <!-- 💻 3단계: 메인 어플리케이션 본체 -->
+    <!-- 💻 3단계: 메인 어플리케이션 본체 (견적히스토리2.JPG 밀림 및 쪼개짐 해결) -->
     <div id="app-container">
         
-        <!-- 통합 제어 헤더 -->
-        <header class="flex flex-col lg:flex-row justify-between items-center bg-[#07071c]/95 border-2 border-[#151538] rounded-2xl p-4 gap-4">
-            <div class="flex items-center gap-3">
-                <i class="fa-solid fa-drum text-3xl text-[#00f3ff] drop-shadow-[0_0_10px_#00f3ff]"></i>
-                <div>
+        <!-- 통합 제어 헤더 (xl:flex-nowrap 및 whitespace-nowrap 적용으로 모니터 한 화면 고정 확보) -->
+        <header class="flex flex-col xl:flex-row justify-between items-center bg-[#07071c]/95 border-2 border-[#151538] rounded-2xl p-4 gap-4 w-full">
+            <div class="flex items-center gap-3 shrink-0">
+                <div class="w-11 h-11 rounded-full bg-cyan-950/45 border border-cyan-500 flex items-center justify-center">
+                    <i class="fa-solid fa-drum text-2xl text-[#00f3ff] drop-shadow-[0_0_10px_#00f3ff]"></i>
+                </div>
+                <div class="whitespace-nowrap">
                     <h1 class="text-xl font-black tracking-widest text-white flex items-center gap-2">
-                        SOUNDGLUCK &nbsp;|&nbsp; DRUM TULZ <span class="text-[#ff007f] font-mono text-[10px] border border-pink-900 px-2 py-0.5 rounded">V4.1.0</span>
+                        SOUNDGLUCK <span class="text-cyan-500 font-light">|</span> DRUM TULZ <span class="text-[#ff007f] font-mono text-[10px] border border-pink-900 px-2 py-0.5 rounded">V4.1.0</span>
                     </h1>
                     <p class="text-[10px] text-gray-500 font-mono">Analog Synthesizer & Pro-Mixing Studio Module</p>
                 </div>
             </div>
             
-            <div class="flex items-center gap-3">
-                <nav class="flex flex-wrap gap-1 bg-black/60 p-1 rounded-xl border border-gray-800">
-                    <button onclick="switchTab('sound')" id="tab-sound" class="nav-tab active px-3 py-2 text-xs font-bold text-gray-400 hover:text-white rounded-lg flex items-center gap-1.5">
+            <div class="flex flex-col md:flex-row items-center gap-3 w-full xl:w-auto justify-end">
+                <nav class="flex flex-wrap md:flex-nowrap gap-1 bg-black/60 p-1 rounded-xl border border-gray-800 shrink-0">
+                    <button onclick="switchTab('sound')" id="tab-sound" class="nav-tab active px-2.5 py-2 text-[11px] font-bold text-gray-400 hover:text-white rounded-lg flex items-center gap-1 whitespace-nowrap">
                         <i class="fa-solid fa-sliders"></i> PERFORMANCE MODE
                     </button>
-                    <button onclick="switchTab('play')" id="tab-play" class="nav-tab px-3 py-2 text-xs font-bold text-gray-400 hover:text-white rounded-lg flex items-center gap-1.5">
+                    <button onclick="switchTab('play')" id="tab-play" class="nav-tab px-2.5 py-2 text-[11px] font-bold text-gray-400 hover:text-white rounded-lg flex items-center gap-1 whitespace-nowrap">
                         <i class="fa-solid fa-gamepad"></i> GAME MODE
                     </button>
-                    <button onclick="switchTab('controller')" id="tab-controller" class="nav-tab px-3 py-2 text-xs font-bold text-gray-400 hover:text-white rounded-lg flex items-center gap-1.5">
+                    <button onclick="switchTab('controller')" id="tab-controller" class="nav-tab px-2.5 py-2 text-[11px] font-bold text-gray-400 hover:text-white rounded-lg flex items-center gap-1 whitespace-nowrap">
                         <i class="fa-solid fa-circle-nodes"></i> 컨트롤러 맵핑
                     </button>
-                    <button onclick="switchTab('help')" id="tab-help" class="nav-tab px-3 py-2 text-xs font-bold text-gray-400 hover:text-white rounded-lg flex items-center gap-1.5">
+                    <button onclick="switchTab('help')" id="tab-help" class="nav-tab px-2.5 py-2 text-[11px] font-bold text-gray-400 hover:text-white rounded-lg flex items-center gap-1 whitespace-nowrap">
                         <i class="fa-solid fa-circle-question"></i> 사용 가이드 & 팁
                     </button>
                 </nav>
 
-                <!-- 사운드글룩 공식 채널 호버 드롭다운 탭 -->
-                <div class="relative group">
-                    <button class="px-3 py-2 text-xs font-extrabold text-cyan-400 bg-cyan-950/40 hover:bg-cyan-900/60 border border-cyan-800 rounded-lg flex items-center gap-1.5 transition cursor-pointer">
-                        <i class="fa-solid fa-bars"></i> 공식 채널 <i class="fa-solid fa-chevron-down text-[9px] transition-transform group-hover:rotate-180"></i>
+                <div class="flex items-center gap-2 shrink-0">
+                    <!-- 공식 채널: 팝업 모달 트리거 단추 (드롭다운을 팝업 형태로 완벽 전환) -->
+                    <button onclick="openChannelModal()" class="px-3 py-2 text-[11px] font-extrabold text-cyan-400 bg-cyan-950/45 hover:bg-cyan-900/60 border border-cyan-800 rounded-lg flex items-center gap-1.5 transition cursor-pointer whitespace-nowrap">
+                        <i class="fa-solid fa-bars"></i> 공식 채널
                     </button>
-                    <div class="absolute right-0 mt-2 w-56 bg-[#090918] border-2 border-cyan-500/50 rounded-xl shadow-[0_10px_25px_rgba(0,243,255,0.15)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-[100] p-2 space-y-1">
-                        <span class="text-[8px] font-black text-gray-500 uppercase tracking-widest block px-2.5 py-1">Official Links</span>
-                        <a href="https://soundgluck.com/" target="_blank" class="flex items-center gap-2 px-2.5 py-2 text-xs text-gray-300 hover:text-cyan-300 hover:bg-cyan-950/30 rounded-lg transition">
-                            <i class="fa-solid fa-store text-cyan-400 w-4 text-center"></i> 공식 쇼핑몰
-                        </a>
-                        <a href="https://smartstore.naver.com/soundgluck" target="_blank" class="flex items-center gap-2 px-2.5 py-2 text-xs text-gray-300 hover:text-cyan-300 hover:bg-cyan-950/30 rounded-lg transition">
-                            <i class="fa-solid fa-bag-shopping text-cyan-400 w-4 text-center"></i> 네이버 스마트 스토어
-                        </a>
-                        <a href="https://www.instagram.com/soundgluck/" target="_blank" class="flex items-center gap-2 px-2.5 py-2 text-xs text-gray-300 hover:text-pink-400 hover:bg-pink-950/20 rounded-lg transition">
-                            <i class="fa-brands fa-instagram text-pink-400 w-4 text-center"></i> 인스타그램
-                        </a>
-                        <a href="https://x.com/SOUNDGLUCK" target="_blank" class="flex items-center gap-2 px-2.5 py-2 text-xs text-gray-300 hover:text-sky-400 hover:bg-sky-950/20 rounded-lg transition">
-                            <i class="fa-brands fa-x-twitter text-sky-400 w-4 text-center"></i> 공식 X (트위터)
-                        </a>
-                        <div class="border-t border-gray-900 my-1"></div>
-                        <div class="px-2.5 py-1.5 bg-black/40 rounded-lg border border-gray-800">
-                            <span class="text-[7.5px] font-bold text-gray-500 uppercase block">카카오톡 고객센터</span>
-                            <span class="text-[10px] text-green-400 font-black block mt-0.5"><i class="fa-solid fa-comment mr-1"></i> '사운드글룩' 채널 검색</span>
-                        </div>
-                    </div>
-                </div>
 
-                <button onclick="handleLogout()" class="px-3 py-2 text-xs font-black bg-red-950 hover:bg-red-900/60 border border-red-800 text-red-300 rounded-lg transition">
-                    로그아웃
-                </button>
+                    <button onclick="handleLogout()" class="px-3 py-2 text-[11px] font-black bg-red-950 hover:bg-red-900/60 border border-red-800 text-red-300 rounded-lg transition whitespace-nowrap">
+                        로그아웃
+                    </button>
+                </div>
             </div>
         </header>
 
@@ -755,7 +743,7 @@
                         </div>
                     </div>
 
-                    <!-- 2열 공간계 (Room Bleed 포함) -->
+                    <!-- 2열 공간계 (Overhead/Room Bleed 포함) -->
                     <div class="grid grid-cols-2 gap-3 border-t border-[#1c1c3f] pt-3">
                         <div class="flex flex-col gap-1">
                             <span class="text-[8.5px] font-bold text-gray-400">Delay Time: <b id="label-fx-delayTime" class="text-cyan-400">0.3s</b></span>
@@ -946,7 +934,7 @@
             </div>
         </div>
 
-        <!-- ---------------- TAB 3: CONTROLLER MAPPING (시물레이션 키맵 제거) ---------------- -->
+        <!-- ---------------- TAB 3: CONTROLLER MAPPING ---------------- -->
         <div id="content-controller" class="hidden flex flex-col gap-4 bg-[#06061a]/95 border border-[#141432] rounded-2xl p-5">
             <div class="flex justify-between items-center border-b border-gray-800 pb-3 mb-2">
                 <div>
@@ -993,7 +981,7 @@
                         <button onclick="exportMidiSetupFile()" class="flex-1 py-2.5 bg-cyan-950/40 hover:bg-cyan-900/50 border border-cyan-800 text-cyan-400 text-xs font-bold rounded-lg transition cursor-pointer">
                             <i class="fa-solid fa-file-export mr-1"></i> 현재 미디 맵핑 파일로 내보내기
                         </button>
-                        <button onclick="startSetupWizard()" class="flex-1 py-2.5 bg-gradient-to-r from-[#ff007f] to-[#b026ff] text-white text-xs font-bold rounded-lg transition cursor-pointer">
+                        <button onclick="triggerSetupWizardReRun()" class="flex-1 py-2.5 bg-gradient-to-r from-[#ff007f] to-[#b026ff] text-white text-xs font-bold rounded-lg transition cursor-pointer">
                             <i class="fa-solid fa-wand-magic-sparkles mr-1"></i> 대화형 셋업 위저드 다시 실행
                         </button>
                     </div>
@@ -1102,16 +1090,72 @@
             </div>
         </div>
 
-        <!-- ⚠️ 무단 사용 법적 조치 경고 푸터 배너 -->
-        <footer class="w-full text-center py-6 mt-8 border-t border-gray-900 font-mono">
-            <p class="text-[10px] text-gray-500 tracking-wider">
+        <!-- ⚠️ 무단 사용 법적 조치 경고 푸터 배너 (줄간격 밸런스 및 가독성 대폭 향상) -->
+        <footer class="w-full text-center py-8 mt-10 border-t border-gray-900 bg-[#060614]/80 p-6 rounded-2xl border border-red-950/45 max-w-7xl mx-auto">
+            <p class="text-xs text-gray-400 font-mono font-bold tracking-wider">
                 © 2026 SOUNDGLUCK. All Rights Reserved.
             </p>
-            <p class="text-[9px] text-[#ff003c]/80 font-bold tracking-widest uppercase mt-1 px-4 leading-relaxed max-w-4xl mx-auto">
+            <p class="text-xs text-red-500 font-bold tracking-wide uppercase mt-3 leading-relaxed px-4 text-center max-w-5xl mx-auto drop-shadow-[0_2px_10px_rgba(255,0,60,0.15)]">
                 ⚠️ WARNING: SOUNDGLUCK DRUMTULZ는 SOUNDGLUCK에서 독점 라이선스 권한을 확보하여 자체 개발하고 빌드한 고유의 독창적 소프트웨어 자산입니다. 당사의 명시적인 서면 동의 없는 무단 불법 복제, 파일 배포, 소스 도용 및 상업적 목적의 무단 사용 행위는 저작권법 및 부정경쟁방지법 등 관련 법령에 의거하여 예외 없는 강력한 법적 대응 및 민형사상 손해배상 처벌을 받게 됩니다.
             </p>
         </footer>
 
+    </div>
+
+    <!-- 🌐 공식 채널 바로가기 고성능 크리스탈 팝업 모달창 (드롭다운을 전격 팝업으로 대체!) -->
+    <div id="channel-modal" class="fixed inset-0 flex items-center justify-center bg-black/85 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 z-[1200]">
+        <div class="bg-[#08081a] border-2 border-cyan-500 shadow-[0_0_50px_rgba(0,243,255,0.3)] rounded-2xl p-8 max-w-md w-full relative transform scale-95 transition-transform duration-300" id="channel-modal-content">
+            <!-- X 닫기 단추 -->
+            <button onclick="closeChannelModal()" class="absolute top-4 right-4 text-gray-500 hover:text-white transition text-2xl outline-none">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 rounded-full bg-cyan-950/45 border border-cyan-400 flex items-center justify-center mx-auto mb-2">
+                    <i class="fa-solid fa-circle-nodes text-2xl text-cyan-400"></i>
+                </div>
+                <h3 class="text-lg font-black text-white tracking-widest uppercase">SOUNDGLUCK OFFICIAL</h3>
+                <p class="text-[10px] text-cyan-400 font-mono">사운드글룩 공식 소통 채널 바로가기</p>
+            </div>
+
+            <!-- 정교하고 가독성 높은 링킹 레이아웃 -->
+            <div class="space-y-3.5">
+                <a href="https://soundgluck.com/" target="_blank" class="flex items-center justify-between p-3.5 bg-cyan-950/20 hover:bg-cyan-950/60 border border-cyan-900/60 rounded-xl transition group">
+                    <span class="flex items-center gap-3 text-sm font-bold text-gray-200 group-hover:text-cyan-300">
+                        <i class="fa-solid fa-store text-cyan-400 text-lg w-5 text-center"></i> 공식 쇼핑몰
+                    </span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-xs text-cyan-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition"></i>
+                </a>
+
+                <a href="https://smartstore.naver.com/soundgluck" target="_blank" class="flex items-center justify-between p-3.5 bg-green-950/10 hover:bg-green-950/40 border border-green-900/50 rounded-xl transition group">
+                    <span class="flex items-center gap-3 text-sm font-bold text-gray-200 group-hover:text-green-300">
+                        <i class="fa-solid fa-bag-shopping text-green-400 text-lg w-5 text-center"></i> 네이버 스마트 스토어
+                    </span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-xs text-green-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition"></i>
+                </a>
+
+                <a href="https://www.instagram.com/soundgluck/" target="_blank" class="flex items-center justify-between p-3.5 bg-pink-950/10 hover:bg-pink-950/40 border border-pink-900/50 rounded-xl transition group">
+                    <span class="flex items-center gap-3 text-sm font-bold text-gray-200 group-hover:text-pink-300">
+                        <i class="fa-brands fa-instagram text-pink-400 text-lg w-5 text-center"></i> 공식 인스타그램
+                    </span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-xs text-pink-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition"></i>
+                </a>
+
+                <a href="https://x.com/SOUNDGLUCK" target="_blank" class="flex items-center justify-between p-3.5 bg-slate-900 hover:bg-slate-800 border border-slate-700 rounded-xl transition group">
+                    <span class="flex items-center gap-3 text-sm font-bold text-gray-200 group-hover:text-white">
+                        <i class="fa-brands fa-x-twitter text-slate-300 text-lg w-5 text-center"></i> 공식 X (트위터)
+                    </span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-xs text-gray-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition"></i>
+                </a>
+
+                <!-- 카카오톡 고객센터 박스 대폭 확대 및 가독성 업그레이드 -->
+                <div class="p-4 bg-yellow-950/20 rounded-xl border border-yellow-800/60 mt-4 text-center">
+                    <span class="text-[10px] font-black text-yellow-500 uppercase tracking-widest block">KAKAO CS CENTER</span>
+                    <span class="text-sm font-black text-yellow-300 block mt-1.5"><i class="fa-solid fa-comment mr-1"></i> 카카오톡 채널 '사운드글룩' 검색</span>
+                    <p class="text-[10.5px] text-gray-400 mt-1">문의 사항이나 기술 지원은 카카오 채널로 문의해 주세요.</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -1119,10 +1163,9 @@
            0. 🔑 내부 보안 로그인 및 세션 체크 (Google Sheets API 실시간 연동 지원)
            =================================================================== */
 
-        // 🌐 보내주신 구글 앱스 스크립트 웹앱 주소가 소스에 완전 결속되었습니다!
         const GOOGLE_SHEET_API_URL = "https://script.google.com/macros/s/AKfycbwpGsX22GBxkKezIPq73jkhLMAlC8RmABTBzPKUN8qdDxuGosuc5QXlAFCM9tIidFV_/exec"; 
 
-        // 🔔 비차단 반응형 토스트 알리미 (모든 alert 방출!)
+        // 🔔 비차단 반응형 토스트 알리미
         function showToast(msg) {
             const toast = document.getElementById('notification-toast');
             const toastText = document.getElementById('toast-text');
@@ -1136,6 +1179,25 @@
                 toast.classList.remove('opacity-100', 'translate-y-0');
                 toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-[-10px]');
             }, 3500);
+        }
+
+        // 팝업 모달 제어 시스템
+        function openChannelModal() {
+            const modal = document.getElementById('channel-modal');
+            const content = document.getElementById('channel-modal-content');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('opacity-100');
+            content.classList.remove('scale-95');
+            content.classList.add('scale-100');
+        }
+
+        function closeChannelModal() {
+            const modal = document.getElementById('channel-modal');
+            const content = document.getElementById('channel-modal-content');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.classList.remove('opacity-100');
+            content.classList.add('scale-95');
+            content.classList.remove('scale-100');
         }
 
         function checkExistingSession() {
@@ -1161,7 +1223,6 @@
             submitBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin mr-1"></i> 인증 진행 중...`;
 
             try {
-                // 1. API 주소가 공백이거나 설정되지 않은 경우 로컬 오프라인 인증 모드로 작동
                 if (!GOOGLE_SHEET_API_URL || GOOGLE_SHEET_API_URL.trim() === "") {
                     console.warn("[Auth] 구글 웹앱 URL이 정의되지 않아 오프라인 로그인 모드로 작동합니다.");
                     
@@ -1173,7 +1234,6 @@
                         throw new Error("아이디 또는 비밀번호가 일치하지 않습니다. (오프라인 모드)");
                     }
                 } else {
-                    // 2. 구글 스프레드시트 웹앱 API 실제 전송 처리
                     const response = await fetch(GOOGLE_SHEET_API_URL, {
                         method: 'POST',
                         mode: 'cors',
@@ -1259,7 +1319,7 @@
             compRatio: 4,
             saturation: 15,
             chorus: 10,
-            roomBleed: 0.1 // 룸 블리드 (공간 혼합 앰비언스 노브 연동 파라미터)
+            roomBleed: 0.1 
         };
 
         const channelVUMeters = { kick: 0, snare: 0, hihat: 0, tom: 0, crash: 0, crash2: 0 };
@@ -1392,7 +1452,6 @@
                 if (label) label.innerText = val === 20000 ? "Bypass (20kHz)" : val + unit;
             }
             else if (param === 'roomBleed') {
-                // 실시간 OverHead / Room Bleed 믹싱 가변 처리
                 if (label) label.innerText = Math.round(val * 100) + unit;
             }
         }
@@ -1456,7 +1515,6 @@
             pannerNode.connect(masterCompressor);
 
             const delaySendGain = audioCtx.createGain();
-            // Room Bleed 믹스값을 가산하여 공간감 확장
             const dynamicDelaySend = params.delaySend * (1.0 + masterFX.roomBleed);
             delaySendGain.gain.setValueAtTime(dynamicDelaySend, now);
             pannerNode.connect(delaySendGain);
@@ -1730,11 +1788,11 @@
         let maxCombo = 0;
         let bpm = 120;
         let noteSpeed = 0.45;
-        let autoPattern = 'eight_go'; // 디폴트 8비트 그루브 지정
+        let autoPattern = 'eight_go'; 
         let lastBeatTime = 0; 
         let beatInterval = (60 / bpm) * 1000;
         let subBeatCounter = 0; 
-        let isGameRunning = false; // 게임 상태 관리 변수 추가
+        let isGameRunning = false; 
 
         const JUDGMENT_OFFSET = 70;    
         const PERFECT_WINDOW = 45;     
@@ -1792,7 +1850,15 @@
         let wizardPendingMappingQueue = [];
 
         function startSetupWizard() {
-            document.getElementById('onboarding-screen').style.display = "flex"; // 확실히 화면 활성화
+            document.getElementById('onboarding-screen').style.display = "flex"; 
+            document.getElementById('onboarding-menu-list').classList.add('hidden');
+            document.getElementById('setup-wizard-panel').classList.remove('hidden');
+            nextWizardStep(1);
+        }
+
+        // 위저드 강제 재진입 트리거 (버그 완전 수정)
+        function triggerSetupWizardReRun() {
+            document.getElementById('onboarding-screen').style.display = "flex";
             document.getElementById('onboarding-menu-list').classList.add('hidden');
             document.getElementById('setup-wizard-panel').classList.remove('hidden');
             nextWizardStep(1);
@@ -2033,7 +2099,7 @@
         }
 
         /* ===================================================================
-           5. 동적 레이아웃 생성 및 제어 엔진 (키보드 맵핑 관련 UI 전면 삭제)
+           5. 동적 레이아웃 생성 및 제어 엔진
            =================================================================== */
         function initLayout() {
             const laneData = laneConfigurations[currentLanes];
@@ -2236,7 +2302,7 @@
             const rawVelocity = data[2];
 
             if (cmd === 9 && rawVelocity > 0) {
-                const velocityScale = rawVelocity / 127.0; // Dynamic Velocity 수집
+                const velocityScale = rawVelocity / 127.0; 
                 logMidiSystem(`[MIDI Input] Code: ${note} | Velocity: ${rawVelocity} (${Math.round(velocityScale*100)}%)`);
                 
                 if (wizardCurrentStep === 3) {
@@ -2464,7 +2530,7 @@
         function startReplay() {
             if (recordedSequence.length === 0) return;
             isReplaying = true;
-            isGameRunning = true; // 리플레이 시 하강 프로세스 허용
+            isGameRunning = true; 
             changeRhythmPreset('none');
             notes.forEach(n => n.element.remove());
             notes = [];
@@ -2601,11 +2667,9 @@
             const now = audioCtx.currentTime;
             triggerEnvelopeAnimation(type);
 
-            // 벨로시티 다이내믹 곡선 계산 (감도 파라미터 연산)
             const sensCheck = document.getElementById('param-humanize').checked;
             let dynamicVelocity = velocity;
             if (sensCheck) {
-                // 미세한 타이밍 휴머나이즈 및 세기 가중치 감쇄
                 dynamicVelocity = velocity * (0.85 + Math.random() * 0.15);
             }
 
@@ -2614,7 +2678,6 @@
                 const gain = audioCtx.createGain();
                 osc.connect(gain);
                 
-                // 타격 세기에 따라 피치 및 감쇠 속도 미세 변동 (다이내믹스)
                 const pitchVal = synthParams.kick.pitch * (0.95 + dynamicVelocity * 0.1);
                 const decayVal = synthParams.kick.decay * (0.9 + dynamicVelocity * 0.2);
 
@@ -2642,7 +2705,6 @@
 
                 const noiseFilter = audioCtx.createBiquadFilter();
                 noiseFilter.type = 'bandpass';
-                // 벨로시티가 높을수록 스네어 와이어 고역대가 열림 (Overhead-Bleed 완벽 재현)
                 noiseFilter.frequency.value = synthParams.snare.noiseFreq * (0.8 + dynamicVelocity * 0.4);
 
                 const noiseGain = audioCtx.createGain();
@@ -2756,7 +2818,6 @@
             }
         }
 
-        /* 🎛️ Serum/Massive 스타일 가상 로터리 노브 회전 및 드래그 이벤트 엔진 */
         function initRotaryKnobs() {
             const knobs = document.querySelectorAll('.rotary-knob');
             
@@ -2962,39 +3023,35 @@
             });
         }
 
-        // 9종의 음악적 다채널 동시 드롭 패턴 구현부 (Toms, Crashes, Rides 레인 완벽 해소)
         function triggerRhythmDrop() {
             const step = subBeatCounter % 16;
             
             if (autoPattern === 'quarter') {
                 if (step % 4 === 0) {
                     createBeatLine();
-                    createNote(0); // Kick
+                    createNote(0); 
                 }
             } 
             else if (autoPattern === 'eight_go') {
-                // 8비트 복합 고고 드럼 악보 시뮬레이션
                 if (step % 2 === 0) {
                     createBeatLine();
-                    createNote(1); // 하이햇 고정 연타
+                    createNote(1); 
                     
-                    if (step === 0 || step === 8) createNote(0); // 강박에 베이스 킥 동시 드롭
-                    if (step === 4 || step === 12) createNote(2); // 약박에 스네어 동시 드롭
+                    if (step === 0 || step === 8) createNote(0); 
+                    if (step === 4 || step === 12) createNote(2); 
                     
-                    // 1마디 끝부분에 다이나믹 탐탐 1/2 필인 드롭
                     if (step === 6) createNote(3);
                     if (step === 14) createNote(4);
                 }
             } 
             else if (autoPattern === 'sixteen_funk') {
                 createBeatLine();
-                // 펑키 그루브 더블스토킹 드롭
-                if (step % 2 === 0) createNote(1); // 하이햇 연타
+                if (step % 2 === 0) createNote(1); 
                 
-                if (step === 0 || step === 3 || step === 8 || step === 11) createNote(0); // 16비트 엇박자 킥 드롭
-                if (step === 4 || step === 12) createNote(2); // 스네어 드롭
+                if (step === 0 || step === 3 || step === 8 || step === 11) createNote(0); 
+                if (step === 4 || step === 12) createNote(2); 
                 
-                if (step === 14) { // 마디 마지막 플로어 탐 연타 필인
+                if (step === 14) { 
                     createNote(5);
                     if (currentLanes > 8) createNote(6);
                 }
@@ -3003,47 +3060,44 @@
                 const shuffleSteps = [0, 2, 3, 5, 6, 8, 9, 11, 12, 14, 15];
                 if (shuffleSteps.includes(step)) {
                     createBeatLine();
-                    createNote(1); // 하이햇 셔플 바운스
-                    if (step === 0 || step === 6 || step === 12) createNote(0); // 셔플 삼연음 첫박 킥
-                    if (step === 3 || step === 9) createNote(2); // 스네어
-                    if (step === 15) createNote(currentLanes - 1); // 라이드 마무리
+                    createNote(1); 
+                    if (step === 0 || step === 6 || step === 12) createNote(0); 
+                    if (step === 3 || step === 9) createNote(2); 
+                    if (step === 15) createNote(currentLanes - 1); 
                 }
             }
             else if (autoPattern === 'bossa_beat') {
                 createBeatLine();
-                if (step % 2 === 0) createNote(1); // 림샷/하이햇
-                // 보사노바 고유의 엇박자 베이스 킥 드롭
+                if (step % 2 === 0) createNote(1); 
                 if (step === 0 || step === 3 || step === 8 || step === 11 || step === 14) createNote(0);
-                if (step === 4 || step === 12) createNote(2); // 스네어 엑센트
-                if (step === 7) createNote(3); // 탐 1
-                if (step === 15) createNote(5); // 탐 3
+                if (step === 4 || step === 12) createNote(2); 
+                if (step === 7) createNote(3); 
+                if (step === 15) createNote(5); 
             }
             else if (autoPattern === 'dnb_frenzy') {
                 createBeatLine();
-                // 드럼앤베이스 고속 브레이크비트 드롭
-                createNote(1); // 고속 하이햇
-                if (step === 0 || step === 10) createNote(0); // 킥
-                if (step === 4 || step === 12) createNote(2); // 백비트 스네어
-                if (step === 6) createNote(3); // 탐 1
-                if (step === 14) createNote(4); // 탐 2
+                createNote(1); 
+                if (step === 0 || step === 10) createNote(0); 
+                if (step === 4 || step === 12) createNote(2); 
+                if (step === 6) createNote(3); 
+                if (step === 14) createNote(4); 
             }
             else if (autoPattern === 'retro_disco') {
                 createBeatLine();
                 if (step % 2 === 0) {
-                    createNote(1); // 디스코 정박 오픈햇
-                    createNote(0); // 정박 킥 (포온더플로어)
+                    createNote(1); 
+                    createNote(0); 
                 }
-                if (step === 4 || step === 12) createNote(2); // 백비트 스네어
-                if (step === 0) createNote(6); // 마디 시작 부분 크래쉬 1 드롭
-                if (step === 8 && currentLanes > 8) createNote(7); // 크래쉬 2 드롭
+                if (step === 4 || step === 12) createNote(2); 
+                if (step === 0) createNote(6); 
+                if (step === 8 && currentLanes > 8) createNote(7); 
             }
             else if (autoPattern === 'metal_blast') {
                 createBeatLine();
-                // 메탈 초고속 트윈페달 블래스트비트 (킥/스네어 무한 연타)
-                createNote(0); // 매 박자 더블 킥 드롭
-                createNote(1); // 차이나/라이드 컵 연타
-                if (step % 2 === 0) createNote(2); // 스네어 연타 드롭
-                if (step === 14) { // 고속 탐 필인
+                createNote(0); 
+                createNote(1); 
+                if (step % 2 === 0) createNote(2); 
+                if (step === 14) { 
                     createNote(3);
                     createNote(4);
                     createNote(5);
@@ -3059,7 +3113,6 @@
             subBeatCounter++;
         }
 
-        // 🎮 게임 엔진 수동 구동 제어부
         function startGameEngine() {
             if (isGameRunning) return;
             isGameRunning = true;
@@ -3104,7 +3157,6 @@
             }
             const screenHeight = screen.clientHeight;
 
-            // 게임이 러닝 중이거나 리플레이 중일 때만 동작 수집
             if (isGameRunning) {
                 if (isReplaying) {
                     const elapsedReplay = timestamp - replayStartTime;
@@ -3130,7 +3182,6 @@
                     }
                 }
 
-                // 비트 가이드라인 하강
                 for (let i = visualBeatLines.length - 1; i >= 0; i--) {
                     const line = visualBeatLines[i];
                     line.currentY += noteSpeed * deltaTime;
@@ -3142,7 +3193,6 @@
                     }
                 }
 
-                // 드럼 노트 실시간 하강 및 이탈 판정
                 for (let i = notes.length - 1; i >= 0; i--) {
                     const note = notes[i];
                     note.currentY += noteSpeed * deltaTime;
