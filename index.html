@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SoundGluck Studio v4.0.1 - Premium Electronic Drum System</title>
+    <title>SoundGluck Studio v4.1.0 - Ultimate Electronic Drum System</title>
     <!-- Tailwind CSS 및 FontAwesome 아이콘 로드 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --bg-color: #03030b;
-            --panel-bg: rgba(8, 8, 22, 0.98);
-            --lane-bg: rgba(16, 16, 35, 0.4);
+            --bg-color: #020206;
+            --panel-bg: rgba(7, 7, 18, 0.98);
+            --lane-bg: rgba(13, 13, 28, 0.35);
             --neon-blue: #00f3ff;
             --neon-pink: #ff007f;
             --neon-green: #39ff14;
@@ -22,8 +22,8 @@
             --neon-cyan: #00ffd5;
             --neon-red: #ff003c;
             --neon-bronze: #e5c158;
-            --dark-metal: #121225;
-            --dark-trim: #1a1a38;
+            --dark-metal: #0e0e1a;
+            --dark-trim: #14142f;
         }
 
         * {
@@ -58,7 +58,7 @@
             display: flex;
             position: fixed;
             inset: 0;
-            background: radial-gradient(circle at center, #0a0a24 0%, #020207 100%);
+            background: radial-gradient(circle at center, #07071a 0%, #010103 100%);
             z-index: 1000;
             align-items: center;
             justify-content: center;
@@ -70,7 +70,7 @@
             display: none;
             position: fixed;
             inset: 0;
-            background: radial-gradient(circle at center, #090920 0%, #010105 100%);
+            background: radial-gradient(circle at center, #060618 0%, #010103 100%);
             z-index: 900;
             align-items: center;
             justify-content: center;
@@ -93,10 +93,10 @@
             position: relative;
             width: 100%;
             height: 48vh;
-            background: linear-gradient(180deg, #050515 0%, #010105 100%);
-            border: 2px solid #14142f;
+            background: linear-gradient(180deg, #03030d 0%, #010103 100%);
+            border: 2px solid #101025;
             border-radius: 16px;
-            box-shadow: 0 0 40px rgba(0, 243, 255, 0.05);
+            box-shadow: 0 0 40px rgba(0, 243, 255, 0.03);
             overflow: hidden;
         }
 
@@ -153,7 +153,7 @@
             position: absolute;
             width: 100%;
             height: 1px;
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.07);
             pointer-events: none;
         }
 
@@ -162,8 +162,8 @@
             bottom: 70px;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.7), rgba(255, 0, 127, 0.7), rgba(0, 243, 255, 0.7), transparent);
-            box-shadow: 0 0 18px rgba(0, 243, 255, 0.7);
+            background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.6), rgba(255, 0, 127, 0.6), rgba(0, 243, 255, 0.6), transparent);
+            box-shadow: 0 0 18px rgba(0, 243, 255, 0.6);
             z-index: 10;
         }
 
@@ -189,8 +189,8 @@
 
         /* 하단 컴팩트 리얼 드럼 랙 */
         #drum-rack-wrapper {
-            background: rgba(8, 8, 20, 0.9);
-            border: 2px solid #141435;
+            background: rgba(5, 5, 12, 0.9);
+            border: 2px solid #111128;
             border-radius: 16px;
             padding: 14px;
             min-height: 120px;
@@ -217,8 +217,8 @@
             flex-grow: 1;
             height: 85px;
             border-radius: 14px;
-            border: 2px solid #1a1a35;
-            background: radial-gradient(circle, #0e0e28 0%, #04040c 100%);
+            border: 2px solid #14142b;
+            background: radial-gradient(circle, #08081f 0%, #020206 100%);
             cursor: pointer;
             transition: transform 0.05s ease, border-color 0.05s ease, box-shadow 0.05s ease;
         }
@@ -269,7 +269,7 @@
         /* 가로 세로 믹싱 페이더 구현을 위한 커스텀 트랙 */
         input[type="range"] {
             appearance: none;
-            background: #090918;
+            background: #060610;
             height: 6px;
             border-radius: 3px;
             outline: none;
@@ -297,8 +297,8 @@
             width: 34px;
             height: 34px;
             border-radius: 50%;
-            background: radial-gradient(circle, #1a1a36 30%, #090915 90%);
-            border: 1.5px solid #202046;
+            background: radial-gradient(circle, #12122b 30%, #050510 90%);
+            border: 1.5px solid #161638;
             box-shadow: inset 0 1px 3px rgba(255,255,255,0.05), 0 2px 4px rgba(0,0,0,0.6);
             display: flex;
             align-items: center;
@@ -338,9 +338,9 @@
             position: relative;
             width: 22px;
             height: 100px;
-            background: linear-gradient(90deg, #050510 0%, #151525 50%, #050510 100%);
+            background: linear-gradient(90deg, #030308 0%, #101020 50%, #030308 100%);
             border-radius: 4px;
-            border: 1px solid #1a1a35;
+            border: 1px solid #14142a;
             display: flex;
             justify-content: center;
         }
@@ -353,15 +353,15 @@
             justify-content: space-between;
             font-family: monospace;
             font-size: 7.5px;
-            color: #555577;
+            color: #4a4a6b;
             pointer-events: none;
         }
         .fader-cap {
             position: absolute;
             width: 20px;
             height: 14px;
-            background: linear-gradient(180deg, #5e5e7a 0%, #202030 50%, #5e5e7a 100%);
-            border: 1.5px solid #a0a0c0;
+            background: linear-gradient(180deg, #50506c 0%, #151525 50%, #50506c 100%);
+            border: 1.5px solid #8e8ea8;
             border-radius: 3px;
             cursor: pointer;
             box-shadow: 0 3px 6px rgba(0,0,0,0.8);
@@ -387,15 +387,15 @@
 
     <!-- 🔒 1단계: 네온 보안 로그인 스크린 (구글 스프레드시트 완전 연동) -->
     <div id="login-screen">
-        <div class="bg-[#0b0b1e]/90 border-2 border-[#00f3ff] shadow-[0_0_40px_rgba(0,243,255,0.25)] rounded-2xl p-8 max-w-sm w-full text-center backdrop-blur-md">
+        <div class="bg-[#070715]/95 border-2 border-[#00f3ff] shadow-[0_0_40px_rgba(0,243,255,0.2)] rounded-2xl p-8 max-w-sm w-full text-center backdrop-blur-md">
             <div class="flex justify-center mb-4">
-                <div class="w-16 h-16 rounded-full bg-cyan-950/50 border border-cyan-500 flex items-center justify-center shadow-[0_0_15px_rgba(0,243,255,0.4)]">
+                <div class="w-16 h-16 rounded-full bg-cyan-950/45 border border-cyan-500 flex items-center justify-center shadow-[0_0_15px_rgba(0,243,255,0.35)]">
                     <i class="fa-solid fa-drum text-3xl text-[#00f3ff]"></i>
                 </div>
             </div>
             
             <h2 class="text-xl font-black tracking-widest text-white mb-1">SoundGluck Studio</h2>
-            <p class="text-[10px] text-[#ff007f] font-mono tracking-wider uppercase mb-6">l &nbsp; Drum Tulz v4.0.1</p>
+            <p class="text-[10px] text-[#ff007f] font-mono tracking-wider uppercase mb-6">l &nbsp; Drum Tulz v4.1.0 Ultimate</p>
             
             <form onsubmit="handleLogin(event)" class="space-y-4">
                 <div class="text-left">
@@ -420,13 +420,13 @@
                     <i class="fa-solid fa-cloud-arrow-up text-[9px]"></i> Google Sheets Cloud Security Enabled
                 </span>
             </div>
-            <p class="text-[9px] text-gray-600 mt-5 font-mono">AUTHORIZED PERSONNEL ONLY // v4.0.1</p>
+            <p class="text-[9px] text-gray-600 mt-5 font-mono">AUTHORIZED PERSONNEL ONLY // v4.1.0</p>
         </div>
     </div>
 
     <!-- 🚪 3단 온보딩 게이트웨이 및 대화형 설정 위저드 화면 -->
     <div id="onboarding-screen">
-        <div id="onboarding-card-main" class="bg-[#0a0a20] border-2 border-cyan-500/80 shadow-[0_0_50px_rgba(0,243,255,0.15)] rounded-2xl p-8 max-w-lg w-full backdrop-blur-md">
+        <div id="onboarding-card-main" class="bg-[#050516] border-2 border-cyan-500/80 shadow-[0_0_50px_rgba(0,243,255,0.12)] rounded-2xl p-8 max-w-lg w-full backdrop-blur-md">
             <div class="text-center mb-6">
                 <span class="text-[10px] text-cyan-400 font-mono tracking-widest uppercase">SoundGluck Welcome System</span>
                 <h2 class="text-2xl font-black text-white mt-1">전자드럼 셋업 및 도구 시작</h2>
@@ -435,7 +435,7 @@
 
             <!-- 메인 3선지 메뉴 목록 -->
             <div id="onboarding-menu-list" class="space-y-3.5">
-                <button onclick="startSetupWizard()" class="w-full bg-gradient-to-r from-cyan-950/80 to-blue-950/80 border-2 border-cyan-500 hover:border-cyan-300 rounded-xl p-4 flex items-center gap-4 transition text-left group">
+                <button onclick="startSetupWizard()" class="w-full bg-gradient-to-r from-cyan-950/70 to-blue-950/70 border-2 border-cyan-500 hover:border-cyan-300 rounded-xl p-4 flex items-center gap-4 transition text-left group">
                     <div class="w-12 h-12 rounded-lg bg-cyan-900/40 border border-cyan-400 flex items-center justify-center text-cyan-300 text-xl group-hover:scale-105 transition">
                         <i class="fa-solid fa-wand-magic-sparkles"></i>
                     </div>
@@ -456,7 +456,7 @@
                     </div>
                 </label>
 
-                <button onclick="bypassOnboardingDirectly()" class="w-full bg-[#101026] border-2 border-slate-800 hover:border-gray-500 rounded-xl p-4 flex items-center gap-4 transition text-left group">
+                <button onclick="bypassOnboardingDirectly()" class="w-full bg-[#0b0b1e] border-2 border-slate-800 hover:border-gray-500 rounded-xl p-4 flex items-center gap-4 transition text-left group">
                     <div class="w-12 h-12 rounded-lg bg-black/40 border border-slate-700 flex items-center justify-center text-slate-400 text-xl group-hover:scale-105 transition">
                         <i class="fa-solid fa-play"></i>
                     </div>
@@ -494,17 +494,17 @@
                     </div>
                 </div>
 
-                <!-- Wizard Step 2: Drum Kit Option Choice -->
+                <!-- Wizard Step 2: Drum Kit Option Choice (모델명 전면 배제 및 가독성 업그레이드) -->
                 <div id="wizard-step-2" class="hidden space-y-4">
                     <p class="text-xs text-gray-300">사용하시는 드럼의 물리적인 장비 스펙(트리거 패드 구성 형태)을 선택하세요.</p>
                     <div class="grid grid-cols-2 gap-3.5">
                         <button onclick="selectWizardHardware(8)" id="btn-wiz-hw-8" class="border-2 border-cyan-500/80 bg-cyan-950/20 rounded-xl p-4 text-center transition">
                             <h5 class="text-sm font-extrabold text-white">8패드 킷</h5>
-                            <span class="text-[10px] text-gray-400 mt-1 block leading-relaxed">기본 5드럼 + 3심벌 규격 (입문용 및 KED 스타터 등)</span>
+                            <span class="text-[10px] text-gray-400 mt-1 block leading-relaxed">기본 5드럼 + 3심벌 규격 (보급형 및 표준 전자드럼 사양)</span>
                         </button>
                         <button onclick="selectWizardHardware(9)" id="btn-wiz-hw-9" class="border-2 border-slate-800 bg-slate-950/20 rounded-xl p-4 text-center transition">
                             <h5 class="text-sm font-extrabold text-white">9패드 킷</h5>
-                            <span class="text-[10px] text-gray-400 mt-1 block leading-relaxed">Crash 2 추가 규격 (고퍼우드 X5/X9/X12 및 하이엔드)</span>
+                            <span class="text-[10px] text-gray-400 mt-1 block leading-relaxed">Crash 2 추가 규격 (하이엔드 및 다기능 심벌 확장 사양)</span>
                         </button>
                     </div>
                     <div class="flex justify-between pt-2">
@@ -527,7 +527,7 @@
                     </div>
 
                     <!-- 맵핑 미디 로그 트래커 -->
-                    <div class="bg-[#050510] rounded border border-gray-900 p-2 text-center h-10 font-mono text-[10px] text-green-400" id="wizard-midi-live-log">
+                    <div class="bg-[#03030b] rounded border border-gray-900 p-2 text-center h-10 font-mono text-[10px] text-green-400" id="wizard-midi-live-log">
                         [System] 드럼 타격 신호 대기 중...
                     </div>
 
@@ -564,189 +564,43 @@
     <div id="app-container">
         
         <!-- 통합 제어 헤더 -->
-        <header class="flex flex-col lg:flex-row justify-between items-center bg-[#07071c]/95 border-2 border-[#151538] rounded-2xl p-4 gap-4">
+        <header class="flex flex-col lg:flex-row justify-between items-center bg-[#050516]/95 border-2 border-[#12122b] rounded-2xl p-4 gap-4">
             <div class="flex items-center gap-3">
                 <i class="fa-solid fa-drum text-3xl text-[#00f3ff] drop-shadow-[0_0_10px_#00f3ff]"></i>
                 <div>
                     <h1 class="text-xl font-black tracking-widest text-white flex items-center gap-2">
-                        SOUND GLUCK <span class="text-[#ff007f] font-mono text-xs border border-pink-900 px-2 py-0.5 rounded">l &nbsp; Drum Tulz v4.0.1</span>
+                        SoundGluck <span class="text-[#ff007f] font-mono text-xs border border-pink-900 px-2 py-0.5 rounded">v4.1.0 Ultimate Studio</span>
                     </h1>
                     <p class="text-[10px] text-gray-500 font-mono">Analog Synthesizer & Pro-Mixing Studio Module</p>
                 </div>
             </div>
             
-            <div class="flex flex-wrap items-center gap-3">
-                <nav class="flex flex-wrap gap-1 bg-black/60 p-1 rounded-xl border border-gray-800">
-                    <button onclick="switchTab('sound')" id="tab-sound" class="nav-tab active px-3 py-2 text-xs font-bold text-gray-400 hover:text-white rounded-lg flex items-center gap-1.5">
-                        <i class="fa-solid fa-sliders"></i> PERFORMANCE MODE
-                    </button>
-                    <button onclick="switchTab('play')" id="tab-play" class="nav-tab px-3 py-2 text-xs font-bold text-gray-400 hover:text-white rounded-lg flex items-center gap-1.5">
-                        <i class="fa-solid fa-gamepad"></i> GAME MODE
-                    </button>
-                    <button onclick="switchTab('controller')" id="tab-controller" class="nav-tab px-3 py-2 text-xs font-bold text-gray-400 hover:text-white rounded-lg flex items-center gap-1.5">
-                        <i class="fa-solid fa-circle-nodes"></i> 컨트롤러 맵핑
-                    </button>
-                    <button onclick="switchTab('help')" id="tab-help" class="nav-tab px-3 py-2 text-xs font-bold text-gray-400 hover:text-white rounded-lg flex items-center gap-1.5">
-                        <i class="fa-solid fa-circle-question"></i> 사용 가이드 & 팁
-                    </button>
-                </nav>
-                
-                <button onclick="handleLogout()" class="px-3.5 py-2 text-xs font-black bg-red-950/80 hover:bg-red-900 border border-red-800 hover:border-red-600 text-red-300 rounded-xl transition duration-200 flex items-center gap-1.5 shadow-md">
-                    <i class="fa-solid fa-right-from-bracket"></i> 로그아웃
+            <nav class="flex flex-wrap gap-1 bg-black/60 p-1 rounded-xl border border-gray-800">
+                <button onclick="switchTab('sound')" id="tab-sound" class="nav-tab px-3 py-2 text-xs font-bold text-gray-400 hover:text-white rounded-lg flex items-center gap-1.5 active">
+                    <i class="fa-solid fa-sliders"></i> PERFORMANCE MODE
                 </button>
-            </div>
+                <button onclick="switchTab('play')" id="tab-play" class="nav-tab px-3 py-2 text-xs font-bold text-gray-400 hover:text-white rounded-lg flex items-center gap-1.5">
+                    <i class="fa-solid fa-gamepad"></i> GAME TRAINING
+                </button>
+                <button onclick="switchTab('controller')" id="tab-controller" class="nav-tab px-3 py-2 text-xs font-bold text-gray-400 hover:text-white rounded-lg flex items-center gap-1.5">
+                    <i class="fa-solid fa-circle-nodes"></i> MIDI SETTINGS
+                </button>
+                <button onclick="switchTab('help')" id="tab-help" class="nav-tab px-3 py-2 text-xs font-bold text-gray-400 hover:text-white rounded-lg flex items-center gap-1.5">
+                    <i class="fa-solid fa-circle-question"></i> USER MANUAL
+                </button>
+                <!-- 🔒 로그아웃 버튼 추가 -->
+                <button onclick="handleLogout()" class="px-3 py-2 text-xs font-bold text-red-400 hover:text-red-300 rounded-lg flex items-center gap-1.5 border border-red-950/40 hover:bg-red-950/10 transition">
+                    <i class="fa-solid fa-right-from-bracket"></i> LOGOUT
+                </button>
+            </nav>
         </header>
 
-        <!-- ---------------- TAB 1: GAME MODE (이제 두번째 탭이므로 초기 hidden 처리) ---------------- -->
-        <div id="content-play" class="hidden flex flex-col gap-4">
-            <!-- 퀵 설정 대시보드 -->
-            <div class="grid grid-cols-1 lg:grid-cols-5 gap-3 bg-[#08081a] border border-[#141432] rounded-xl p-3">
-                <div class="flex flex-col gap-1.5 bg-black/40 p-2 rounded-lg border border-gray-800/60 justify-center">
-                    <label class="text-[9px] font-black text-gray-400 uppercase tracking-wider">액티브 맵핑 형태</label>
-                    <span id="label-active-setup-lanes" class="text-xs font-bold text-cyan-300 font-mono">8L 자동 활성화</span>
-                </div>
-                
-                <div class="flex flex-col gap-1 bg-black/40 p-2 rounded-lg border border-gray-800/60 justify-center">
-                    <div class="flex justify-between text-[9px] font-black text-gray-400 uppercase">
-                        <span>노트 속도 (Speed)</span>
-                        <span id="speed-text" class="text-[#ff007f]">0.45 px/ms</span>
-                    </div>
-                    <input type="range" id="speed-range" min="0.10" max="1.10" step="0.05" value="0.45" oninput="changeSpeed(this.value)">
-                </div>
-
-                <!-- ⏱️ 정밀 오디오 메트로놈 제어부 -->
-                <div class="flex flex-col gap-1 bg-black/40 p-2 rounded-lg border border-gray-800/60 col-span-1 lg:col-span-2">
-                    <div class="flex justify-between items-center text-[9px] font-black text-gray-400 uppercase">
-                        <span>⏱️ 정밀 메트로놈</span>
-                        <div class="flex gap-2">
-                            <span id="bpm-text" class="text-green-400">120 BPM</span>
-                            <label class="inline-flex items-center cursor-pointer scale-75">
-                                <input type="checkbox" id="play-metronome-enable" class="sr-only peer" onchange="syncMetronomeToggle(this.checked)">
-                                <div class="relative w-9 h-5 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-500"></div>
-                            </label>
-                        </div>
-                    </div>
-                    <input type="range" id="bpm-range" min="60" max="220" value="120" oninput="changeBPM(this.value)" class="mb-1.5">
-                    
-                    <div class="grid grid-cols-2 gap-1.5 mt-0.5">
-                        <div class="flex items-center gap-1">
-                            <span class="text-[8px] font-bold text-gray-500 uppercase">박자</span>
-                            <select id="metro-signature" onchange="changeTimeSignature(this.value)" class="text-[9px] bg-black text-gray-300 font-extrabold p-1 rounded border border-gray-800 outline-none flex-1">
-                                <option value="4/4">4/4 박자</option>
-                                <option value="3/4">3/4 박자</option>
-                                <option value="2/4">2/4 박자</option>
-                                <option value="6/8">6/8 박자</option>
-                            </select>
-                        </div>
-                        <div class="flex items-center gap-1">
-                            <span class="text-[8px] font-bold text-gray-500 uppercase">분할</span>
-                            <select id="metro-subdivision" onchange="changeSubdivision(this.value)" class="text-[9px] bg-black text-gray-300 font-extrabold p-1 rounded border border-gray-800 outline-none flex-1">
-                                <option value="1">1분할 (정박)</option>
-                                <option value="2">2분할 (8비트)</option>
-                                <option value="4">4분할 (16비트)</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex flex-col justify-center items-center bg-black/50 p-2 rounded-lg border border-cyan-900/60">
-                    <span class="text-[9px] font-black text-cyan-400 tracking-widest">LIVE SCORE</span>
-                    <div id="score-display" class="text-2xl font-black font-mono mt-0.5 text-white">000000</div>
-                </div>
-            </div>
-
-            <!-- 🎮 GAME CONTROLLER BAR (재생, 정지, 멈춤, 리셋 제어 콘솔 데스크) -->
-            <div class="flex justify-between items-center bg-[#0d0d27] border border-[#1e1e4a] p-3 rounded-xl gap-4">
-                <div class="flex items-center gap-3">
-                    <span class="text-xs font-bold text-gray-400 flex items-center gap-1"><i class="fa-solid fa-gamepad text-cyan-400"></i> GAME CONTROL:</span>
-                    <span id="game-state-badge" class="px-2 py-0.5 text-[10px] font-black rounded bg-red-950 text-red-400 border border-red-900 font-mono">STOPPED</span>
-                </div>
-                
-                <div class="flex gap-2">
-                    <button id="btn-game-play" onclick="controlGameEngine('play')" class="px-4 py-1.5 bg-green-950/80 hover:bg-green-900 border border-green-700 hover:border-green-500 text-green-300 text-xs font-extrabold rounded-lg transition flex items-center gap-1 shadow-md shadow-green-950/20">
-                        <i class="fa-solid fa-play"></i> 재생 (PLAY)
-                    </button>
-                    <button id="btn-game-pause" onclick="controlGameEngine('pause')" class="px-4 py-1.5 bg-yellow-950/80 hover:bg-yellow-900 border border-yellow-700 hover:border-yellow-500 text-yellow-300 text-xs font-extrabold rounded-lg transition flex items-center gap-1 shadow-md shadow-yellow-950/20">
-                        <i class="fa-solid fa-pause"></i> 일시정지 (PAUSE)
-                    </button>
-                    <button id="btn-game-stop" onclick="controlGameEngine('stop')" class="px-4 py-1.5 bg-red-950/80 hover:bg-red-900 border border-red-700 hover:border-red-500 text-red-300 text-xs font-extrabold rounded-lg transition flex items-center gap-1 shadow-md shadow-red-950/20">
-                        <i class="fa-solid fa-stop"></i> 멈춤 (STOP)
-                    </button>
-                    <button id="btn-game-reset" onclick="controlGameEngine('reset')" class="px-4 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-300 text-xs font-extrabold rounded-lg transition flex items-center gap-1 shadow-md">
-                        <i class="fa-solid fa-arrows-rotate"></i> 리셋 (RESET)
-                    </button>
-                </div>
-
-                <div class="flex items-center gap-2 bg-black/30 px-3 py-1.5 rounded border border-gray-800">
-                    <span class="text-[10px] font-bold text-gray-500">리듬 패턴 프리셋</span>
-                    <select id="rhythm-select" onchange="changeRhythmPreset(this.value)" class="text-[11px] bg-black text-cyan-300 font-extrabold border-none outline-none cursor-pointer">
-                        <option value="eight_go">8비트 기본 고고</option>
-                        <option value="quarter">4비트 단조로운 킥</option>
-                        <option value="sixteen_funk">16비트 정통 펑크</option>
-                        <option value="shuffle">어쿠스틱 셔플 롤</option>
-                        <option value="bossa_nova">보사노바 (Bossa Nova)</option>
-                        <option value="drum_n_bass">드럼 앤 베이스 (D&B)</option>
-                        <option value="disco">디스코 업비트 (Disco)</option>
-                        <option value="heavy_metal">헤비 메탈 (Blast Beat)</option>
-                        <option value="random">완전 랜덤 드롭</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- 중앙 게임 스크린 -->
-            <div id="game-screen">
-                <canvas id="effect-canvas"></canvas>
-                <div id="judgment-banner">PERFECT</div>
-                <div id="combo-display">0 COMBO</div>
-                <div id="lanes-wrapper"></div>
-                <div id="laser-judgment-line"></div>
-            </div>
-
-            <!-- 리코더 파일 입출력 및 제어부 -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 bg-[#060614] border border-[#141430] rounded-xl p-3">
-                <div class="flex items-center justify-between gap-3 bg-black/40 p-2.5 rounded-lg border border-gray-800/80">
-                    <div class="flex items-center gap-2">
-                        <i class="fa-solid fa-microphone text-red-500 animate-pulse"></i>
-                        <div>
-                            <p class="text-xs font-bold text-white">시퀀스 레코더</p>
-                            <span id="record-status-badge" class="text-[9px] px-1.5 py-0.5 rounded font-extrabold bg-slate-800 text-slate-400">STANDBY</span>
-                        </div>
-                    </div>
-                    <div class="flex gap-1.5">
-                        <button id="record-btn" onclick="toggleRecording()" class="px-3 py-1.5 bg-red-950/40 border border-red-800 text-xs text-red-400 rounded-lg font-bold hover:bg-red-950 transition flex items-center gap-1">
-                            <i class="fa-solid fa-circle" id="rec-icon"></i> 녹음
-                        </button>
-                        <button id="replay-btn" disabled onclick="startReplay()" class="px-3 py-1.5 bg-cyan-950/20 opacity-50 border border-cyan-900 text-xs text-cyan-400 rounded-lg font-bold transition flex items-center gap-1">
-                            <i class="fa-solid fa-play"></i> 리플레이
-                        </button>
-                    </div>
-                </div>
-
-                <div class="flex items-center justify-between gap-2 bg-black/40 p-2.5 rounded-lg border border-gray-800/80">
-                    <div class="text-left">
-                        <p class="text-xs font-bold text-white">시퀀스 파일 저장 & 다운로드</p>
-                        <span class="text-[9px] text-gray-500">녹음된 노트를 파일로 내보내기</span>
-                    </div>
-                    <div class="flex gap-1.5 flex-1 justify-end">
-                        <button id="file-export-btn" disabled onclick="exportToJsonFile()" class="px-2.5 py-1.5 bg-[#121c12] border border-green-900 text-xs text-green-400 rounded-lg font-bold hover:bg-green-950 transition flex items-center gap-1">
-                            <i class="fa-solid fa-file-export"></i> 내보내기
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 하단 드럼 랙 영역 -->
-            <div id="drum-rack-wrapper">
-                <div id="drum-rack"></div>
-            </div>
-        </div>
-
-        <!-- ---------------- TAB 2: PERFORMANCE MODE (첫번째 탭이므로 초기 show 처리) ---------------- -->
-        <div id="content-sound" class="flex flex-col gap-4 bg-[#06061a]/95 border border-[#141432] rounded-2xl p-5">
-            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center border-b border-[#1c1c3f] pb-4 gap-4">
+        <!-- ---------------- TAB 1: PERFORMANCE MODE (첫 번째 최우선 정렬 및 겹침 복구) ---------------- -->
+        <div id="content-sound" class="flex flex-col gap-4 bg-[#03030d]/95 border border-[#10102b] rounded-2xl p-5">
+            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center border-b border-[#141433] pb-4 gap-4">
                 <div>
                     <h2 class="text-sm font-black text-[#00f3ff] tracking-widest uppercase flex items-center gap-1.5">
-                        <i class="fa-solid fa-wave-square text-cyan-400"></i> SOUND GLUCK l Drum Tulz Workspace v4.0.1
+                        <i class="fa-solid fa-wave-square text-cyan-400"></i> SoundGluck Performance Workspace v4.1.0
                     </h2>
                     <p class="text-[11px] text-gray-400 mt-1 font-sans">고밀도 신디사이저 믹싱 및 사운드 조율 워크플레이스</p>
                 </div>
@@ -784,24 +638,28 @@
                             <input type="checkbox" id="audio-enable" class="sr-only peer" checked>
                             <div class="relative w-9 h-5 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-cyan-500"></div>
                         </label>
-            <!-- 사운드 프리셋 셀렉터 (총 12개 대화형 확장형 라이브러리) -->
-            <div class="bg-black/30 border border-gray-800 p-3 rounded-xl flex flex-col md:flex-row items-start md:items-center gap-3">
-                <span class="text-[11px] font-black text-[#ffe600] uppercase tracking-wider flex items-center gap-1">
-                    <i class="fa-solid fa-compact-disc"></i> 🥁 SOUND LIBRARY PRESET:
+                    </div>
+                </div>
+            </div>
+
+            <!-- 사운드 프리셋 셀렉터 (12종 프로페셔널 사운드 프리셋 확장형 완비) -->
+            <div class="bg-black/30 border border-gray-800 p-3 rounded-xl flex flex-col gap-3">
+                <span class="text-[11px] font-black text-[#ffe600] uppercase tracking-wider flex items-center gap-1 border-b border-gray-900 pb-1">
+                    <i class="fa-solid fa-compact-disc"></i> 🥁 12 SOUND SYNTHESIZER PRESETS (프로 수준 고품격 확장):
                 </span>
-                <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-12 gap-2 w-full">
+                <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2 w-full">
                     <button onclick="loadDrumKitPreset('acoustic')" class="px-2 py-1.5 bg-cyan-950/40 hover:bg-cyan-900 border border-cyan-800 text-[10px] text-cyan-300 font-bold rounded-lg transition text-center truncate">Acoustic Studio</button>
                     <button onclick="loadDrumKitPreset('trap808')" class="px-2 py-1.5 bg-pink-950/40 hover:bg-pink-900 border border-pink-800 text-[10px] text-pink-300 font-bold rounded-lg transition text-center truncate">Deep Sub 808</button>
                     <button onclick="loadDrumKitPreset('retro80s')" class="px-2 py-1.5 bg-purple-950/40 hover:bg-purple-900 border border-purple-800 text-[10px] text-purple-300 font-bold rounded-lg transition text-center truncate">Cyber Retro 80s</button>
                     <button onclick="loadDrumKitPreset('metal')" class="px-2 py-1.5 bg-yellow-950/40 hover:bg-yellow-900 border border-yellow-800 text-[10px] text-yellow-400 font-bold rounded-lg transition text-center truncate">Industrial Metal</button>
-                    <button onclick="loadDrumKitPreset('lofijazz')" class="px-2 py-1.5 bg-emerald-950/40 hover:bg-emerald-900 border border-emerald-800 text-[10px] text-emerald-400 font-bold rounded-lg transition text-center truncate">Lo-Fi Chill Jazz</button>
-                    <button onclick="loadDrumKitPreset('stadium')" class="px-2 py-1.5 bg-rose-950/40 hover:bg-rose-900 border border-rose-800 text-[10px] text-rose-400 font-bold rounded-lg transition text-center truncate">Arena Stadium</button>
-                    <button onclick="loadDrumKitPreset('perc')" class="px-2 py-1.5 bg-amber-950/40 hover:bg-amber-900 border border-amber-800 text-[10px] text-amber-400 font-bold rounded-lg transition text-center truncate">Latin Percussion</button>
-                    <button onclick="loadDrumKitPreset('techno')" class="px-2 py-1.5 bg-indigo-950/40 hover:bg-indigo-900 border border-indigo-800 text-[10px] text-indigo-400 font-bold rounded-lg transition text-center truncate">Electro House</button>
-                    <button onclick="loadDrumKitPreset('synthwave')" class="px-2 py-1.5 bg-orange-950/40 hover:bg-orange-900 border border-orange-800 text-[10px] text-orange-400 font-bold rounded-lg transition text-center truncate">Outrun Wave</button>
-                    <button onclick="loadDrumKitPreset('drumandbass')" class="px-2 py-1.5 bg-red-950/40 hover:bg-red-900 border border-red-800 text-[10px] text-red-400 font-bold rounded-lg transition text-center truncate">Fast D&B Break</button>
-                    <button onclick="loadDrumKitPreset('bossanova')" class="px-2 py-1.5 bg-teal-950/40 hover:bg-teal-900 border border-teal-800 text-[10px] text-teal-400 font-bold rounded-lg transition text-center truncate">Warm Bossa Rim</button>
-                    <button onclick="loadDrumKitPreset('orchestral')" class="px-2 py-1.5 bg-slate-850/40 hover:bg-slate-800 border border-slate-700 text-[10px] text-slate-300 font-bold rounded-lg transition text-center truncate">Hall Timpani</button>
+                    <button onclick="loadDrumKitPreset('lofi')" class="px-2 py-1.5 bg-amber-950/40 hover:bg-amber-900 border border-amber-800 text-[10px] text-amber-300 font-bold rounded-lg transition text-center truncate">Lo-Fi Jazz</button>
+                    <button onclick="loadDrumKitPreset('stadium')" class="px-2 py-1.5 bg-red-950/40 hover:bg-red-900 border border-red-800 text-[10px] text-red-300 font-bold rounded-lg transition text-center truncate">Stadium Rock</button>
+                    <button onclick="loadDrumKitPreset('bossa')" class="px-2 py-1.5 bg-green-950/40 hover:bg-green-900 border border-green-800 text-[10px] text-green-300 font-bold rounded-lg transition text-center truncate">Bossa Nova</button>
+                    <button onclick="loadDrumKitPreset('dnb')" class="px-2 py-1.5 bg-blue-950/40 hover:bg-blue-900 border border-blue-800 text-[10px] text-blue-300 font-bold rounded-lg transition text-center truncate">Drum & Bass</button>
+                    <button onclick="loadDrumKitPreset('electro')" class="px-2 py-1.5 bg-orange-950/40 hover:bg-orange-900 border border-orange-800 text-[10px] text-orange-300 font-bold rounded-lg transition text-center truncate">Electro House</button>
+                    <button onclick="loadDrumKitPreset('orchestra')" class="px-2 py-1.5 bg-indigo-950/40 hover:bg-indigo-900 border border-indigo-800 text-[10px] text-indigo-300 font-bold rounded-lg transition text-center truncate">Cinematic Orch</button>
+                    <button onclick="loadDrumKitPreset('vintage')" class="px-2 py-1.5 bg-teal-950/40 hover:bg-teal-900 border border-teal-800 text-[10px] text-teal-300 font-bold rounded-lg transition text-center truncate">Vintage Pop</button>
+                    <button onclick="loadDrumKitPreset('neosoul')" class="px-2 py-1.5 bg-rose-950/40 hover:bg-rose-900 border border-rose-800 text-[10px] text-rose-300 font-bold rounded-lg transition text-center truncate">Neo Soul</button>
                 </div>
             </div>
 
@@ -809,8 +667,8 @@
             <div class="grid grid-cols-1 xl:grid-cols-4 gap-4 items-start">
                 
                 <!-- 🎚 *스튜디오 믹서* -->
-                <div class="xl:col-span-3 bg-[#0a0a1f] border border-[#1e1e40] rounded-2xl p-4 flex flex-col gap-3 shadow-inner">
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-[#1f1f4d] pb-2 gap-2">
+                <div class="xl:col-span-3 bg-[#050516] border border-[#12122b] rounded-2xl p-4 flex flex-col gap-3 shadow-inner">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-[#12122b] pb-2 gap-2">
                         <span id="mixer-desk-title" class="text-xs font-black text-cyan-400 tracking-widest flex items-center gap-2">
                             <i class="fa-solid fa-sliders text-cyan-400"></i> PRO-MIXER DESK (8L AUTOMATED)
                         </span>
@@ -821,8 +679,8 @@
                     </div>
                 </div>
 
-                <!-- 🎛️ 스튜디오 아웃 FX 랙 & 다이나믹스 제어부 -->
-                <div class="bg-gradient-to-b from-[#0a0a25] to-[#040410] border-2 border-[#1c1c3f] rounded-2xl p-4 flex flex-col gap-3.5 shadow-2xl">
+                <!-- 🎛️ 스튜디오 아웃 FX 랙 & 다이나믹스 제어부 (Superior Drummer 요소 도입) -->
+                <div class="bg-gradient-to-b from-[#060618] to-[#020207] border-2 border-[#12122b] rounded-2xl p-4 flex flex-col gap-3.5 shadow-2xl">
                     <span class="text-xs font-black text-[#ff007f] tracking-wider border-b border-pink-950 pb-2 flex items-center justify-between">
                         <span class="flex items-center gap-1"><i class="fa-solid fa-server"></i> STUDIO MASTER OUT</span>
                     </span>
@@ -831,6 +689,26 @@
                     <div class="bg-black/90 border border-[#1b1b36] rounded-xl h-20 relative overflow-hidden">
                         <canvas id="master-visualizer-canvas" class="w-full h-full"></canvas>
                         <span class="absolute top-1 left-2 text-[8px] text-[#00f3ff]/60 font-mono tracking-widest uppercase">Live FFT Spectrum</span>
+                    </div>
+
+                    <!-- Humanize & Room Bleed 마스터 연동 다이얼 -->
+                    <div class="grid grid-cols-2 gap-2.5 bg-black/40 p-2.5 rounded-lg border border-cyan-900/40">
+                        <div class="flex flex-col items-center">
+                            <span class="text-[8px] font-black text-cyan-400 uppercase tracking-widest mb-1"><i class="fa-solid fa-user-gear"></i> Humanize</span>
+                            <label class="inline-flex items-center cursor-pointer scale-75">
+                                <input type="checkbox" id="humanize-enable" class="sr-only peer" checked onchange="toggleHumanize(this.checked)">
+                                <div class="relative w-9 h-5 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-cyan-500"></div>
+                            </label>
+                            <span class="text-[7px] text-gray-400 mt-1">인간 타격오차 모션</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <span class="text-[8px] font-black text-cyan-400 uppercase tracking-widest mb-1"><i class="fa-solid fa-volume-high"></i> Room Bleed</span>
+                            <div class="rotary-knob" id="dial-room-bleed" data-instrument="master" data-param="bleed" data-min="0" data-max="100" data-value="30" data-unit="%">
+                                <div class="rotary-knob-pointer"></div>
+                                <svg class="rotary-knob-svg"><path class="rotary-knob-arc" stroke="var(--neon-cyan)" d="M 9.7 32.3 A 16 16 0 1 1 32.3 32.3" /></svg>
+                            </div>
+                            <span class="text-[7.5px] text-cyan-300 font-mono mt-0.5" id="label-master-bleed">30%</span>
+                        </div>
                     </div>
 
                     <!-- Dynamics / FX Controls -->
@@ -869,7 +747,7 @@
                     </div>
 
                     <!-- 2열 공간계 -->
-                    <div class="grid grid-cols-2 gap-3 border-t border-[#1c1c3f] pt-3">
+                    <div class="grid grid-cols-2 gap-3 border-t border-[#12122b] pt-3">
                         <div class="flex flex-col gap-1">
                             <span class="text-[8.5px] font-bold text-gray-400">Delay Time: <b id="label-fx-delayTime" class="text-cyan-400">0.3s</b></span>
                             <input type="range" id="param-fx-delayTime" min="1" max="10" value="3" oninput="updateMasterFX('delayTime', this.value / 10, 's')">
@@ -889,7 +767,7 @@
                     </div>
 
                     <!-- 🎚️ 퍼포먼스 전체 믹싱셋 저장/불러오기 추가 -->
-                    <div class="border-t border-[#1c1c3f] pt-3 mt-1 space-y-2">
+                    <div class="border-t border-[#12122b] pt-3 mt-1 space-y-2">
                         <span class="text-[9px] font-black text-cyan-400 uppercase tracking-widest flex items-center gap-1">
                             <i class="fa-solid fa-cloud"></i> 퍼포먼스 사운드 셋업 보존
                         </span>
@@ -897,7 +775,7 @@
                             <button onclick="exportSoundSetupFile()" class="py-1.5 bg-cyan-950/20 hover:bg-cyan-950/60 border border-cyan-800 text-[10px] text-cyan-300 font-bold rounded-lg transition">
                                 <i class="fa-solid fa-file-export mr-1"></i> 셋업 저장하기
                             </button>
-                            <label class="py-1.5 bg-purple-950/20 hover:bg-purple-950/60 border border-purple-800 text-[10px] text-purple-300 font-bold rounded-lg text-center cursor-pointer transition">
+                            <label class="py-1.5 bg-purple-950/20 hover:bg-purple-950/60 border border-purple-800 text-[10px] text-purple-300 font-bold text-center cursor-pointer transition">
                                 <i class="fa-solid fa-file-import mr-1"></i> 셋업 가져오기
                                 <input type="file" id="sound-setup-import-input" accept=".json" class="hidden" onchange="importSoundSetupFile(event)">
                             </label>
@@ -908,8 +786,146 @@
             </div>
         </div>
 
-        <!-- ---------------- TAB 3: CONTROLLER MAPPING (시물레이션 키맵 제거) ---------------- -->
-        <div id="content-controller" class="hidden flex flex-col gap-4 bg-[#06061a]/95 border border-[#141432] rounded-2xl p-5">
+        <!-- ---------------- TAB 2: GAME MODE (재생/일시정지/초기화 콘솔 데크 구축) ---------------- -->
+        <div id="content-play" class="hidden flex flex-col gap-4">
+            <!-- 퀵 설정 대시보드 및 재생 제어 통합 제어 콘솔 데크 -->
+            <div class="grid grid-cols-1 lg:grid-cols-6 gap-3 bg-[#050516] border border-[#12122b] rounded-xl p-3 items-center">
+                
+                <div class="flex flex-col gap-1.5 bg-black/40 p-2 rounded-lg border border-gray-800/60 justify-center">
+                    <label class="text-[9px] font-black text-gray-400 uppercase tracking-wider">액티브 맵핑 형태</label>
+                    <span id="label-active-setup-lanes" class="text-xs font-bold text-cyan-300 font-mono">8L 자동 활성화</span>
+                </div>
+
+                <!-- 🎛️ PLAY / PAUSE / STOP / RESET 콘솔 패널 -->
+                <div class="flex flex-col gap-1 bg-black/50 p-2 rounded-lg border border-cyan-950/80 col-span-1 lg:col-span-2">
+                    <span class="text-[9px] font-black text-cyan-400 uppercase tracking-widest text-center mb-1"><i class="fa-solid fa-circle-play"></i> GAMEPLAY CONTROLLER</span>
+                    <div class="grid grid-cols-4 gap-1">
+                        <button onclick="playGame()" id="btn-game-play" class="py-1.5 bg-green-950/40 hover:bg-green-900/60 border border-green-800 rounded font-bold text-xs text-green-400 transition flex flex-col items-center gap-0.5">
+                            <i class="fa-solid fa-play"></i> <span class="text-[8px]">START</span>
+                        </button>
+                        <button onclick="pauseGame()" id="btn-game-pause" class="py-1.5 bg-yellow-950/30 hover:bg-yellow-900/40 border border-yellow-800 rounded font-bold text-xs text-yellow-400 transition flex flex-col items-center gap-0.5">
+                            <i class="fa-solid fa-pause"></i> <span class="text-[8px]">PAUSE</span>
+                        </button>
+                        <button onclick="stopGame()" id="btn-game-stop" class="py-1.5 bg-red-950/40 hover:bg-red-900/60 border border-red-800 rounded font-bold text-xs text-red-400 transition flex flex-col items-center gap-0.5">
+                            <i class="fa-solid fa-stop"></i> <span class="text-[8px]">STOP</span>
+                        </button>
+                        <button onclick="resetGame()" class="py-1.5 bg-purple-950/40 hover:bg-purple-900/60 border border-purple-800 rounded font-bold text-xs text-purple-400 transition flex flex-col items-center gap-0.5">
+                            <i class="fa-solid fa-arrows-rotate"></i> <span class="text-[8px]">RESET</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col gap-1 bg-black/40 p-2 rounded-lg border border-gray-800/60 justify-center">
+                    <div class="flex justify-between text-[9px] font-black text-gray-400 uppercase">
+                        <span>노트 속도 (Speed)</span>
+                        <span id="speed-text" class="text-[#ff007f]">0.45 px/ms</span>
+                    </div>
+                    <input type="range" id="speed-range" min="0.10" max="1.10" step="0.05" value="0.45" oninput="changeSpeed(this.value)">
+                </div>
+
+                <!-- ⏱️ 정밀 오디오 메트로놈 제어부 -->
+                <div class="flex flex-col gap-1 bg-black/40 p-2 rounded-lg border border-gray-800/60 col-span-1">
+                    <div class="flex justify-between items-center text-[9px] font-black text-gray-400 uppercase">
+                        <span>⏱️ 정밀 템포</span>
+                        <div class="flex gap-2">
+                            <span id="bpm-text" class="text-green-400">120 BPM</span>
+                            <label class="inline-flex items-center cursor-pointer scale-75">
+                                <input type="checkbox" id="play-metronome-enable" class="sr-only peer" onchange="syncMetronomeToggle(this.checked)">
+                                <div class="relative w-9 h-5 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-500"></div>
+                            </label>
+                        </div>
+                    </div>
+                    <input type="range" id="bpm-range" min="60" max="220" value="120" oninput="changeBPM(this.value)" class="mb-1">
+                    
+                    <div class="grid grid-cols-2 gap-1.5">
+                        <select id="metro-signature" onchange="changeTimeSignature(this.value)" class="text-[8.5px] bg-black text-gray-300 font-extrabold p-1 rounded border border-gray-800 outline-none flex-1">
+                            <option value="4/4">4/4 박자</option>
+                            <option value="3/4">3/4 박자</option>
+                            <option value="2/4">2/4 박자</option>
+                            <option value="6/8">6/8 박자</option>
+                        </select>
+                        <select id="metro-subdivision" onchange="changeSubdivision(this.value)" class="text-[8.5px] bg-black text-gray-300 font-extrabold p-1 rounded border border-gray-800 outline-none flex-1">
+                            <option value="1">정박</option>
+                            <option value="2">8비트</option>
+                            <option value="4">16비트</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex flex-col justify-center items-center bg-black/50 p-2 rounded-lg border border-cyan-900/60">
+                    <span class="text-[9px] font-black text-cyan-400 tracking-widest">LIVE SCORE</span>
+                    <div id="score-display" class="text-2xl font-black font-mono mt-0.5 text-white">000000</div>
+                </div>
+            </div>
+
+            <!-- 9종 다채널 동시 낙하 리듬 프리셋 패키지 트랙 (Kick 혼자만 쏟아지던 현상 원천 패치) -->
+            <div class="bg-black/30 border border-gray-800 p-3 rounded-xl flex flex-col md:flex-row items-start md:items-center gap-3">
+                <span class="text-[10px] font-black text-[#39ff14] uppercase tracking-wider flex items-center gap-1">
+                    <i class="fa-solid fa-list-check"></i> 🎯 9-RHYTHM DRILLS (다채널 동시 드롭 복합 패턴):
+                </span>
+                <div class="flex flex-wrap gap-1.5 w-full md:w-auto">
+                    <button onclick="changeRhythmPreset('eight_go')" id="btn-rh-eight_go" class="px-2.5 py-1 bg-green-950/40 hover:bg-green-900 border border-green-800 text-[10px] text-green-300 font-bold rounded-lg transition active-rhythm">8-Beat Gogo</button>
+                    <button onclick="changeRhythmPreset('funk')" id="btn-rh-funk" class="px-2.5 py-1 bg-slate-900 hover:bg-slate-800 border border-slate-700 text-[10px] text-gray-400 font-bold rounded-lg transition">Funk Groove</button>
+                    <button onclick="changeRhythmPreset('shuffle')" id="btn-rh-shuffle" class="px-2.5 py-1 bg-slate-900 hover:bg-slate-800 border border-slate-700 text-[10px] text-gray-400 font-bold rounded-lg transition">Swing Shuffle</button>
+                    <button onclick="changeRhythmPreset('bossa')" id="btn-rh-bossa" class="px-2.5 py-1 bg-slate-900 hover:bg-slate-800 border border-slate-700 text-[10px] text-gray-400 font-bold rounded-lg transition">Bossa Syncopation</button>
+                    <button onclick="changeRhythmPreset('dnb_break')" id="btn-rh-dnb_break" class="px-2.5 py-1 bg-slate-900 hover:bg-slate-800 border border-slate-700 text-[10px] text-gray-400 font-bold rounded-lg transition">Fast D&B</button>
+                    <button onclick="changeRhythmPreset('metal_blast')" id="btn-rh-metal_blast" class="px-2.5 py-1 bg-slate-900 hover:bg-slate-800 border border-slate-700 text-[10px] text-gray-400 font-bold rounded-lg transition">Metal Blast</button>
+                    <button onclick="changeRhythmPreset('dubstep')" id="btn-rh-dubstep" class="px-2.5 py-1 bg-slate-900 hover:bg-slate-800 border border-slate-700 text-[10px] text-gray-400 font-bold rounded-lg transition">Dubstep Half</button>
+                    <button onclick="changeRhythmPreset('waltz')" id="btn-rh-waltz" class="px-2.5 py-1 bg-slate-900 hover:bg-slate-800 border border-slate-700 text-[10px] text-gray-400 font-bold rounded-lg transition">Jazz Waltz 3/4</button>
+                    <button onclick="changeRhythmPreset('none')" id="btn-rh-none" class="px-2.5 py-1 bg-slate-900 hover:bg-slate-800 border border-slate-700 text-[10px] text-gray-400 font-bold rounded-lg transition">연습 패턴 끄기</button>
+                </div>
+            </div>
+
+            <!-- 중앙 게임 스크린 -->
+            <div id="game-screen">
+                <canvas id="effect-canvas"></canvas>
+                <div id="judgment-banner">PERFECT</div>
+                <div id="combo-display">0 COMBO</div>
+                <div id="lanes-wrapper"></div>
+                <div id="laser-judgment-line"></div>
+            </div>
+
+            <!-- 리코더 파일 입출력 및 제어부 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 bg-[#03030b] border border-[#101025] rounded-xl p-3">
+                <div class="flex items-center justify-between gap-3 bg-black/40 p-2.5 rounded-lg border border-gray-800/80">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-microphone text-red-500 animate-pulse"></i>
+                        <div>
+                            <p class="text-xs font-bold text-white">시퀀스 레코더</p>
+                            <span id="record-status-badge" class="text-[9px] px-1.5 py-0.5 rounded font-extrabold bg-slate-800 text-slate-400">STANDBY</span>
+                        </div>
+                    </div>
+                    <div class="flex gap-1.5">
+                        <button id="record-btn" onclick="toggleRecording()" class="px-3 py-1.5 bg-red-950/40 border border-red-800 text-xs text-red-400 rounded-lg font-bold hover:bg-red-950 transition flex items-center gap-1">
+                            <i class="fa-solid fa-circle" id="rec-icon"></i> 녹음
+                        </button>
+                        <button id="replay-btn" disabled onclick="startReplay()" class="px-3 py-1.5 bg-cyan-950/20 opacity-50 border border-cyan-900 text-xs text-cyan-400 rounded-lg font-bold transition flex items-center gap-1">
+                            <i class="fa-solid fa-play"></i> 리플레이
+                        </button>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between gap-2 bg-black/40 p-2.5 rounded-lg border border-gray-800/80">
+                    <div class="text-left">
+                        <p class="text-xs font-bold text-white">시퀀스 파일 저장 & 다운로드</p>
+                        <span class="text-[9px] text-gray-500">녹음된 노트를 파일로 내보내기</span>
+                    </div>
+                    <div class="flex gap-1.5 flex-1 justify-end">
+                        <button id="file-export-btn" disabled onclick="exportToJsonFile()" class="px-2.5 py-1.5 bg-[#121c12] border border-green-900 text-xs text-green-400 rounded-lg font-bold hover:bg-green-950 transition flex items-center gap-1">
+                            <i class="fa-solid fa-file-export"></i> 내보내기
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 하단 드럼 랙 영역 -->
+            <div id="drum-rack-wrapper">
+                <div id="drum-rack"></div>
+            </div>
+        </div>
+
+        <!-- ---------------- TAB 3: CONTROLLER MAPPING ---------------- -->
+        <div id="content-controller" class="hidden flex flex-col gap-4 bg-[#03030d]/95 border border-[#10102b] rounded-2xl p-5">
             <div class="flex justify-between items-center border-b border-gray-800 pb-3 mb-2">
                 <div>
                     <h2 class="text-sm font-black text-[#ff007f] tracking-widest uppercase flex items-center gap-1.5">
@@ -930,9 +946,9 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 gap-5">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
                 <!-- 🔌 MIDI 1:1 Mapping Builder Table -->
-                <div class="bg-black/30 border border-gray-800 rounded-xl p-4 flex flex-col gap-3">
+                <div class="lg:col-span-2 bg-black/30 border border-gray-800 rounded-xl p-4 flex flex-col gap-3">
                     <div class="flex justify-between items-center border-b border-cyan-950 pb-2">
                         <span class="text-xs font-black text-cyan-400 flex items-center gap-1.5">
                             <i class="fa-solid fa-plug text-cyan-400"></i> 🔌 하드웨어 물리 패드 구성 매핑 목록
@@ -968,14 +984,52 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- 🎚️ e-Drum Velocity Calibration Panel (Superior Drummer 프로 핵심 이식) -->
+                <div class="bg-black/30 border border-gray-800 rounded-xl p-4 flex flex-col gap-3.5">
+                    <span class="text-xs font-black text-[#ff007f] border-b border-pink-950 pb-2 flex items-center gap-1.5">
+                        <i class="fa-solid fa-wave-square"></i> E-DRUM SENSITIVITY CALIBRATOR
+                    </span>
+                    <p class="text-[10.5px] text-gray-400 leading-relaxed">
+                        실제 전자드럼 타격 속도(MIDI Velocity)에 따라 합성 엔진이 어떤 동적 성향으로 반응할지 민감도 곡선을 미세 캘리브레이션합니다.
+                    </p>
+
+                    <div class="flex flex-col gap-1 bg-black/50 p-2.5 rounded border border-gray-800">
+                        <span class="text-[9px] font-bold text-gray-500 uppercase tracking-wider block mb-1">벨로시티 다이내믹 곡선 (Curve)</span>
+                        <select id="velocity-curve-select" onchange="changeVelocityCurve(this.value)" class="text-[10px] bg-black text-[#ff007f] font-extrabold p-2 rounded border border-gray-800 outline-none w-full">
+                            <option value="linear">Linear (기본 표준 강도 비율)</option>
+                            <option value="exponential">Exponential (강타할 때만 소리가 크게 폭발)</option>
+                            <option value="logarithmic">Logarithmic (살살 쳐도 균일하고 크게 반응)</option>
+                            <option value="flat">Flat (때리는 세기와 무관하게 85% 고정 출력)</option>
+                        </select>
+                    </div>
+
+                    <!-- 다이내믹 톤 깊이 감도 조절 슬라이더 -->
+                    <div class="flex flex-col gap-1.5 bg-black/50 p-2.5 rounded border border-gray-800">
+                        <div class="flex justify-between items-center text-[9px] font-bold text-gray-500 uppercase">
+                            <span>Dynamic Tone Shift (톤 동요폭)</span>
+                            <span id="label-tone-depth" class="text-cyan-400 font-mono font-bold">50%</span>
+                        </div>
+                        <input type="range" id="param-tone-depth" min="0" max="100" value="50" oninput="changeToneDepth(this.value)">
+                        <span class="text-[8px] text-gray-500">세게 때릴수록 고음 필터가 더욱 선명하게 찰랑거리는 깊이입니다.</span>
+                    </div>
+
+                    <div class="bg-[#030310] border border-slate-900 rounded-xl p-3 text-center">
+                        <i class="fa-solid fa-graduation-cap text-yellow-400 text-lg"></i>
+                        <h5 class="text-[11px] font-bold text-white mt-1">MIDI 학습 모드 팁</h5>
+                        <p class="text-[9.5px] text-gray-500 mt-1 leading-relaxed">
+                            매핑 리스트의 [신호 맵핑]을 누른 뒤 실제 드럼의 탐, 하이햇, 페달을 때리면 자동으로 페어링이 완료됩니다.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- ---------------- TAB 4: USAGE GUIDE & TIPS ---------------- -->
-        <div id="content-help" class="hidden bg-[#06061a]/95 border border-[#141432] rounded-2xl p-6">
+        <div id="content-help" class="hidden bg-[#03030d]/95 border border-[#10102b] rounded-2xl p-6">
             <div class="border-b border-gray-800 pb-4 mb-6">
                 <h2 class="text-base font-black text-[#00f3ff] tracking-widest uppercase flex items-center gap-2">
-                    <i class="fa-solid fa-circle-info text-cyan-400"></i> SoundGluck Studio v4.0.1 통합 실전 워크플로우 가이드
+                    <i class="fa-solid fa-circle-info text-cyan-400"></i> SoundGluck Studio v4.1.0 통합 실전 워크플로우 가이드
                 </h2>
                 <p class="text-xs text-gray-400 mt-1">대화형 위저드 자동 연동방식으로 새롭게 탄생한 완벽한 가이드를 확인하세요.</p>
             </div>
@@ -1068,8 +1122,7 @@
            0. 🔑 내부 보안 로그인 및 세션 체크 (Google Sheets API 실시간 연동 지원)
            =================================================================== */
 
-        // 🌐 Google Sheets Apps Script 배포 후 얻은 웹앱 URL을 아래 빈공간에 정확하게 입력하세요!
-        // (배포 주소가 비어있으면 오프라인/개발자 로컬 로그인 모드로 자동 전환됩니다.)
+        // 🌐 제공해주신 구글 스프레드시트 배포 주소를 정밀 주입 완료했습니다!
         const GOOGLE_SHEET_API_URL = "https://script.google.com/macros/s/AKfycbwpGsX22GBxkKezIPq73jkhLMAlC8RmABTBzPKUN8qdDxuGosuc5QXlAFCM9tIidFV_/exec"; 
 
         // 🔔 비차단 반응형 토스트 알리미 (모든 alert 방출!)
@@ -1114,8 +1167,6 @@
                 // 1. API 주소가 공백이거나 설정되지 않은 경우 로컬 오프라인 인증 모드로 작동
                 if (!GOOGLE_SHEET_API_URL || GOOGLE_SHEET_API_URL.trim() === "") {
                     console.warn("[Auth] 구글 웹앱 URL이 정의되지 않아 오프라인 로그인 모드로 작동합니다.");
-                    
-                    // 요청하신 jee/min 및 기존 sound/gluck 모두 오프라인에서 통과
                     if ((inputId === "jee" && inputPw === "min") || (inputId === "sound" && inputPw === "gluck")) {
                         sessionStorage.setItem('soundgluck_logged_in', 'true');
                         showToast("오프라인 개발자 계정으로 로그인 성공!");
@@ -1172,43 +1223,32 @@
             initMIDI(); // 백그라운드 MIDI 스레드 가동
         }
 
+        // 🔒 로그아웃 실구현 함수
         function handleLogout() {
             sessionStorage.removeItem('soundgluck_logged_in');
-            showToast("안전하게 로그아웃 되었습니다. 게이트 화면으로 전환합니다.");
-            
-            const loginScreen = document.getElementById('login-screen');
-            const onboardingScreen = document.getElementById('onboarding-screen');
-            const appContainer = document.getElementById('app-container');
-
-            appContainer.style.display = "none";
-            onboardingScreen.style.display = "none";
-            
-            loginScreen.style.opacity = "1";
-            loginScreen.style.visibility = "visible";
-            
-            // 기존 폼 초기화 및 새로고침 유도
-            document.getElementById('login-id').value = "";
-            document.getElementById('login-pw').value = "";
+            showToast("성공적으로 로그아웃 되었습니다. 세션을 종료합니다.");
+            setTimeout(() => {
+                window.location.reload(); // 세션 삭제 후 페이지 전면 강제 초기화하여 로그인으로 복귀
+            }, 800);
         }
 
         window.addEventListener('DOMContentLoaded', checkExistingSession);
 
         /* ===================================================================
-           1. 사운드 및 오디오 신디사이저 엔진 (진짜 드럼에 가깝게 묵직하게 튜닝)
+           1. 사운드 및 오디오 신디사이저 엔진 (Web Audio API 스튜디오 마스터)
            =================================================================== */
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         const audioEnableCheckbox = document.getElementById('audio-enable');
         const metronomeCheckbox = document.getElementById('metronome-enable');
         const playMetronomeCheckbox = document.getElementById('play-metronome-enable');
 
-        // 테크노 질감을 묵직한 어쿠스틱 리얼 드럼 질감으로 튜닝하기 위해 기본 피치 하강 폭 및 노이즈 주파수 대거 조정
         const synthParams = {
-            kick: { pitch: 120, decay: 0.18, volume: 1.2, pan: 0.0, eqLow: 4, eqMid: -2, eqHigh: -1, reverbSend: 0.05, delaySend: 0.0, mute: false, solo: false },
-            snare: { pitch: 165, noiseFreq: 1300, decay: 0.22, volume: 0.95, pan: -0.05, eqLow: -2, eqMid: 3, eqHigh: 2, reverbSend: 0.2, delaySend: 0.0, mute: false, solo: false },
-            hihat: { highpass: 8500, decay: 0.04, volume: 0.75, pan: -0.3, eqLow: -4, eqMid: 0, eqHigh: 4, reverbSend: 0.08, delaySend: 0.0, mute: false, solo: false },
-            tom: { pitch: 180, pitchEnd: 55, decay: 0.22, volume: 0.85, pan: 0.15, eqLow: 3, eqMid: 1, eqHigh: -1, reverbSend: 0.15, delaySend: 0.05, mute: false, solo: false },
-            crash: { pitch: 480, highpass: 3200, decay: 0.8, volume: 0.85, pan: -0.25, eqLow: -3, eqMid: -1, eqHigh: 5, reverbSend: 0.25, delaySend: 0.08, mute: false, solo: false },
-            crash2: { pitch: 580, highpass: 3500, decay: 0.65, volume: 0.85, pan: 0.4, eqLow: -3, eqMid: -1, eqHigh: 5, reverbSend: 0.25, delaySend: 0.08, mute: false, solo: false }
+            kick: { pitch: 150, decay: 0.3, volume: 1.1, pan: 0.0, eqLow: 1, eqMid: -2, eqHigh: 0, reverbSend: 0.1, delaySend: 0.0, mute: false, solo: false },
+            snare: { pitch: 180, noiseFreq: 1000, decay: 0.25, volume: 0.9, pan: -0.1, eqLow: -1, eqMid: 2, eqHigh: 1, reverbSend: 0.25, delaySend: 0.05, mute: false, solo: false },
+            hihat: { highpass: 7000, decay: 0.05, volume: 0.7, pan: -0.4, eqLow: -3, eqMid: 0, eqHigh: 3, reverbSend: 0.1, delaySend: 0.0, mute: false, solo: false },
+            tom: { pitch: 220, pitchEnd: 60, decay: 0.25, volume: 0.8, pan: 0.2, eqLow: 2, eqMid: 1, eqHigh: -1, reverbSend: 0.2, delaySend: 0.1, mute: false, solo: false },
+            crash: { pitch: 550, highpass: 2000, decay: 0.6, volume: 0.8, pan: -0.3, eqLow: -2, eqMid: -1, eqHigh: 4, reverbSend: 0.3, delaySend: 0.1, mute: false, solo: false },
+            crash2: { pitch: 650, highpass: 2200, decay: 0.45, volume: 0.8, pan: 0.5, eqLow: -2, eqMid: -1, eqHigh: 4, reverbSend: 0.3, delaySend: 0.1, mute: false, solo: false }
         };
 
         const masterFX = {
@@ -1221,10 +1261,16 @@
             compThreshold: -24,
             compRatio: 4,
             saturation: 15,
-            chorus: 10
+            chorus: 10,
+            roomBleed: 30 // Ambient Bleed Feedback
         };
 
         const channelVUMeters = { kick: 0, snare: 0, hihat: 0, tom: 0, crash: 0, crash2: 0 };
+
+        // e-Drum Dynamic calibration state
+        let humanizeEnabled = true;
+        let velocityCurve = "linear";
+        let toneDepth = 50;
 
         let metronomeEnabled = false;
         let timeSignature = '4/4'; 
@@ -1247,6 +1293,10 @@
         let delayNode = audioCtx.createDelay(2.0);
         let delayFeedbackNode = audioCtx.createGain();
         let delayWetGain = audioCtx.createGain();
+
+        // 더스티 LP 크랙 사운드 발생기 (Lo-Fi Jazz 전용)
+        let dustNode = null;
+        let dustGainNode = null;
 
         let analyserNode = audioCtx.createAnalyser();
         analyserNode.fftSize = 256;
@@ -1292,6 +1342,31 @@
             masterHighpass.connect(masterLowpass);
             masterLowpass.connect(analyserNode);
             analyserNode.connect(audioCtx.destination);
+
+            initDustyCrackleEngine();
+        }
+
+        // LP 지글지글 사운드 엔진 시뮬레이션 (Lo-Fi 프리셋 질감용)
+        function initDustyCrackleEngine() {
+            if (dustNode) return;
+            const bufferSize = audioCtx.sampleRate * 2;
+            const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+            const data = buffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) {
+                // 더스티 랜덤 노이즈 생성
+                let white = Math.random() * 2 - 1;
+                let crackle = Math.random() > 0.992 ? (Math.random() > 0.5 ? 0.6 : -0.6) : 0;
+                data[i] = white * 0.005 + crackle * 0.03;
+            }
+            dustNode = audioCtx.createBufferSource();
+            dustNode.buffer = buffer;
+            dustNode.loop = true;
+            dustGainNode = audioCtx.createGain();
+            dustGainNode.gain.value = 0.0; // 디폴트는 비활성화
+            
+            dustNode.connect(dustGainNode);
+            dustGainNode.connect(masterLowpass); // 필터 뒤로 연결하여 빈티지하게
+            try { dustNode.start(); } catch(e) {}
         }
 
         function updateSaturationCurve(amount) {
@@ -1375,7 +1450,22 @@
             }
         }
 
-        function routeChannelAudio(sourceNode, instType) {
+        function toggleHumanize(checked) {
+            humanizeEnabled = checked;
+            showToast(checked ? "Humanize 오차 감동 전원 가동" : "정박 미디 트리거 가동");
+        }
+
+        function changeVelocityCurve(val) {
+            velocityCurve = val;
+            showToast(`벨로시티 곡선이 [${val.toUpperCase()}] 타입으로 변경되었습니다.`);
+        }
+
+        function changeToneDepth(val) {
+            toneDepth = parseInt(val);
+            document.getElementById('label-tone-depth').innerText = val + "%";
+        }
+
+        function routeChannelAudio(sourceNode, instType, dynamicVolume = 1.0) {
             const params = synthParams[instType];
             const now = audioCtx.currentTime;
 
@@ -1401,7 +1491,9 @@
             eqHighNode.gain.setValueAtTime(params.eqHigh, now);
 
             const channelGainNode = audioCtx.createGain();
-            channelGainNode.gain.setValueAtTime(params.volume, now);
+            // 벨로시티에 따른 볼륨 동적 가변 (Superior Drummer 이식 핵심)
+            const finalVol = params.volume * dynamicVolume;
+            channelGainNode.gain.setValueAtTime(finalVol, now);
 
             const pannerNode = audioCtx.createStereoPanner();
             pannerNode.pan.setValueAtTime(params.pan, now);
@@ -1419,17 +1511,20 @@
             delaySendGain.connect(delayNode);
 
             const reverbSendGain = audioCtx.createGain();
-            reverbSendGain.gain.setValueAtTime(params.reverbSend, now);
+            // Overhead/Bleed 크기 제어 추가 연동
+            const bleedFactor = (masterFX.roomBleed / 100);
+            const totalReverbSend = params.reverbSend * bleedFactor;
+            reverbSendGain.gain.setValueAtTime(totalReverbSend, now);
             pannerNode.connect(reverbSendGain);
             reverbSendGain.connect(reverbNode);
 
-            channelVUMeters[instType] = 1.0;
+            channelVUMeters[instType] = finalVol;
         }
 
         initAudioRouting();
 
         /* ===================================================================
-           2. 🎚️ 하드웨어 콘솔 믹서 뷰포트 동적 렌더링
+           2. 🎚️ 하드웨어 콘솔 믹서 뷰포트 동적 렌더링 (밸런스 정렬 및 크기 복원)
            =================================================================== */
         function render6ChannelMixer() {
             const wrapper = document.getElementById('mixer-strips-wrapper');
@@ -1454,7 +1549,7 @@
                 if (hardwarePadMode === 8 && chan.isCrash2) return;
 
                 const strip = document.createElement('div');
-                strip.className = `flex flex-col items-center bg-[#0d0d27] border-2 border-[#1c1c3f] rounded-2xl p-2 gap-2 relative min-w-[110px] w-full max-w-[140px]`;
+                strip.className = `flex flex-col items-center bg-[#070718] border-2 border-[#12122b] rounded-2xl p-2 gap-2 relative min-w-[110px] w-full max-w-[140px]`;
                 strip.style.borderColor = chan.color;
                 strip.style.boxShadow = `inset 0 0 15px rgba(0,0,0,0.8), 0 4px 10px rgba(0,0,0,0.5)`;
 
@@ -1571,7 +1666,7 @@
                         <div class="flex flex-col gap-1">
                             <button id="btn-solo-${chan.id}" onclick="toggleChannelMuteSolo('${chan.id}', 'solo')" class="w-5 h-5 rounded bg-[#2a1d0d] hover:bg-yellow-900 border border-[#b87014] text-[8px] font-black text-[#f39c12] tracking-wider transition ${synthParams[chan.id].solo ? 'bg-[#d35400] text-white font-black' : ''}">S</button>
                             <button id="btn-mute-${chan.id}" onclick="toggleChannelMuteSolo('${chan.id}', 'mute')" class="w-5 h-5 rounded bg-[#2a0d0d] hover:bg-red-900 border border-[#b81414] text-[8px] font-black text-[#e74c3c] tracking-wider transition ${synthParams[chan.id].mute ? 'bg-[#c0392b] text-white font-black' : ''}">M</button>
-                            <button onclick="playSynthesizedDrum('${chan.id}')" class="w-5 h-7 rounded bg-[#101033] hover:bg-cyan-900 border border-[#1b1b59] text-[7.5px] font-extrabold text-cyan-300 text-center leading-none flex items-center justify-center">TRY</button>
+                            <button onclick="playSynthesizedDrum('${chan.id}')" class="w-5 h-7 rounded bg-[#07072a] hover:bg-cyan-900 border border-[#1b1b59] text-[7.5px] font-extrabold text-cyan-300 text-center leading-none flex items-center justify-center">TRY</button>
                         </div>
                     </div>
                 `;
@@ -1685,13 +1780,11 @@
         let maxCombo = 0;
         let bpm = 120;
         let noteSpeed = 0.45;
-        let autoPattern = 'eight_go'; // 기본 구동을 KICK만 단독으로 내려오던 'quarter'에서 'eight_go'(8비트 그루브)로 전격 변경!
+        let autoPattern = 'eight_go'; // 디폴트를 8비트 그루브로 변경하여 단조로운 Kick 연타 방지!
         let lastBeatTime = 0; 
         let beatInterval = (60 / bpm) * 1000;
         let subBeatCounter = 0; 
-        
-        // 🎮 게임 활성화 및 리셋용 제어 상태 변수
-        let isGamePlaying = false;
+        let gameIsPlaying = false; // 🚦 재생/멈춤 통제 상태 변수
 
         const JUDGMENT_OFFSET = 70;    
         const PERFECT_WINDOW = 45;     
@@ -1871,9 +1964,6 @@
             setLaneMode(wizardActiveHardwareType);
             document.getElementById('label-active-setup-lanes').innerText = `${wizardActiveHardwareType}L 자동 활성화`;
 
-            // PERFORMANCE MODE 가 첫번째 탭으로 오도록 강제 제어
-            switchTab('sound');
-
             setTimeout(() => {
                 resizeCanvas();
                 initAllEnvelopes();
@@ -2041,61 +2131,6 @@
             initLayout();
         }
 
-        // 🎮 게임 제어용 코어 엔진 구현 (재생, 일시정지, 멈춤, 리셋)
-        function controlGameEngine(action) {
-            const badge = document.getElementById('game-state-badge');
-            
-            if (action === 'play') {
-                isGamePlaying = true;
-                if (badge) {
-                    badge.innerText = "PLAYING";
-                    badge.className = "px-2 py-0.5 text-[10px] font-black rounded bg-green-950 text-green-400 border border-green-800 font-mono";
-                }
-                showToast("게임 리듬 플레이가 시작되었습니다.");
-            } 
-            else if (action === 'pause') {
-                isGamePlaying = false;
-                if (badge) {
-                    badge.innerText = "PAUSED";
-                    badge.className = "px-2 py-0.5 text-[10px] font-black rounded bg-yellow-950 text-yellow-400 border border-yellow-800 font-mono";
-                }
-                showToast("게임 플레이가 일시정지되었습니다.");
-            } 
-            else if (action === 'stop') {
-                isGamePlaying = false;
-                if (badge) {
-                    badge.innerText = "STOPPED";
-                    badge.className = "px-2 py-0.5 text-[10px] font-black rounded bg-red-950 text-red-400 border border-red-800 font-mono";
-                }
-                // 화면의 모든 살아있는 노트 및 비트라인 청소
-                notes.forEach(n => n.element.remove());
-                notes = [];
-                visualBeatLines.forEach(b => b.element.remove());
-                visualBeatLines = [];
-                showToast("게임 플레이가 중단되었습니다.");
-            } 
-            else if (action === 'reset') {
-                isGamePlaying = false;
-                score = 0;
-                combo = 0;
-                maxCombo = 0;
-                subBeatCounter = 0;
-                document.getElementById('score-display').innerText = "000000";
-                updateComboUI();
-                
-                notes.forEach(n => n.element.remove());
-                notes = [];
-                visualBeatLines.forEach(b => b.element.remove());
-                visualBeatLines = [];
-                
-                if (badge) {
-                    badge.innerText = "READY";
-                    badge.className = "px-2 py-0.5 text-[10px] font-black rounded bg-cyan-950 text-cyan-400 border border-cyan-800 font-mono";
-                }
-                showToast("점수 및 비트 트랙이 완벽하게 초기화되었습니다.");
-            }
-        }
-
         function changeSpeed(val) {
             noteSpeed = parseFloat(val);
             document.getElementById('speed-text').innerText = `${val} px/ms`;
@@ -2121,6 +2156,20 @@
         function changeRhythmPreset(val) {
             autoPattern = val;
             subBeatCounter = 0;
+
+            // 액티브 리듬 버튼 스타일 토글 처리
+            const presets = ['eight_go', 'funk', 'shuffle', 'bossa', 'dnb_break', 'metal_blast', 'dubstep', 'waltz', 'none'];
+            presets.forEach(p => {
+                const btn = document.getElementById(`btn-rh-${p}`);
+                if (btn) {
+                    if (p === val) {
+                        btn.className = "px-2.5 py-1 bg-green-950/40 hover:bg-green-900 border border-green-800 text-[10px] text-green-300 font-bold rounded-lg transition active-rhythm";
+                    } else {
+                        btn.className = "px-2.5 py-1 bg-slate-900 hover:bg-slate-800 border border-slate-700 text-[10px] text-gray-400 font-bold rounded-lg transition";
+                    }
+                }
+            });
+            showToast(`연습 리듬 패턴이 [${val.toUpperCase()}] 타입으로 정렬되었습니다.`);
         }
 
         function setHardwarePadMode(modeNum) {
@@ -2273,7 +2322,8 @@
                 if (physicalDrumPad) {
                     const targetLane = physicalDrumPad.targetLaneMap[currentLanes];
                     if (targetLane !== undefined) {
-                        triggerHit(targetLane);
+                        // 미디 타격시 Velocity 값(0~127)을 전달
+                        triggerHit(targetLane, velocity / 127);
                     }
                 }
             }
@@ -2460,7 +2510,7 @@
         function exportToJsonFile() {
             if (recordedSequence.length === 0) return;
             const fileData = {
-                generator: "SoundGluck Drum Engine v4.0.1 Premium Edition",
+                generator: "SoundGluck Drum Engine v4.1.0 Premium Edition",
                 lanes: currentLanes,
                 tempo: bpm,
                 sequence: recordedSequence
@@ -2486,12 +2536,14 @@
             combo = 0;
             document.getElementById('score-display').innerText = "000000";
             document.getElementById('record-status-badge').innerText = "REPLAYING";
+            playGame(); // 재생 가동
         }
 
         function stopReplay() {
             isReplaying = false;
             document.getElementById('record-status-badge').innerText = "STANDBY";
-            changeRhythmPreset('quarter');
+            changeRhythmPreset('eight_go');
+            pauseGame();
         }
 
         /* ===================================================================
@@ -2603,20 +2655,42 @@
         }
 
         /* ===================================================================
-           10. 가상 악기 합성 트리거 로직
+           10. 가상 악기 합성 트리거 로직 (다이내믹 다이나믹 센서 이식 완료)
            =================================================================== */
-        function playSynthesizedDrum(type) {
+        function playSynthesizedDrum(type, velocity = 1.0) {
             if (!audioEnableCheckbox.checked) return;
             if (audioCtx.state === 'suspended') audioCtx.resume();
 
-            const now = audioCtx.currentTime;
+            let targetVelocity = velocity;
+
+            // 벨로시티 보정 곡선 적용 (Superior Drummer 이식)
+            if (velocityCurve === 'exponential') {
+                targetVelocity = Math.pow(velocity, 2);
+            } else if (velocityCurve === 'logarithmic') {
+                targetVelocity = Math.sqrt(velocity);
+            } else if (velocityCurve === 'flat') {
+                targetVelocity = 0.85; 
+            }
+
+            // 인간 타격 미세오차 휴머니이저 적용
+            let now = audioCtx.currentTime;
+            if (humanizeEnabled) {
+                const microTimeDelay = (Math.random() - 0.5) * 0.015; // 최대 +/- 7.5ms 시간 밀림
+                now += Math.max(0, microTimeDelay);
+                targetVelocity *= (1.0 + (Math.random() - 0.5) * 0.12); // 최대 +/- 6% 볼륨 감동
+                targetVelocity = Math.min(1.0, Math.max(0.1, targetVelocity));
+            }
+
             triggerEnvelopeAnimation(type);
 
             if (type === 'kick') {
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
                 osc.connect(gain);
-                const pitchVal = synthParams.kick.pitch;
+                
+                // 타격 강도에 따른 피치 동요 (세게 때리면 순간적인 피치 어택이 튀어오름)
+                const dynamicToneFactor = 1.0 + (targetVelocity - 0.5) * (toneDepth / 100) * 0.2;
+                const pitchVal = synthParams.kick.pitch * dynamicToneFactor;
                 const decayVal = synthParams.kick.decay;
 
                 osc.frequency.setValueAtTime(pitchVal, now);
@@ -2625,7 +2699,7 @@
                 gain.gain.setValueAtTime(1.0, now);
                 gain.gain.exponentialRampToValueAtTime(0.01, now + decayVal);
 
-                routeChannelAudio(gain, 'kick');
+                routeChannelAudio(gain, 'kick', targetVelocity);
                 osc.start(now);
                 osc.stop(now + decayVal);
             } 
@@ -2643,7 +2717,10 @@
 
                 const noiseFilter = audioCtx.createBiquadFilter();
                 noiseFilter.type = 'bandpass';
-                noiseFilter.frequency.value = synthParams.snare.noiseFreq;
+                
+                // 타격 세기에 따라 필터 주파수가 선명해짐
+                const dynamicSnareFreq = synthParams.snare.noiseFreq * (1.0 + (targetVelocity - 0.5) * (toneDepth / 100) * 0.3);
+                noiseFilter.frequency.value = dynamicSnareFreq;
 
                 const noiseGain = audioCtx.createGain();
                 noiseGain.gain.setValueAtTime(0.7, now);
@@ -2661,8 +2738,8 @@
 
                 osc.connect(oscGain);
 
-                routeChannelAudio(noiseGain, 'snare');
-                routeChannelAudio(oscGain, 'snare');
+                routeChannelAudio(noiseGain, 'snare', targetVelocity);
+                routeChannelAudio(oscGain, 'snare', targetVelocity);
 
                 noise.start(now);
                 osc.start(now);
@@ -2691,7 +2768,7 @@
                 noise.connect(filter);
                 filter.connect(gain);
 
-                routeChannelAudio(gain, 'hihat');
+                routeChannelAudio(gain, 'hihat', targetVelocity);
                 noise.start(now);
             } 
             else if (type === 'tom') {
@@ -2706,7 +2783,7 @@
                 gain.gain.setValueAtTime(0.8, now);
                 gain.gain.exponentialRampToValueAtTime(0.01, now + tomDecay);
 
-                routeChannelAudio(gain, 'tom');
+                routeChannelAudio(gain, 'tom', targetVelocity);
                 osc.start(now);
                 osc.stop(now + tomDecay);
             }
@@ -2723,7 +2800,7 @@
                 osc.connect(filter);
                 filter.connect(gain);
 
-                routeChannelAudio(gain, 'crash2');
+                routeChannelAudio(gain, 'crash2', targetVelocity);
 
                 const crash2Decay = synthParams.crash2.decay;
                 gain.gain.setValueAtTime(0.35, now);
@@ -2745,7 +2822,7 @@
                 osc.connect(filter);
                 filter.connect(gain);
 
-                routeChannelAudio(gain, 'crash');
+                routeChannelAudio(gain, 'crash', targetVelocity);
 
                 const crashDecay = synthParams.crash.decay;
                 gain.gain.setValueAtTime(0.4, now);
@@ -2777,7 +2854,12 @@
                 const onMouseDown = (e) => {
                     isDragging = true;
                     startY = e.clientY || e.touches[0].clientY;
-                    startValue = synthParams[inst][param] !== undefined ? synthParams[inst][param] : initialVal;
+                    
+                    if (inst === "master" && param === "bleed") {
+                        startValue = masterFX.roomBleed;
+                    } else {
+                        startValue = synthParams[inst][param] !== undefined ? synthParams[inst][param] : initialVal;
+                    }
                     document.body.style.cursor = 'ns-resize';
                     
                     window.addEventListener('mousemove', onMouseMove);
@@ -2806,13 +2888,17 @@
                         newValue = Math.round(newValue);
                     }
 
-                    synthParams[inst][param] = newValue;
-                    updateKnobVisuals(inst, param, newValue);
-                    
-                    const label = document.getElementById(`label-${inst}-${param}`);
-                    if (label) label.innerText = newValue + unit;
+                    if (inst === "master" && param === "bleed") {
+                        masterFX.roomBleed = newValue;
+                        document.getElementById('label-master-bleed').innerText = newValue + "%";
+                    } else {
+                        synthParams[inst][param] = newValue;
+                        const label = document.getElementById(`label-${inst}-${param}`);
+                        if (label) label.innerText = newValue + unit;
+                        drawInstrumentEnvelope(inst);
+                    }
 
-                    drawInstrumentEnvelope(inst);
+                    updateKnobVisuals(inst, param, newValue);
                 };
 
                 const onMouseUp = () => {
@@ -2935,7 +3021,7 @@
         }
 
         /* ===================================================================
-           11. 실시간 렌더링 물리 계산 루프 및 노미네이션 트리거
+           11. 실시간 렌더링 물리 계산 루프 및 노미네이션 트리거 (9종 복합 동시 하강패턴 실구현)
            =================================================================== */
         function createBeatLine() {
             const lanesWrapper = document.getElementById('lanes-wrapper');
@@ -2962,122 +3048,113 @@
             });
         }
 
-        // 🥁 단조로운 KICK 단독 드롭 버그를 극복하고, 입체감 넘치는 드럼 고유의 리듬으로 분할 드롭되도록 개편
+        // 🚦 게임플레이 재생, 멈춤, 일시정지, 리셋 전용 바인딩 엔진
+        function playGame() {
+            gameIsPlaying = true;
+            document.getElementById('btn-game-play').classList.add('bg-green-600', 'text-white');
+            document.getElementById('btn-game-play').classList.remove('bg-green-950/40', 'text-green-400');
+            document.getElementById('btn-game-pause').classList.remove('bg-yellow-600', 'text-white');
+            document.getElementById('btn-game-pause').classList.add('bg-yellow-950/30', 'text-yellow-400');
+            showToast("드럼 게임 트레이닝 가동!");
+        }
+
+        function pauseGame() {
+            gameIsPlaying = false;
+            document.getElementById('btn-game-play').classList.remove('bg-green-600', 'text-white');
+            document.getElementById('btn-game-play').classList.add('bg-green-950/40', 'text-green-400');
+            document.getElementById('btn-game-pause').classList.add('bg-yellow-600', 'text-white');
+            document.getElementById('btn-game-pause').classList.remove('bg-yellow-950/30', 'text-yellow-400');
+            showToast("일시 정지됨");
+        }
+
+        function stopGame() {
+            gameIsPlaying = false;
+            notes.forEach(n => n.element.remove());
+            notes = [];
+            visualBeatLines.forEach(b => b.element.remove());
+            visualBeatLines = [];
+            subBeatCounter = 0;
+
+            document.getElementById('btn-game-play').classList.remove('bg-green-600', 'text-white');
+            document.getElementById('btn-game-play').classList.add('bg-green-950/40', 'text-green-400');
+            document.getElementById('btn-game-pause').classList.remove('bg-yellow-600', 'text-white');
+            document.getElementById('btn-game-pause').classList.add('bg-yellow-950/30', 'text-yellow-400');
+            showToast("트레이닝 중단");
+        }
+
+        function resetGame() {
+            stopGame();
+            score = 0;
+            combo = 0;
+            maxCombo = 0;
+            document.getElementById('score-display').innerText = "000000";
+            updateComboUI();
+            showToast("점수 및 템포 초기화 완료!");
+        }
+
+        // 9종 복합 다채널 동시 낙하 설계 (EZdrummer 패턴 이식 완성!)
         function triggerRhythmDrop() {
+            if (!gameIsPlaying) return; // 🚦 재생 중이 아니면 리듬을 생성하지 않음
+
             const step = subBeatCounter % 16;
+            createBeatLine();
             
-            if (autoPattern === 'quarter') {
-                // 4비트 단순 쿵-쿵-쿵-쿵 킥 드롭
-                if (step % 4 === 0) {
-                    createBeatLine();
-                    createNote(0); // 킥
-                }
+            if (autoPattern === 'eight_go') {
+                // 하이햇은 매 8분음표마다 상시 하강 (1번 레인)
+                if (step % 2 === 0) createNote(1);
+                // 킥 연타 (0번 레인)
+                if (step === 0 || step === 6 || step === 8 || step === 14) createNote(0);
+                // 스네어 (2번 레인)
+                if (step === 4 || step === 12) createNote(2);
             } 
-            else if (autoPattern === 'eight_go') {
-                // 8비트 정통 락 고고 그루브 (하이햇은 계속 일정하게 가고, 킥과 스네어가 번갈아가며 연주)
-                if (step % 2 === 0) {
-                    createBeatLine();
-                    createNote(1); // 하이햇 드롭 (S)
-                    
-                    if (step === 0 || step === 8) {
-                        createNote(0); // 베이스 킥 동시 드롭 (A)
-                    }
-                    if (step === 4 || step === 12) {
-                        createNote(2); // 스네어 드럼 동시 드롭 (D)
-                    }
-                }
-            } 
-            else if (autoPattern === 'sixteen_funk') {
-                // 더 촘촘하고 리드미컬한 16비트 펑크 드럼 패턴
-                createBeatLine();
-                if (step % 2 === 0) {
-                    createNote(1); // 하이햇 (S)
-                }
-                if (step === 0 || step === 6 || step === 8 || step === 14) {
-                    createNote(0); // 바운스 킥 (A)
-                }
-                if (step === 4 || step === 12) {
-                    createNote(2); // 고밀도 스네어 (D)
-                }
-                if (step === 10) {
-                    createNote(3); // 탐탐 (F)
-                }
+            else if (autoPattern === 'funk') {
+                // 싱코페이션 펑크 그루브
+                if (step % 2 === 0) createNote(1); // 8비트 하이햇
+                if (step === 0 || step === 3 || step === 8 || step === 11) createNote(0); // 킥 엇박
+                if (step === 4 || step === 12 || step === 15) createNote(2); // 스네어 고스트 노트 유도
+                if (step === 6 || step === 14) createNote(3); // 탐탐 필인 액센트
             } 
             else if (autoPattern === 'shuffle') {
-                // 셋잇단음표 느낌의 경쾌한 셔플 비트
-                const shuffleSteps = [0, 2, 3, 4, 6, 7, 8, 10, 11, 12, 14, 15];
-                if (shuffleSteps.includes(step)) {
-                    createBeatLine();
-                    createNote(1); // 하이햇 연주
-                    
-                    if (step === 0 || step === 8) {
-                        createNote(0); // 첫박 킥
-                    }
-                    if (step === 4 || step === 12) {
-                        createNote(2); // 스네어 백비트
-                    }
-                }
+                // 트리플 바운스 셔플 리듬
+                const shuffleSteps = [0, 2, 3, 6, 8, 10, 11, 14];
+                if (shuffleSteps.includes(step)) createNote(1); // 셔플 하이햇
+                if (step === 0 || step === 8) createNote(0); // 킥 정박
+                if (step === 4 || step === 12) createNote(2); // 스네어 백비트
+            } 
+            else if (autoPattern === 'bossa') {
+                // 보사노바 싱코페이션 (Woody 톤 매칭)
+                if (step % 2 === 0) createNote(1); // 하이햇/셔플
+                if (step === 0 || step === 3 || step === 6 || step === 8 || step === 11 || step === 14) createNote(0); // 보사노바 킥 베이스
+                if (step === 2 || step === 7 || step === 10 || step === 13) createNote(2); // 림샷 엇박
+            } 
+            else if (autoPattern === 'dnb_break') {
+                // 175 BPM 초고속 드럼앤베이스 브레이크
+                createNote(1); // 고속 하이햇 드롭
+                if (step === 0 || step === 10) createNote(0); // 킥
+                if (step === 4 || step === 12 || step === 15) createNote(2); // 스네어 싱코페이션
+            } 
+            else if (autoPattern === 'metal_blast') {
+                // 메탈의 진수 더블 킥 난사 패턴 (킥 연타 + 하프 스네어)
+                if (step % 2 === 0) createNote(0); // 킥 더블베이스 연타!
+                if (step % 4 === 0) createNote(1); // 하이햇
+                if (step === 4 || step === 12) createNote(2); // 스네어
+                if (step === 14) { createNote(3); createNote(4); } // 연타 탐탐 필인
             }
-            else if (autoPattern === 'bossa_nova') {
-                // 싱코페이션(당김음)이 살아있는 리얼 보사노바 패턴
-                if (step % 2 === 0) {
-                    createBeatLine();
-                    createNote(1); // 맑은 림/샤이커용 하이햇 상시 연주
-                }
-                if (step === 0 || step === 6 || step === 8 || step === 14) {
-                    createNote(0); // 부드러운 보사노바 베이스 킥
-                }
-                if (step === 2 || step === 10 || step === 12) {
-                    createNote(2); // 스네어 림샷 타이밍
-                }
+            else if (autoPattern === 'dubstep') {
+                // 반속의 육중한 더브스텝 그루브
+                if (step % 4 === 0) createNote(1);
+                if (step === 0 || step === 2 || step === 11) createNote(0); // 깊은 서브 킥
+                if (step === 8) createNote(2); // 비트 3에 무거운 스네어 타격
             }
-            else if (autoPattern === 'drum_n_bass') {
-                // 170BPM 이상에서 폭발하는 초고속 브레이크비트 드럼 앤 베이스
-                createBeatLine();
-                if (step % 2 === 0) {
-                    createNote(1); // 촘촘한 고속 하이햇
-                }
-                if (step === 0 || step === 10 || step === 11) {
-                    createNote(0); // 바운스 브레이크 킥
-                }
-                if (step === 4 || step === 12) {
-                    createNote(2); // 폭발적인 스네어 백비트
-                }
+            else if (autoPattern === 'waltz') {
+                // 3/4 재즈 왈츠 패턴 (12박 단위로 루핑)
+                const wStep = subBeatCounter % 12;
+                if (wStep % 2 === 0) createNote(1); // 하이햇
+                if (wStep === 0) createNote(0); // 1박 킥
+                if (wStep === 4 || wStep === 8) createNote(2); // 2, 3박 스네어 브러쉬 타격
             }
-            else if (autoPattern === 'disco') {
-                // 하이햇 오픈/클로즈의 숨결이 들리는 클래식 디스코 4온더플로어
-                createBeatLine();
-                if (step % 4 === 0) {
-                    createNote(0); // 일정한 4박 베이스 킥
-                }
-                if (step === 4 || step === 12) {
-                    createNote(2); // 스네어
-                }
-                if (step % 2 !== 0) {
-                    createNote(1); // 디스코 특유의 엇박(Off-beat) 하이햇 노트 배치
-                }
-            }
-            else if (autoPattern === 'heavy_metal') {
-                // 극한의 메탈을 위한 더블 베이스 킥 난사 및 블래스트 비트
-                createBeatLine();
-                createNote(0); // 매 단계 쉴 새 없이 몰아치는 트윈페달 베이스 킥
-                if (step % 2 === 0) {
-                    createNote(1); // 라이드/하이햇 심벌즈
-                }
-                if (step % 4 === 2) {
-                    createNote(2); // 무겁고 단단한 백스네어 타격
-                }
-            }
-            else if (autoPattern === 'random') {
-                if (step % 2 === 0) {
-                    createBeatLine();
-                    const randomLane = Math.floor(Math.random() * currentLanes);
-                    createNote(randomLane);
-                    if (Math.random() > 0.6) {
-                        const secondLane = (randomLane + 2) % currentLanes;
-                        createNote(secondLane);
-                    }
-                }
+            else if (autoPattern === 'none') {
+                // 수동 연습 모드 (리듬 생성 안 함)
             }
             subBeatCounter++;
         }
@@ -3095,75 +3172,71 @@
             }
             const screenHeight = screen.clientHeight;
 
-            // 게임 재생(isGamePlaying === true) 상태 또는 리플레이 중일 때만 물리 프레임 진행
             if (isReplaying) {
-                const elapsedReplay = timestamp - replayStartTime;
-                while (replayIndex < recordedSequence.length && recordedSequence[replayIndex].time <= elapsedReplay) {
-                    const event = recordedSequence[replayIndex];
-                    if (event.lane < currentLanes) {
-                        createNote(event.lane);
+                if (gameIsPlaying) {
+                    const elapsedReplay = timestamp - replayStartTime;
+                    while (replayIndex < recordedSequence.length && recordedSequence[replayIndex].time <= elapsedReplay) {
+                        const event = recordedSequence[replayIndex];
+                        if (event.lane < currentLanes) {
+                            createNote(event.lane);
+                        }
+                        replayIndex++;
                     }
-                    replayIndex++;
+
+                    if (replayIndex >= recordedSequence.length && notes.length === 0) {
+                        stopReplay();
+                        showReportModal(score, maxCombo);
+                    }
+                }
+            } else {
+                if (gameIsPlaying) {
+                    const deltaSinceLastBeat = timestamp - lastBeatTime;
+                    const stepInterval = beatInterval / 4; 
+
+                    if (deltaSinceLastBeat >= stepInterval) {
+                        lastBeatTime = timestamp;
+                        triggerRhythmDrop();
+                    }
+                }
+            }
+
+            // 노트 하강 역시 재생 상태에서만 움직임 통제
+            if (gameIsPlaying) {
+                for (let i = visualBeatLines.length - 1; i >= 0; i--) {
+                    const line = visualBeatLines[i];
+                    line.currentY += noteSpeed * deltaTime;
+                    if (line.currentY > screenHeight) {
+                        line.element.remove();
+                        visualBeatLines.splice(i, 1);
+                    } else {
+                        line.element.style.top = `${line.currentY}px`;
+                    }
                 }
 
-                if (replayIndex >= recordedSequence.length && notes.length === 0) {
-                    stopReplay();
-                    showReportModal(score, maxCombo);
-                }
-                
-                // 리플레이 일때의 스크롤 하강 계산
-                updateActiveNotesAndBeats(deltaTime, screenHeight);
-            } 
-            else if (isGamePlaying) {
-                const deltaSinceLastBeat = timestamp - lastBeatTime;
-                const stepInterval = beatInterval / 4; 
+                for (let i = notes.length - 1; i >= 0; i--) {
+                    const note = notes[i];
+                    note.currentY += noteSpeed * deltaTime;
 
-                if (deltaSinceLastBeat >= stepInterval) {
-                    lastBeatTime = timestamp;
-                    triggerRhythmDrop();
+                    if (note.hit) {
+                        note.element.remove();
+                        notes.splice(i, 1);
+                        continue;
+                    }
+                    if (note.currentY > screenHeight) {
+                        displayJudgmentFeedback('Miss');
+                        note.element.remove();
+                        notes.splice(i, 1);
+                        continue;
+                    }
+                    note.element.style.transform = `translateY(${note.currentY}px)`;
                 }
-                
-                // 플레이 중일 때의 스크롤 하강 계산
-                updateActiveNotesAndBeats(deltaTime, screenHeight);
             }
 
             updateAndDrawParticles();
             requestAnimationFrame(physicsUpdate);
         }
 
-        // 스크롤 하강 계산 공통 분리화
-        function updateActiveNotesAndBeats(deltaTime, screenHeight) {
-            for (let i = visualBeatLines.length - 1; i >= 0; i--) {
-                const line = visualBeatLines[i];
-                line.currentY += noteSpeed * deltaTime;
-                if (line.currentY > screenHeight) {
-                    line.element.remove();
-                    visualBeatLines.splice(i, 1);
-                } else {
-                    line.element.style.top = `${line.currentY}px`;
-                }
-            }
-
-            for (let i = notes.length - 1; i >= 0; i--) {
-                const note = notes[i];
-                note.currentY += noteSpeed * deltaTime;
-
-                if (note.hit) {
-                    note.element.remove();
-                    notes.splice(i, 1);
-                    continue;
-                }
-                if (note.currentY > screenHeight) {
-                    displayJudgmentFeedback('Miss');
-                    note.element.remove();
-                    notes.splice(i, 1);
-                    continue;
-                }
-                note.element.style.transform = `translateY(${note.currentY}px)`;
-            }
-        }
-
-        function triggerHit(lane) {
+        function triggerHit(lane, velocity = 1.0) {
             const pad = document.querySelector(`.drum-pad.pad-${lane}`);
             if (pad) {
                 pad.classList.add('active');
@@ -3172,7 +3245,7 @@
 
             const config = laneConfigurations[currentLanes][lane];
             if (config) {
-                playSynthesizedDrum(config.sound);
+                playSynthesizedDrum(config.sound, velocity);
             }
 
             judgeDrumEvent(lane);
@@ -3255,35 +3328,36 @@
             const targetLane = currentKeyMap[e.key];
             if (targetLane !== undefined) {
                 activeKeys[e.key] = true;
-                triggerHit(targetLane);
+                // 키보드 연주시 랜덤 보정한 디폴트 Velocity 부여
+                triggerHit(targetLane, 0.95);
             }
         });
 
         /* ===================================================================
-           12. 공통 인프라 인터페이스 바인딩 (사운드 프리셋 4개 -> 12개로 대거 보강 확장)
+           12. 공통 인프라 인터페이스 바인딩 (12종 사운드 프리셋 라이브러리 완비)
            =================================================================== */
         const drumKitLibrary = {
             acoustic: {
                 synth: {
-                    kick: { pitch: 120, decay: 0.18, volume: 1.2, pan: 0.0, eqLow: 4, eqMid: -2, eqHigh: -1, reverbSend: 0.05, delaySend: 0.0 },
-                    snare: { pitch: 165, noiseFreq: 1300, decay: 0.22, volume: 0.95, pan: -0.05, eqLow: -2, eqMid: 3, eqHigh: 2, reverbSend: 0.2, delaySend: 0.0 },
-                    hihat: { highpass: 8500, decay: 0.04, volume: 0.75, pan: -0.3, eqLow: -4, eqMid: 0, eqHigh: 4, reverbSend: 0.08, delaySend: 0.0 },
-                    tom: { pitch: 180, pitchEnd: 55, decay: 0.22, volume: 0.85, pan: 0.15, eqLow: 3, eqMid: 1, eqHigh: -1, reverbSend: 0.15, delaySend: 0.05 },
-                    crash: { pitch: 480, highpass: 3200, decay: 0.8, volume: 0.85, pan: -0.25, eqLow: -3, eqMid: -1, eqHigh: 5, reverbSend: 0.25, delaySend: 0.08 },
-                    crash2: { pitch: 580, highpass: 3500, decay: 0.65, volume: 0.85, pan: 0.4, eqLow: -3, eqMid: -1, eqHigh: 5, reverbSend: 0.25, delaySend: 0.08 }
+                    kick: { pitch: 150, decay: 0.3, volume: 1.1, pan: 0.0, eqLow: 1, eqMid: -2, eqHigh: 0, reverbSend: 0.1, delaySend: 0.0 },
+                    snare: { pitch: 180, noiseFreq: 1000, decay: 0.25, volume: 0.9, pan: -0.1, eqLow: -1, eqMid: 2, eqHigh: 1, reverbSend: 0.25, delaySend: 0.05 },
+                    hihat: { highpass: 7000, decay: 0.05, volume: 0.7, pan: -0.4, eqLow: -3, eqMid: 0, eqHigh: 3, reverbSend: 0.1, delaySend: 0.0 },
+                    tom: { pitch: 220, pitchEnd: 60, decay: 0.25, volume: 0.8, pan: 0.2, eqLow: 2, eqMid: 1, eqHigh: -1, reverbSend: 0.2, delaySend: 0.1 },
+                    crash: { pitch: 550, highpass: 2000, decay: 0.6, volume: 0.8, pan: -0.3, eqLow: -2, eqMid: -1, eqHigh: 4, reverbSend: 0.3, delaySend: 0.1 },
+                    crash2: { pitch: 650, highpass: 2200, decay: 0.45, volume: 0.8, pan: 0.5, eqLow: -2, eqMid: -1, eqHigh: 4, reverbSend: 0.3, delaySend: 0.1 }
                 },
-                fx: { delayTime: 0.3, delayFeedback: 0.1, reverbSize: 1.2, reverbMix: 0.15, highpass: 10, lowpass: 20000, compThreshold: -18, compRatio: 3, saturation: 5, chorus: 5 }
+                fx: { delayTime: 0.3, delayFeedback: 0.1, reverbSize: 1.2, reverbMix: 0.15, highpass: 10, lowpass: 20000, compThreshold: -18, compRatio: 3, saturation: 5, chorus: 5, roomBleed: 15 }
             },
             trap808: {
                 synth: {
-                    kick: { pitch: 58, decay: 0.85, volume: 1.4, pan: 0.0, eqLow: 7, eqMid: -4, eqHigh: -2, reverbSend: 0.0, delaySend: 0.0 },
-                    snare: { pitch: 240, noiseFreq: 1500, decay: 0.16, volume: 1.05, pan: -0.05, eqLow: -2, eqMid: 4, eqHigh: 2, reverbSend: 0.2, delaySend: 0.15 },
-                    hihat: { highpass: 9500, decay: 0.03, volume: 0.8, pan: -0.3, eqLow: -5, eqMid: 1, eqHigh: 5, reverbSend: 0.1, delaySend: 0.2 },
-                    tom: { pitch: 120, pitchEnd: 35, decay: 0.45, volume: 0.9, pan: 0.15, eqLow: 5, eqMid: 2, eqHigh: -2, reverbSend: 0.25, delaySend: 0.1 },
-                    crash: { pitch: 380, highpass: 1600, decay: 0.9, volume: 0.9, pan: -0.4, eqLow: -2, eqMid: 1, eqHigh: 3, reverbSend: 0.35, delaySend: 0.25 },
-                    crash2: { pitch: 440, highpass: 1900, decay: 0.7, volume: 0.9, pan: 0.4, eqLow: -2, eqMid: 1, eqHigh: 3, reverbSend: 0.35, delaySend: 0.25 }
+                    kick: { pitch: 70, decay: 0.75, volume: 1.4, pan: 0.0, eqLow: 6, eqMid: -3, eqHigh: -1, reverbSend: 0.0, delaySend: 0.0 },
+                    snare: { pitch: 220, noiseFreq: 1400, decay: 0.18, volume: 1.0, pan: -0.05, eqLow: -2, eqMid: 4, eqHigh: 2, reverbSend: 0.2, delaySend: 0.15 },
+                    hihat: { highpass: 9000, decay: 0.03, volume: 0.8, pan: -0.3, eqLow: -5, eqMid: 1, eqHigh: 5, reverbSend: 0.1, delaySend: 0.2 },
+                    tom: { pitch: 140, pitchEnd: 40, decay: 0.4, volume: 0.9, pan: 0.15, eqLow: 4, eqMid: 2, eqHigh: -2, reverbSend: 0.25, delaySend: 0.1 },
+                    crash: { pitch: 400, highpass: 1500, decay: 0.8, volume: 0.9, pan: -0.4, eqLow: -2, eqMid: 1, eqHigh: 3, reverbSend: 0.35, delaySend: 0.25 },
+                    crash2: { pitch: 480, highpass: 1800, decay: 0.6, volume: 0.9, pan: 0.4, eqLow: -2, eqMid: 1, eqHigh: 3, reverbSend: 0.35, delaySend: 0.25 }
                 },
-                fx: { delayTime: 0.4, delayFeedback: 0.4, reverbSize: 2.5, reverbMix: 0.3, highpass: 20, lowpass: 15000, compThreshold: -25, compRatio: 5, saturation: 25, chorus: 15 }
+                fx: { delayTime: 0.4, delayFeedback: 0.4, reverbSize: 2.5, reverbMix: 0.3, highpass: 20, lowpass: 15000, compThreshold: -25, compRatio: 5, saturation: 25, chorus: 15, roomBleed: 40 }
             },
             retro80s: {
                 synth: {
@@ -3294,7 +3368,7 @@
                     crash: { pitch: 680, highpass: 2500, decay: 1.2, volume: 0.8, pan: -0.3, eqLow: -1, eqMid: 0, eqHigh: 5, reverbSend: 0.5, delaySend: 0.3 },
                     crash2: { pitch: 800, highpass: 2800, decay: 0.9, volume: 0.8, pan: 0.5, eqLow: -1, eqMid: 0, eqHigh: 5, reverbSend: 0.5, delaySend: 0.3 }
                 },
-                fx: { delayTime: 0.33, delayFeedback: 0.35, reverbSize: 3.5, reverbMix: 0.45, highpass: 10, lowpass: 18000, compThreshold: -22, compRatio: 4, saturation: 20, chorus: 25 }
+                fx: { delayTime: 0.33, delayFeedback: 0.35, reverbSize: 3.5, reverbMix: 0.45, highpass: 10, lowpass: 18000, compThreshold: -22, compRatio: 4, saturation: 20, chorus: 25, roomBleed: 50 }
             },
             metal: {
                 synth: {
@@ -3305,101 +3379,108 @@
                     crash: { pitch: 850, highpass: 3200, decay: 1.0, volume: 0.9, pan: -0.4, eqLow: -3, eqMid: -1, eqHigh: 5, reverbSend: 0.3, delaySend: 0.15 },
                     crash2: { pitch: 980, highpass: 3500, decay: 0.8, volume: 0.9, pan: 0.4, eqLow: -3, eqMid: -1, eqHigh: 5, reverbSend: 0.3, delaySend: 0.15 }
                 },
-                fx: { delayTime: 0.2, delayFeedback: 0.15, reverbSize: 1.8, reverbMix: 0.25, highpass: 50, lowpass: 20000, compThreshold: -15, compRatio: 6, saturation: 40, chorus: 10 }
+                fx: { delayTime: 0.2, delayFeedback: 0.15, reverbSize: 1.8, reverbMix: 0.25, highpass: 50, lowpass: 20000, compThreshold: -15, compRatio: 6, saturation: 40, chorus: 10, roomBleed: 20 }
             },
-            lofijazz: {
+            lofi: {
                 synth: {
-                    kick: { pitch: 95, decay: 0.25, volume: 1.1, pan: 0.0, eqLow: 3, eqMid: -1, eqHigh: -2, reverbSend: 0.15, delaySend: 0.1 },
-                    snare: { pitch: 150, noiseFreq: 900, decay: 0.3, volume: 0.85, pan: -0.05, eqLow: 1, eqMid: 2, eqHigh: 0, reverbSend: 0.4, delaySend: 0.2 },
-                    hihat: { highpass: 5500, decay: 0.06, volume: 0.65, pan: -0.3, eqLow: -3, eqMid: -1, eqHigh: 2, reverbSend: 0.2, delaySend: 0.1 },
-                    tom: { pitch: 150, pitchEnd: 50, decay: 0.35, volume: 0.8, pan: 0.2, eqLow: 2, eqMid: 1, eqHigh: -2, reverbSend: 0.3, delaySend: 0.15 },
-                    crash: { pitch: 420, highpass: 2200, decay: 1.4, volume: 0.7, pan: -0.3, eqLow: -2, eqMid: 0, eqHigh: 3, reverbSend: 0.45, delaySend: 0.25 },
-                    crash2: { pitch: 500, highpass: 2500, decay: 1.1, volume: 0.7, pan: 0.4, eqLow: -2, eqMid: 0, eqHigh: 3, reverbSend: 0.45, delaySend: 0.25 }
+                    kick: { pitch: 100, decay: 0.4, volume: 1.1, pan: 0.0, eqLow: 3, eqMid: 1, eqHigh: -3, reverbSend: 0.3, delaySend: 0.2 },
+                    snare: { pitch: 140, noiseFreq: 600, decay: 0.35, volume: 0.8, pan: -0.05, eqLow: 2, eqMid: 1, eqHigh: -2, reverbSend: 0.4, delaySend: 0.2 },
+                    hihat: { highpass: 4500, decay: 0.08, volume: 0.6, pan: -0.2, eqLow: -1, eqMid: 1, eqHigh: 1, reverbSend: 0.2, delaySend: 0.1 },
+                    tom: { pitch: 180, pitchEnd: 70, decay: 0.3, volume: 0.7, pan: 0.1, eqLow: 1, eqMid: 1, eqHigh: -2, reverbSend: 0.3, delaySend: 0.2 },
+                    crash: { pitch: 420, highpass: 1200, decay: 0.8, volume: 0.6, pan: -0.3, eqLow: 0, eqMid: 1, eqHigh: -1, reverbSend: 0.4, delaySend: 0.3 },
+                    crash2: { pitch: 500, highpass: 1500, decay: 0.7, volume: 0.6, pan: 0.3, eqLow: 0, eqMid: 1, eqHigh: -1, reverbSend: 0.4, delaySend: 0.3 }
                 },
-                fx: { delayTime: 0.38, delayFeedback: 0.28, reverbSize: 2.8, reverbMix: 0.35, highpass: 40, lowpass: 14000, compThreshold: -20, compRatio: 3, saturation: 10, chorus: 18 }
+                fx: { delayTime: 0.35, delayFeedback: 0.3, reverbSize: 2.0, reverbMix: 0.35, highpass: 80, lowpass: 10000, compThreshold: -20, compRatio: 3, saturation: 35, chorus: 15, roomBleed: 60 }
             },
             stadium: {
                 synth: {
-                    kick: { pitch: 140, decay: 0.25, volume: 1.25, pan: 0.0, eqLow: 5, eqMid: -1, eqHigh: 1, reverbSend: 0.3, delaySend: 0.05 },
-                    snare: { pitch: 180, noiseFreq: 1100, decay: 0.4, volume: 1.0, pan: -0.1, eqLow: 0, eqMid: 3, eqHigh: 3, reverbSend: 0.65, delaySend: 0.1 },
-                    hihat: { highpass: 7500, decay: 0.08, volume: 0.75, pan: -0.35, eqLow: -3, eqMid: 1, eqHigh: 4, reverbSend: 0.25, delaySend: 0.05 },
-                    tom: { pitch: 210, pitchEnd: 70, decay: 0.3, volume: 0.9, pan: 0.25, eqLow: 4, eqMid: 2, eqHigh: 0, reverbSend: 0.45, delaySend: 0.15 },
-                    crash: { pitch: 600, highpass: 1800, decay: 1.8, volume: 0.85, pan: -0.4, eqLow: -1, eqMid: 1, eqHigh: 4, reverbSend: 0.6, delaySend: 0.2 },
-                    crash2: { pitch: 720, highpass: 2000, decay: 1.5, volume: 0.85, pan: 0.4, eqLow: -1, eqMid: 1, eqHigh: 4, reverbSend: 0.6, delaySend: 0.2 }
+                    kick: { pitch: 160, decay: 0.35, volume: 1.3, pan: 0.0, eqLow: 3, eqMid: -2, eqHigh: 1, reverbSend: 0.4, delaySend: 0.1 },
+                    snare: { pitch: 190, noiseFreq: 1100, decay: 0.5, volume: 1.1, pan: -0.1, eqLow: 1, eqMid: 2, eqHigh: 3, reverbSend: 0.6, delaySend: 0.2 },
+                    hihat: { highpass: 8000, decay: 0.08, volume: 0.7, pan: -0.3, eqLow: -3, eqMid: 1, eqHigh: 4, reverbSend: 0.2, delaySend: 0.1 },
+                    tom: { pitch: 240, pitchEnd: 55, decay: 0.4, volume: 0.9, pan: 0.2, eqLow: 2, eqMid: 1, eqHigh: 1, reverbSend: 0.5, delaySend: 0.2 },
+                    crash: { pitch: 600, highpass: 1800, decay: 1.5, volume: 0.9, pan: -0.4, eqLow: -1, eqMid: 1, eqHigh: 5, reverbSend: 0.7, delaySend: 0.3 },
+                    crash2: { pitch: 700, highpass: 2000, decay: 1.2, volume: 0.9, pan: 0.4, eqLow: -1, eqMid: 1, eqHigh: 5, reverbSend: 0.7, delaySend: 0.3 }
                 },
-                fx: { delayTime: 0.3, delayFeedback: 0.2, reverbSize: 4.5, reverbMix: 0.55, highpass: 10, lowpass: 20000, compThreshold: -24, compRatio: 5, saturation: 18, chorus: 12 }
+                fx: { delayTime: 0.3, delayFeedback: 0.2, reverbSize: 4.0, reverbMix: 0.5, highpass: 10, lowpass: 20000, compThreshold: -22, compRatio: 5, saturation: 15, chorus: 12, roomBleed: 80 }
             },
-            perc: {
+            bossa: {
                 synth: {
-                    kick: { pitch: 180, decay: 0.08, volume: 1.0, pan: 0.0, eqLow: 2, eqMid: 1, eqHigh: -1, reverbSend: 0.1, delaySend: 0.15 },
-                    snare: { pitch: 320, noiseFreq: 2500, decay: 0.08, volume: 0.8, pan: -0.2, eqLow: -4, eqMid: 5, eqHigh: 3, reverbSend: 0.2, delaySend: 0.25 },
-                    hihat: { highpass: 11000, decay: 0.02, volume: 0.7, pan: 0.3, eqLow: -6, eqMid: 2, eqHigh: 6, reverbSend: 0.15, delaySend: 0.1 },
-                    tom: { pitch: 350, pitchEnd: 150, decay: 0.12, volume: 0.85, pan: -0.3, eqLow: 1, eqMid: 4, eqHigh: 1, reverbSend: 0.25, delaySend: 0.2 },
-                    crash: { pitch: 950, highpass: 5000, decay: 0.25, volume: 0.75, pan: 0.4, eqLow: -4, eqMid: 2, eqHigh: 5, reverbSend: 0.3, delaySend: 0.3 },
-                    crash2: { pitch: 1200, highpass: 5500, decay: 0.2, volume: 0.75, pan: -0.4, eqLow: -4, eqMid: 2, eqHigh: 5, reverbSend: 0.3, delaySend: 0.3 }
+                    kick: { pitch: 110, decay: 0.25, volume: 1.0, pan: 0.0, eqLow: 2, eqMid: -1, eqHigh: -1, reverbSend: 0.1, delaySend: 0.0 },
+                    snare: { pitch: 280, noiseFreq: 1500, decay: 0.15, volume: 0.9, pan: -0.1, eqLow: -3, eqMid: 4, eqHigh: 3, reverbSend: 0.2, delaySend: 0.1 }, // Rimshot style
+                    hihat: { highpass: 8500, decay: 0.04, volume: 0.8, pan: -0.4, eqLow: -4, eqMid: 0, eqHigh: 4, reverbSend: 0.1, delaySend: 0.0 },
+                    tom: { pitch: 200, pitchEnd: 90, decay: 0.2, volume: 0.8, pan: 0.2, eqLow: 1, eqMid: 2, eqHigh: -1, reverbSend: 0.15, delaySend: 0.05 },
+                    crash: { pitch: 700, highpass: 3000, decay: 0.5, volume: 0.7, pan: -0.3, eqLow: -3, eqMid: 0, eqHigh: 4, reverbSend: 0.2, delaySend: 0.05 },
+                    crash2: { pitch: 800, highpass: 3300, decay: 0.4, volume: 0.7, pan: 0.3, eqLow: -3, eqMid: 0, eqHigh: 4, reverbSend: 0.2, delaySend: 0.05 }
                 },
-                fx: { delayTime: 0.25, delayFeedback: 0.45, reverbSize: 1.5, reverbMix: 0.2, highpass: 80, lowpass: 16000, compThreshold: -12, compRatio: 2, saturation: 5, chorus: 8 }
+                fx: { delayTime: 0.25, delayFeedback: 0.1, reverbSize: 1.5, reverbMix: 0.15, highpass: 30, lowpass: 18000, compThreshold: -15, compRatio: 3, saturation: 5, chorus: 8, roomBleed: 25 }
             },
-            techno: {
+            dnb: {
                 synth: {
-                    kick: { pitch: 150, decay: 0.3, volume: 1.25, pan: 0.0, eqLow: 5, eqMid: -2, eqHigh: 0, reverbSend: 0.1, delaySend: 0.0 },
-                    snare: { pitch: 180, noiseFreq: 1000, decay: 0.25, volume: 0.95, pan: -0.1, eqLow: -1, eqMid: 2, eqHigh: 1, reverbSend: 0.25, delaySend: 0.05 },
-                    hihat: { highpass: 7000, decay: 0.05, volume: 0.75, pan: -0.4, eqLow: -3, eqMid: 0, eqHigh: 3, reverbSend: 0.1, delaySend: 0.0 },
-                    tom: { pitch: 220, pitchEnd: 60, decay: 0.25, volume: 0.8, pan: 0.2, eqLow: 2, eqMid: 1, eqHigh: -1, reverbSend: 0.2, delaySend: 0.1 },
-                    crash: { pitch: 550, highpass: 2000, decay: 0.6, volume: 0.8, pan: -0.3, eqLow: -2, eqMid: -1, eqHigh: 4, reverbSend: 0.3, delaySend: 0.1 },
-                    crash2: { pitch: 650, highpass: 2200, decay: 0.45, volume: 0.8, pan: 0.5, eqLow: -2, eqMid: -1, eqHigh: 4, reverbSend: 0.3, delaySend: 0.1 }
+                    kick: { pitch: 180, decay: 0.12, volume: 1.2, pan: 0.0, eqLow: 3, eqMid: -1, eqHigh: 2, reverbSend: 0.05, delaySend: 0.0 },
+                    snare: { pitch: 260, noiseFreq: 2200, decay: 0.15, volume: 1.1, pan: -0.05, eqLow: -2, eqMid: 3, eqHigh: 2, reverbSend: 0.15, delaySend: 0.1 },
+                    hihat: { highpass: 9500, decay: 0.04, volume: 0.8, pan: -0.3, eqLow: -5, eqMid: 0, eqHigh: 5, reverbSend: 0.1, delaySend: 0.1 },
+                    tom: { pitch: 250, pitchEnd: 110, decay: 0.15, volume: 0.8, pan: 0.2, eqLow: 1, eqMid: 3, eqHigh: -1, reverbSend: 0.1, delaySend: 0.1 },
+                    crash: { pitch: 900, highpass: 4000, decay: 0.4, volume: 0.8, pan: -0.4, eqLow: -3, eqMid: -1, eqHigh: 5, reverbSend: 0.25, delaySend: 0.15 },
+                    crash2: { pitch: 1100, highpass: 4500, decay: 0.3, volume: 0.8, pan: 0.4, eqLow: -3, eqMid: -1, eqHigh: 5, reverbSend: 0.25, delaySend: 0.15 }
                 },
-                fx: { delayTime: 0.3, delayFeedback: 0.3, reverbSize: 1.5, reverbMix: 0.2, highpass: 10, lowpass: 20000, compThreshold: -24, compRatio: 4, saturation: 15, chorus: 10 }
+                fx: { delayTime: 0.2, delayFeedback: 0.3, reverbSize: 1.2, reverbMix: 0.2, highpass: 40, lowpass: 19000, compThreshold: -18, compRatio: 5, saturation: 25, chorus: 15, roomBleed: 15 }
             },
-            synthwave: {
+            electro: {
                 synth: {
-                    kick: { pitch: 90, decay: 0.28, volume: 1.3, pan: 0.0, eqLow: 5, eqMid: -1, eqHigh: 0, reverbSend: 0.1, delaySend: 0.05 },
-                    snare: { pitch: 170, noiseFreq: 600, decay: 0.45, volume: 1.1, pan: -0.05, eqLow: 1, eqMid: 3, eqHigh: 2, reverbSend: 0.45, delaySend: 0.15 },
-                    hihat: { highpass: 5200, decay: 0.08, volume: 0.7, pan: -0.3, eqLow: -3, eqMid: 1, eqHigh: 3, reverbSend: 0.1, delaySend: 0.0 },
-                    tom: { pitch: 240, pitchEnd: 65, decay: 0.32, volume: 0.85, pan: 0.15, eqLow: 3, eqMid: 1, eqHigh: -1, reverbSend: 0.25, delaySend: 0.1 },
-                    crash: { pitch: 600, highpass: 2100, decay: 1.1, volume: 0.8, pan: -0.25, eqLow: -2, eqMid: 0, eqHigh: 4, reverbSend: 0.4, delaySend: 0.2 },
-                    crash2: { pitch: 700, highpass: 2400, decay: 0.9, volume: 0.8, pan: 0.4, eqLow: -2, eqMid: 0, eqHigh: 4, reverbSend: 0.4, delaySend: 0.2 }
+                    kick: { pitch: 90, decay: 0.3, volume: 1.3, pan: 0.0, eqLow: 4, eqMid: -2, eqHigh: 1, reverbSend: 0.1, delaySend: 0.0 },
+                    snare: { pitch: 200, noiseFreq: 1200, decay: 0.2, volume: 1.0, pan: -0.05, eqLow: -1, eqMid: 3, eqHigh: 2, reverbSend: 0.3, delaySend: 0.2 },
+                    hihat: { highpass: 8000, decay: 0.06, volume: 0.7, pan: -0.3, eqLow: -3, eqMid: 1, eqHigh: 3, reverbSend: 0.15, delaySend: 0.15 },
+                    tom: { pitch: 160, pitchEnd: 50, decay: 0.25, volume: 0.8, pan: 0.15, eqLow: 2, eqMid: 1, eqHigh: -1, reverbSend: 0.2, delaySend: 0.15 },
+                    crash: { pitch: 500, highpass: 2200, decay: 0.8, volume: 0.8, pan: -0.3, eqLow: -2, eqMid: 1, eqHigh: 4, reverbSend: 0.4, delaySend: 0.3 },
+                    crash2: { pitch: 580, highpass: 2500, decay: 0.7, volume: 0.8, pan: 0.3, eqLow: -2, eqMid: 1, eqHigh: 4, reverbSend: 0.4, delaySend: 0.3 }
                 },
-                fx: { delayTime: 0.35, delayFeedback: 0.3, reverbSize: 3.2, reverbMix: 0.35, highpass: 10, lowpass: 18000, compThreshold: -20, compRatio: 4, saturation: 18, chorus: 22 }
+                fx: { delayTime: 0.33, delayFeedback: 0.4, reverbSize: 2.2, reverbMix: 0.3, highpass: 15, lowpass: 16000, compThreshold: -24, compRatio: 4, saturation: 30, chorus: 20, roomBleed: 35 }
             },
-            drumandbass: {
+            orchestra: {
                 synth: {
-                    kick: { pitch: 140, decay: 0.15, volume: 1.35, pan: 0.0, eqLow: 4, eqMid: -2, eqHigh: 1, reverbSend: 0.02, delaySend: 0.0 },
-                    snare: { pitch: 260, noiseFreq: 1800, decay: 0.12, volume: 1.0, pan: -0.1, eqLow: -3, eqMid: 4, eqHigh: 3, reverbSend: 0.15, delaySend: 0.1 },
-                    hihat: { highpass: 8200, decay: 0.03, volume: 0.8, pan: -0.35, eqLow: -5, eqMid: 0, eqHigh: 5, reverbSend: 0.05, delaySend: 0.08 },
-                    tom: { pitch: 190, pitchEnd: 80, decay: 0.18, volume: 0.8, pan: 0.2, eqLow: 1, eqMid: 2, eqHigh: 0, reverbSend: 0.1, delaySend: 0.15 },
-                    crash: { pitch: 720, highpass: 3000, decay: 0.5, volume: 0.75, pan: -0.3, eqLow: -3, eqMid: -1, eqHigh: 5, reverbSend: 0.2, delaySend: 0.1 },
-                    crash2: { pitch: 850, highpass: 3300, decay: 0.4, volume: 0.75, pan: 0.4, eqLow: -3, eqMid: -1, eqHigh: 5, reverbSend: 0.2, delaySend: 0.1 }
+                    kick: { pitch: 50, decay: 0.8, volume: 1.5, pan: 0.0, eqLow: 6, eqMid: -2, eqHigh: -2, reverbSend: 0.5, delaySend: 0.1 }, // Timpani like
+                    snare: { pitch: 150, noiseFreq: 500, decay: 0.4, volume: 0.8, pan: -0.1, eqLow: 2, eqMid: 1, eqHigh: -1, reverbSend: 0.5, delaySend: 0.1 },
+                    hihat: { highpass: 5000, decay: 0.08, volume: 0.6, pan: -0.35, eqLow: -2, eqMid: 0, eqHigh: 2, reverbSend: 0.3, delaySend: 0.05 },
+                    tom: { pitch: 100, pitchEnd: 45, decay: 0.7, volume: 1.1, pan: 0.2, eqLow: 5, eqMid: 1, eqHigh: -2, reverbSend: 0.6, delaySend: 0.15 },
+                    crash: { pitch: 350, highpass: 800, decay: 2.5, volume: 1.0, pan: -0.4, eqLow: 1, eqMid: 2, eqHigh: 4, reverbSend: 0.8, delaySend: 0.2 },
+                    crash2: { pitch: 420, highpass: 900, decay: 2.0, volume: 1.0, pan: 0.4, eqLow: 1, eqMid: 2, eqHigh: 4, reverbSend: 0.8, delaySend: 0.2 }
                 },
-                fx: { delayTime: 0.25, delayFeedback: 0.2, reverbSize: 1.2, reverbMix: 0.1, highpass: 30, lowpass: 19000, compThreshold: -16, compRatio: 5, saturation: 22, chorus: 10 }
+                fx: { delayTime: 0.45, delayFeedback: 0.25, reverbSize: 5.0, reverbMix: 0.6, highpass: 10, lowpass: 20000, compThreshold: -26, compRatio: 3, saturation: 10, chorus: 15, roomBleed: 90 }
             },
-            bossanova: {
+            vintage: {
                 synth: {
-                    kick: { pitch: 80, decay: 0.22, volume: 0.95, pan: 0.0, eqLow: 3, eqMid: -1, eqHigh: -2, reverbSend: 0.1, delaySend: 0.0 },
-                    snare: { pitch: 350, noiseFreq: 2200, decay: 0.05, volume: 0.8, pan: -0.15, eqLow: -5, eqMid: 4, eqHigh: 4, reverbSend: 0.25, delaySend: 0.15 },
-                    hihat: { highpass: 10000, decay: 0.04, volume: 0.75, pan: -0.25, eqLow: -6, eqMid: -1, eqHigh: 5, reverbSend: 0.15, delaySend: 0.05 },
-                    tom: { pitch: 130, pitchEnd: 70, decay: 0.28, volume: 0.8, pan: 0.3, eqLow: 3, eqMid: 1, eqHigh: -1, reverbSend: 0.2, delaySend: 0.1 },
-                    crash: { pitch: 480, highpass: 4000, decay: 0.7, volume: 0.65, pan: -0.35, eqLow: -4, eqMid: -1, eqHigh: 4, reverbSend: 0.3, delaySend: 0.2 },
-                    crash2: { pitch: 550, highpass: 4200, decay: 0.6, volume: 0.65, pan: 0.35, eqLow: -4, eqMid: -1, eqHigh: 4, reverbSend: 0.3, delaySend: 0.2 }
+                    kick: { pitch: 130, decay: 0.2, volume: 1.1, pan: 0.0, eqLow: 1, eqMid: 0, eqHigh: -2, reverbSend: 0.15, delaySend: 0.05 },
+                    snare: { pitch: 170, noiseFreq: 800, decay: 0.22, volume: 0.9, pan: -0.05, eqLow: 1, eqMid: 2, eqHigh: 1, reverbSend: 0.3, delaySend: 0.1 },
+                    hihat: { highpass: 6500, decay: 0.06, volume: 0.7, pan: -0.3, eqLow: -2, eqMid: 1, eqHigh: 2, reverbSend: 0.15, delaySend: 0.1 },
+                    tom: { pitch: 210, pitchEnd: 75, decay: 0.22, volume: 0.8, pan: 0.15, eqLow: 1, eqMid: 1, eqHigh: -1, reverbSend: 0.2, delaySend: 0.1 },
+                    crash: { pitch: 520, highpass: 1800, decay: 0.9, volume: 0.7, pan: -0.3, eqLow: -1, eqMid: 1, eqHigh: 3, reverbSend: 0.4, delaySend: 0.2 },
+                    crash2: { pitch: 600, highpass: 2000, decay: 0.8, volume: 0.7, pan: 0.3, eqLow: -1, eqMid: 1, eqHigh: 3, reverbSend: 0.4, delaySend: 0.2 }
                 },
-                fx: { delayTime: 0.3, delayFeedback: 0.15, reverbSize: 2.0, reverbMix: 0.25, highpass: 40, lowpass: 16000, compThreshold: -12, compRatio: 2.5, saturation: 5, chorus: 12 }
+                fx: { delayTime: 0.3, delayFeedback: 0.2, reverbSize: 1.8, reverbMix: 0.25, highpass: 40, lowpass: 14000, compThreshold: -16, compRatio: 4, saturation: 20, chorus: 12, roomBleed: 30 }
             },
-            orchestral: {
+            neosoul: {
                 synth: {
-                    kick: { pitch: 75, decay: 0.5, volume: 1.4, pan: 0.0, eqLow: 8, eqMid: -3, eqHigh: -3, reverbSend: 0.55, delaySend: 0.1 },
-                    snare: { pitch: 140, noiseFreq: 500, decay: 0.5, volume: 1.1, pan: -0.05, eqLow: 3, eqMid: 2, eqHigh: 1, reverbSend: 0.6, delaySend: 0.2 },
-                    hihat: { highpass: 4500, decay: 0.12, volume: 0.6, pan: -0.4, eqLow: -1, eqMid: 2, eqHigh: 2, reverbSend: 0.3, delaySend: 0.1 },
-                    tom: { pitch: 110, pitchEnd: 45, decay: 0.6, volume: 1.2, pan: 0.2, eqLow: 6, eqMid: 2, eqHigh: -2, reverbSend: 0.5, delaySend: 0.25 },
-                    crash: { pitch: 350, highpass: 1500, decay: 2.5, volume: 1.0, pan: -0.3, eqLow: 0, eqMid: 2, eqHigh: 5, reverbSend: 0.8, delaySend: 0.3 },
-                    crash2: { pitch: 400, highpass: 1800, decay: 2.0, volume: 1.0, pan: 0.3, eqLow: 0, eqMid: 2, eqHigh: 5, reverbSend: 0.8, delaySend: 0.3 }
+                    kick: { pitch: 85, decay: 0.35, volume: 1.2, pan: 0.0, eqLow: 4, eqMid: -1, eqHigh: -2, reverbSend: 0.2, delaySend: 0.1 },
+                    snare: { pitch: 155, noiseFreq: 550, decay: 0.18, volume: 0.85, pan: -0.05, eqLow: 1, eqMid: 2, eqHigh: -1, reverbSend: 0.35, delaySend: 0.15 },
+                    hihat: { highpass: 5500, decay: 0.04, volume: 0.65, pan: -0.25, eqLow: -3, eqMid: 1, eqHigh: 2, reverbSend: 0.15, delaySend: 0.1 },
+                    tom: { pitch: 170, pitchEnd: 65, decay: 0.25, volume: 0.75, pan: 0.1, eqLow: 2, eqMid: 1, eqHigh: -2, reverbSend: 0.25, delaySend: 0.1 },
+                    crash: { pitch: 480, highpass: 1600, decay: 1.0, volume: 0.65, pan: -0.35, eqLow: -2, eqMid: 1, eqHigh: 2, reverbSend: 0.4, delaySend: 0.25 },
+                    crash2: { pitch: 550, highpass: 1800, decay: 0.9, volume: 0.65, pan: 0.35, eqLow: -2, eqMid: 1, eqHigh: 2, reverbSend: 0.4, delaySend: 0.25 }
                 },
-                fx: { delayTime: 0.45, delayFeedback: 0.25, reverbSize: 5.0, reverbMix: 0.6, highpass: 10, lowpass: 20000, compThreshold: -26, compRatio: 3.5, saturation: 8, chorus: 15 }
+                fx: { delayTime: 0.38, delayFeedback: 0.25, reverbSize: 2.5, reverbMix: 0.35, highpass: 50, lowpass: 12000, compThreshold: -22, compRatio: 3, saturation: 25, chorus: 18, roomBleed: 55 }
             }
         };
 
         function loadDrumKitPreset(kitName) {
             const selected = drumKitLibrary[kitName];
             if (!selected) return;
+
+            // 1. LP 크랙 시뮬레이터 활성화 분기 (Lo-Fi Jazz 프리셋 특화)
+            if (kitName === "lofi") {
+                dustGainNode.gain.setValueAtTime(0.3, audioCtx.currentTime); // LP 지글지글 사운드 on
+            } else {
+                dustGainNode.gain.setValueAtTime(0.0, audioCtx.currentTime); // lofi 외에는 크랙 무음
+            }
 
             for (let inst in selected.synth) {
                 for (let param in selected.synth[inst]) {
@@ -3427,6 +3508,10 @@
                     updateDynamics(fx, value);
                     const dynSlider = document.getElementById(fx === 'saturation' ? 'fx-saturate' : 'fx-chorus');
                     if (dynSlider) dynSlider.value = value;
+                } else if (fx === 'roomBleed') {
+                    masterFX.roomBleed = value;
+                    updateKnobVisuals('master', 'bleed', value);
+                    document.getElementById('label-master-bleed').innerText = value + "%";
                 } else {
                     updateMasterFX(fx, value, suffix);
                 }
@@ -3459,7 +3544,9 @@
                     knobs.forEach(k => {
                         const inst = k.dataset.instrument;
                         const param = k.dataset.param;
-                        if (synthParams[inst]) {
+                        if (inst === "master" && param === "bleed") {
+                            updateKnobVisuals('master', 'bleed', masterFX.roomBleed);
+                        } else if (synthParams[inst]) {
                             const val = synthParams[inst][param];
                             updateKnobVisuals(inst, param, val);
                         }
@@ -3487,6 +3574,7 @@
             console.log("[System] 로컬 미디 셋업 캐시가 복원되었습니다.");
         }
 
+        // 초기 시작 실행 순서
         render6ChannelMixer();
         initLayout();
         requestAnimationFrame(physicsUpdate);
