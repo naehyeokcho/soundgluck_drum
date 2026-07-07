@@ -575,20 +575,26 @@
                 </div>
             </div>
             
-            <nav class="flex flex-wrap gap-1 bg-black/60 p-1 rounded-xl border border-gray-800">
-                <button onclick="switchTab('sound')" id="tab-sound" class="nav-tab active px-3 py-2 text-xs font-bold text-gray-400 hover:text-white rounded-lg flex items-center gap-1.5">
-                    <i class="fa-solid fa-sliders"></i> PERFORMANCE MODE
+            <div class="flex flex-wrap items-center gap-3">
+                <nav class="flex flex-wrap gap-1 bg-black/60 p-1 rounded-xl border border-gray-800">
+                    <button onclick="switchTab('sound')" id="tab-sound" class="nav-tab active px-3 py-2 text-xs font-bold text-gray-400 hover:text-white rounded-lg flex items-center gap-1.5">
+                        <i class="fa-solid fa-sliders"></i> PERFORMANCE MODE
+                    </button>
+                    <button onclick="switchTab('play')" id="tab-play" class="nav-tab px-3 py-2 text-xs font-bold text-gray-400 hover:text-white rounded-lg flex items-center gap-1.5">
+                        <i class="fa-solid fa-gamepad"></i> GAME MODE
+                    </button>
+                    <button onclick="switchTab('controller')" id="tab-controller" class="nav-tab px-3 py-2 text-xs font-bold text-gray-400 hover:text-white rounded-lg flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle-nodes"></i> 컨트롤러 맵핑
+                    </button>
+                    <button onclick="switchTab('help')" id="tab-help" class="nav-tab px-3 py-2 text-xs font-bold text-gray-400 hover:text-white rounded-lg flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle-question"></i> 사용 가이드 & 팁
+                    </button>
+                </nav>
+                
+                <button onclick="handleLogout()" class="px-3.5 py-2 text-xs font-black bg-red-950/80 hover:bg-red-900 border border-red-800 hover:border-red-600 text-red-300 rounded-xl transition duration-200 flex items-center gap-1.5 shadow-md">
+                    <i class="fa-solid fa-right-from-bracket"></i> 로그아웃
                 </button>
-                <button onclick="switchTab('play')" id="tab-play" class="nav-tab px-3 py-2 text-xs font-bold text-gray-400 hover:text-white rounded-lg flex items-center gap-1.5">
-                    <i class="fa-solid fa-gamepad"></i> GAME MODE
-                </button>
-                <button onclick="switchTab('controller')" id="tab-controller" class="nav-tab px-3 py-2 text-xs font-bold text-gray-400 hover:text-white rounded-lg flex items-center gap-1.5">
-                    <i class="fa-solid fa-circle-nodes"></i> 컨트롤러 맵핑
-                </button>
-                <button onclick="switchTab('help')" id="tab-help" class="nav-tab px-3 py-2 text-xs font-bold text-gray-400 hover:text-white rounded-lg flex items-center gap-1.5">
-                    <i class="fa-solid fa-circle-question"></i> 사용 가이드 & 팁
-                </button>
-            </nav>
+            </div>
         </header>
 
         <!-- ---------------- TAB 1: GAME MODE (이제 두번째 탭이므로 초기 hidden 처리) ---------------- -->
@@ -678,6 +684,10 @@
                         <option value="quarter">4비트 단조로운 킥</option>
                         <option value="sixteen_funk">16비트 정통 펑크</option>
                         <option value="shuffle">어쿠스틱 셔플 롤</option>
+                        <option value="bossa_nova">보사노바 (Bossa Nova)</option>
+                        <option value="drum_n_bass">드럼 앤 베이스 (D&B)</option>
+                        <option value="disco">디스코 업비트 (Disco)</option>
+                        <option value="heavy_metal">헤비 메탈 (Blast Beat)</option>
                         <option value="random">완전 랜덤 드롭</option>
                     </select>
                 </div>
@@ -774,24 +784,24 @@
                             <input type="checkbox" id="audio-enable" class="sr-only peer" checked>
                             <div class="relative w-9 h-5 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-cyan-500"></div>
                         </label>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 사운드 프리셋 셀렉터 (총 8개로 보강 확대) -->
+            <!-- 사운드 프리셋 셀렉터 (총 12개 대화형 확장형 라이브러리) -->
             <div class="bg-black/30 border border-gray-800 p-3 rounded-xl flex flex-col md:flex-row items-start md:items-center gap-3">
                 <span class="text-[11px] font-black text-[#ffe600] uppercase tracking-wider flex items-center gap-1">
                     <i class="fa-solid fa-compact-disc"></i> 🥁 SOUND LIBRARY PRESET:
                 </span>
-                <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2 w-full">
-                    <button onclick="loadDrumKitPreset('acoustic')" class="px-2.5 py-1 bg-cyan-950/40 hover:bg-cyan-900 border border-cyan-800 text-[10.5px] text-cyan-300 font-bold rounded-lg transition text-center truncate">Acoustic Studio</button>
-                    <button onclick="loadDrumKitPreset('trap808')" class="px-2.5 py-1 bg-pink-950/40 hover:bg-pink-900 border border-pink-800 text-[10.5px] text-pink-300 font-bold rounded-lg transition text-center truncate">Deep Sub 808</button>
-                    <button onclick="loadDrumKitPreset('retro80s')" class="px-2.5 py-1 bg-purple-950/40 hover:bg-purple-900 border border-purple-800 text-[10.5px] text-purple-300 font-bold rounded-lg transition text-center truncate">Cyber Retro 80s</button>
-                    <button onclick="loadDrumKitPreset('metal')" class="px-2.5 py-1 bg-yellow-950/40 hover:bg-yellow-900 border border-yellow-800 text-[10.5px] text-yellow-400 font-bold rounded-lg transition text-center truncate">Industrial Metal</button>
-                    <button onclick="loadDrumKitPreset('lofijazz')" class="px-2.5 py-1 bg-emerald-950/40 hover:bg-emerald-900 border border-emerald-800 text-[10.5px] text-emerald-400 font-bold rounded-lg transition text-center truncate">Lo-Fi Chill Jazz</button>
-                    <button onclick="loadDrumKitPreset('stadium')" class="px-2.5 py-1 bg-rose-950/40 hover:bg-rose-900 border border-rose-800 text-[10.5px] text-rose-400 font-bold rounded-lg transition text-center truncate">Arena Stadium</button>
-                    <button onclick="loadDrumKitPreset('perc')" class="px-2.5 py-1 bg-amber-950/40 hover:bg-amber-900 border border-amber-800 text-[10.5px] text-amber-400 font-bold rounded-lg transition text-center truncate">Latin Percussion</button>
-                    <button onclick="loadDrumKitPreset('techno')" class="px-2.5 py-1 bg-indigo-950/40 hover:bg-indigo-900 border border-indigo-800 text-[10.5px] text-indigo-400 font-bold rounded-lg transition text-center truncate">Electro House</button>
+                <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-12 gap-2 w-full">
+                    <button onclick="loadDrumKitPreset('acoustic')" class="px-2 py-1.5 bg-cyan-950/40 hover:bg-cyan-900 border border-cyan-800 text-[10px] text-cyan-300 font-bold rounded-lg transition text-center truncate">Acoustic Studio</button>
+                    <button onclick="loadDrumKitPreset('trap808')" class="px-2 py-1.5 bg-pink-950/40 hover:bg-pink-900 border border-pink-800 text-[10px] text-pink-300 font-bold rounded-lg transition text-center truncate">Deep Sub 808</button>
+                    <button onclick="loadDrumKitPreset('retro80s')" class="px-2 py-1.5 bg-purple-950/40 hover:bg-purple-900 border border-purple-800 text-[10px] text-purple-300 font-bold rounded-lg transition text-center truncate">Cyber Retro 80s</button>
+                    <button onclick="loadDrumKitPreset('metal')" class="px-2 py-1.5 bg-yellow-950/40 hover:bg-yellow-900 border border-yellow-800 text-[10px] text-yellow-400 font-bold rounded-lg transition text-center truncate">Industrial Metal</button>
+                    <button onclick="loadDrumKitPreset('lofijazz')" class="px-2 py-1.5 bg-emerald-950/40 hover:bg-emerald-900 border border-emerald-800 text-[10px] text-emerald-400 font-bold rounded-lg transition text-center truncate">Lo-Fi Chill Jazz</button>
+                    <button onclick="loadDrumKitPreset('stadium')" class="px-2 py-1.5 bg-rose-950/40 hover:bg-rose-900 border border-rose-800 text-[10px] text-rose-400 font-bold rounded-lg transition text-center truncate">Arena Stadium</button>
+                    <button onclick="loadDrumKitPreset('perc')" class="px-2 py-1.5 bg-amber-950/40 hover:bg-amber-900 border border-amber-800 text-[10px] text-amber-400 font-bold rounded-lg transition text-center truncate">Latin Percussion</button>
+                    <button onclick="loadDrumKitPreset('techno')" class="px-2 py-1.5 bg-indigo-950/40 hover:bg-indigo-900 border border-indigo-800 text-[10px] text-indigo-400 font-bold rounded-lg transition text-center truncate">Electro House</button>
+                    <button onclick="loadDrumKitPreset('synthwave')" class="px-2 py-1.5 bg-orange-950/40 hover:bg-orange-900 border border-orange-800 text-[10px] text-orange-400 font-bold rounded-lg transition text-center truncate">Outrun Wave</button>
+                    <button onclick="loadDrumKitPreset('drumandbass')" class="px-2 py-1.5 bg-red-950/40 hover:bg-red-900 border border-red-800 text-[10px] text-red-400 font-bold rounded-lg transition text-center truncate">Fast D&B Break</button>
+                    <button onclick="loadDrumKitPreset('bossanova')" class="px-2 py-1.5 bg-teal-950/40 hover:bg-teal-900 border border-teal-800 text-[10px] text-teal-400 font-bold rounded-lg transition text-center truncate">Warm Bossa Rim</button>
+                    <button onclick="loadDrumKitPreset('orchestral')" class="px-2 py-1.5 bg-slate-850/40 hover:bg-slate-800 border border-slate-700 text-[10px] text-slate-300 font-bold rounded-lg transition text-center truncate">Hall Timpani</button>
                 </div>
             </div>
 
@@ -1060,7 +1070,7 @@
 
         // 🌐 Google Sheets Apps Script 배포 후 얻은 웹앱 URL을 아래 빈공간에 정확하게 입력하세요!
         // (배포 주소가 비어있으면 오프라인/개발자 로컬 로그인 모드로 자동 전환됩니다.)
-        const GOOGLE_SHEET_API_URL = ""; 
+        const GOOGLE_SHEET_API_URL = "https://script.google.com/macros/s/AKfycbwpGsX22GBxkKezIPq73jkhLMAlC8RmABTBzPKUN8qdDxuGosuc5QXlAFCM9tIidFV_/exec"; 
 
         // 🔔 비차단 반응형 토스트 알리미 (모든 alert 방출!)
         function showToast(msg) {
@@ -1160,6 +1170,25 @@
             
             onboardingScreen.style.display = "flex";
             initMIDI(); // 백그라운드 MIDI 스레드 가동
+        }
+
+        function handleLogout() {
+            sessionStorage.removeItem('soundgluck_logged_in');
+            showToast("안전하게 로그아웃 되었습니다. 게이트 화면으로 전환합니다.");
+            
+            const loginScreen = document.getElementById('login-screen');
+            const onboardingScreen = document.getElementById('onboarding-screen');
+            const appContainer = document.getElementById('app-container');
+
+            appContainer.style.display = "none";
+            onboardingScreen.style.display = "none";
+            
+            loginScreen.style.opacity = "1";
+            loginScreen.style.visibility = "visible";
+            
+            // 기존 폼 초기화 및 새로고침 유도
+            document.getElementById('login-id').value = "";
+            document.getElementById('login-pw').value = "";
         }
 
         window.addEventListener('DOMContentLoaded', checkExistingSession);
@@ -2989,6 +3018,56 @@
                     }
                 }
             }
+            else if (autoPattern === 'bossa_nova') {
+                // 싱코페이션(당김음)이 살아있는 리얼 보사노바 패턴
+                if (step % 2 === 0) {
+                    createBeatLine();
+                    createNote(1); // 맑은 림/샤이커용 하이햇 상시 연주
+                }
+                if (step === 0 || step === 6 || step === 8 || step === 14) {
+                    createNote(0); // 부드러운 보사노바 베이스 킥
+                }
+                if (step === 2 || step === 10 || step === 12) {
+                    createNote(2); // 스네어 림샷 타이밍
+                }
+            }
+            else if (autoPattern === 'drum_n_bass') {
+                // 170BPM 이상에서 폭발하는 초고속 브레이크비트 드럼 앤 베이스
+                createBeatLine();
+                if (step % 2 === 0) {
+                    createNote(1); // 촘촘한 고속 하이햇
+                }
+                if (step === 0 || step === 10 || step === 11) {
+                    createNote(0); // 바운스 브레이크 킥
+                }
+                if (step === 4 || step === 12) {
+                    createNote(2); // 폭발적인 스네어 백비트
+                }
+            }
+            else if (autoPattern === 'disco') {
+                // 하이햇 오픈/클로즈의 숨결이 들리는 클래식 디스코 4온더플로어
+                createBeatLine();
+                if (step % 4 === 0) {
+                    createNote(0); // 일정한 4박 베이스 킥
+                }
+                if (step === 4 || step === 12) {
+                    createNote(2); // 스네어
+                }
+                if (step % 2 !== 0) {
+                    createNote(1); // 디스코 특유의 엇박(Off-beat) 하이햇 노트 배치
+                }
+            }
+            else if (autoPattern === 'heavy_metal') {
+                // 극한의 메탈을 위한 더블 베이스 킥 난사 및 블래스트 비트
+                createBeatLine();
+                createNote(0); // 매 단계 쉴 새 없이 몰아치는 트윈페달 베이스 킥
+                if (step % 2 === 0) {
+                    createNote(1); // 라이드/하이햇 심벌즈
+                }
+                if (step % 4 === 2) {
+                    createNote(2); // 무겁고 단단한 백스네어 타격
+                }
+            }
             else if (autoPattern === 'random') {
                 if (step % 2 === 0) {
                     createBeatLine();
@@ -3181,7 +3260,7 @@
         });
 
         /* ===================================================================
-           12. 공통 인프라 인터페이스 바인딩 (사운드 프리셋 4개 -> 8개로 보강 확장)
+           12. 공통 인프라 인터페이스 바인딩 (사운드 프리셋 4개 -> 12개로 대거 보강 확장)
            =================================================================== */
         const drumKitLibrary = {
             acoustic: {
@@ -3271,6 +3350,50 @@
                     crash2: { pitch: 650, highpass: 2200, decay: 0.45, volume: 0.8, pan: 0.5, eqLow: -2, eqMid: -1, eqHigh: 4, reverbSend: 0.3, delaySend: 0.1 }
                 },
                 fx: { delayTime: 0.3, delayFeedback: 0.3, reverbSize: 1.5, reverbMix: 0.2, highpass: 10, lowpass: 20000, compThreshold: -24, compRatio: 4, saturation: 15, chorus: 10 }
+            },
+            synthwave: {
+                synth: {
+                    kick: { pitch: 90, decay: 0.28, volume: 1.3, pan: 0.0, eqLow: 5, eqMid: -1, eqHigh: 0, reverbSend: 0.1, delaySend: 0.05 },
+                    snare: { pitch: 170, noiseFreq: 600, decay: 0.45, volume: 1.1, pan: -0.05, eqLow: 1, eqMid: 3, eqHigh: 2, reverbSend: 0.45, delaySend: 0.15 },
+                    hihat: { highpass: 5200, decay: 0.08, volume: 0.7, pan: -0.3, eqLow: -3, eqMid: 1, eqHigh: 3, reverbSend: 0.1, delaySend: 0.0 },
+                    tom: { pitch: 240, pitchEnd: 65, decay: 0.32, volume: 0.85, pan: 0.15, eqLow: 3, eqMid: 1, eqHigh: -1, reverbSend: 0.25, delaySend: 0.1 },
+                    crash: { pitch: 600, highpass: 2100, decay: 1.1, volume: 0.8, pan: -0.25, eqLow: -2, eqMid: 0, eqHigh: 4, reverbSend: 0.4, delaySend: 0.2 },
+                    crash2: { pitch: 700, highpass: 2400, decay: 0.9, volume: 0.8, pan: 0.4, eqLow: -2, eqMid: 0, eqHigh: 4, reverbSend: 0.4, delaySend: 0.2 }
+                },
+                fx: { delayTime: 0.35, delayFeedback: 0.3, reverbSize: 3.2, reverbMix: 0.35, highpass: 10, lowpass: 18000, compThreshold: -20, compRatio: 4, saturation: 18, chorus: 22 }
+            },
+            drumandbass: {
+                synth: {
+                    kick: { pitch: 140, decay: 0.15, volume: 1.35, pan: 0.0, eqLow: 4, eqMid: -2, eqHigh: 1, reverbSend: 0.02, delaySend: 0.0 },
+                    snare: { pitch: 260, noiseFreq: 1800, decay: 0.12, volume: 1.0, pan: -0.1, eqLow: -3, eqMid: 4, eqHigh: 3, reverbSend: 0.15, delaySend: 0.1 },
+                    hihat: { highpass: 8200, decay: 0.03, volume: 0.8, pan: -0.35, eqLow: -5, eqMid: 0, eqHigh: 5, reverbSend: 0.05, delaySend: 0.08 },
+                    tom: { pitch: 190, pitchEnd: 80, decay: 0.18, volume: 0.8, pan: 0.2, eqLow: 1, eqMid: 2, eqHigh: 0, reverbSend: 0.1, delaySend: 0.15 },
+                    crash: { pitch: 720, highpass: 3000, decay: 0.5, volume: 0.75, pan: -0.3, eqLow: -3, eqMid: -1, eqHigh: 5, reverbSend: 0.2, delaySend: 0.1 },
+                    crash2: { pitch: 850, highpass: 3300, decay: 0.4, volume: 0.75, pan: 0.4, eqLow: -3, eqMid: -1, eqHigh: 5, reverbSend: 0.2, delaySend: 0.1 }
+                },
+                fx: { delayTime: 0.25, delayFeedback: 0.2, reverbSize: 1.2, reverbMix: 0.1, highpass: 30, lowpass: 19000, compThreshold: -16, compRatio: 5, saturation: 22, chorus: 10 }
+            },
+            bossanova: {
+                synth: {
+                    kick: { pitch: 80, decay: 0.22, volume: 0.95, pan: 0.0, eqLow: 3, eqMid: -1, eqHigh: -2, reverbSend: 0.1, delaySend: 0.0 },
+                    snare: { pitch: 350, noiseFreq: 2200, decay: 0.05, volume: 0.8, pan: -0.15, eqLow: -5, eqMid: 4, eqHigh: 4, reverbSend: 0.25, delaySend: 0.15 },
+                    hihat: { highpass: 10000, decay: 0.04, volume: 0.75, pan: -0.25, eqLow: -6, eqMid: -1, eqHigh: 5, reverbSend: 0.15, delaySend: 0.05 },
+                    tom: { pitch: 130, pitchEnd: 70, decay: 0.28, volume: 0.8, pan: 0.3, eqLow: 3, eqMid: 1, eqHigh: -1, reverbSend: 0.2, delaySend: 0.1 },
+                    crash: { pitch: 480, highpass: 4000, decay: 0.7, volume: 0.65, pan: -0.35, eqLow: -4, eqMid: -1, eqHigh: 4, reverbSend: 0.3, delaySend: 0.2 },
+                    crash2: { pitch: 550, highpass: 4200, decay: 0.6, volume: 0.65, pan: 0.35, eqLow: -4, eqMid: -1, eqHigh: 4, reverbSend: 0.3, delaySend: 0.2 }
+                },
+                fx: { delayTime: 0.3, delayFeedback: 0.15, reverbSize: 2.0, reverbMix: 0.25, highpass: 40, lowpass: 16000, compThreshold: -12, compRatio: 2.5, saturation: 5, chorus: 12 }
+            },
+            orchestral: {
+                synth: {
+                    kick: { pitch: 75, decay: 0.5, volume: 1.4, pan: 0.0, eqLow: 8, eqMid: -3, eqHigh: -3, reverbSend: 0.55, delaySend: 0.1 },
+                    snare: { pitch: 140, noiseFreq: 500, decay: 0.5, volume: 1.1, pan: -0.05, eqLow: 3, eqMid: 2, eqHigh: 1, reverbSend: 0.6, delaySend: 0.2 },
+                    hihat: { highpass: 4500, decay: 0.12, volume: 0.6, pan: -0.4, eqLow: -1, eqMid: 2, eqHigh: 2, reverbSend: 0.3, delaySend: 0.1 },
+                    tom: { pitch: 110, pitchEnd: 45, decay: 0.6, volume: 1.2, pan: 0.2, eqLow: 6, eqMid: 2, eqHigh: -2, reverbSend: 0.5, delaySend: 0.25 },
+                    crash: { pitch: 350, highpass: 1500, decay: 2.5, volume: 1.0, pan: -0.3, eqLow: 0, eqMid: 2, eqHigh: 5, reverbSend: 0.8, delaySend: 0.3 },
+                    crash2: { pitch: 400, highpass: 1800, decay: 2.0, volume: 1.0, pan: 0.3, eqLow: 0, eqMid: 2, eqHigh: 5, reverbSend: 0.8, delaySend: 0.3 }
+                },
+                fx: { delayTime: 0.45, delayFeedback: 0.25, reverbSize: 5.0, reverbMix: 0.6, highpass: 10, lowpass: 20000, compThreshold: -26, compRatio: 3.5, saturation: 8, chorus: 15 }
             }
         };
 
