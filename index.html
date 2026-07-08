@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOUNDGLUCK | DRUM TULZ v4.2.0 Ultimate Edition</title>
+    <title>SOUNDGLUCK | DRUM TULZ v4.2.5 Ultimate Edition</title>
     <!-- 외부 고화질 아이콘 라이브러리 및 테일윈드 프레임워크 로드 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -390,7 +390,7 @@
             </div>
             
             <h2 class="text-2xl font-black tracking-widest text-white mb-2 uppercase whitespace-nowrap">SOUNDGLUCK &nbsp;|&nbsp; DRUM TULZ</h2>
-            <p class="text-[11px] text-[#ff007f] font-mono tracking-wider uppercase mb-8">l &nbsp; Drum Tulz v4.2.0 Ultimate</p>
+            <p class="text-[11px] text-[#ff007f] font-mono tracking-wider uppercase mb-8">l &nbsp; Drum Tulz v4.2.5 Ultimate</p>
             
             <form onsubmit="handleLogin(event)" class="space-y-6">
                 <div class="text-left">
@@ -415,7 +415,7 @@
                     <i class="fa-solid fa-cloud-arrow-up text-[10px]"></i> Google Sheets Cloud Security Enabled
                 </span>
             </div>
-            <p class="text-[10px] text-gray-600 mt-6 font-mono">AUTHORIZED PERSONNEL ONLY // v4.2.0</p>
+            <p class="text-[10px] text-gray-600 mt-6 font-mono">AUTHORIZED PERSONNEL ONLY // v4.2.5</p>
         </div>
     </div>
 
@@ -558,7 +558,7 @@
                 </div>
                 <div class="whitespace-nowrap">
                     <h1 class="text-xl font-black tracking-widest text-white flex items-center gap-2">
-                        SOUNDGLUCK <span class="text-cyan-500 font-light">|</span> DRUM TULZ <span class="text-[#ff007f] font-mono text-[10px] border border-pink-900 px-2 py-0.5 rounded">V4.2.0</span>
+                        SOUNDGLUCK <span class="text-cyan-500 font-light">|</span> DRUM TULZ <span class="text-[#ff007f] font-mono text-[10px] border border-pink-900 px-2 py-0.5 rounded">V4.2.5</span>
                     </h1>
                     <p class="text-[10px] text-gray-500 font-mono">Analog Synthesizer & Pro-Mixing Studio Module</p>
                 </div>
@@ -596,7 +596,7 @@
             <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center border-b border-[#1c1c3f] pb-4 gap-4">
                 <div>
                     <h2 class="text-sm font-black text-[#00f3ff] tracking-widest uppercase flex items-center gap-1.5">
-                        <i class="fa-solid fa-wave-square text-cyan-400"></i> SoundGluck Performance Workspace v4.2.0
+                        <i class="fa-solid fa-wave-square text-cyan-400"></i> SoundGluck Performance Workspace v4.2.5
                     </h2>
                     <p class="text-[11px] text-gray-400 mt-1 font-sans">고밀도 신디사이저 믹싱 및 사운드 조율 워크플레이스</p>
                 </div>
@@ -669,7 +669,7 @@
                 <div class="xl:col-span-3 bg-[#0a0a1f] border border-[#1e1e40] rounded-2xl p-4 flex flex-col gap-3 shadow-inner">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-[#1f1f4d] pb-2 gap-2">
                         <span id="mixer-desk-title" class="text-xs font-black text-cyan-400 tracking-widest flex items-center gap-2">
-                            <i class="fa-solid fa-sliders text-cyan-400"></i> PRO-MIXER DESK (8L AUTOMATED)
+                            <i class="fa-solid fa-sliders text-cyan-400"></i> PRO-MIXER DESK (8L AUTOMATED WITH ANALOG VU METERS)
                         </span>
                     </div>
                     
@@ -792,6 +792,7 @@
                 </div>
             </div>
 
+            <!-- Parameters Dashboard Row -->
             <div class="grid grid-cols-1 lg:grid-cols-5 gap-3 bg-[#08081a] border border-[#141432] rounded-xl p-3">
                 <div class="flex flex-col gap-1.5 bg-black/40 p-2 rounded-lg border border-gray-800/60 justify-center">
                     <label class="text-[9px] font-black text-gray-400 uppercase tracking-wider">액티브 맵핑 형태</label>
@@ -847,8 +848,10 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-3 bg-[#0a0a20] border-2 border-cyan-500/30 rounded-xl p-3">
-                <div class="flex items-center justify-center gap-2 col-span-3 bg-black/60 p-2 rounded-lg border border-gray-800/80">
+            <!-- Consolidated System Controls & Live Sequence Recorder Row -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 bg-[#0a0a20] border-2 border-cyan-500/30 rounded-xl p-3 items-center">
+                <!-- Left half: Game Control Engines (PLAY, PAUSE, STOP, RESET) -->
+                <div class="lg:col-span-6 flex flex-wrap items-center gap-2 bg-black/40 p-2 rounded-lg border border-gray-800/80">
                     <button onclick="startGameEngine()" class="px-4 py-2 bg-green-950 hover:bg-green-900 text-green-300 border border-green-800 text-xs font-black rounded-lg transition flex items-center gap-1.5 shadow-md shadow-green-950">
                         <i class="fa-solid fa-play"></i> PLAY
                     </button>
@@ -861,14 +864,40 @@
                     <button onclick="resetGameEngine()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 text-xs font-black rounded-lg transition flex items-center gap-1.5">
                         <i class="fa-solid fa-rotate-left"></i> RESET
                     </button>
+                    <div class="flex items-center gap-2 border-l border-gray-800 pl-3 ml-1 h-[28px]">
+                        <span class="text-[9px] font-black text-gray-400 uppercase">HUMANIZE</span>
+                        <label class="inline-flex items-center cursor-pointer scale-90">
+                            <input type="checkbox" id="param-humanize" class="sr-only peer" checked>
+                            <div class="relative w-9 h-5 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-cyan-500"></div>
+                        </label>
+                    </div>
                 </div>
 
-                <div class="flex items-center justify-between p-2.5 bg-black/40 border border-gray-800 rounded-lg">
-                    <span class="text-[9px] font-black text-gray-400 uppercase">인간미 오차 보정 (Humanize)</span>
-                    <label class="inline-flex items-center cursor-pointer">
-                        <input type="checkbox" id="param-humanize" class="sr-only peer" checked>
-                        <div class="relative w-9 h-5 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-cyan-500"></div>
-                    </label>
+                <!-- Right half: Consolidated Recorder & Exporter Panel -->
+                <div class="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-2 bg-black/40 p-2 rounded-lg border border-gray-800/80">
+                    <div class="flex items-center justify-between gap-2 border-r border-gray-800/60 pr-2">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-microphone text-red-500 animate-pulse text-xs"></i>
+                            <div>
+                                <span id="record-status-badge" class="text-[8px] px-1.5 py-0.5 rounded font-extrabold bg-slate-800 text-slate-400">STANDBY</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-1">
+                            <button id="record-btn" onclick="toggleRecording()" class="px-2.5 py-1 bg-red-950/40 border border-red-800 text-[10px] text-red-400 rounded-lg font-bold hover:bg-red-950 transition flex items-center gap-1">
+                                <i class="fa-solid fa-circle text-[8px]" id="rec-icon"></i> 녹음
+                            </button>
+                            <button id="replay-btn" disabled onclick="startReplay()" class="px-2.5 py-1 bg-cyan-950/20 opacity-50 border border-cyan-900 text-[10px] text-cyan-400 rounded-lg font-bold transition flex items-center gap-1">
+                                <i class="fa-solid fa-play text-[8px]"></i> 리플레이
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between gap-2 pl-1">
+                        <span class="text-[9px] text-gray-500 font-bold">시퀀스 내보내기/저장</span>
+                        <button id="file-export-btn" disabled onclick="exportToJsonFile()" class="px-3 py-1 bg-[#121c12] border border-green-900 text-[10px] text-green-400 rounded-lg font-bold hover:bg-green-950 transition flex items-center gap-1">
+                            <i class="fa-solid fa-file-export text-[9px]"></i> 내보내기
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -879,38 +908,6 @@
                 <div id="combo-display">0 COMBO</div>
                 <div id="lanes-wrapper"></div>
                 <div id="laser-judgment-line"></div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 bg-[#060614] border border-[#141430] rounded-xl p-3">
-                <div class="flex items-center justify-between gap-3 bg-black/40 p-2.5 rounded-lg border border-gray-800/80">
-                    <div class="flex items-center gap-2">
-                        <i class="fa-solid fa-microphone text-red-500 animate-pulse"></i>
-                        <div>
-                            <p class="text-xs font-bold text-white">시퀀스 레코더</p>
-                            <span id="record-status-badge" class="text-[9px] px-1.5 py-0.5 rounded font-extrabold bg-slate-800 text-slate-400">STANDBY</span>
-                        </div>
-                    </div>
-                    <div class="flex gap-1.5">
-                        <button id="record-btn" onclick="toggleRecording()" class="px-3 py-1.5 bg-red-950/40 border border-red-800 text-xs text-red-400 rounded-lg font-bold hover:bg-red-950 transition flex items-center gap-1 animate-none">
-                            <i class="fa-solid fa-circle" id="rec-icon"></i> 녹음
-                        </button>
-                        <button id="replay-btn" disabled onclick="startReplay()" class="px-3 py-1.5 bg-cyan-950/20 opacity-50 border border-cyan-900 text-xs text-cyan-400 rounded-lg font-bold transition flex items-center gap-1">
-                            <i class="fa-solid fa-play"></i> 리플레이
-                        </button>
-                    </div>
-                </div>
-
-                <div class="flex items-center justify-between gap-2 bg-black/40 p-2.5 rounded-lg border border-gray-800/80">
-                    <div class="text-left">
-                        <p class="text-xs font-bold text-white">시퀀스 파일 저장 & 다운로드</p>
-                        <span class="text-[9px] text-gray-500">녹음된 노트를 파일로 내보내기</span>
-                    </div>
-                    <div class="flex gap-1.5 flex-1 justify-end">
-                        <button id="file-export-btn" disabled onclick="exportToJsonFile()" class="px-2.5 py-1.5 bg-[#121c12] border border-green-900 text-xs text-green-400 rounded-lg font-bold hover:bg-green-950 transition flex items-center gap-1">
-                            <i class="fa-solid fa-file-export"></i> 내보내기
-                        </button>
-                    </div>
-                </div>
             </div>
 
             <!-- Virtual Drum Pad Frame -->
@@ -982,7 +979,7 @@
         <div id="content-help" class="hidden bg-[#06061a]/95 border border-[#141432] rounded-2xl p-6">
             <div class="border-b border-gray-800 pb-4 mb-6">
                 <h2 class="text-base font-black text-[#00f3ff] tracking-widest uppercase flex items-center gap-2">
-                    <i class="fa-solid fa-circle-info text-cyan-400"></i> SOUNDGLUCK DRUMTULZ v4.2.0 초보자 맞춤형 정밀 가이드
+                    <i class="fa-solid fa-circle-info text-cyan-400"></i> SOUNDGLUCK DRUMTULZ v4.2.5 초보자 맞춤형 정밀 가이드
                 </h2>
                 <p class="text-xs text-gray-400 mt-1">전자드럼 최초 결속부터 오디오 성능을 300% 극대화하는 전문가 셋업 노하우까지 한눈에 확인하세요.</p>
             </div>
@@ -1132,7 +1129,7 @@
 
     <script>
         /* ===================================================================
-           1. 🔑 Session Security Management
+           1. 🔑 Session Security Management (Google Sheet Cloud Auth)
            =================================================================== */
 
         const GOOGLE_SHEET_API_URL = "https://script.google.com/macros/s/AKfycbwpGsX22GBxkKezIPq73jkhLMAlC8RmABTBzPKUN8qdDxuGosuc5QXlAFCM9tIidFV_/exec"; 
@@ -1254,7 +1251,7 @@
         }
 
         /* ===================================================================
-           2. 🎛️ Digital Synthesizer Engine (Web Audio API)
+           2. 🎛️ Digital Synthesizer Engine (Web Audio API Permanent Routing)
            =================================================================== */
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         const audioEnableCheckbox = document.getElementById('audio-enable');
@@ -1313,14 +1310,28 @@
         const bufferLength = analyserNode.frequencyBinCount;
         const dataArray = new Uint8Array(bufferLength);
 
+        // Permanent hardware routing channels strip representation
+        const channelNodes = {};
+        const consoleChannels = [
+            { id: 'kick', name: 'Kick' },
+            { id: 'snare', name: 'Snare' },
+            { id: 'hihat', name: 'Hi-Hat' },
+            { id: 'tom', name: 'Toms' },
+            { id: 'crash', name: 'Crash 1' },
+            { id: 'crash2', name: 'Crash 2' }
+        ];
+
         function initAudioRouting() {
+            // Master Compressor setup
             masterCompressor.threshold.setValueAtTime(masterFX.compThreshold, audioCtx.currentTime);
             masterCompressor.ratio.setValueAtTime(masterFX.compRatio, audioCtx.currentTime);
             masterCompressor.attack.setValueAtTime(0.003, audioCtx.currentTime); 
             masterCompressor.release.setValueAtTime(0.08, audioCtx.currentTime);  
 
+            // Saturation Curve setup
             updateSaturationCurve(masterFX.saturation);
 
+            // Modulation / Chorus effects setup
             masterChorusDelay.delayTime.setValueAtTime(0.015, audioCtx.currentTime); 
             masterChorusLFOGain.gain.setValueAtTime(masterFX.chorus * 0.0001, audioCtx.currentTime); 
             masterChorusLFO.frequency.value = 1.5; 
@@ -1328,11 +1339,13 @@
             masterChorusLFOGain.connect(masterChorusDelay.delayTime);
             try { masterChorusLFO.start(); } catch(e) {}
 
+            // Delay module setup
             delayNode.delayTime.value = masterFX.delayTime;
             delayFeedbackNode.gain.value = masterFX.delayFeedback;
             delayNode.connect(delayFeedbackNode);
             delayFeedbackNode.connect(delayNode);
 
+            // Reverb module setup
             reverbWetGain.gain.value = masterFX.reverbMix;
             reverbNode.buffer = createReverbImpulseResponse(masterFX.reverbSize, 3.0);
 
@@ -1352,6 +1365,82 @@
             masterHighpass.connect(masterLowpass);
             masterLowpass.connect(analyserNode);
             analyserNode.connect(audioCtx.destination);
+
+            // Initialize all discrete channels strip representation
+            initChannelStrips();
+        }
+
+        function initChannelStrips() {
+            consoleChannels.forEach(ch => {
+                const param = synthParams[ch.id];
+                
+                const inputNode = audioCtx.createGain();
+                
+                const eqLow = audioCtx.createBiquadFilter();
+                eqLow.type = 'lowshelf';
+                eqLow.frequency.value = 200;
+                eqLow.gain.value = param.eqLow;
+                
+                const eqMid = audioCtx.createBiquadFilter();
+                eqMid.type = 'peaking';
+                eqMid.frequency.value = 1000;
+                eqMid.Q.value = 1.0;
+                eqMid.gain.value = param.eqMid;
+                
+                const eqHigh = audioCtx.createBiquadFilter();
+                eqHigh.type = 'highshelf';
+                eqHigh.frequency.value = 5000;
+                eqHigh.gain.value = param.eqHigh;
+                
+                const panner = audioCtx.createStereoPanner();
+                panner.pan.value = param.pan;
+                
+                const volumeGain = audioCtx.createGain();
+                volumeGain.gain.value = param.volume;
+                
+                const muteGain = audioCtx.createGain();
+                muteGain.gain.value = param.mute ? 0 : 1;
+                
+                // Track-specific level diagnostics
+                const analyser = audioCtx.createAnalyser();
+                analyser.fftSize = 32; 
+                
+                const reverbSend = audioCtx.createGain();
+                reverbSend.gain.value = param.reverbSend;
+                
+                const delaySend = audioCtx.createGain();
+                delaySend.gain.value = param.delaySend;
+                
+                // Hardware chain flow: input -> EQ 3-band -> panning -> volume gain -> mute/solo gating -> track diagnosis -> main mix bus
+                inputNode.connect(eqLow);
+                eqLow.connect(eqMid);
+                eqMid.connect(eqHigh);
+                eqHigh.connect(panner);
+                panner.connect(volumeGain);
+                volumeGain.connect(muteGain);
+                muteGain.connect(analyser);
+                analyser.connect(masterCompressor);
+                
+                // Parallel Sends architecture (Post-EQ, Pre-fader)
+                eqHigh.connect(reverbSend);
+                reverbSend.connect(reverbNode);
+                
+                eqHigh.connect(delaySend);
+                delaySend.connect(delayNode);
+                
+                channelNodes[ch.id] = {
+                    input: inputNode,
+                    eqLow: eqLow,
+                    eqMid: eqMid,
+                    eqHigh: eqHigh,
+                    panner: panner,
+                    volumeGain: volumeGain,
+                    muteGain: muteGain,
+                    analyser: analyser,
+                    reverbSend: reverbSend,
+                    delaySend: delaySend
+                };
+            });
         }
 
         function updateSaturationCurve(amount) {
@@ -1446,7 +1535,7 @@
                 hihat: { highpass: 7000, decay: 0.1, volume: 0.72, pan: -0.38, eqLow: -2, eqMid: 0, eqHigh: 3, reverbSend: 0.18, delaySend: 0.08, mute: false, solo: false },
                 tom: { pitch: 165, decay: 0.48, volume: 0.88, pan: 0.28, eqLow: 4, eqMid: 1, eqHigh: 1, reverbSend: 0.35, delaySend: 0.15, mute: false, solo: false },
                 crash: { pitch: 470, highpass: 1300, decay: 1.2, volume: 0.88, pan: -0.35, eqLow: -2, eqMid: 1, eqHigh: 4, reverbSend: 0.45, delaySend: 0.2, mute: false, solo: false },
-                crash2: { pitch: 550, highpass: 1450, decay: 1.05, volume: 0.88, pan: 0.45, eqLow: -2, eqMid: 1, eqHigh: 4, reverbSend: 0.45, delaySend: 0.2, mute: false, solo: false }
+                crash2: { pitch: 550, hihpass: 1450, decay: 1.05, volume: 0.88, pan: 0.45, eqLow: -2, eqMid: 1, eqHigh: 4, reverbSend: 0.45, delaySend: 0.2, mute: false, solo: false }
             },
             dubStep: {
                 kick: { pitch: 60, decay: 0.55, volume: 1.2, pan: 0.0, eqLow: 8, eqMid: -4, eqHigh: 1, reverbSend: 0.1, delaySend: 0.0, mute: false, solo: false },
@@ -1518,36 +1607,25 @@
             if (!audioEnableCheckbox.checked) return;
             if (audioCtx.state === 'suspended') audioCtx.resume();
 
+            // Obtain parameters from permanent config state
             const p = synthParams[instrument];
             if (!p || p.mute) return;
 
+            // Route to target permanent channel strip
+            const strip = channelNodes[instrument];
+            if (!strip) return;
+
             const velScale = velocity / 127;
-            const channelGain = audioCtx.createGain();
-            channelGain.gain.setValueAtTime(p.volume * velScale, audioCtx.currentTime);
-
-            const panner = audioCtx.createStereoPanner();
-            panner.pan.setValueAtTime(p.pan, audioCtx.currentTime);
-
-            const eqL = audioCtx.createBiquadFilter(); eqL.type = 'lowshelf'; eqL.frequency.value = 200; eqL.gain.value = p.eqLow;
-            const eqM = audioCtx.createBiquadFilter(); eqM.type = 'peaking'; eqM.frequency.value = 1000; eqM.Q.value = 1.0; eqM.gain.value = p.eqMid;
-            const eqH = audioCtx.createBiquadFilter(); eqH.type = 'highshelf'; eqH.frequency.value = 5000; eqH.gain.value = p.eqHigh;
-
-            const revGain = audioCtx.createGain(); revGain.gain.value = p.reverbSend;
-            const delGain = audioCtx.createGain(); delGain.gain.value = p.delaySend;
-
-            channelGain.connect(panner);
-            panner.connect(eqL); eqL.connect(eqM); eqM.connect(eqH);
-            eqH.connect(masterCompressor);
-
-            eqH.connect(revGain); revGain.connect(reverbNode);
-            eqH.connect(delGain); delGain.connect(delayNode);
+            const triggerGain = audioCtx.createGain();
+            triggerGain.gain.setValueAtTime(velScale, audioCtx.currentTime);
+            triggerGain.connect(strip.input);
 
             if (instrument === 'kick') {
                 const osc = audioCtx.createOscillator();
                 osc.type = 'sine';
                 osc.frequency.setValueAtTime(p.pitch, audioCtx.currentTime);
                 osc.frequency.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + p.decay);
-                osc.connect(channelGain);
+                osc.connect(triggerGain);
                 osc.start();
                 osc.stop(audioCtx.currentTime + p.decay);
             } 
@@ -1569,11 +1647,11 @@
                 if (noiseNode) {
                     noiseNode.connect(noiseFilter);
                     noiseFilter.connect(noiseGain);
-                    noiseGain.connect(channelGain);
+                    noiseGain.connect(triggerGain);
                     try { noiseNode.start(); noiseNode.stop(audioCtx.currentTime + p.decay); } catch(e){}
                 }
 
-                osc.connect(channelGain);
+                osc.connect(triggerGain);
                 osc.start();
                 osc.stop(audioCtx.currentTime + p.decay);
             } 
@@ -1590,7 +1668,7 @@
                 if (noiseNode) {
                     noiseNode.connect(filter);
                     filter.connect(decayGain);
-                    decayGain.connect(channelGain);
+                    decayGain.connect(triggerGain);
                     try { noiseNode.start(); noiseNode.stop(audioCtx.currentTime + p.decay); } catch(e){}
                 }
             } 
@@ -1599,7 +1677,7 @@
                 osc.type = 'sine';
                 osc.frequency.setValueAtTime(p.pitch, audioCtx.currentTime);
                 osc.frequency.exponentialRampToValueAtTime(p.pitchEnd || 60, audioCtx.currentTime + p.decay);
-                osc.connect(channelGain);
+                osc.connect(triggerGain);
                 osc.start();
                 osc.stop(audioCtx.currentTime + p.decay);
             } 
@@ -1621,16 +1699,9 @@
                     noiseNode.connect(filter);
                     filter.connect(hpFilter);
                     hpFilter.connect(decayGain);
-                    decayGain.connect(channelGain);
+                    decayGain.connect(triggerGain);
                     try { noiseNode.start(); noiseNode.stop(audioCtx.currentTime + p.decay); } catch(e){}
                 }
-            }
-
-            if (masterFX.roomBleed > 0) {
-                const roomGain = audioCtx.createGain();
-                roomGain.gain.value = masterFX.roomBleed * 0.5;
-                channelGain.connect(roomGain);
-                roomGain.connect(reverbNode);
             }
 
             triggerVUVisualizer(instrument, velScale);
@@ -1653,8 +1724,17 @@
             const preset = presets[kitName];
             if (!preset) return;
             for (const key in preset) {
-                if (synthParams[key]) {
+                if (synthParams[key] && channelNodes[key]) {
                     Object.assign(synthParams[key], preset[key]);
+                    
+                    // Update active permanent nodes real-time
+                    channelNodes[key].volumeGain.gain.setValueAtTime(preset[key].volume, audioCtx.currentTime);
+                    channelNodes[key].panner.pan.setValueAtTime(preset[key].pan, audioCtx.currentTime);
+                    channelNodes[key].eqLow.gain.setValueAtTime(preset[key].eqLow, audioCtx.currentTime);
+                    channelNodes[key].eqMid.gain.setValueAtTime(preset[key].eqMid, audioCtx.currentTime);
+                    channelNodes[key].eqHigh.gain.setValueAtTime(preset[key].eqHigh, audioCtx.currentTime);
+                    channelNodes[key].reverbSend.gain.setValueAtTime(preset[key].reverbSend, audioCtx.currentTime);
+                    channelNodes[key].delaySend.gain.setValueAtTime(preset[key].delaySend, audioCtx.currentTime);
                 }
             }
             renderMixerConsole();
@@ -1794,15 +1874,6 @@
             osc.stop(time + 0.05);
         }
 
-        const consoleChannels = [
-            { id: 'kick', name: 'Kick' },
-            { id: 'snare', name: 'Snare' },
-            { id: 'hihat', name: 'Hi-Hat' },
-            { id: 'tom', name: 'Toms' },
-            { id: 'crash', name: 'Crash 1' },
-            { id: 'crash2', name: 'Crash 2' }
-        ];
-
         function renderMixerConsole() {
             const wrapper = document.getElementById('mixer-strips-wrapper');
             if (!wrapper) return;
@@ -1817,12 +1888,19 @@
                 strip.innerHTML = `
                     <span class="text-[10px] font-black text-gray-400 uppercase tracking-wider mb-2 truncate max-w-full">${ch.name}</span>
                     
-                    <!-- Virtual Fader Volume Track -->
-                    <div class="fader-track mb-3" id="fader-track-${ch.id}">
-                        <div class="fader-scale">
-                            <span>+6</span><span>0</span><span>-6</span><span>-12</span><span>-24</span><span>-oo</span>
+                    <div class="flex items-center justify-between gap-1.5 w-full mb-3 px-1">
+                        <!-- Virtual Fader Volume Track -->
+                        <div class="fader-track flex-1" id="fader-track-${ch.id}">
+                            <div class="fader-scale">
+                                <span>+6</span><span>0</span><span>-6</span><span>-12</span><span>-24</span><span>-oo</span>
+                            </div>
+                            <div class="fader-cap" id="fader-cap-${ch.id}" style="bottom: ${Math.min(Math.max((param.volume / 1.5) * 80, 0), 86)}px;"></div>
                         </div>
-                        <div class="fader-cap" id="fader-cap-${ch.id}" style="bottom: ${Math.min(Math.max((param.volume / 1.5) * 80, 0), 86)}px;"></div>
+
+                        <!-- 💡 Discrete Real-time LED VU Meter -->
+                        <div class="w-1.5 h-[100px] bg-black/80 rounded border border-[#161633] relative overflow-hidden flex flex-col justify-end">
+                            <div id="vu-bar-${ch.id}" class="w-full bg-gradient-to-t from-green-500 via-yellow-400 to-red-500 transition-all duration-75" style="height: 0%;"></div>
+                        </div>
                     </div>
 
                     <!-- Vol Label -->
@@ -1875,6 +1953,11 @@
                 synthParams[id].volume = val;
                 cap.style.bottom = (percent * 86) + 'px';
                 document.getElementById(`label-vol-${id}`).innerText = Math.round(val * 100) + '%';
+                
+                // Live update permanent strip volume
+                if (channelNodes[id]) {
+                    channelNodes[id].volumeGain.gain.setValueAtTime(val, audioCtx.currentTime);
+                }
             }
 
             track.addEventListener('mousedown', (e) => { isDragging = true; onMove(e.clientY); });
@@ -1904,9 +1987,15 @@
                 if (paramType === 'pan') {
                     synthParams[id].pan = val;
                     pointer.style.transform = `rotate(${val * 135}deg)`;
+                    if (channelNodes[id]) {
+                        channelNodes[id].panner.pan.setValueAtTime(val, audioCtx.currentTime);
+                    }
                 } else if (paramType === 'rev') {
                     synthParams[id].reverbSend = val;
                     pointer.style.transform = `rotate(${(val / 0.5) * 270 - 135}deg)`;
+                    if (channelNodes[id]) {
+                        channelNodes[id].reverbSend.gain.setValueAtTime(val, audioCtx.currentTime);
+                    }
                 }
             }
 
@@ -1929,6 +2018,9 @@
 
         function toggleMixerMute(id) {
             synthParams[id].mute = !synthParams[id].mute;
+            if (channelNodes[id]) {
+                channelNodes[id].muteGain.gain.setValueAtTime(synthParams[id].mute ? 0 : 1, audioCtx.currentTime);
+            }
             renderMixerConsole();
         }
 
@@ -1946,6 +2038,10 @@
                 } else {
                     synthParams[key].mute = false;
                 }
+                
+                if (channelNodes[key]) {
+                    channelNodes[key].muteGain.gain.setValueAtTime(synthParams[key].mute ? 0 : 1, audioCtx.currentTime);
+                }
             }
             renderMixerConsole();
         }
@@ -1960,34 +2056,61 @@
         const visualizerCanvas = document.getElementById('master-visualizer-canvas');
         const visCtx = visualizerCanvas ? visualizerCanvas.getContext('2d') : null;
 
+        const vuData = new Uint8Array(16);
         function animateVisualizer() {
             requestAnimationFrame(animateVisualizer);
-            if (!visCtx || !visualizerCanvas) return;
+            
+            // Draw Main Master output FFT analyzer
+            if (visCtx && visualizerCanvas) {
+                const width = visualizerCanvas.width = visualizerCanvas.offsetWidth;
+                const height = visualizerCanvas.height = visualizerCanvas.offsetHeight;
 
-            const width = visualizerCanvas.width = visualizerCanvas.offsetWidth;
-            const height = visualizerCanvas.height = visualizerCanvas.offsetHeight;
+                analyserNode.getByteFrequencyData(dataArray);
 
-            analyserNode.getByteFrequencyData(dataArray);
+                visCtx.fillStyle = 'rgba(3, 3, 11, 0.2)';
+                visCtx.fillRect(0, 0, width, height);
 
-            visCtx.fillStyle = 'rgba(3, 3, 11, 0.2)';
-            visCtx.fillRect(0, 0, width, height);
+                const barWidth = (width / bufferLength) * 2.5;
+                let barHeight;
+                let x = 0;
 
-            const barWidth = (width / bufferLength) * 2.5;
-            let barHeight;
-            let x = 0;
+                for (let i = 0; i < bufferLength; i++) {
+                    barHeight = dataArray[i] * (height / 255) * 0.95;
 
-            for (let i = 0; i < bufferLength; i++) {
-                barHeight = dataArray[i] * (height / 255) * 0.95;
+                    const grad = visCtx.createLinearGradient(0, height, 0, height - barHeight);
+                    grad.addColorStop(0, '#00f3ff');
+                    grad.addColorStop(1, '#ff007f');
 
-                const grad = visCtx.createLinearGradient(0, height, 0, height - barHeight);
-                grad.addColorStop(0, '#00f3ff');
-                grad.addColorStop(1, '#ff007f');
+                    visCtx.fillStyle = grad;
+                    visCtx.fillRect(x, height - barHeight, barWidth - 1, barHeight);
 
-                visCtx.fillStyle = grad;
-                visCtx.fillRect(x, height - barHeight, barWidth - 1, barHeight);
-
-                x += barWidth;
+                    x += barWidth;
+                }
             }
+
+            // Draw individual channel strip VU indicators from permanent analyser diagnostics
+            consoleChannels.forEach(ch => {
+                const nodes = channelNodes[ch.id];
+                if (!nodes) return;
+                
+                nodes.analyser.getByteFrequencyData(vuData);
+                let sum = 0;
+                for (let i = 0; i < 16; i++) {
+                    sum += vuData[i];
+                }
+                let val = sum / 16;
+                let percent = (val / 160) * 100;
+                if (percent > 100) percent = 100;
+
+                const bar = document.getElementById(`vu-bar-${ch.id}`);
+                if (bar) {
+                    let currentVal = parseFloat(bar.style.height) || 0;
+                    let targetVal = percent;
+                    let newVal = currentVal * 0.70 + targetVal * 0.30; // smooth analog-like damping decay
+                    if (newVal < 1) newVal = 0;
+                    bar.style.height = newVal.toFixed(1) + '%';
+                }
+            });
         }
 
         /* ===================================================================
@@ -2549,17 +2672,17 @@
                 recordStartTime = Date.now();
                 sequenceRecord = [];
                 
-                btn.className = 'px-3 py-1.5 bg-red-600 border border-red-500 text-xs text-white rounded-lg font-bold transition flex items-center gap-1 animate-pulse';
+                btn.className = 'px-2.5 py-1 bg-red-600 border border-red-500 text-[10px] text-white rounded-lg font-bold transition flex items-center gap-1 animate-pulse';
                 badge.innerText = 'RECORDING';
-                badge.className = 'text-[9px] px-1.5 py-0.5 rounded font-extrabold bg-red-950 text-red-400 border border-red-800';
+                badge.className = 'text-[8px] px-1.5 py-0.5 rounded font-extrabold bg-red-950 text-red-400 border border-red-800';
                 
                 showToast("실시간 드럼 연주 녹음 시작!");
             } else {
                 isRecording = false;
                 
-                btn.className = 'px-3 py-1.5 bg-red-950/40 border border-red-800 text-xs text-red-400 rounded-lg font-bold hover:bg-red-950 transition flex items-center gap-1';
+                btn.className = 'px-2.5 py-1 bg-red-950/40 border border-red-800 text-[10px] text-red-400 rounded-lg font-bold hover:bg-red-950 transition flex items-center gap-1';
                 badge.innerText = 'STANDBY';
-                badge.className = 'text-[9px] px-1.5 py-0.5 rounded font-extrabold bg-slate-800 text-slate-400';
+                badge.className = 'text-[8px] px-1.5 py-0.5 rounded font-extrabold bg-slate-800 text-slate-400';
                 
                 if (sequenceRecord.length > 0) {
                     document.getElementById('replay-btn').disabled = false;
@@ -2665,7 +2788,6 @@
 
             if (status >= 144 && status <= 159 && velocity > 0) {
                 const logBox = document.getElementById('midi-log');
-                const wizLogBox = document.getElementById('wizard-midi-live-log');
                 
                 if (logBox) {
                     logBox.innerHTML += `\n[MIDI Signal] Note: ${note} | Velocity: ${velocity}`;
@@ -2802,7 +2924,7 @@
 
             document.getElementById('onboarding-screen').style.display = 'none';
             document.getElementById('app-container').style.display = 'flex';
-            showToast("SOUNDGLUCK | Drum Tulz v4.2.0 콘솔이 안전하게 가동되었습니다!");
+            showToast("SOUNDGLUCK | Drum Tulz v4.2.5 콘솔이 안전하게 가동되었습니다!");
         }
 
         function bypassOnboardingDirectly() {
@@ -2874,6 +2996,15 @@
                     for (const key in parsed) {
                         if (synthParams[key]) {
                             Object.assign(synthParams[key], parsed[key]);
+                            if (channelNodes[key]) {
+                                channelNodes[key].volumeGain.gain.setValueAtTime(parsed[key].volume, audioCtx.currentTime);
+                                channelNodes[key].panner.pan.setValueAtTime(parsed[key].pan, audioCtx.currentTime);
+                                channelNodes[key].eqLow.gain.setValueAtTime(parsed[key].eqLow, audioCtx.currentTime);
+                                channelNodes[key].eqMid.gain.setValueAtTime(parsed[key].eqMid, audioCtx.currentTime);
+                                channelNodes[key].eqHigh.gain.setValueAtTime(parsed[key].eqHigh, audioCtx.currentTime);
+                                channelNodes[key].reverbSend.gain.setValueAtTime(parsed[key].reverbSend, audioCtx.currentTime);
+                                channelNodes[key].delaySend.gain.setValueAtTime(parsed[key].delaySend, audioCtx.currentTime);
+                            }
                         }
                     }
                     renderMixerConsole();
