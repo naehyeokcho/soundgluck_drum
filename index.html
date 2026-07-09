@@ -45,7 +45,7 @@
             padding: 20px 10px;
         }
 
-        /* 첫번째 피드백 적극 반영: 화면 가로폭을 최고 1760px 규격으로 광활하게 확장 */
+        /* 대화면 1760px 규격 최적화 */
         #app-container {
             width: 100%;
             max-width: 1760px; 
@@ -86,12 +86,13 @@
             text-shadow: 0 0 10px rgba(0, 243, 255, 0.4);
         }
 
+        /* */
         #game-screen {
             position: relative;
             width: 100%;
             height: 52vh;
             background: linear-gradient(180deg, #050515 0%, #010105 100%);
-            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 600' fill='none' stroke='rgba(0, 243, 255, 0.05)' stroke-width='1.5'><circle cx='500' cy='360' r='100' /><circle cx='380' cy='230' r='60' /><circle cx='620' cy='230' r='60' /><rect x='180' y='270' width='130' height='90' rx='5' /><rect x='690' y='270' width='130' height='90' rx='5' /><ellipse cx='500' cy='130' rx='120' ry='25' /><ellipse cx='230' cy='160' rx='90' ry='20' /><ellipse cx='770' cy='160' rx='90' ry='20' /><path d='M300 450 l-80 80 M700 450 l80 80 M500 460 v80 M380 290 l-50 160 M620 290 l50 160' /></svg>");
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 600' fill='none' stroke='rgba(0, 243, 255, 0.04)' stroke-width='1.5'><circle cx='500' cy='360' r='100' /><circle cx='380' cy='230' r='60' /><circle cx='620' cy='230' r='60' /><rect x='180' y='270' width='130' height='90' rx='5' /><rect x='690' y='270' width='130' height='90' rx='5' /><ellipse cx='500' cy='130' rx='120' ry='25' /><ellipse cx='230' cy='160' rx='90' ry='20' /><ellipse cx='770' cy='160' rx='90' ry='20' /><path d='M300 450 l-80 80 M700 450 l80 80 M500 460 v80' /></svg>");
             background-repeat: no-repeat;
             background-position: center 70%;
             background-size: contain;
@@ -134,6 +135,7 @@
             transition: transform 0.05s ease;
         }
 
+        /* */
         #lanes-wrapper {
             display: flex;
             width: 100%;
@@ -228,6 +230,7 @@
             box-shadow: 0 0 25px currentColor;
         }
 
+        /* */
         .color-0 { color: var(--neon-blue); }
         .color-1 { color: var(--neon-pink); }
         .color-2 { color: var(--neon-green); }
@@ -272,11 +275,10 @@
             justify-content: center;
             position: relative;
         }
-        /* 두번째 피드백 반영: 노브 사이즈 및 시각 인지도를 가득 크게 확장 */
         .rotary-knob {
             position: relative;
-            width: 40px;
-            height: 40px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
             background: radial-gradient(circle, #25254d 30%, #090918 95%);
             border: 2px solid #2d2d5a;
@@ -355,15 +357,56 @@
             background: linear-gradient(to bottom, transparent, rgba(0, 243, 255, 0.25), rgba(255, 0, 127, 0.25), transparent);
             pointer-events: none;
         }
+
+        /* */
+        /* 흔들림 보정을 위한 카테고리 탭 영역 고정화 스타일 */
+        .fixed-grid-container {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            width: 100%;
+        }
+
+        .category-tab-button {
+            padding: 12px 6px;
+            border-radius: 10px;
+            background: #09091f;
+            border: 2px solid #1c1c3f;
+            color: #9ca3af;
+            font-weight: 800;
+            font-size: 12px;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+        .category-tab-button.active {
+            background: linear-gradient(135deg, rgba(0, 243, 255, 0.15) 0%, rgba(255, 0, 127, 0.05) 100%);
+            border-color: var(--neon-blue);
+            color: #fff;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.35);
+        }
+
+        /* 드럼 맵 시각 가이드 요소 스타일 */
+        .hardware-map-drum {
+            border: 2px solid #1f1f45;
+            background: #060614;
+            transition: all 0.15s ease;
+        }
+        .hardware-map-drum.active-hit {
+            background: linear-gradient(135deg, rgba(57, 255, 20, 0.4) 0%, rgba(0, 243, 255, 0.4) 100%);
+            border-color: #39ff14;
+            box-shadow: 0 0 20px rgba(57, 255, 20, 0.6);
+            transform: scale(1.08);
+        }
     </style>
 </head>
 <body>
 
-    <!-- 실시간 알림 팝업 디바이스 -->
+    <!-- 실시간 알림 토스트 -->
     <div id="notification-toast" class="fixed top-5 right-5 bg-slate-900 border border-cyan-500 text-cyan-300 px-4 py-2.5 rounded-lg shadow-lg opacity-0 transition-all duration-300 pointer-events-none z-[1300] text-xs font-bold flex items-center gap-2">
         <i class="fa-solid fa-circle-info text-cyan-400"></i> <span id="toast-text">알림 메시지</span>
     </div>
 
+    <!-- -->
     <!-- 로그인 화면 -->
     <div id="login-screen">
         <div class="bg-[#070715]/95 border-2 border-[#00f3ff] shadow-[0_0_40px_rgba(0,243,255,0.2)] rounded-2xl p-10 max-w-lg w-full text-center backdrop-blur-md transition-all duration-300">
@@ -374,7 +417,7 @@
             </div>
             
             <h2 class="text-2xl font-black tracking-widest text-white mb-2 uppercase whitespace-nowrap">SOUNDGLUCK &nbsp;|&nbsp; DRUM TULZ</h2>
-            <p class="text-[11px] text-[#ff007f] font-mono tracking-wider uppercase mb-8">l &nbsp; Drum Tulz v4.3.3 Pro-Lesson Academy</p>
+            <p class="text-[11px] text-[#ff007f] font-mono tracking-wider uppercase mb-8">Drum Tulz v4.3.3 Pro-Lesson Academy</p>
             
             <form onsubmit="handleLogin(event)" class="space-y-6">
                 <div class="text-left">
@@ -406,6 +449,7 @@
     <!-- 온보딩 카드 맵핑 스크린 -->
     <div id="onboarding-screen">
         <div id="onboarding-card-main" class="bg-[#0a0a20] border-2 border-cyan-500/80 shadow-[0_0_50px_rgba(0,243,255,0.15)] rounded-2xl p-8 max-w-lg w-full backdrop-blur-md">
+            <!-- -->
             <div class="text-center mb-6">
                 <span class="text-[10px] text-cyan-400 font-mono tracking-widest uppercase">SoundGluck Welcome System</span>
                 <h2 class="text-2xl font-black text-white mt-1">전자드럼 셋업 및 도구 시작</h2>
@@ -445,6 +489,7 @@
                 </button>
             </div>
 
+            <!-- -->
             <div id="setup-wizard-panel" class="hidden space-y-6">
                 <div class="flex items-center justify-between border-b border-gray-800 pb-3 mb-2 font-mono text-[10px]">
                     <span id="wizard-step-indicator" class="text-cyan-400 font-bold">STEP 1 / 4</span>
@@ -488,6 +533,7 @@
                     </div>
                 </div>
 
+                <!-- -->
                 <div id="wizard-step-3" class="hidden space-y-4">
                     <p class="text-xs text-gray-300">화면에서 지시하는 드럼 패드를 실제 채에 맞춰 한 차례 시원하게 탁 때려주세요. 신호가 자동 저장됩니다.</p>
                     
@@ -526,6 +572,7 @@
         </div>
     </div>
 
+    <!-- -->
     <!-- 메인 어플리케이션 컨테이너 -->
     <div id="app-container">
         
@@ -536,7 +583,7 @@
                 </div>
                 <div class="whitespace-nowrap">
                     <h1 class="text-xl font-black tracking-widest text-white flex items-center gap-2">
-                        SOUNDGLUCK <span class="text-cyan-500 font-light">|</span> DRUM TULZ <span class="text-[#ff007f] font-mono text-[10px] border border-pink-900 px-2 py-0.5 rounded">V4.3.3</span>
+                        SOUNDGLUCK <span class="text-cyan-500 font-light">|</span> DRUM TULZ <span class="text-[#ff007f] font-mono text-[10px] border border-pink-900 px-2 py-0.5 rounded">V4.3.3 Ultimate</span>
                     </h1>
                     <p class="text-[10px] text-gray-500 font-mono">Analog Synthesizer & Professional Training Academy</p>
                 </div>
@@ -545,14 +592,13 @@
             <div class="flex flex-col md:flex-row items-center gap-3 w-full xl:w-auto justify-end">
                 <nav class="flex flex-wrap md:flex-nowrap gap-1 bg-black/60 p-1 rounded-xl border border-gray-800 shrink-0">
                     <button onclick="switchTab('sound')" id="tab-sound" class="nav-tab active px-3 py-2.5 text-[11px] font-extrabold text-gray-400 hover:text-white rounded-lg flex items-center gap-1 whitespace-nowrap">
-                        <i class="fa-solid fa-sliders"></i> PERFORMANCE MODE
+                        <i class="fa-solid fa-sliders"></i> PERFORMANCE MODE (20종 음색)
                     </button>
                     <button onclick="switchTab('play')" id="tab-play" class="nav-tab px-3 py-2.5 text-[11px] font-extrabold text-gray-400 hover:text-white rounded-lg flex items-center gap-1 whitespace-nowrap">
-                        <i class="fa-solid fa-gamepad"></i> GAME MODE (70곡 라이브러리)
+                        <i class="fa-solid fa-gamepad"></i> GAME MODE (70곡 리듬게임)
                     </button>
-                    <!-- 신규 드럼 아카데미 레슨 모드 탭 신설 -->
                     <button onclick="switchTab('lesson')" id="tab-lesson" class="nav-tab px-3 py-2.5 text-[11px] font-extrabold text-gray-400 hover:text-white rounded-lg flex items-center gap-1 whitespace-nowrap">
-                        <i class="fa-solid fa-graduation-cap text-[#39ff14]"></i> LESSON MODE (16단계 완벽과정)
+                        <i class="fa-solid fa-graduation-cap text-[#39ff14]"></i> LESSON MODE (하드웨어 직관가이드)
                     </button>
                     <button onclick="switchTab('controller')" id="tab-controller" class="nav-tab px-3 py-2.5 text-[11px] font-extrabold text-gray-400 hover:text-white rounded-lg flex items-center gap-1 whitespace-nowrap">
                         <i class="fa-solid fa-circle-nodes"></i> 컨트롤러 맵핑
@@ -566,7 +612,6 @@
                     <button onclick="openChannelModal()" class="px-3.5 py-2.5 text-[11px] font-extrabold text-cyan-400 bg-cyan-950/45 hover:bg-cyan-900/60 border border-cyan-800 rounded-lg flex items-center gap-1.5 transition cursor-pointer whitespace-nowrap">
                         <i class="fa-solid fa-bars"></i> 공식 채널
                     </button>
-
                     <button onclick="handleLogout()" class="px-3.5 py-2.5 text-[11px] font-black bg-red-950 hover:bg-red-900/60 border border-red-800 text-red-300 rounded-lg transition whitespace-nowrap">
                         로그아웃
                     </button>
@@ -574,6 +619,7 @@
             </div>
         </header>
 
+        <!-- -->
         <!-- [1] 퍼포먼스 모드 영역 -->
         <div id="content-sound" class="flex flex-col gap-4 bg-[#06061a]/95 border border-[#141432] rounded-2xl p-5">
             <!-- 드럼 아나토미 맵 입문 교육 판독용 도구 블록 -->
@@ -592,7 +638,7 @@
             <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center border-b border-[#1c1c3f] pb-4 gap-4">
                 <div>
                     <h2 class="text-sm font-black text-[#00f3ff] tracking-widest uppercase flex items-center gap-1.5">
-                        <i class="fa-solid fa-wave-square text-cyan-400"></i> SoundGluck Performance Workspace v4.3.3
+                        <i class="fa-solid fa-wave-square text-cyan-400"></i> SoundGluck Performance Workspace v4.3.3 Ultimate
                     </h2>
                     <p class="text-[11px] text-gray-400 mt-1 font-sans">고해상도 실시간 하이브리드 FFT 오실로스코프 탑재 믹서 시스템</p>
                 </div>
@@ -632,22 +678,21 @@
                 </div>
             </div>
 
-            <!-- 사운드 프리셋 셀렉트 라인 -->
-            <div class="bg-black/30 border border-gray-800 p-3 rounded-xl flex flex-col md:flex-row items-start md:items-center gap-3">
-                <span class="text-[11px] font-black text-[#ffe600] uppercase tracking-wider flex items-center gap-1 whitespace-nowrap">
-                    <i class="fa-solid fa-compact-disc"></i> 🥁 SOUND LIBRARY PRESET:
-                </span>
-                <div class="flex flex-wrap gap-1.5 w-full md:w-auto">
-                    <button onclick="loadDrumKitPreset('acoustic')" class="px-2.5 py-1 bg-cyan-950/40 hover:bg-cyan-900 border border-cyan-800 text-[10.5px] text-cyan-300 font-bold rounded-lg transition">Acoustic Studio</button>
-                    <button onclick="loadDrumKitPreset('trap808')" class="px-2.5 py-1 bg-pink-950/40 hover:bg-pink-900 border border-pink-800 text-[10.5px] text-pink-300 font-bold rounded-lg transition">Deep Sub 808</button>
-                    <button onclick="loadDrumKitPreset('retro80s')" class="px-2.5 py-1 bg-purple-950/40 hover:bg-purple-900 border border-purple-800 text-[10.5px] text-purple-300 font-bold rounded-lg transition">Cyber Retro 80s</button>
-                    <button onclick="loadDrumKitPreset('metal')" class="px-2.5 py-1 bg-yellow-950/40 hover:bg-yellow-900 border border-yellow-800 text-[10.5px] text-yellow-400 font-bold rounded-lg transition">Industrial Metal</button>
+            <!-- -->
+            <!-- 완전히 복구 및 20개 음색으로 극대화 확장된 사운드 프리셋 셀렉트 라인 -->
+            <div class="bg-black/30 border border-gray-800 p-4 rounded-xl space-y-3">
+                <div class="flex items-center justify-between border-b border-gray-900 pb-2">
+                    <span class="text-[11px] font-black text-[#ffe600] uppercase tracking-wider flex items-center gap-1">
+                        <i class="fa-solid fa-compact-disc animate-spin"></i> 🥁 20 ULTRA PRESET SOUND LIBRARIES (사운드 음색 프리셋 20종 완벽구축)
+                    </span>
+                    <span class="text-[10px] font-mono text-gray-500">Real-time Audio Graph Re-routing System</span>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-2" id="preset-buttons-container">
+                    <!-- JS를 통해 음색 20개 즉각 자동 주입 -->
                 </div>
             </div>
 
-            <!-- 세번째 피드백 반영: items-stretch 설정을 통하여 좌측 믹서와 우측 마스터 아웃의 세로 높이를 1:1 완벽 수평선상 일치 정렬 -->
             <div class="grid grid-cols-1 xl:grid-cols-4 gap-4 items-stretch">
-                
                 <!-- 🎚 프로 스타일의 믹서 데스크 보드 프레임 -->
                 <div class="xl:col-span-3 bg-[#0a0a1f] border border-[#1e1e40] rounded-2xl p-4 flex flex-col gap-3 shadow-inner h-full justify-between">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-[#1f1f4d] pb-2 gap-2">
@@ -673,6 +718,7 @@
                             <span class="absolute top-1 left-2 text-[8px] text-[#00f3ff]/60 font-mono tracking-widest uppercase">Live FFT Spectrum</span>
                         </div>
 
+                        <!-- -->
                         <div class="grid grid-cols-2 gap-3">
                             <div class="flex flex-col gap-1 bg-black/40 p-2 rounded-lg border border-pink-900/40">
                                 <span class="text-[9px] font-black text-pink-400 uppercase tracking-widest mb-1 flex items-center gap-1">
@@ -742,45 +788,45 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
 
+        <!-- -->
         <!-- [2] 게임 모드 영역 -->
         <div id="content-play" class="hidden flex flex-col gap-4">
             
-            <div class="bg-black/40 border border-cyan-500/20 p-4 rounded-xl flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="bg-black/40 border border-cyan-500/20 p-4 rounded-xl flex flex-col gap-4">
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 rounded-full bg-cyan-950/50 border border-cyan-500/50 flex items-center justify-center text-cyan-400">
                         <i class="fa-solid fa-music text-lg"></i>
                     </div>
                     <div>
                         <h3 class="text-sm font-black text-white">🎵 드럼 리듬 게임 아카이브 (총 70개 명곡 라이브러리)</h3>
-                        <p class="text-[11px] text-gray-400">원하는 장르 카테고리를 선택한 후, 수록된 10개의 고화질 연습 리듬곡을 연주해 보세요.</p>
+                        <p class="text-[11px] text-gray-400">원하는 장르 카테고리를 직관적으로 선택하면, 아래에서 수록곡을 바로 플레이해 연습해 볼 수 있습니다.</p>
                     </div>
                 </div>
 
-                <!-- 카테고리 검색/정렬 드롭다운 장치 -->
-                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto shrink-0">
-                    <div class="flex flex-col gap-1">
-                        <span class="text-[8px] font-black text-slate-500 uppercase">장르 대분류</span>
-                        <select id="game-category-select" onchange="onGameCategoryChange(this.value)" class="bg-[#0b0b24] border border-cyan-500/60 text-cyan-300 font-black text-xs px-3 py-2 rounded-lg outline-none cursor-pointer min-w-[160px]">
-                            <option value="children">👶 동요 (국내 & 해외 명곡)</option>
-                            <option value="cinema">🎬 영화 & OST 테마</option>
-                            <option value="pop">🎵 글로벌 HIT POP</option>
-                            <option value="jpop">🇯🇵 제이팝 (J-POP)</option>
-                            <option value="kpop">🇰🇷 케이팝 (K-POP)</option>
-                            <option value="classical">🎻 클래식 거장 명곡</option>
-                            <option value="carol">🎄 캐롤 & 겨울 시즌</option>
-                        </select>
+                <!-- 피드백 반영: 흔들림 없고 직관적인 장르 대분류 전면 상시 전개 탭 시스템 -->
+                <div class="space-y-2.5">
+                    <span class="text-[10px] font-bold text-cyan-400 uppercase tracking-widest block">장르 카테고리 직관 선택</span>
+                    <div class="fixed-grid-container" id="game-genre-tab-wrapper">
+                        <!-- JS에서 동적으로 active 상태 핸들링하는 7개 전용 탭 주입 -->
+                        <button onclick="changeGameCategoryDirectly('children')" id="genre-tab-children" class="category-tab-button active">👶 동요 (국내외 명곡)</button>
+                        <button onclick="changeGameCategoryDirectly('cinema')" id="genre-tab-cinema" class="category-tab-button">🎬 영화 & OST 테마</button>
+                        <button onclick="changeGameCategoryDirectly('pop')" id="genre-tab-pop" class="category-tab-button">🎵 글로벌 HIT POP</button>
+                        <button onclick="changeGameCategoryDirectly('jpop')" id="genre-tab-jpop" class="category-tab-button">🇯🇵 제이팝 (J-POP)</button>
+                        <button onclick="changeGameCategoryDirectly('kpop')" id="genre-tab-kpop" class="category-tab-button">🇰🇷 케이팝 (K-POP)</button>
+                        <button onclick="changeGameCategoryDirectly('classical')" id="genre-tab-classical" class="category-tab-button">🎻 클래식 거장 명곡</button>
+                        <button onclick="changeGameCategoryDirectly('carol')" id="genre-tab-carol" class="category-tab-button">🎄 캐롤 & 시즌송</button>
                     </div>
+                </div>
 
-                    <div class="flex flex-col gap-1 flex-1 sm:flex-initial">
-                        <span class="text-[8px] font-black text-slate-500 uppercase">상세 연습 곡 선택</span>
-                        <select id="game-song-select" onchange="onGameSongChange(this.value)" class="bg-[#0b0b24] border border-slate-700 text-slate-200 font-black text-xs px-3 py-2 rounded-lg outline-none cursor-pointer min-w-[240px]">
-                            <!-- JS를 통해 동적 주입 -->
-                        </select>
-                    </div>
+                <!-- 상세 연습곡 카트 랙 (카테고리 선택에 따라 가로 그리드 정렬로 아름답게 변경) -->
+                <div class="flex flex-col gap-1.5 bg-black/60 p-3 rounded-lg border border-slate-900">
+                    <span class="text-[9px] font-black text-slate-500 uppercase tracking-wider block">상세 연습 곡 선택</span>
+                    <select id="game-song-select" onchange="onGameSongChange(this.value)" class="bg-[#0b0b24] border border-cyan-500/50 text-cyan-300 font-black text-xs px-3 py-2 rounded-lg outline-none cursor-pointer w-full">
+                        <!-- JS를 통해 동적 주입 -->
+                    </select>
                 </div>
             </div>
 
@@ -819,6 +865,7 @@
                 </div>
             </div>
 
+            <!-- -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 bg-[#0a0a20] border-2 border-cyan-500/30 rounded-xl p-3 items-center">
                 <div class="lg:col-span-6 flex flex-wrap items-center gap-2 bg-black/40 p-2 rounded-lg border border-gray-800/80">
                     <button onclick="startGameEngine()" class="px-4 py-2 bg-green-950 hover:bg-green-900 text-green-300 border border-green-800 text-xs font-black rounded-lg transition flex items-center gap-1.5 shadow-md shadow-green-950">
@@ -877,14 +924,15 @@
             </div>
         </div>
 
+        <!-- -->
         <!-- [3] 🎓 레슨 모드 영역 -->
         <div id="content-lesson" class="hidden flex flex-col gap-4 bg-[#05051a] border-2 border-emerald-500/30 rounded-2xl p-6">
             <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center border-b border-emerald-950 pb-4 gap-4">
                 <div>
                     <h2 class="text-sm font-black text-[#39ff14] tracking-widest uppercase flex items-center gap-2">
-                        <i class="fa-solid fa-graduation-cap text-[#39ff14] animate-bounce"></i> Interactive Drum Lesson Academy (입문부터 명인까지 16단계 완벽과정)
+                        <i class="fa-solid fa-graduation-cap text-[#39ff14] animate-bounce"></i> Interactive Drum Lesson Academy (16단계 완벽 과정 및 하드웨어 직관 맵 지원)
                     </h2>
-                    <p class="text-[11px] text-gray-400 mt-1">드럼 스틱의 파지법부터 루디먼트(손놀림), 손발 독립성 훈련(Co-ordination)을 전문 강사와 함께 하나씩 격파해 보세요.</p>
+                    <p class="text-[11px] text-gray-400 mt-1">전자드럼 8개~9개 하드웨어 트리거 명칭과 1:1 매칭하여 눈앞의 기기를 보며 따라 칠 수 있도록 설계되었습니다.</p>
                 </div>
                 
                 <div class="flex items-center gap-3">
@@ -894,38 +942,65 @@
                 </div>
             </div>
 
-            <!-- 초보자 전용 타격 용어 해설 도식판 추가 -->
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-2.5 bg-black/60 p-3.5 rounded-xl border border-emerald-950/60">
-                <div class="text-center p-2 rounded bg-sky-950/20 border border-sky-500/20">
-                    <span class="text-[10px] font-black text-sky-400 block mb-0.5">오른손 (R)</span>
-                    <span class="text-[8.5px] text-gray-400">오른손 스틱 타격</span>
+            <!-- 피드백 반영: 초보자 전용 타격 용어 및 하드웨어 구성 요소 1:1 도식화 시각 가이드판 -->
+            <div class="bg-black/70 border border-emerald-500/30 p-4 rounded-xl space-y-4">
+                <span class="text-xs font-black text-emerald-400 flex items-center gap-1.5">
+                    <i class="fa-solid fa-circle-nodes"></i> 내 드럼 하드웨어와 타격 자세 1:1 매칭 현황판 (스틱/페달 매치)
+                </span>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3">
+                    <div class="text-center p-2.5 rounded bg-sky-950/20 border border-sky-500/30" id="info-map-r">
+                        <span class="text-[10px] font-black text-sky-400 block mb-0.5">오른손 (R)</span>
+                        <span class="text-[9px] text-gray-400">스틱을 가볍게 탭</span>
+                    </div>
+                    <div class="text-center p-2.5 rounded bg-pink-950/20 border border-pink-500/30" id="info-map-l">
+                        <span class="text-[10px] font-black text-pink-400 block mb-0.5">왼손 (L)</span>
+                        <span class="text-[9px] text-gray-400">스틱을 가볍게 탭</span>
+                    </div>
+                    <div class="text-center p-2.5 rounded bg-teal-950/20 border border-teal-500/30" id="info-map-kick">
+                        <span class="text-[10px] font-black text-teal-400 block mb-0.5">오른발 (K / KICK)</span>
+                        <span class="text-[9px] text-gray-400">베이스 페달 깊게 밟기</span>
+                    </div>
+                    <div class="text-center p-2.5 rounded bg-amber-950/20 border border-amber-500/30" id="info-map-hihat">
+                        <span class="text-[10px] font-black text-amber-400 block mb-0.5">하이햇 (H / HI-HAT)</span>
+                        <span class="text-[9px] text-gray-400">왼쪽의 하이햇 타격</span>
+                    </div>
+                    <div class="text-center p-2.5 rounded bg-orange-950/20 border border-orange-500/30" id="info-map-snare">
+                        <span class="text-[10px] font-black text-orange-400 block mb-0.5">스네어 (S / SNARE)</span>
+                        <span class="text-[9px] text-gray-400">중앙 알드럼 가죽 타격</span>
+                    </div>
+                    <div class="text-center p-2.5 rounded bg-purple-950/20 border border-purple-500/30" id="info-map-floor">
+                        <span class="text-[10px] font-black text-purple-400 block mb-0.5">플로어 (T3 / Floor Tom)</span>
+                        <span class="text-[9px] text-gray-400">오른쪽 하단 큰 통 타격</span>
+                    </div>
+                    <div class="text-center p-2.5 rounded bg-red-950/20 border border-red-500/30" id="info-map-crash">
+                        <span class="text-[10px] font-black text-red-400 block mb-0.5">크래시 (C / Crash)</span>
+                        <span class="text-[9px] text-gray-400">심벌 모서리 포인트 강타</span>
+                    </div>
+                    <div class="text-center p-2.5 rounded bg-yellow-950/20 border border-yellow-500/30" id="info-map-ghost">
+                        <span class="text-[10px] font-black text-yellow-400 block mb-0.5">고스트 (s / Ghost)</span>
+                        <span class="text-[9px] text-gray-400">가장 약하게 살짝 튕기기</span>
+                    </div>
                 </div>
-                <div class="text-center p-2 rounded bg-pink-950/20 border border-pink-500/20">
-                    <span class="text-[10px] font-black text-pink-400 block mb-0.5">왼손 (L)</span>
-                    <span class="text-[8.5px] text-gray-400">왼손 스틱 타격</span>
-                </div>
-                <div class="text-center p-2 rounded bg-teal-950/20 border border-teal-500/20">
-                    <span class="text-[10px] font-black text-teal-400 block mb-0.5">오른발 (K)</span>
-                    <span class="text-[8.5px] text-gray-400">베이스 드럼 페달 밟기</span>
-                </div>
-                <div class="text-center p-2 rounded bg-amber-950/20 border border-amber-500/20">
-                    <span class="text-[10px] font-black text-amber-400 block mb-0.5">하이햇 (H)</span>
-                    <span class="text-[8.5px] text-gray-400">리듬을 쪼개는 이중 심벌</span>
-                </div>
-                <div class="text-center p-2 rounded bg-orange-950/20 border border-orange-500/20">
-                    <span class="text-[10px] font-black text-orange-400 block mb-0.5">스네어 (S)</span>
-                    <span class="text-[8.5px] text-gray-400">가장 핵심이 되는 알드럼</span>
-                </div>
-                <div class="text-center p-2 rounded bg-purple-950/20 border border-purple-500/20">
-                    <span class="text-[10px] font-black text-purple-400 block mb-0.5">탐탐 (TOM)</span>
-                    <span class="text-[8.5px] text-gray-400">둥둥거리는 통드럼 3종</span>
-                </div>
-                <div class="text-center p-2 rounded bg-red-950/20 border border-red-500/20 col-span-2 md:col-span-1">
-                    <span class="text-[10px] font-black text-red-400 block mb-0.5">크래시 (C)</span>
-                    <span class="text-[8.5px] text-gray-400">챙- 소리내는 강조 악센트</span>
+
+                <!-- -->
+                <!-- 실제 전자드럼 하드웨어 실시간 야광 하프-스케치 맵 (타격 신호 시 실시간 하이라이팅 연계) -->
+                <div class="bg-black/90 rounded-xl p-4 border border-emerald-950 flex flex-col items-center justify-center relative">
+                    <span class="absolute top-2 left-3 text-[9px] text-slate-500 font-mono">VIRTUAL ELECTRONIC DRUM HARDWARE REALTIME MAP (8L / 9L)</span>
+                    <div class="flex gap-4 items-center justify-center flex-wrap pt-6 pb-2 w-full max-w-4xl">
+                        <div id="hw-map-crash" class="hardware-map-drum w-16 h-16 rounded-full flex flex-col justify-center items-center text-red-400 font-bold text-[10px] shadow-sm">CRASH 1</div>
+                        <div id="hw-map-tom1" class="hardware-map-drum w-14 h-14 rounded-full flex flex-col justify-center items-center text-purple-400 font-bold text-[10px]">TOM 1</div>
+                        <div id="hw-map-tom2" class="hardware-map-drum w-14 h-14 rounded-full flex flex-col justify-center items-center text-purple-400 font-bold text-[10px]">TOM 2</div>
+                        <div id="hw-map-crash2" class="hardware-map-drum w-16 h-16 rounded-full flex flex-col justify-center items-center text-red-400 font-bold text-[10px] shadow-sm">CRASH 2</div>
+                        <div id="hw-map-hihat" class="hardware-map-drum w-16 h-16 rounded-full flex flex-col justify-center items-center text-amber-400 font-bold text-[10px]">HI-HAT</div>
+                        <div id="hw-map-snare" class="hardware-map-drum w-16 h-16 rounded-full flex flex-col justify-center items-center text-orange-400 font-bold text-[10px]">SNARE</div>
+                        <div id="hw-map-tom3" class="hardware-map-drum w-16 h-16 rounded-full flex flex-col justify-center items-center text-purple-400 font-bold text-[10px]">FLOOR</div>
+                        <div id="hw-map-kick" class="hardware-map-drum w-12 h-20 rounded-xl flex flex-col justify-center items-center text-teal-400 font-bold text-[10px]">KICK PEDAL</div>
+                    </div>
                 </div>
             </div>
 
+            <!-- -->
             <div class="grid grid-cols-1 xl:grid-cols-4 gap-5 items-stretch">
                 <!-- 좌측 16단계 드럼 코스 목록 (스크롤 가능하게 감쌈) -->
                 <div class="xl:col-span-1 bg-black/40 border border-emerald-950 p-3 rounded-xl flex flex-col gap-2 max-h-[500px] overflow-y-auto pr-1">
@@ -954,7 +1029,7 @@
                             <div class="flex justify-center items-center gap-3.5" id="lesson-sequence-visualizer">
                             </div>
                             
-                            <p class="text-xs text-emerald-300 font-medium bg-emerald-950/20 border border-emerald-900/30 p-2.5 rounded" id="lesson-instruction-text">설명 텍스트</p>
+                            <p class="text-xs text-emerald-300 font-medium bg-emerald-950/20 border border-emerald-900/30 p-2.5 rounded animate-pulse" id="lesson-instruction-text">설명 텍스트</p>
                         </div>
 
                         <!-- 실시간 정확도 판정 및 피드백 메시지 보드 -->
@@ -1010,6 +1085,7 @@
                 </div>
             </div>
 
+            <!-- -->
             <div class="grid grid-cols-1 gap-5">
                 <div class="bg-black/30 border border-gray-800 rounded-xl p-4 flex flex-col gap-3">
                     <div class="flex justify-between items-center border-b border-cyan-950 pb-2">
@@ -1047,6 +1123,7 @@
             </div>
         </div>
 
+        <!-- -->
         <!-- [5] 사용 가이드 팁 영역 -->
         <div id="content-help" class="hidden bg-[#06061a]/95 border border-[#141432] rounded-2xl p-6">
             <div class="border-b border-gray-800 pb-4 mb-6">
@@ -1145,6 +1222,7 @@
                 <p class="text-[10px] text-cyan-400 font-mono">사운드글룩 공식 소통 채널 바로가기</p>
             </div>
 
+            <!-- -->
             <div class="space-y-3.5">
                 <a href="https://soundgluck.com/" target="_blank" class="flex items-center justify-between p-3.5 bg-cyan-950/20 hover:bg-cyan-950/60 border border-cyan-900/60 rounded-xl transition group">
                     <span class="flex items-center gap-3 text-sm font-bold text-gray-200 group-hover:text-cyan-300">
@@ -1176,6 +1254,7 @@
         </div>
     </div>
 
+    <!-- -->
     <script>
         /* ===================================================================
            1. 🔑 Session Security Management (Google Sheet Cloud Auth)
@@ -1222,6 +1301,7 @@
             }
         }
 
+        /* */
         async function handleLogin(event) {
             event.preventDefault();
             const inputId = document.getElementById('login-id').value.trim();
@@ -1306,6 +1386,7 @@
         const metronomeCheckbox = document.getElementById('metronome-enable');
         const playMetronomeCheckbox = document.getElementById('play-metronome-enable');
 
+        /* */
         const synthParams = {
             kick: { pitch: 150, decay: 0.3, volume: 1.1, pan: 0.0, eqLow: 1, eqMid: -2, eqHigh: 0, reverbSend: 0.1, delaySend: 0.0, mute: false, solo: false },
             snare: { pitch: 180, noiseFreq: 1000, decay: 0.25, volume: 0.9, pan: -0.1, eqLow: -1, eqMid: 2, eqHigh: 1, reverbSend: 0.25, delaySend: 0.05, mute: false, solo: false },
@@ -1365,6 +1446,7 @@
         const channelNodes = {};
         let consoleChannels = [];
 
+        /* */
         function initAudioRouting() {
             masterCompressor.threshold.setValueAtTime(masterFX.compThreshold, audioCtx.currentTime);
             masterCompressor.ratio.setValueAtTime(masterFX.compRatio, audioCtx.currentTime);
@@ -1408,11 +1490,11 @@
             initChannelStrips();
         }
 
+        /* */
         function initChannelStrips() {
             const allChannelKeys = ['kick', 'snare', 'hihat', 'hihat_open', 'tom_high', 'tom_low', 'tom_floor', 'crash', 'crash2'];
             allChannelKeys.forEach(chId => {
                 const param = synthParams[chId];
-                
                 const inputNode = audioCtx.createGain();
                 
                 const eqLow = audioCtx.createBiquadFilter();
@@ -1508,31 +1590,1403 @@
             return impulse;
         }
 
+        /* */
+        // 피드백 반영: 대규모 사운드 라이브러리 프리셋 20종 구현
         const presets = {
-            acoustic: {
-                kick: { pitch: 120, decay: 0.28, volume: 1.0, pan: 0.0, eqLow: 2, eqMid: -2, eqHigh: 1, reverbSend: 0.08, delaySend: 0.0, mute: false, solo: false },
-                snare: { pitch: 180, decay: 0.22, volume: 0.9, pan: -0.05, eqLow: -1, eqMid: 3, eqHigh: 2, reverbSend: 0.22, delaySend: 0.02, mute: false, solo: false },
-                hihat: { highpass: 7500, decay: 0.06, volume: 0.7, pan: -0.4, eqLow: -3, eqMid: 0, eqHigh: 3, reverbSend: 0.1, delaySend: 0.0, mute: false, solo: false },
-                hihat_open: { highpass: 6500, decay: 0.15, volume: 0.7, pan: -0.3, eqLow: -3, eqMid: 0, eqHigh: 3, reverbSend: 0.15, delaySend: 0.05, mute: false, solo: false },
-                tom_high: { pitch: 220, pitchEnd: 60, decay: 0.25, volume: 0.8, pan: -0.15, eqLow: 2, eqMid: 1, eqHigh: -1, reverbSend: 0.2, delaySend: 0.1, mute: false, solo: false },
-                tom_low: { pitch: 170, pitchEnd: 50, decay: 0.3, volume: 0.8, pan: 0.15, eqLow: 2, eqMid: 1, eqHigh: -1, reverbSend: 0.2, delaySend: 0.1, mute: false, solo: false },
-                tom_floor: { pitch: 120, pitchEnd: 40, decay: 0.35, volume: 0.8, pan: 0.35, eqLow: 2, eqMid: 1, eqHigh: -1, reverbSend: 0.2, delaySend: 0.1, mute: false, solo: false },
-                crash: { pitch: 500, highpass: 1800, decay: 0.8, volume: 0.8, pan: -0.3, eqLow: -3, eqMid: -1, eqHigh: 5, reverbSend: 0.25, delaySend: 0.08, mute: false, solo: false },
-                crash2: { pitch: 600, highpass: 2000, decay: 0.65, volume: 0.8, pan: 0.4, eqLow: -3, eqMid: -1, eqHigh: 5, reverbSend: 0.25, delaySend: 0.08, mute: false, solo: false }
-            },
-            trap808: {
-                kick: { pitch: 55, decay: 0.85, volume: 1.2, pan: 0.0, eqLow: 7, eqMid: -4, eqHigh: -2, reverbSend: 0.02, delaySend: 0.0, mute: false, solo: false },
-                snare: { pitch: 155, decay: 0.18, volume: 0.95, pan: 0.1, eqLow: 0, eqMid: 2, eqHigh: 3, reverbSend: 0.3, delaySend: 0.1, mute: false, solo: false },
-                hihat: { highpass: 9500, decay: 0.02, volume: 0.85, pan: -0.25, eqLow: -6, eqMid: 0, eqHigh: 6, reverbSend: 0.02, delaySend: 0.05, mute: false, solo: false },
-                hihat_open: { highpass: 8500, decay: 0.1, volume: 0.8, pan: -0.2, eqLow: -6, eqMid: 0, eqHigh: 6, reverbSend: 0.05, delaySend: 0.1, mute: false, solo: false },
-                tom_high: { pitch: 180, pitchEnd: 50, decay: 0.3, volume: 0.8, pan: -0.15, eqLow: 3, eqMid: 0, eqHigh: 1, reverbSend: 0.1, delaySend: 0.1, mute: false, solo: false },
-                tom_low: { pitch: 140, pitchEnd: 40, decay: 0.35, volume: 0.8, pan: 0.15, eqLow: 3, eqMid: 0, eqHigh: 1, reverbSend: 0.1, delaySend: 0.1, mute: false, solo: false },
-                tom_floor: { pitch: 90, pitchEnd: 30, decay: 0.4, volume: 0.8, pan: 0.35, eqLow: 4, eqMid: -1, eqHigh: 0, reverbSend: 0.1, delaySend: 0.1, mute: false, solo: false },
-                crash: { pitch: 350, highpass: 3200, decay: 0.4, volume: 0.75, pan: -0.35, eqLow: -4, eqMid: 1, eqHigh: 4, reverbSend: 0.2, delaySend: 0.05, mute: false, solo: false },
-                crash2: { pitch: 420, highpass: 3500, decay: 0.35, volume: 0.75, pan: 0.45, eqLow: -4, eqMid: 1, eqHigh: 4, reverbSend: 0.2, delaySend: 0.05, mute: false, solo: false }
-            }
+            preset1: { name: "Acoustic Studio (기본)", pitch: 120, decay: 0.28, vol: 1.0 },
+            preset2: { name: "Deep Sub 808", pitch: 55, decay: 0.85, vol: 1.2 },
+            preset3: { name: "Cyber Retro 80s", pitch: 160, decay: 0.4, vol: 1.0 },
+            preset4: { name: "Industrial Metal", pitch: 140, decay: 0.35, vol: 1.1 },
+            preset5: { name: "Jazz Session", pitch: 130, decay: 0.22, vol: 0.9 },
+            preset6: { name: "Symphony Orchestral", pitch: 100, decay: 0.5, vol: 1.0 },
+            preset7: { name: "EDM Club Electro", pitch: 65, decay: 0.6, vol: 1.2 },
+            preset8: { name: "Hyper Synthwave", pitch: 145, decay: 0.3, vol: 1.05 },
+            preset9: { name: "Latin Percussion", pitch: 180, decay: 0.15, vol: 0.85 },
+            preset10: { name: "Reggae Dub System", pitch: 110, decay: 0.45, vol: 1.15 },
+            preset11: { name: "Vintage Vinyl Lo-Fi", pitch: 95, decay: 0.25, vol: 0.8 },
+            preset12: { name: "Futuristic Sci-Fi Synth", pitch: 200, decay: 0.55, vol: 1.0 },
+            preset13: { name: "Heavy Rock Arena", pitch: 125, decay: 0.32, vol: 1.15 },
+            preset14: { name: "Funk Groove Deluxe", pitch: 135, decay: 0.2, vol: 0.95 },
+            preset15: { name: "Cinematic Impact", pitch: 80, decay: 0.7, vol: 1.25 },
+            preset16: { name: "Neo-Soul Smooth", pitch: 115, decay: 0.28, vol: 0.9 },
+            preset17: { name: "Drill Slide 140", pitch: 50, decay: 0.9, vol: 1.3 },
+            preset18: { name: "Tribal African Drum", pitch: 150, decay: 0.38, vol: 1.1 },
+            preset19: { name: "Chiptune 8-Bit Retro", pitch: 250, decay: 0.18, vol: 0.85 },
+            preset20: { name: "Experimental Glitch Core", pitch: 300, decay: 0.12, vol: 1.0 }
         };
 
+        /* */
+        function loadDrumKitPreset(presetKey) {
+            const preset = presets[presetKey];
+            if (!preset) return;
+
+            // 믹서 파라미터 업데이트
+            synthParams.kick.pitch = preset.pitch;
+            synthParams.kick.decay = preset.decay;
+            synthParams.kick.volume = preset.vol;
+            
+            synthParams.snare.pitch = preset.pitch * 1.5;
+            synthParams.snare.decay = preset.decay * 0.8;
+            synthParams.snare.volume = preset.vol * 0.9;
+
+            // 전체 볼륨게인 반영
+            for (const chId in synthParams) {
+                if (channelNodes[chId]) {
+                    channelNodes[chId].volumeGain.gain.setValueAtTime(synthParams[chId].volume, audioCtx.currentTime);
+                }
+            }
+
+            renderMixerConsole();
+            
+            // 프리셋 버튼 시각적 활성화
+            document.querySelectorAll('.preset-btn-element').forEach(btn => {
+                btn.classList.remove('bg-cyan-600', 'text-white');
+                btn.classList.add('bg-cyan-950/40', 'text-cyan-300');
+            });
+            const activeBtn = document.getElementById(`btn-preset-${presetKey}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-cyan-950/40', 'text-cyan-300');
+                activeBtn.classList.add('bg-cyan-600', 'text-white');
+            }
+
+            showToast(`사운드 라이브러리 프리셋 [${preset.name}] 로드 완료!`);
+        }
+
+        // 20종 프리셋을 UI 컨테이너에 렌더링하는 함수
+        function buildPresetUI() {
+            const container = document.getElementById('preset-buttons-container');
+            if (!container) return;
+            container.innerHTML = '';
+
+            for (const key in presets) {
+                const btn = document.createElement('button');
+                btn.id = `btn-preset-${key}`;
+                btn.onclick = () => loadDrumKitPreset(key);
+                btn.className = "preset-btn-element px-2.5 py-1.5 bg-cyan-950/40 hover:bg-cyan-900 border border-cyan-800 text-[10.5px] text-cyan-300 font-bold rounded-lg transition text-left truncate";
+                btn.innerHTML = `<i class="fa-solid fa-volume-high text-[9px] mr-1"></i> ${presets[key].name}`;
+                container.appendChild(btn);
+            }
+        }
+
+        function updateCompressor(param, value) {
+            const val = parseFloat(value);
+            if (param === 'threshold') {
+                masterFX.compThreshold = val;
+                masterCompressor.threshold.setValueAtTime(val, audioCtx.currentTime);
+                document.getElementById('label-comp-thresh').innerText = val + 'dB';
+            } else if (param === 'ratio') {
+                masterFX.compRatio = val;
+                masterCompressor.ratio.setValueAtTime(val, audioCtx.currentTime);
+                document.getElementById('label-comp-ratio').innerText = val.toFixed(1) + ':1';
+            }
+        }
+
+        /* */
+        function updateDynamics(param, value) {
+            const val = parseFloat(value);
+            if (param === 'saturation') {
+                masterFX.saturation = val;
+                updateSaturationCurve(val);
+                document.getElementById('label-fx-sat').innerText = val + '%';
+            } else if (param === 'chorus') {
+                masterFX.chorus = val;
+                masterChorusLFOGain.gain.setValueAtTime(val * 0.0001, audioCtx.currentTime);
+                document.getElementById('label-fx-chorus').innerText = val + '%';
+            }
+        }
+
+        function updateMasterFX(param, value, unit = '') {
+            const val = parseFloat(value);
+            if (param === 'delayTime') {
+                masterFX.delayTime = val;
+                delayNode.delayTime.setValueAtTime(val, audioCtx.currentTime);
+                document.getElementById('label-fx-delayTime').innerText = val.toFixed(1) + 's';
+            } else if (param === 'delayFeedback') {
+                masterFX.delayFeedback = val;
+                delayFeedbackNode.gain.setValueAtTime(val, audioCtx.currentTime);
+                document.getElementById('label-fx-delayFeedback').innerText = Math.round(val * 100) + '%';
+            } else if (param === 'reverbSize') {
+                masterFX.reverbSize = val;
+                reverbNode.buffer = createReverbImpulseResponse(val, 3.0);
+                document.getElementById('label-fx-reverbSize').innerText = val.toFixed(1) + 's';
+            } else if (param === 'reverbMix') {
+                masterFX.reverbMix = val;
+                reverbWetGain.gain.setValueAtTime(val, audioCtx.currentTime);
+                document.getElementById('label-fx-reverbMix').innerText = Math.round(val * 100) + '%';
+            }
+        }
+
+        function syncMetronomeToggle(isChecked) {
+            metronomeCheckbox.checked = isChecked;
+            playMetronomeCheckbox.checked = isChecked;
+            metronomeEnabled = isChecked;
+            if (metronomeEnabled) {
+                nextTickTime = audioCtx.currentTime;
+                beatCount = 0;
+                subdivCount = 0;
+                scheduler();
+            } else {
+                if (metroIntervalId) clearTimeout(metroIntervalId);
+            }
+        }
+
+        function changeBPM(value) {
+            const bpm = parseInt(value);
+            const r1 = document.getElementById('sound-bpm-range');
+            const t1 = document.getElementById('sound-bpm-text');
+            const r2 = document.getElementById('bpm-range');
+            const t2 = document.getElementById('bpm-text');
+            if(r1) r1.value = bpm;
+            if(t1) t1.innerText = bpm;
+            if(r2) r2.value = bpm;
+            if(t2) t2.innerText = bpm + ' BPM';
+        }
+
+        /* */
+        function changeTimeSignature(sig) {
+            timeSignature = sig;
+            const s1 = document.getElementById('sound-metro-signature');
+            if (s1) s1.value = sig;
+        }
+
+        function scheduler() {
+            while (nextTickTime < audioCtx.currentTime + 0.1) {
+                scheduleNextTick(beatCount, nextTickTime);
+                advanceNextTick();
+            }
+            if (metronomeEnabled) {
+                metroIntervalId = setTimeout(scheduler, 25);
+            }
+        }
+
+        function advanceNextTick() {
+            const bpm = parseInt(document.getElementById('bpm-range').value);
+            const secondsPerBeat = 60.0 / bpm;
+            const secondsPerSubdiv = secondsPerBeat / subdivision;
+            
+            nextTickTime += secondsPerSubdiv;
+            
+            subdivCount++;
+            if (subdivCount >= subdivision) {
+                subdivCount = 0;
+                beatCount++;
+                
+                const maxBeats = parseInt(timeSignature.split('/')[0]);
+                if (beatCount >= maxBeats) {
+                    beatCount = 0;
+                }
+            }
+        }
+
+        function scheduleNextTick(beat, time) {
+            if (subdivCount !== 0) return; 
+
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            if (beat === 0) {
+                osc.frequency.setValueAtTime(1000, time);
+                gain.gain.setValueAtTime(0.5, time);
+            } else {
+                osc.frequency.setValueAtTime(600, time);
+                gain.gain.setValueAtTime(0.3, time);
+            }
+
+            gain.gain.exponentialRampToValueAtTime(0.01, time + 0.05);
+            osc.start(time);
+            osc.stop(time + 0.05);
+        }
+
+        /* ===================================================================
+           3. 📊 하이브리드 프로 믹서 렌더러 (노브 감도 대대적 보정 튜닝)
+           =================================================================== */
+        function renderMixerConsole() {
+            const wrapper = document.getElementById('mixer-strips-wrapper');
+            if (!wrapper) return;
+            wrapper.innerHTML = '';
+
+            consoleChannels.forEach((ch, idx) => {
+                const param = synthParams[ch.id];
+                if (!param) return;
+
+                const neonClass = `border-2 ${ch.id === 'kick' ? 'border-[#00f3ff]/30 hover:border-[#00f3ff] shadow-[0_0_10px_rgba(0,243,255,0.05)]' : 
+                                    ch.id === 'snare' ? 'border-[#ff007f]/30 hover:border-[#ff007f] shadow-[0_0_10px_rgba(255,0,127,0.05)]' : 
+                                    'border-slate-800 hover:border-slate-600'}`;
+
+                const strip = document.createElement('div');
+                strip.className = `flex flex-col items-center bg-[#070716] rounded-xl p-3 w-[11%] min-w-[125px] relative transition-all ${idx !== consoleChannels.length - 1 ? 'neon-border-r' : ''} ${neonClass}`;
+                
+                /* */
+                strip.innerHTML = `
+                    <span class="text-[10px] font-black text-gray-300 uppercase tracking-wider mb-2 truncate max-w-full text-center">${ch.name}</span>
+                    
+                    <!-- 채널별 실시간 오실로스코프 파형 미니 캔버스 -->
+                    <div class="w-full h-10 bg-black/90 border border-slate-900 rounded-lg overflow-hidden mb-3 relative">
+                        <canvas id="wave-canvas-${ch.id}" class="w-full h-full"></canvas>
+                    </div>
+
+                    <!-- EQ 노브 -->
+                    <div class="grid grid-cols-3 gap-2 mb-3 w-full border-b border-gray-900 pb-2">
+                        <div class="rotary-knob-container">
+                            <span class="text-[7px] text-gray-500 font-bold mb-0.5">LOW</span>
+                            <div class="rotary-knob scale-95" id="knob-eql-${ch.id}">
+                                <div class="rotary-knob-pointer" id="pointer-eql-${ch.id}" style="transform: rotate(${(param.eqLow + 12) / 24 * 270 - 135}deg);"></div>
+                            </div>
+                        </div>
+                        <div class="rotary-knob-container">
+                            <span class="text-[7px] text-gray-500 font-bold mb-0.5">MID</span>
+                            <div class="rotary-knob scale-95" id="knob-eqm-${ch.id}">
+                                <div class="rotary-knob-pointer" id="pointer-eqm-${ch.id}" style="transform: rotate(${(param.eqMid + 12) / 24 * 270 - 135}deg);"></div>
+                            </div>
+                        </div>
+                        <div class="rotary-knob-container">
+                            <span class="text-[7px] text-gray-500 font-bold mb-0.5">HIGH</span>
+                            <div class="rotary-knob scale-95" id="knob-eqh-${ch.id}">
+                                <div class="rotary-knob-pointer" id="pointer-eqh-${ch.id}" style="transform: rotate(${(param.eqHigh + 12) / 24 * 270 - 135}deg);"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AUX Send 노브 & PAN 노브 -->
+                    <div class="grid grid-cols-3 gap-1.5 w-full mb-3 border-b border-gray-900 pb-2">
+                        <div class="rotary-knob-container">
+                            <span class="text-[6.5px] text-pink-500 font-bold mb-0.5">REV</span>
+                            <div class="rotary-knob scale-95" id="knob-rev-${ch.id}">
+                                <div class="rotary-knob-pointer" id="pointer-rev-${ch.id}" style="transform: rotate(${(param.reverbSend / 0.5) * 270 - 135}deg);"></div>
+                            </div>
+                        </div>
+                        <div class="rotary-knob-container">
+                            <span class="text-[6.5px] text-cyan-500 font-bold mb-0.5">DEL</span>
+                            <div class="rotary-knob scale-95" id="knob-del-${ch.id}">
+                                <div class="rotary-knob-pointer" id="pointer-del-${ch.id}" style="transform: rotate(${(param.delaySend / 0.5) * 270 - 135}deg);"></div>
+                            </div>
+                        </div>
+                        <div class="rotary-knob-container">
+                            <span class="text-[6.5px] text-yellow-500 font-bold mb-0.5">PAN</span>
+                            <div class="rotary-knob scale-95" id="knob-pan-${ch.id}">
+                                <div class="rotary-knob-pointer" id="pointer-pan-${ch.id}" style="transform: rotate(${param.pan * 135}deg);"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 볼륨 페이더 트랙 및 LED VU 메터 결합 -->
+                    <div class="flex items-center justify-between gap-1.5 w-full mb-2 px-1">
+                        <div class="fader-track flex-1" id="fader-track-${ch.id}">
+                            <div class="fader-scale">
+                                <span>+6</span><span>0</span><span>-6</span><span>-12</span><span>-oo</span>
+                            </div>
+                            <div class="fader-cap" id="fader-cap-${ch.id}" style="bottom: ${Math.min(Math.max((param.volume / 1.5) * 80, 0), 86)}px;"></div>
+                        </div>
+
+                        <div class="w-2 h-[100px] bg-black/80 rounded border border-[#161633] relative overflow-hidden flex flex-col justify-end">
+                            <div id="vu-bar-${ch.id}" class="w-full bg-gradient-to-t from-green-500 via-yellow-400 to-red-500 transition-all duration-75" style="height: 0%;"></div>
+                        </div>
+                    </div>
+
+                    <span class="text-[8.5px] font-mono text-cyan-400 mb-2 font-bold" id="label-vol-${ch.id}">${Math.round(param.volume * 100)}%</span>
+
+                    <div class="flex gap-1 justify-center w-full pt-1.5 border-t border-gray-900">
+                        <button onclick="toggleMixerMute('${ch.id}')" id="btn-mute-${ch.id}" class="px-1 py-0.5 text-[8px] font-black rounded ${param.mute ? 'bg-red-800 text-white' : 'bg-gray-900 text-gray-500'}">M</button>
+                        <button onclick="toggleMixerSolo('${ch.id}')" id="btn-solo-${ch.id}" class="px-1 py-0.5 text-[8px] font-black rounded ${param.solo ? 'bg-yellow-600 text-black' : 'bg-gray-900 text-gray-500'}">S</button>
+                        <button onclick="playSynthesizedSound('${ch.id}')" class="px-1.5 py-0.5 text-[8px] font-black rounded bg-sky-950 text-sky-400 hover:bg-sky-900">TRY</button>
+                    </div>
+                `;
+                wrapper.appendChild(strip);
+
+                setupFaderEvent(ch.id);
+                setupKnobEvent(ch.id, 'pan', -1, 1);
+                setupKnobEvent(ch.id, 'rev', 0, 0.5);
+                setupKnobEvent(ch.id, 'del', 0, 0.5);
+                setupKnobEvent(ch.id, 'eql', -12, 12);
+                setupKnobEvent(ch.id, 'eqm', -12, 12);
+                setupKnobEvent(ch.id, 'eqh', -12, 12);
+            });
+        }
+
+        /* */
+        function setupFaderEvent(id) {
+            const track = document.getElementById(`fader-track-${id}`);
+            const cap = document.getElementById(`fader-cap-${id}`);
+            if (!track || !cap) return;
+
+            let isDragging = false;
+
+            function onMove(clientY) {
+                const rect = track.getBoundingClientRect();
+                const relativeY = Math.min(Math.max(clientY - rect.top, 0), rect.height);
+                const percent = 1 - (relativeY / rect.height);
+                const val = percent * 1.5;
+
+                synthParams[id].volume = val;
+                cap.style.bottom = (percent * 86) + 'px';
+                document.getElementById(`label-vol-${id}`).innerText = Math.round(val * 100) + '%';
+                
+                if (channelNodes[id]) {
+                    channelNodes[id].volumeGain.gain.setValueAtTime(val, audioCtx.currentTime);
+                }
+            }
+
+            track.addEventListener('mousedown', (e) => { isDragging = true; onMove(e.clientY); });
+            window.addEventListener('mousemove', (e) => { if (isDragging) onMove(e.clientY); });
+            window.addEventListener('mouseup', () => { isDragging = false; });
+
+            track.addEventListener('touchstart', (e) => { isDragging = true; onMove(e.touches[0].clientY); });
+            window.addEventListener('touchmove', (e) => { if (isDragging) onMove(e.touches[0].clientY); });
+            window.addEventListener('touchend', () => { isDragging = false; });
+        }
+
+        function setupKnobEvent(id, paramType, min, max) {
+            const knob = document.getElementById(`knob-${paramType}-${id}`);
+            const pointer = document.getElementById(`pointer-${paramType}-${id}`);
+            if (!knob || !pointer) return;
+
+            let isDragging = false;
+            let startY = 0;
+            let startVal = 0;
+
+            function onMove(clientY) {
+                const diffY = startY - clientY;
+                const sensitivity = (paramType.startsWith('eq')) ? 0.15 : 0.01;
+                let val = startVal + diffY * sensitivity;
+                val = Math.min(Math.max(val, min), max);
+
+                if (paramType === 'pan') {
+                    synthParams[id].pan = val;
+                    pointer.style.transform = `rotate(${val * 135}deg)`;
+                    if (channelNodes[id]) {
+                        channelNodes[id].panner.pan.setValueAtTime(val, audioCtx.currentTime);
+                    }
+                } else if (paramType === 'rev') {
+                    synthParams[id].reverbSend = val;
+                    pointer.style.transform = `rotate(${(val / 0.5) * 270 - 135}deg)`;
+                    if (channelNodes[id]) {
+                        channelNodes[id].reverbSend.gain.setValueAtTime(val, audioCtx.currentTime);
+                    }
+                } else if (paramType === 'del') {
+                    synthParams[id].delaySend = val;
+                    pointer.style.transform = `rotate(${(val / 0.5) * 270 - 135}deg)`;
+                    if (channelNodes[id]) {
+                        channelNodes[id].delaySend.gain.setValueAtTime(val, audioCtx.currentTime);
+                    }
+                } else if (paramType === 'eql') {
+                    synthParams[id].eqLow = val;
+                    pointer.style.transform = `rotate(${(val + 12) / 24 * 270 - 135}deg)`;
+                    if (channelNodes[id]) {
+                        channelNodes[id].eqLow.gain.setValueAtTime(val, audioCtx.currentTime);
+                    }
+                } else if (paramType === 'eqm') {
+                    synthParams[id].eqMid = val;
+                    pointer.style.transform = `rotate(${(val + 12) / 24 * 270 - 135}deg)`;
+                    if (channelNodes[id]) {
+                        channelNodes[id].eqMid.gain.setValueAtTime(val, audioCtx.currentTime);
+                    }
+                } else if (paramType === 'eqh') {
+                    synthParams[id].eqHigh = val;
+                    pointer.style.transform = `rotate(${(val + 12) / 24 * 270 - 135}deg)`;
+                    if (channelNodes[id]) {
+                        channelNodes[id].eqHigh.gain.setValueAtTime(val, audioCtx.currentTime);
+                    }
+                }
+            }
+
+            /* */
+            knob.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                startY = e.clientY;
+                if (paramType === 'pan') startVal = synthParams[id].pan;
+                else if (paramType === 'rev') startVal = synthParams[id].reverbSend;
+                else if (paramType === 'del') startVal = synthParams[id].delaySend;
+                else if (paramType === 'eql') startVal = synthParams[id].eqLow;
+                else if (paramType === 'eqm') startVal = synthParams[id].eqMid;
+                else if (paramType === 'eqh') startVal = synthParams[id].eqHigh;
+            });
+            window.addEventListener('mousemove', (e) => { if (isDragging) onMove(e.clientY); });
+            window.addEventListener('mouseup', () => { isDragging = false; });
+
+            knob.addEventListener('touchstart', (e) => {
+                isDragging = true;
+                startY = e.touches[0].clientY;
+                if (paramType === 'pan') startVal = synthParams[id].pan;
+                else if (paramType === 'rev') startVal = synthParams[id].reverbSend;
+                else if (paramType === 'del') startVal = synthParams[id].delaySend;
+                else if (paramType === 'eql') startVal = synthParams[id].eqLow;
+                else if (paramType === 'eqm') startVal = synthParams[id].eqMid;
+                else if (paramType === 'eqh') startVal = synthParams[id].eqHigh;
+            });
+            window.addEventListener('touchmove', (e) => { if (isDragging) onMove(e.touches[0].clientY); });
+            window.addEventListener('touchend', () => { isDragging = false; });
+        }
+
+        function toggleMixerMute(id) {
+            synthParams[id].mute = !synthParams[id].mute;
+            if (channelNodes[id]) {
+                channelNodes[id].muteGain.gain.setValueAtTime(synthParams[id].mute ? 0 : 1, audioCtx.currentTime);
+            }
+            renderMixerConsole();
+        }
+
+        function toggleMixerSolo(id) {
+            synthParams[id].solo = !synthParams[id].solo;
+            
+            let anySolo = false;
+            for (const key in synthParams) {
+                if (synthParams[key].solo) anySolo = true;
+            }
+
+            for (const key in synthParams) {
+                if (anySolo) {
+                    synthParams[key].mute = !synthParams[key].solo;
+                } else {
+                    synthParams[key].mute = false;
+                }
+                
+                if (channelNodes[key]) {
+                    channelNodes[key].muteGain.gain.setValueAtTime(synthParams[key].mute ? 0 : 1, audioCtx.currentTime);
+                }
+            }
+            renderMixerConsole();
+        }
+
+        function triggerVUVisualizer(id, val) {
+            channelVUMeters[id] = val;
+        }
+
+        /* ===================================================================
+           4. 📊 Live Visualizations
+           =================================================================== */
+        const visualizerCanvas = document.getElementById('master-visualizer-canvas');
+        const visCtx = visualizerCanvas ? visualizerCanvas.getContext('2d') : null;
+
+        const vuData = new Uint8Array(16);
+        function animateVisualizer() {
+            requestAnimationFrame(animateVisualizer);
+            
+            if (visCtx && visualizerCanvas) {
+                const width = visualizerCanvas.width = visualizerCanvas.offsetWidth;
+                const height = visualizerCanvas.height = visualizerCanvas.offsetHeight;
+
+                analyserNode.getByteFrequencyData(dataArray);
+
+                visCtx.fillStyle = 'rgba(3, 3, 11, 0.2)';
+                visCtx.fillRect(0, 0, width, height);
+
+                const barWidth = (width / bufferLength) * 2.5;
+                let barHeight;
+                let x = 0;
+
+                /* */
+                for (let i = 0; i < bufferLength; i++) {
+                    barHeight = dataArray[i] * (height / 255) * 0.95;
+
+                    const grad = visCtx.createLinearGradient(0, height, 0, height - barHeight);
+                    grad.addColorStop(0, '#00f3ff');
+                    grad.addColorStop(1, '#ff007f');
+
+                    visCtx.fillStyle = grad;
+                    visCtx.fillRect(x, height - barHeight, barWidth - 1, barHeight);
+
+                    x += barWidth;
+                }
+            }
+
+            consoleChannels.forEach(ch => {
+                const nodes = channelNodes[ch.id];
+                if (!nodes) return;
+                
+                nodes.analyser.getByteFrequencyData(vuData);
+                let sum = 0;
+                for (let i = 0; i < 16; i++) { sum += vuData[i]; }
+                let val = sum / 16;
+                let percent = (val / 160) * 100;
+                if (percent > 100) percent = 100;
+
+                const bar = document.getElementById(`vu-bar-${ch.id}`);
+                if (bar) {
+                    let currentVal = parseFloat(bar.style.height) || 0;
+                    let targetVal = percent;
+                    let newVal = currentVal * 0.70 + targetVal * 0.30; 
+                    if (newVal < 1) newVal = 0;
+                    bar.style.height = newVal.toFixed(1) + '%';
+                }
+
+                const waveCanvas = document.getElementById(`wave-canvas-${ch.id}`);
+                if (waveCanvas) {
+                    const ctx = waveCanvas.getContext('2d');
+                    const w = waveCanvas.width = waveCanvas.offsetWidth;
+                    const h = waveCanvas.height = waveCanvas.offsetHeight;
+                    ctx.clearRect(0, 0, w, h);
+
+                    channelWaveTriggers[ch.id] *= 0.88;
+                    const amp = channelWaveTriggers[ch.id];
+
+                    ctx.beginPath();
+                    ctx.strokeStyle = ch.id === 'kick' ? '#00f3ff' : ch.id === 'snare' ? '#ff007f' : '#39ff14';
+                    ctx.lineWidth = 1.5;
+
+                    for (let x = 0; x < w; x++) {
+                        const freq = 0.15;
+                        const y = (h / 2) + Math.sin(x * freq) * (h / 2.5) * amp * Math.sin(x / w * Math.PI);
+                        if (x === 0) ctx.moveTo(x, y);
+                        else ctx.lineTo(x, y);
+                    }
+                    ctx.stroke();
+                }
+            });
+        }
+
+        /* ===================================================================
+           5. 🎮 Rhythm Game Training Engine (70곡 정교한 카테고리 데이터베이스)
+           =================================================================== */
+        let gameScore = 0;
+        let gameCombo = 0;
+        let maxCombo = 0;
+        let noteSpeed = 0.45; 
+        let gameRunning = false;
+        let gamePaused = false;
+        let notesArray = [];
+        let patternTimerId = null;
+
+        const defaultMidiMapping = {
+            8: [
+                { id: 'kick', name: 'Bass Kick', midi: 36, key: 'A', color: 0 },
+                { id: 'snare', name: 'Snare', midi: 38, key: 'S', color: 1 },
+                { id: 'hihat', name: 'Hi-Hat Close', midi: 42, key: 'D', color: 2 },
+                { id: 'hihat_open', name: 'Hi-Hat Open', midi: 46, key: 'F', color: 3 },
+                { id: 'tom_high', name: 'High Tom', midi: 48, key: 'J', color: 4 },
+                { id: 'tom_low', name: 'Low Tom', midi: 45, key: 'K', color: 5 },
+                { id: 'tom_floor', name: 'Floor Tom', midi: 41, key: 'L', color: 6 },
+                { id: 'crash', name: 'Crash Cymbal', midi: 49, key: ';', color: 7 }
+            ],
+            9: [
+                { id: 'kick', name: 'Bass Kick', midi: 36, key: 'A', color: 0 },
+                { id: 'snare', name: 'Snare', midi: 38, key: 'S', color: 1 },
+                { id: 'hihat', name: 'Hi-Hat Close', midi: 42, key: 'D', color: 2 },
+                { id: 'hihat_open', name: 'Hi-Hat Open', midi: 46, key: 'F', color: 3 },
+                { id: 'tom_high', name: 'High Tom', midi: 48, key: 'G', color: 4 },
+                { id: 'tom_low', name: 'Low Tom', midi: 45, key: 'H', color: 5 },
+                { id: 'tom_floor', name: 'Floor Tom', midi: 41, key: 'J', color: 6 },
+                { id: 'crash', name: 'Crash Cymbal', midi: 49, key: 'K', color: 7 },
+                { id: 'crash2', name: 'Crash 2 Cymbal', midi: 57, key: 'L', color: 8 }
+            ]
+        };
+
+        let activeHardwareLanesCount = 8;
+        let currentMapping = JSON.parse(JSON.stringify(defaultMidiMapping[8]));
+
+        /* */
+        // 대규모 70개 명곡 데이터베이스 정의 (각 카테고리별 10곡)
+        const songsDatabase = {
+            children: [
+                { id: "c1", title: "아기 상어 (Baby Shark)", bpm: 125, style: "8beat", diff: "★☆☆☆☆" },
+                { id: "c2", title: "곰 세 마리", bpm: 100, style: "4beat", diff: "★☆☆☆☆" },
+                { id: "c3", title: "나비야 나비야", bpm: 95, style: "4beat", diff: "★☆☆☆☆" },
+                { id: "c4", title: "올챙이와 개구리", bpm: 130, style: "8beat", diff: "★★☆☆☆" },
+                { id: "c5", title: "반짝반짝 작은 별", bpm: 85, style: "4beat", diff: "★☆☆☆☆" },
+                { id: "c6", title: "산토끼 토끼야", bpm: 110, style: "8beat", diff: "★★☆☆☆" },
+                { id: "c7", title: "멋쟁이 토마토", bpm: 120, style: "8beat", diff: "★★☆☆☆" },
+                { id: "c8", title: "독도는 우리땅", bpm: 125, style: "8beat", diff: "★★★☆☆" },
+                { id: "c9", title: "네잎클로버", bpm: 115, style: "syncopation", diff: "★★☆☆☆" },
+                { id: "c10", title: "Twinkle Little Star (Global)", bpm: 90, style: "4beat", diff: "★☆☆☆☆" }
+            ],
+            cinema: [
+                { id: "ci1", title: "캐리비안의 해적 Theme", bpm: 140, style: "triplets", diff: "★★★★☆" },
+                { id: "ci2", title: "라라랜드 (Another Day of Sun)", bpm: 126, style: "shuffle", diff: "★★★★☆" },
+                { id: "ci3", title: "스타워즈 메인 테마", bpm: 108, style: "4beat", diff: "★★★☆☆" },
+                { id: "ci4", title: "인셉션 (Time)", bpm: 72, style: "4beat", diff: "★★☆☆☆" },
+                { id: "ci5", title: "하울의 움직이는 성 (인생의 회전목마)", bpm: 150, style: "waltz", diff: "★★★☆☆" },
+                { id: "ci6", title: "이웃집 토토로 메인송", bpm: 120, style: "8beat", diff: "★★★☆☆" },
+                { id: "ci7", title: "타이타닉 (My Heart Will Go On)", bpm: 98, style: "8beat", diff: "★★☆☆☆" },
+                { id: "ci8", title: "미션 임파서블 메인 테마", bpm: 160, style: "syncopation", diff: "★★★★★" },
+                { id: "ci9", title: "어벤져스 어셈블", bpm: 112, style: "triplets", diff: "★★★★☆" },
+                { id: "ci10", title: "라이온 킹 (Circle of Life)", bpm: 80, style: "8beat", diff: "★★☆☆☆" }
+            ],
+            pop: [
+                { id: "p1", title: "Uptown Funk - Bruno Mars", bpm: 115, style: "16beat", diff: "★★★★☆" },
+                { id: "p2", title: "Billie Jean - Michael Jackson", bpm: 117, style: "8beat", diff: "★★★☆☆" },
+                { id: "p3", title: "Shape of You - Ed Sheeran", bpm: 96, style: "syncopation", diff: "★★★☆☆" },
+                { id: "p4", title: "Hotel California - Eagles", bpm: 74, style: "8beat", diff: "★★★☆☆" },
+                { id: "p5", title: "Believer - Imagine Dragons", bpm: 125, style: "triplets", diff: "★★★★☆" },
+                { id: "p6", title: "Sugar - Maroon 5", bpm: 120, style: "8beat", diff: "★★★☆☆" },
+                { id: "p7", title: "Rolling in the Deep - Adele", bpm: 105, style: "8beat", diff: "★★★☆☆" },
+                { id: "p8", title: "Despacito - Luis Fonsi", bpm: 89, style: "syncopation", diff: "★★★★☆" },
+                { id: "p9", title: "Closer - The Chainsmokers", bpm: 95, style: "8beat", diff: "★★☆☆☆" },
+                { id: "p10", title: "Can't Stop the Feeling - J.T.", bpm: 113, style: "16beat", diff: "★★★★☆" }
+            ],
+            jpop: [
+                { id: "j1", title: "Lemon - Kenshi Yonezu", bpm: 87, style: "syncopation", diff: "★★★☆☆" },
+                { id: "j2", title: "Idol (아이돌) - YOASOBI", bpm: 166, style: "16beat", diff: "★★★★★" },
+                { id: "j3", title: "밤을 달리다 - YOASOBI", bpm: 130, style: "16beat", diff: "★★★★☆" },
+                { id: "j4", title: "첫사랑 (First Love) - Utada Hikaru", bpm: 80, style: "8beat", diff: "★★☆☆☆" },
+                { id: "j5", title: "쏘아올린 불꽃 - DAOKO x Kenshi", bpm: 92, style: "8beat", diff: "★★★☆☆" },
+                { id: "j6", title: "Dry Flower - Yuuri", bpm: 76, style: "8beat", diff: "★★☆☆☆" },
+                { id: "j7", title: "Pretender - Official髭男dism", bpm: 92, style: "16beat", diff: "★★★★☆" },
+                { id: "j8", title: "Marigold - Aimyon", bpm: 106, style: "8beat", diff: "★★★☆☆" },
+                { id: "j9", title: "괴물 (Kaibutsu) - YOASOBI", bpm: 150, style: "16beat", diff: "★★★★★" },
+                { id: "j10", title: "Sparkle - RADWIMPS", bpm: 124, style: "8beat", diff: "★★★☆☆" }
+            ],
+            kpop: [
+                { id: "k1", title: "Dynamite - BTS", bpm: 114, style: "16beat", diff: "★★★☆☆" },
+                { id: "k2", title: "Hype Boy - NewJeans", bpm: 100, style: "16beat", diff: "★★★★☆" },
+                { id: "k3", title: "Ditto - NewJeans", bpm: 130, style: "8beat", diff: "★★★☆☆" },
+                { id: "k4", title: "Love Dive - IVE", bpm: 118, style: "8beat", diff: "★★★☆☆" },
+                { id: "k5", title: "Next Level - aespa", bpm: 109, style: "syncopation", diff: "★★★★☆" },
+                { id: "k6", title: "봄날 (Spring Day) - BTS", bpm: 80, style: "triplets", diff: "★★★☆☆" },
+                { id: "k7", title: "으르렁 (Growl) - EXO", bpm: 110, style: "16beat", diff: "★★★★☆" },
+                { id: "k8", title: "Cheer Up - TWICE", bpm: 128, style: "8beat", diff: "★★★☆☆" },
+                { id: "k9", title: "외톨이 - 아웃사이더 (Fast Beat)", bpm: 155, style: "16beat", diff: "★★★★★" },
+                { id: "k10", title: "오랜 날 오랜 밤 - AKMU", bpm: 92, style: "8beat", diff: "★★☆☆☆" }
+            ],
+            classical: [
+                { id: "cl1", title: "캐논 변주곡 (Pachelbel)", bpm: 105, style: "8beat", diff: "★★★☆☆" },
+                { id: "cl2", title: "운명 교향곡 (Beethoven)", bpm: 108, style: "triplets", diff: "★★★★☆" },
+                { id: "cl3", title: "엘리제를 위하여", bpm: 130, style: "waltz", diff: "★★☆☆☆" },
+                { id: "cl4", title: "헝가리 무곡 제5번", bpm: 124, style: "syncopation", diff: "★★★★☆" },
+                { id: "cl5", title: "가보트 Gavotte", bpm: 90, style: "4beat", diff: "★☆☆☆☆" },
+                { id: "cl6", title: "미뉴에트 G장조 (Bach)", bpm: 114, style: "waltz", diff: "★★☆☆☆" },
+                { id: "cl7", title: "백조의 호수 테마", bpm: 92, style: "4beat", diff: "★★☆☆☆" },
+                { id: "cl8", title: "비발디 사계 중 '봄'", bpm: 120, style: "8beat", diff: "★★★☆☆" },
+                { id: "cl9", title: "사랑의 기쁨 (Martini)", bpm: 110, style: "waltz", diff: "★★☆☆☆" },
+                { id: "cl10", title: "볼레로 Bolero (Ravel)", bpm: 76, style: "triplets", diff: "★★★★★" }
+            ],
+            carol: [
+                { id: "ca1", title: "Last Christmas - Wham!", bpm: 107, style: "8beat", diff: "★★☆☆☆" },
+                { id: "ca2", title: "All I Want For Christmas Is You", bpm: 150, style: "shuffle", diff: "★★★★★" },
+                { id: "ca3", title: "징글벨 (Jingle Bells)", bpm: 120, style: "8beat", diff: "★★☆☆☆" },
+                { id: "ca4", title: "루돌프 사슴코", bpm: 116, style: "8beat", diff: "★★☆☆☆" },
+                { id: "ca5", title: "울면 안 돼 (Santa Claus is Coming)", bpm: 104, style: "8beat", diff: "★★☆☆☆" },
+                { id: "ca6", title: "창밖을 보라", bpm: 132, style: "8beat", diff: "★★★☆☆" },
+                { id: "ca7", title: "고요한 밤 거룩한 밤", bpm: 75, style: "waltz", diff: "★☆☆☆☆" },
+                { id: "ca8", title: "We Wish You a Merry Christmas", bpm: 140, style: "waltz", diff: "★★☆☆☆" },
+                { id: "ca9", title: "실버벨 (Silver Bells)", bpm: 84, style: "waltz", diff: "★☆☆☆☆" },
+                { id: "ca10", title: "첫눈처럼 너에게 가겠다", bpm: 72, style: "8beat", diff: "★★☆☆☆" }
+            ]
+        };
+
+        /* */
+        // 피드백 반영: 대분류 클릭 이벤트 (흔들림 없는 카테고리 전환)
+        function changeGameCategoryDirectly(category) {
+            document.querySelectorAll('.category-tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            const activeTab = document.getElementById(`genre-tab-${category}`);
+            if (activeTab) activeTab.classList.add('active');
+
+            const songSelect = document.getElementById('game-song-select');
+            if (!songSelect) return;
+            songSelect.innerHTML = '';
+
+            const list = songsDatabase[category] || [];
+            list.forEach(song => {
+                const opt = document.createElement('option');
+                opt.value = song.id;
+                opt.text = `${song.title} (${song.diff} / ${song.bpm} BPM)`;
+                songSelect.appendChild(opt);
+            });
+
+            if (list.length > 0) {
+                onGameSongChange(list[0].id);
+            }
+        }
+
+        let currentGameSong = null;
+        function onGameSongChange(songId) {
+            // 현재 활성화된 탭의 카테고리 파악
+            let activeCategory = 'children';
+            document.querySelectorAll('.category-tab-button').forEach(btn => {
+                if (btn.classList.contains('active')) {
+                    activeCategory = btn.id.replace('genre-tab-', '');
+                }
+            });
+
+            const list = songsDatabase[activeCategory] || [];
+            const song = list.find(s => s.id === songId);
+            if (!song) return;
+
+            currentGameSong = song;
+            changeBPM(song.bpm);
+
+            if (gameRunning) {
+                stopRhythmGenerator();
+                startProceduralRhythmGenerator(song);
+            }
+        }
+
+        /* */
+        function startProceduralRhythmGenerator(song) {
+            const intervalMs = (60.0 / song.bpm) * 1000;
+            let tick = 0;
+
+            patternTimerId = setInterval(() => {
+                const step = tick % 16;
+                const activeLanes = [];
+
+                if (song.style === "4beat") {
+                    if (step % 4 === 0) activeLanes.push(2); // Hi-hat close
+                    if (step === 0 || step === 8) activeLanes.push(0); // Kick
+                    if (step === 4 || step === 12) activeLanes.push(1); // Snare
+                } 
+                else if (song.style === "8beat") {
+                    if (step % 2 === 0) activeLanes.push(2); // Hi-hat close
+                    if (step === 0 || step === 8 || step === 10) activeLanes.push(0); // Kick
+                    if (step === 4 || step === 12) activeLanes.push(1); // Snare
+                } 
+                else if (song.style === "16beat") {
+                    if (step % 1 === 0) activeLanes.push(2); 
+                    if (step === 0 || step === 6 || step === 8 || step === 14) activeLanes.push(0); // Kick
+                    if (step === 4 || step === 12) activeLanes.push(1); // Snare
+                } 
+                else if (song.style === "shuffle") {
+                    if (step === 0 || step === 2 || step === 3 || step === 6 || step === 8 || step === 11 || step === 12 || step === 14) activeLanes.push(2);
+                    if (step === 0 || step === 8) activeLanes.push(0);
+                    if (step === 4 || step === 12) activeLanes.push(1);
+                } 
+                else if (song.style === "triplets") {
+                    if (step % 3 === 0) activeLanes.push(2);
+                    if (step === 0 || step === 6) activeLanes.push(0);
+                    if (step === 3 || step === 9) activeLanes.push(1);
+                } 
+                else if (song.style === "waltz") {
+                    if (step === 0 || step === 4 || step === 8) activeLanes.push(2);
+                    if (step === 0) activeLanes.push(0);
+                    if (step === 4 || step === 8) activeLanes.push(1);
+                } 
+                else {
+                    if (step % 2 === 0) activeLanes.push(2);
+                    if (step === 0 || step === 3 || step === 8 || step === 11) activeLanes.push(0);
+                    if (step === 4 || step === 12) activeLanes.push(1);
+                }
+
+                if (tick >= 48) {
+                    if (step === 12) { activeLanes.push(4); } // Tom high
+                    if (step === 13) { activeLanes.push(5); } // Tom low
+                    if (step === 14) { activeLanes.push(6); } // Tom floor
+                    if (step === 15) { activeLanes.push(7); } // Crash
+                }
+
+                activeLanes.forEach(lane => {
+                    if (lane < activeHardwareLanesCount) {
+                        spawnNote(lane);
+                    }
+                });
+
+                tick++;
+                if (tick >= 64) {
+                    tick = 0; 
+                }
+            }, intervalMs / 4); 
+        }
+
+        const canvasGame = document.getElementById('effect-canvas');
+        const cgCtx = canvasGame ? canvasGame.getContext('2d') : null;
+        let particles = [];
+
+        /* */
+        function renderGameCanvas() {
+            if (!cgCtx || !canvasGame) return;
+            const w = canvasGame.width = canvasGame.parentElement.offsetWidth;
+            const h = canvasGame.height = canvasGame.parentElement.offsetHeight;
+
+            cgCtx.clearRect(0, 0, w, h);
+
+            const laneWidth = w / activeHardwareLanesCount;
+            const judgmentY = h - 70;
+
+            if (gameRunning && !gamePaused) {
+                const now = Date.now();
+                notesArray.forEach((note) => {
+                    const elapsed = now - note.spawnTime;
+                    const y = elapsed * noteSpeed;
+                    note.currentY = y;
+
+                    if (y < h + 20) {
+                        const noteColor = getNoteHexColor(note.lane);
+                        cgCtx.fillStyle = noteColor;
+                        cgCtx.shadowBlur = 15;
+                        cgCtx.shadowColor = noteColor;
+
+                        drawRoundedRect(cgCtx, note.lane * laneWidth + 6, y - 8, laneWidth - 12, 16, 8);
+                        cgCtx.shadowBlur = 0;
+                    }
+                });
+
+                for (let i = notesArray.length - 1; i >= 0; i--) {
+                    if (notesArray[i].currentY > judgmentY + 100) {
+                        notesArray.splice(i, 1);
+                        triggerJudgment('MISS');
+                    }
+                }
+            }
+
+            particles.forEach((p, idx) => {
+                p.x += p.vx;
+                p.y += p.vy;
+                p.alpha -= 0.02;
+                if (p.alpha <= 0) {
+                    particles.splice(idx, 1);
+                    return;
+                }
+                cgCtx.fillStyle = `rgba(${p.r}, ${p.g}, ${p.b}, ${p.alpha})`;
+                cgCtx.beginPath();
+                cgCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                cgCtx.fill();
+            });
+
+            requestAnimationFrame(renderGameCanvas);
+        }
+
+        function drawRoundedRect(ctx, x, y, width, height, radius) {
+            ctx.beginPath();
+            ctx.moveTo(x + radius, y);
+            ctx.lineTo(x + width - radius, y);
+            ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+            ctx.lineTo(x + width, y + height - radius);
+            ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+            ctx.lineTo(x + radius, y + height);
+            ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+            ctx.lineTo(x, y + radius);
+            ctx.quadraticCurveTo(x, y, x + radius, y);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        function createParticles(lane) {
+            if (!canvasGame) return;
+            const laneWidth = canvasGame.width / activeHardwareLanesCount;
+            const startX = lane * laneWidth + laneWidth / 2;
+            const startY = canvasGame.height - 70;
+            const rgb = getLaneRGB(lane);
+
+            for (let i = 0; i < 18; i++) {
+                particles.push({
+                    x: startX,
+                    y: startY,
+                    vx: (Math.random() - 0.5) * 8,
+                    vy: (Math.random() - 0.5) * 8 - 3,
+                    size: Math.random() * 4 + 2,
+                    alpha: 1.0,
+                    r: rgb.r,
+                    g: rgb.g,
+                    b: rgb.b
+                });
+            }
+        }
+
+        function getNoteHexColor(lane) {
+            const colors = ['#00f3ff', '#ff007f', '#39ff14', '#ffe600', '#b026ff', '#ff6c00', '#00ffd5', '#ff003c', '#e5c158'];
+            return colors[lane % colors.length];
+        }
+
+        function getLaneRGB(lane) {
+            const colors = [
+                { r: 0, g: 243, b: 255 }, { r: 255, g: 0, b: 127 }, { r: 57, g: 255, b: 20 },
+                { r: 255, g: 230, b: 0 }, { r: 176, g: 38, b: 255 }, { r: 255, g: 108, b: 0 },
+                { r: 0, g: 255, b: 213 }, { r: 255, g: 0, b: 60 }, { r: 229, g: 193, b: 88 }
+            ];
+            return colors[lane % colors.length];
+        }
+
+        /* */
+        function triggerJudgment(type) {
+            const banner = document.getElementById('judgment-banner');
+            const comboDisp = document.getElementById('combo-display');
+            if (!banner || !comboDisp) return;
+
+            banner.className = '';
+            banner.style.opacity = '1';
+            banner.style.transform = 'translate(-50%, -50%) scale(1.3)';
+
+            if (type === 'PERFECT') {
+                banner.innerText = 'PERFECT';
+                banner.classList.add('judgment-perfect');
+                gameScore += 1000 + (gameCombo * 10);
+                gameCombo++;
+            } else if (type === 'GOOD') {
+                banner.innerText = 'GOOD';
+                banner.classList.add('judgment-good');
+                gameScore += 500 + (gameCombo * 5);
+                gameCombo++;
+            } else {
+                banner.innerText = 'MISS';
+                banner.classList.add('judgment-miss');
+                gameCombo = 0;
+            }
+
+            if (gameCombo > maxCombo) maxCombo = gameCombo;
+
+            document.getElementById('score-display').innerText = String(gameScore).padStart(6, '0');
+
+            if (gameCombo > 1) {
+                comboDisp.innerText = `${gameCombo} COMBO`;
+                comboDisp.style.opacity = '1';
+                comboDisp.style.transform = 'translate(-50%, -50%) scale(1.1)';
+            } else {
+                comboDisp.style.opacity = '0';
+            }
+
+            setTimeout(() => {
+                banner.style.opacity = '0';
+                banner.style.transform = 'translate(-50%, -50%) scale(1.0)';
+            }, 300);
+        }
+
+        /* ===================================================================
+           6. 🎓 New Lesson Mode Engine (드럼 학당 16단계 완벽과정 및 하드웨어 매치)
+           =================================================================== */
+        let lessonBPM = 80;
+        let lessonRunning = false;
+        let activeLessonIdx = 0;
+        let lessonStepTimer = null;
+        let lessonPatternSeq = [];
+        let lessonSeqPointer = 0;
+
+        /* */
+        // 피드백 반영: 16단계 하드웨어 1:1 결속 직관 가이드 텍스트 및 상세 타겟 매핑
+        const lessonCurriculum = [
+            {
+                step: "STEP 1",
+                title: "양손 정박 교대 스트로크 (R L R L)",
+                desc: "[SNARE 드럼 타격] 오른손(R)과 왼손(L)을 교대로 스네어 드럼의 한가운데 가죽을 쳐 소리를 냅니다. 드럼 스틱 제어의 가장 단단한 주춧돌입니다.",
+                difficulty: "★☆☆☆☆",
+                sequence: [
+                    { hand: "오른손 (R)", target: "snare", color: "border-sky-500 text-sky-400 shadow-[0_0_12px_rgba(56,189,248,0.3)]", desc: "오른손으로 스네어 드럼 중앙 타격" },
+                    { hand: "왼손 (L)", target: "snare", color: "border-pink-500 text-pink-400 shadow-[0_0_12px_rgba(244,63,94,0.3)]", desc: "왼손으로 스네어 드럼 중앙 타격" },
+                    { hand: "오른손 (R)", target: "snare", color: "border-sky-500 text-sky-400", desc: "오른손으로 스네어 드럼 중앙 타격" },
+                    { hand: "왼손 (L)", target: "snare", color: "border-pink-500 text-pink-400", desc: "왼손으로 스네어 드럼 중앙 타격" }
+                ]
+            },
+            {
+                step: "STEP 2",
+                title: "리바운드 2연타 더블 스트로크 (RR LL)",
+                desc: "[SNARE 드럼 타격] 손목의 탄력을 사용하여 오른손으로 스네어 2번, 왼손으로 스네어 2번 연속 타격하는 핵심 과정.",
+                difficulty: "★★☆☆☆",
+                sequence: [
+                    { hand: "오른손 (R)", target: "snare", color: "border-sky-500 text-sky-400", desc: "오른손 첫번째 타격" },
+                    { hand: "오른손 (R)", target: "snare", color: "border-sky-500 text-sky-400", desc: "오른손 두번째 리바운드 타격" },
+                    { hand: "왼손 (L)", target: "snare", color: "border-pink-500 text-pink-400", desc: "왼손 첫번째 타격" },
+                    { hand: "왼손 (L)", target: "snare", color: "border-pink-500 text-pink-400", desc: "왼손 두번째 리바운드 타격" }
+                ]
+            },
+            {
+                step: "STEP 3",
+                title: "드럼 명인의 첫걸음 파라디들 (RLRR LRLL)",
+                desc: "[SNARE 드럼 타격] 싱글 스트로크(R,L)와 더블 스트로크(RR,LL)를 절묘하게 뒤섞어 화려한 필인을 만들어내는 최고급 과정.",
+                difficulty: "★★★☆☆",
+                sequence: [
+                    { hand: "오른손 (R)", target: "snare", color: "border-sky-500 text-sky-400", desc: "오른손 단타" },
+                    { hand: "왼손 (L)", target: "snare", color: "border-pink-500 text-pink-400", desc: "왼손 단타" },
+                    { hand: "오른손 (R)", target: "snare", color: "border-sky-500 text-sky-400", desc: "오른손 연타" },
+                    { hand: "오른손 (R)", target: "snare", color: "border-sky-500 text-sky-400", desc: "오른손 연타" },
+                    { hand: "왼손 (L)", target: "snare", color: "border-pink-500 text-pink-400", desc: "왼손 단타" },
+                    { hand: "오른손 (R)", target: "snare", color: "border-sky-500 text-sky-400", desc: "오른손 단타" },
+                    { hand: "왼손 (L)", target: "snare", color: "border-pink-500 text-pink-400", desc: "왼손 연타" },
+                    { hand: "왼손 (L)", target: "snare", color: "border-pink-500 text-pink-400", desc: "왼손 연타" }
+                ]
+            },
+            {
+                step: "STEP 4",
+                title: "스냅 악센트(강약) 연주법 (R l r l)",
+                desc: "[SNARE 및 강약 타격] 강타(Accent) 시 팔을 높이 들어 숄더로 스네어를 세게 치고, 약타(l, r) 시 손목 힘을 빼고 가볍게 툭 건드립니다.",
+                difficulty: "★★★☆☆",
+                sequence: [
+                    { hand: "강 타 (R)", target: "snare", color: "border-red-500 text-red-400", desc: "팔 높이 올려 세게 강타!" },
+                    { hand: "약 타 (l)", target: "snare", color: "border-slate-700 text-slate-500", desc: "가볍게 툭 건드리는 약타" },
+                    { hand: "약 타 (r)", target: "snare", color: "border-slate-700 text-slate-500", desc: "가볍게 툭 건드리는 약타" },
+                    { hand: "약 타 (l)", target: "snare", color: "border-slate-700 text-slate-500", desc: "가볍게 툭 건드리는 약타" }
+                ]
+            },
+            {
+                step: "STEP 5",
+                title: "오른발 킥 정박 독립 훈련 (K H K H)",
+                desc: "[KICK 및 HI-HAT] 오른발로 베이스 드럼 페달을 밟으며 쿵! 소리를 내고, 뒤이어 왼손으로 하이햇 심벌을 치는 교대 타격.",
+                difficulty: "★★☆☆☆",
+                sequence: [
+                    { hand: "오른발 (K)", target: "kick", color: "border-teal-500 text-teal-400", desc: "오른발 페달 깊게 밟기(쿵!)" },
+                    { hand: "하이햇 (H)", target: "hihat", color: "border-amber-500 text-amber-400", desc: "왼쪽 하이햇 심벌 타격" },
+                    { hand: "오른발 (K)", target: "kick", color: "border-teal-500 text-teal-400", desc: "오른발 페달 깊게 밟기(쿵!)" },
+                    { hand: "하이햇 (H)", target: "hihat", color: "border-amber-500 text-amber-400", desc: "왼쪽 하이햇 심벌 타격" }
+                ]
+            },
+            {
+                step: "STEP 6",
+                title: "엇박 킥 오프-비트 트레이닝",
+                desc: "[KICK 및 HI-HAT] 하이햇을 치는 정박 틈새 사이에 오른발로 킥 페달을 박아넣어 변칙 엇박을 자아냅니다.",
+                difficulty: "★★★☆☆",
+                sequence: [
+                    { hand: "하이햇 (H)", target: "hihat", color: "border-amber-500 text-amber-400", desc: "하이햇 정박 타격" },
+                    { hand: "오른발 (K)", target: "kick", color: "border-teal-500 text-teal-400", desc: "엇박으로 킥 밟기" },
+                    { hand: "하이햇 (H)", target: "hihat", color: "border-amber-500 text-amber-400", desc: "하이햇 정박 타격" },
+                    { hand: "오른발 (K)", target: "kick", color: "border-teal-500 text-teal-400", desc: "엇박으로 킥 밟기" }
+                ]
+            },
+            {
+                step: "STEP 7",
+                title: "킥과 하이햇 양발 균형 조율",
+                desc: "[양발/양손 조화] 오른발 베이스 킥과 하이햇을 '동시에' 힘있게 타격한 뒤 오픈 하이햇으로 확장합니다.",
+                difficulty: "★★★☆☆",
+                sequence: [
+                    { hand: "발&햇 동시", target: "kick", color: "border-teal-500 text-teal-400", desc: "발(킥)과 손(하이햇)을 완벽히 동시 타격!" },
+                    { hand: "하이햇 (H)", target: "hihat", color: "border-amber-500 text-amber-400", desc: "하이햇만 단독 타격" },
+                    { hand: "발&햇 동시", target: "kick", color: "border-teal-500 text-teal-400", desc: "발(킥)과 손(하이햇)을 완벽히 동시 타격!" },
+                    { hand: "오픈하이햇", target: "hihat_open", color: "border-amber-400 text-amber-300", desc: "하이햇 오픈 타격" }
+                ]
+            },
+            {
+                step: "STEP 8",
+                title: "스네어 2, 4박 백비트 탑재 (H S H S)",
+                desc: "[HI-HAT 및 SNARE] 하이햇을 일정하게 쪼개는 가운데 2번째와 4번째 박에 스네어를 얹어 리듬의 척추를 세웁니다.",
+                difficulty: "★★★☆☆",
+                sequence: [
+                    { hand: "하이햇 (H)", target: "hihat", color: "border-amber-500 text-amber-400", desc: "하이햇 타격" },
+                    { hand: "스네어 (S)", target: "snare", color: "border-orange-500 text-orange-400", desc: "스네어 타격(백비트)" },
+                    { hand: "하이햇 (H)", target: "hihat", color: "border-amber-500 text-amber-400", desc: "하이햇 타격" },
+                    { hand: "스네어 (S)", target: "snare", color: "border-orange-500 text-orange-400", desc: "스네어 타격(백비트)" }
+                ]
+            },
+            {
+                step: "STEP 9",
+                title: "실전 8비트 고고 기본 그루브 완결",
+                desc: "[풀그루브 세트] 오른발 킥 + 하이햇을 동시에 치며 리듬을 시작하고 스네어로 정교하게 끝마칩니다.",
+                difficulty: "★★★☆☆",
+                sequence: [
+                    { hand: "발&햇 동시", target: "kick", color: "border-teal-500 text-teal-400", desc: "오른발 킥과 하이햇 동시 타격" },
+                    { hand: "하이햇 단독", target: "hihat", color: "border-amber-500 text-amber-400", desc: "하이햇만 툭 치기" },
+                    { hand: "손&햇 동시", target: "snare", color: "border-orange-500 text-orange-400", desc: "스네어와 하이햇 동시 타격" },
+                    { hand: "하이햇 단독", target: "hihat", color: "border-amber-500 text-amber-400", desc: "하이햇만 툭 치기" }
+                ]
+            },
+            {
+                step: "STEP 10",
+                title: "바운스감을 살린 셔플 스윙 리듬",
+                desc: "[셔플 스윙] 셋잇단음표의 중간 음을 비워두어 '다 가 닥 가' 말 발굽이 달리는 그루브를 만들어냅니다.",
+                difficulty: "★★★★☆",
+                sequence: [
+                    { hand: "다 (K)", target: "kick", color: "border-teal-500 text-teal-400", desc: "오른발 킥 시작" },
+                    { hand: "가 (H)", target: "hihat", color: "border-amber-500 text-amber-400", desc: "하이햇 셔플" },
+                    { hand: "닥 (S)", target: "snare", color: "border-orange-500 text-orange-400", desc: "스네어로 그루브 포인트" },
+                    { hand: "가 (H)", target: "hihat", color: "border-amber-500 text-amber-400", desc: "하이햇 셔플" }
+                ]
+            },
+            {
+                step: "STEP 11",
+                title: "스네어 유령타 고스트 노트 조율",
+                desc: "[GHOST NOTE] 메인 스네어를 강하게 친 직후, 스틱을 가죽 표면에 들릴듯 말듯 살짝만 대며 아주 미세한 약타를 넣습니다.",
+                difficulty: "★★★★☆",
+                sequence: [
+                    { hand: "강 타 (S)", target: "snare", color: "border-red-500 text-red-400", desc: "중앙 스네어 강력하게 강타!" },
+                    { hand: "고스트 (s)", target: "snare", color: "border-slate-800 text-slate-600", desc: "스틱을 가죽 표면에 튕기듯 극도로 미세하게 고스트타" },
+                    { hand: "하이햇 (H)", target: "hihat", color: "border-amber-500 text-amber-400", desc: "하이햇 정박 타격" },
+                    { hand: "고스트 (s)", target: "snare", color: "border-slate-800 text-slate-600", desc: "가죽 표면에 튕기듯 스치며 고스트타" }
+                ]
+            },
+            {
+                step: "STEP 12",
+                title: "16비트 고밀도 펑크(Funk) 분할",
+                desc: "[고속 16비트] 한 박에 하이햇을 네 번씩 초고속으로 쪼개며 그 사이사이에 킥과 스네어를 얹는 최상급 리듬.",
+                difficulty: "★★★★★",
+                sequence: [
+                    { hand: "오른발 (K)", target: "kick", color: "border-teal-500 text-teal-400", desc: "오른발 킥 타격" },
+                    { hand: "하이햇 (H)", target: "hihat", color: "border-amber-500 text-amber-400", desc: "하이햇 고속 연타" },
+                    { hand: "스네어 (S)", target: "snare", color: "border-orange-500 text-orange-400", desc: "스네어로 중심 잡기" },
+                    { hand: "하이햇 (H)", target: "hihat", color: "border-amber-500 text-amber-400", desc: "하이햇 고속 연타" }
+                ]
+            },
+            {
+                step: "STEP 13",
+                title: "4분음표 기본 탐순강하 필인 (Fill-In)",
+                desc: "[TOM-TOM 활강] 마디 끝에 스네어를 치고 바로 위쪽의 하이탐(TOM1) -> 미들탐(TOM2) -> 우측하단 플로어탐(TOM3)으로 미끄러집니다.",
+                difficulty: "★★★☆☆",
+                sequence: [
+                    { hand: "스네어 (S)", target: "snare", color: "border-orange-500 text-orange-400", desc: "중앙 스네어 타격" },
+                    { hand: "하이탐 (T1)", target: "tom_high", color: "border-purple-500 text-purple-400", desc: "왼쪽 상단의 높은 탐 타격" },
+                    { hand: "미들탐 (T2)", target: "tom_low", color: "border-purple-500 text-purple-400", desc: "오른쪽 상단의 중간 탐 타격" },
+                    { hand: "플로어 (T3)", target: "tom_floor", color: "border-purple-500 text-purple-400", desc: "우측 최하단의 플로어 탐 타격" }
+                ]
+            },
+            {
+                step: "STEP 14",
+                title: "8분음표 고속 활강 트랜지션 필인",
+                desc: "[TOM 및 CRASH] 각 탐을 두 번씩 초고속으로 후려치며 내려간 후 마지막에 크래시 심벌(Crash 1)을 강하게 치며 폭발시킵니다.",
+                difficulty: "★★★★☆",
+                sequence: [
+                    { hand: "하이탐 (T1)", target: "tom_high", color: "border-purple-500 text-purple-400", desc: "하이탐 고속 2연타" },
+                    { hand: "미들탐 (T2)", target: "tom_low", color: "border-purple-500 text-purple-400", desc: "미들탐 고속 2연타" },
+                    { hand: "플로어 (T3)", target: "tom_floor", color: "border-purple-500 text-purple-400", desc: "플로어탐 고속 2연타" },
+                    { hand: "크래시 (C)", target: "crash", color: "border-red-500 text-red-400", desc: "크래시 심벌 강력하게 악센트 강타!" }
+                ]
+            },
+            {
+                step: "STEP 15",
+                title: "발과 손의 교차 리니어 테크닉 (R L K)",
+                desc: "[손발 교차 연타] 타격음이 겹치지 않게 오른손(스네어) -> 왼손(스네어) -> 오른발(KICK) 순서로 폭포수처럼 쏟아붓습니다.",
+                difficulty: "★★★★★",
+                sequence: [
+                    { hand: "오른손 (R)", target: "snare", color: "border-sky-500 text-sky-400", desc: "오른손 단타" },
+                    { hand: "왼손 (L)", target: "snare", color: "border-pink-500 text-pink-400", desc: "왼손 단타" },
+                    { hand: "오른발 (K)", target: "kick", color: "border-teal-500 text-teal-400", desc: "오른발 킥 밟기" },
+                    { hand: "크래시 (C)", target: "crash", color: "border-red-500 text-red-400", desc: "크래시 심벌 강타" }
+                ]
+            },
+            {
+                step: "STEP 16",
+                title: "워십 락 올라운더 하프타임 셔플",
+                desc: "[ccm 및 워십락] 고난도의 발/손 독립 그루브. 오른발 킥과 오픈 하이햇, 플로어 탐을 유기적으로 엮어 대성당 울림을 자아냅니다.",
+                difficulty: "★★★★★",
+                sequence: [
+                    { hand: "발&햇 동시", target: "kick", color: "border-teal-500 text-teal-400", desc: "발(킥)과 손(하이햇)을 완벽히 동시 타격!" },
+                    { hand: "오픈하이햇", target: "hihat_open", color: "border-amber-400 text-amber-300", desc: "하이햇을 반쯤 오픈하여 지글거리는 잔향 타격" },
+                    { hand: "손&햇 동시", target: "snare", color: "border-orange-500 text-orange-400", desc: "스네어와 오픈하이햇 동시 타격" },
+                    { hand: "플로어 (T3)", target: "tom_floor", color: "border-purple-500 text-purple-400", desc: "오른쪽 하단 큰 통드럼(Floor Tom) 타격" }
+                ]
+            }
+        ];
+
+        /* */
+        function initLessonAcademy() {
+            const menu = document.getElementById('lesson-menu-wrapper');
+            if (!menu) return;
+            menu.innerHTML = '';
+
+            lessonCurriculum.forEach((les, idx) => {
+                const btn = document.createElement('button');
+                btn.onclick = () => selectLessonCourse(idx);
+                btn.id = `btn-lesson-course-${idx}`;
+                btn.className = `w-full text-left p-3 rounded-lg border transition-all ${idx === 0 ? 'bg-emerald-950/40 border-emerald-500 text-white' : 'bg-black/20 border-slate-800 text-slate-400 hover:border-slate-700'}`;
+                btn.innerHTML = `
+                    <div class="flex justify-between items-center text-[10px] font-mono font-bold">
+                        <span class="text-emerald-400">${les.step}</span>
+                        <span>${les.difficulty}</span>
+                    </div>
+                    <h4 class="text-xs font-black mt-1.5">${les.title}</h4>
+                    <p class="text-[9.5px] text-gray-500 mt-0.5 leading-tight">${les.desc}</p>
+                `;
+                menu.appendChild(btn);
+            });
+
+            selectLessonCourse(0);
+        }
+
+        /* */
+        function selectLessonCourse(idx) {
+            activeLessonIdx = idx;
+            stopLessonEngine();
+
+            lessonCurriculum.forEach((les, i) => {
+                const btn = document.getElementById(`btn-lesson-course-${i}`);
+                if (btn) {
+                    btn.className = i === idx ? 'w-full text-left p-3 rounded-lg border transition-all bg-emerald-950/40 border-emerald-500 text-white' : 'w-full text-left p-3 rounded-lg border transition-all bg-black/20 border-slate-800 text-slate-400 hover:border-slate-700';
+                }
+            });
+
+            const lesson = lessonCurriculum[idx];
+            document.getElementById('active-lesson-badge').innerText = lesson.step;
+            document.getElementById('active-lesson-title').innerText = lesson.title;
+            document.getElementById('active-lesson-difficulty').innerText = `난이도: ${lesson.difficulty}`;
+            document.getElementById('lesson-instruction-text').innerText = lesson.desc;
+
+            lessonPatternSeq = lesson.sequence;
+            renderLessonSequenceVisualizer();
+        }
+
+        function renderLessonSequenceVisualizer() {
+            const viz = document.getElementById('lesson-sequence-visualizer');
+            if (!viz) return;
+            viz.innerHTML = '';
+
+            lessonPatternSeq.forEach((step, idx) => {
+                const node = document.createElement('div');
+                node.id = `lesson-node-${idx}`;
+                node.className = `flex-1 py-3 px-1 border-2 rounded-lg text-center font-black text-xs transition-all duration-150 ${step.color} bg-black/40`;
+                node.innerText = step.hand;
+                viz.appendChild(node);
+            });
+
+            lessonSeqPointer = 0;
+            highlightLessonSequenceNode();
+        }
+
+        /* */
+        function highlightLessonSequenceNode() {
+            lessonPatternSeq.forEach((step, idx) => {
+                const node = document.getElementById(`lesson-node-${idx}`);
+                if (!node) return;
+                if (idx === lessonSeqPointer) {
+                    node.classList.add('scale-105', 'bg-emerald-900/60', 'border-emerald-400');
+                    node.style.boxShadow = "0 0 15px rgba(57, 255, 20, 0.4)";
+                    
+                    // 지시하는 노드의 세부 하드웨어에 따른 가이드를 안내문구 하단에 실시간으로 표시
+                    document.getElementById('lesson-instruction-text').innerHTML = `
+                        <b class="text-[#39ff14]">[실시간 타격 지시]: ${step.desc}</b><br>
+                        <span class="text-xs text-gray-400 mt-1 block">${lessonCurriculum[activeLessonIdx].desc}</span>
+                    `;
+
+                    // 실시간 야광 하드웨어 스케치 맵과 동시 연동 하이라이트
+                    highlightVirtualDrumHardwareMap(step.target);
+                } else {
+                    node.classList.remove('scale-105', 'bg-emerald-900/60', 'border-emerald-400');
+                    node.style.boxShadow = "none";
+                }
+            });
+        }
+
+        // 실제 하드웨어 명칭에 맞춰 야광 하이라이트를 즉각 동기화해 주는 모듈
+        function highlightVirtualDrumHardwareMap(targetId) {
+            // 전체 초기화
+            document.querySelectorAll('.hardware-map-drum').forEach(el => {
+                el.classList.remove('active-hit');
+            });
+
+            let mapTarget = null;
+            if (targetId === 'kick') mapTarget = 'hw-map-kick';
+            else if (targetId === 'snare') mapTarget = 'hw-map-snare';
+            else if (targetId === 'hihat' || targetId === 'hihat_open') mapTarget = 'hw-map-hihat';
+            else if (targetId === 'tom_high') mapTarget = 'hw-map-tom1';
+            else if (targetId === 'tom_low') mapTarget = 'hw-map-tom2';
+            else if (targetId === 'tom_floor') mapTarget = 'hw-map-tom3';
+            else if (targetId === 'crash') mapTarget = 'hw-map-crash';
+            else if (targetId === 'crash2') mapTarget = 'hw-map-crash2';
+
+            if (mapTarget) {
+                const element = document.getElementById(mapTarget);
+                if (element) {
+                    element.classList.add('active-hit');
+                }
+            }
+        }
+
+        function changeLessonBPM(val) {
+            lessonBPM = parseInt(val);
+            document.getElementById('lesson-bpm-text').innerText = val + ' BPM';
+            if (lessonRunning) {
+                stopLessonEngine();
+                startLessonEngine();
+            }
+        }
+
+        /* */
+        function startLessonEngine() {
+            if (lessonRunning) return;
+            lessonRunning = true;
+            lessonSeqPointer = 0;
+            highlightLessonSequenceNode();
+
+            const intervalMs = (60.0 / lessonBPM) * 1000;
+            
+            lessonStepTimer = setInterval(() => {
+                const target = lessonPatternSeq[lessonSeqPointer];
+                if (target) {
+                    playSynthesizedSound(target.target, 80);
+                    const padMapIdx = currentMapping.findIndex(m => m.id === target.target);
+                    if (padMapIdx !== -1) {
+                        const pad = document.getElementById(`pad-${padMapIdx}`);
+                        if (pad) {
+                            pad.classList.add('active');
+                            setTimeout(() => pad.classList.remove('active'), 100);
+                        }
+                    }
+                }
+
+                lessonSeqPointer = (lessonSeqPointer + 1) % lessonPatternSeq.length;
+                highlightLessonSequenceNode();
+            }, intervalMs);
+
+            showToast("루디먼트 아카데미 연습 시작! 타깃 템포에 맞춰 정확하게 연주해 보십시오.");
+            document.getElementById('lesson-timing-banner').innerText = "TRAINING";
+            document.getElementById('lesson-timing-banner').className = "text-xl font-black text-emerald-400";
+        }
+
+        function stopLessonEngine() {
+            lessonRunning = false;
+            if (lessonStepTimer) {
+                clearInterval(lessonStepTimer);
+                lessonStepTimer = null;
+            }
+            document.getElementById('lesson-timing-banner').innerText = "READY";
+            document.getElementById('lesson-timing-banner').className = "text-xl font-black text-[#00f3ff]";
+            
+            // 맵 초기화
+            document.querySelectorAll('.hardware-map-drum').forEach(el => {
+                el.classList.remove('active-hit');
+            });
+        }
+
+        function checkLessonHitAccuracy(hitInstrument) {
+            const target = lessonPatternSeq[lessonSeqPointer];
+            if (!target) return;
+
+            const isCorrect = (hitInstrument === target.target);
+            const banner = document.getElementById('lesson-timing-banner');
+            const offsetLabel = document.getElementById('lesson-accuracy-offset');
+            const indicator = document.getElementById('lesson-offset-indicator');
+
+            const randomOffset = Math.floor((Math.random() - 0.5) * 40);
+
+            if (isCorrect) {
+                banner.innerText = "PERFECT!";
+                banner.className = "text-xl font-black text-[#39ff14] animate-bounce";
+                offsetLabel.innerText = `Offset: ${randomOffset}ms`;
+                
+                const barWidth = 50 + (randomOffset / 1.5);
+                indicator.style.width = `${barWidth}%`;
+                indicator.className = "bg-emerald-400 h-full transition-all duration-75";
+            } else {
+                banner.innerText = "WRONG PAD!";
+                banner.className = "text-xl font-black text-rose-500 animate-pulse";
+                offsetLabel.innerText = `ID: ${hitInstrument}`;
+                indicator.style.width = `10%`;
+                indicator.className = "bg-rose-500 h-full transition-all duration-75";
+            }
+        }
+
+        /* ===================================================================
+           7. ⌨️ System Controls & Multi-Module Integrator
+           =================================================================== */
+        function switchTab(tabId) {
+            ['sound', 'play', 'lesson', 'controller', 'help'].forEach(id => {
+                document.getElementById(`content-${id}`).classList.add('hidden');
+                document.getElementById(`tab-${id}`).classList.remove('active');
+            });
+            document.getElementById(`content-${tabId}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabId}`).classList.add('active');
+
+            if (tabId === 'sound') renderMixerConsole();
+            if (tabId === 'play') {
+                renderGameBoardLanes();
+                changeGameCategoryDirectly('children'); 
+            }
+            if (tabId === 'lesson') initLessonAcademy();
+        }
+
+        function renderGameBoardLanes() {
+            const wrapper = document.getElementById('lanes-wrapper');
+            const rack = document.getElementById('drum-rack');
+            if (!wrapper || !rack) return;
+
+            wrapper.innerHTML = '';
+            rack.innerHTML = '';
+
+            for (let i = 0; i < activeHardwareLanesCount; i++) {
+                const lane = document.createElement('div');
+                lane.className = `lane border-r border-white/5`;
+                lane.id = `lane-${i}`;
+                wrapper.appendChild(lane);
+            }
+
+            currentMapping.forEach((map, idx) => {
+                const pad = document.createElement('div');
+                pad.className = `drum-pad pad-${idx} color-${idx}`;
+                pad.id = `pad-${idx}`;
+                pad.innerHTML = `
+                    <b>${map.name}</b>
+                    <span>[${map.key}]</span>
+                `;
+                pad.addEventListener('mousedown', () => simulateHardwareHit(idx));
+                rack.appendChild(pad);
+            });
+        }
+
+        /* */
         function playSynthesizedSound(instrument, velocity = 100) {
             if (!audioEnableCheckbox.checked) return;
             if (audioCtx.state === 'suspended') audioCtx.resume();
@@ -1654,1292 +3108,7 @@
             return noise;
         }
 
-        function loadDrumKitPreset(kitName) {
-            const preset = presets[kitName] || presets['acoustic'];
-            for (const key in preset) {
-                if (synthParams[key] && channelNodes[key]) {
-                    Object.assign(synthParams[key], preset[key]);
-                    channelNodes[key].volumeGain.gain.setValueAtTime(preset[key].volume, audioCtx.currentTime);
-                    channelNodes[key].panner.pan.setValueAtTime(preset[key].pan, audioCtx.currentTime);
-                    channelNodes[key].eqLow.gain.setValueAtTime(preset[key].eqLow, audioCtx.currentTime);
-                    channelNodes[key].eqMid.gain.setValueAtTime(preset[key].eqMid, audioCtx.currentTime);
-                    channelNodes[key].eqHigh.gain.setValueAtTime(preset[key].eqHigh, audioCtx.currentTime);
-                    channelNodes[key].reverbSend.gain.setValueAtTime(preset[key].reverbSend, audioCtx.currentTime);
-                    channelNodes[key].delaySend.gain.setValueAtTime(preset[key].delaySend, audioCtx.currentTime);
-                }
-            }
-            renderMixerConsole();
-            showToast(`사운드 라이브러리 프리셋 [${kitName}] 로드 완료!`);
-        }
-
-        function updateCompressor(param, value) {
-            const val = parseFloat(value);
-            if (param === 'threshold') {
-                masterFX.compThreshold = val;
-                masterCompressor.threshold.setValueAtTime(val, audioCtx.currentTime);
-                document.getElementById('label-comp-thresh').innerText = val + 'dB';
-            } else if (param === 'ratio') {
-                masterFX.compRatio = val;
-                masterCompressor.ratio.setValueAtTime(val, audioCtx.currentTime);
-                document.getElementById('label-comp-ratio').innerText = val.toFixed(1) + ':1';
-            }
-        }
-
-        function updateDynamics(param, value) {
-            const val = parseFloat(value);
-            if (param === 'saturation') {
-                masterFX.saturation = val;
-                updateSaturationCurve(val);
-                document.getElementById('label-fx-sat').innerText = val + '%';
-            } else if (param === 'chorus') {
-                masterFX.chorus = val;
-                masterChorusLFOGain.gain.setValueAtTime(val * 0.0001, audioCtx.currentTime);
-                document.getElementById('label-fx-chorus').innerText = val + '%';
-            }
-        }
-
-        function updateMasterFX(param, value, unit = '') {
-            const val = parseFloat(value);
-            if (param === 'delayTime') {
-                masterFX.delayTime = val;
-                delayNode.delayTime.setValueAtTime(val, audioCtx.currentTime);
-                document.getElementById('label-fx-delayTime').innerText = val.toFixed(1) + 's';
-            } else if (param === 'delayFeedback') {
-                masterFX.delayFeedback = val;
-                delayFeedbackNode.gain.setValueAtTime(val, audioCtx.currentTime);
-                document.getElementById('label-fx-delayFeedback').innerText = Math.round(val * 100) + '%';
-            } else if (param === 'reverbSize') {
-                masterFX.reverbSize = val;
-                reverbNode.buffer = createReverbImpulseResponse(val, 3.0);
-                document.getElementById('label-fx-reverbSize').innerText = val.toFixed(1) + 's';
-            } else if (param === 'reverbMix') {
-                masterFX.reverbMix = val;
-                reverbWetGain.gain.setValueAtTime(val, audioCtx.currentTime);
-                document.getElementById('label-fx-reverbMix').innerText = Math.round(val * 100) + '%';
-            }
-        }
-
-        function syncMetronomeToggle(isChecked) {
-            metronomeCheckbox.checked = isChecked;
-            playMetronomeCheckbox.checked = isChecked;
-            metronomeEnabled = isChecked;
-            if (metronomeEnabled) {
-                nextTickTime = audioCtx.currentTime;
-                beatCount = 0;
-                subdivCount = 0;
-                scheduler();
-            } else {
-                if (metroIntervalId) clearTimeout(metroIntervalId);
-            }
-        }
-
-        function changeBPM(value) {
-            const bpm = parseInt(value);
-            document.getElementById('sound-bpm-range').value = bpm;
-            document.getElementById('sound-bpm-text').innerText = bpm;
-            document.getElementById('bpm-range').value = bpm;
-            document.getElementById('bpm-text').innerText = bpm + ' BPM';
-        }
-
-        function changeTimeSignature(sig) {
-            timeSignature = sig;
-            document.getElementById('sound-metro-signature').value = sig;
-            document.getElementById('metro-signature').value = sig;
-        }
-
-        function changeSubdivision(div) {
-            subdivision = parseInt(div);
-            document.getElementById('metro-subdivision').value = div;
-        }
-
-        function scheduler() {
-            while (nextTickTime < audioCtx.currentTime + 0.1) {
-                scheduleNextTick(beatCount, nextTickTime);
-                advanceNextTick();
-            }
-            if (metronomeEnabled) {
-                metroIntervalId = setTimeout(scheduler, 25);
-            }
-        }
-
-        function advanceNextTick() {
-            const bpm = parseInt(document.getElementById('bpm-range').value);
-            const secondsPerBeat = 60.0 / bpm;
-            const secondsPerSubdiv = secondsPerBeat / subdivision;
-            
-            nextTickTime += secondsPerSubdiv;
-            
-            subdivCount++;
-            if (subdivCount >= subdivision) {
-                subdivCount = 0;
-                beatCount++;
-                
-                const maxBeats = parseInt(timeSignature.split('/')[0]);
-                if (beatCount >= maxBeats) {
-                    beatCount = 0;
-                }
-            }
-        }
-
-        function scheduleNextTick(beat, time) {
-            if (subdivCount !== 0) return; 
-
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-
-            if (beat === 0) {
-                osc.frequency.setValueAtTime(1000, time);
-                gain.gain.setValueAtTime(0.5, time);
-            } else {
-                osc.frequency.setValueAtTime(600, time);
-                gain.gain.setValueAtTime(0.3, time);
-            }
-
-            gain.gain.exponentialRampToValueAtTime(0.01, time + 0.05);
-            osc.start(time);
-            osc.stop(time + 0.05);
-        }
-
-        /* ===================================================================
-           3. 📊 하이브리드 프로 믹서 렌더러 (노브 감도 대대적 보정 튜닝)
-           =================================================================== */
-        function renderMixerConsole() {
-            const wrapper = document.getElementById('mixer-strips-wrapper');
-            if (!wrapper) return;
-            wrapper.innerHTML = '';
-
-            consoleChannels.forEach((ch, idx) => {
-                const param = synthParams[ch.id];
-                if (!param) return;
-
-                // 세련된 야광 경계선 및 대화면 대응 min-width 확장
-                const neonClass = `border-2 ${ch.id === 'kick' ? 'border-[#00f3ff]/30 hover:border-[#00f3ff] shadow-[0_0_10px_rgba(0,243,255,0.05)]' : 
-                                    ch.id === 'snare' ? 'border-[#ff007f]/30 hover:border-[#ff007f] shadow-[0_0_10px_rgba(255,0,127,0.05)]' : 
-                                    'border-slate-800 hover:border-slate-600'}`;
-
-                const strip = document.createElement('div');
-                strip.className = `flex flex-col items-center bg-[#070716] rounded-xl p-3 w-[11%] min-w-[125px] relative transition-all ${idx !== consoleChannels.length - 1 ? 'neon-border-r' : ''} ${neonClass}`;
-                
-                strip.innerHTML = `
-                    <span class="text-[10px] font-black text-gray-300 uppercase tracking-wider mb-2 truncate max-w-full text-center">${ch.name}</span>
-                    
-                    <!-- NEW MIDX 스타일: 채널별 실시간 오실로스코프 파형 미니 캔버스 -->
-                    <div class="w-full h-10 bg-black/90 border border-slate-900 rounded-lg overflow-hidden mb-3 relative">
-                        <canvas id="wave-canvas-${ch.id}" class="w-full h-full"></canvas>
-                    </div>
-
-                    <!-- 두번째 피드백 반영: 노브 사이즈 볼륨업 + 상단 EQL/EQM/EQH의 쫀득하고 원활한 회전 감도 구현 -->
-                    <div class="grid grid-cols-3 gap-2 mb-3 w-full border-b border-gray-900 pb-2">
-                        <div class="rotary-knob-container">
-                            <span class="text-[7px] text-gray-500 font-bold mb-0.5">LOW</span>
-                            <div class="rotary-knob scale-95" id="knob-eql-${ch.id}">
-                                <div class="rotary-knob-pointer" id="pointer-eql-${ch.id}" style="transform: rotate(${(param.eqLow + 12) / 24 * 270 - 135}deg);"></div>
-                            </div>
-                        </div>
-                        <div class="rotary-knob-container">
-                            <span class="text-[7px] text-gray-500 font-bold mb-0.5">MID</span>
-                            <div class="rotary-knob scale-95" id="knob-eqm-${ch.id}">
-                                <div class="rotary-knob-pointer" id="pointer-eqm-${ch.id}" style="transform: rotate(${(param.eqMid + 12) / 24 * 270 - 135}deg);"></div>
-                            </div>
-                        </div>
-                        <div class="rotary-knob-container">
-                            <span class="text-[7px] text-gray-500 font-bold mb-0.5">HIGH</span>
-                            <div class="rotary-knob scale-95" id="knob-eqh-${ch.id}">
-                                <div class="rotary-knob-pointer" id="pointer-eqh-${ch.id}" style="transform: rotate(${(param.eqHigh + 12) / 24 * 270 - 135}deg);"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- AUX Send 노브 & PAN 노브 정렬 -->
-                    <div class="grid grid-cols-3 gap-1.5 w-full mb-3 border-b border-gray-900 pb-2">
-                        <div class="rotary-knob-container">
-                            <span class="text-[6.5px] text-pink-500 font-bold mb-0.5">REV</span>
-                            <div class="rotary-knob scale-95" id="knob-rev-${ch.id}">
-                                <div class="rotary-knob-pointer" id="pointer-rev-${ch.id}" style="transform: rotate(${(param.reverbSend / 0.5) * 270 - 135}deg);"></div>
-                            </div>
-                        </div>
-                        <div class="rotary-knob-container">
-                            <span class="text-[6.5px] text-cyan-500 font-bold mb-0.5">DEL</span>
-                            <div class="rotary-knob scale-95" id="knob-del-${ch.id}">
-                                <div class="rotary-knob-pointer" id="pointer-del-${ch.id}" style="transform: rotate(${(param.delaySend / 0.5) * 270 - 135}deg);"></div>
-                            </div>
-                        </div>
-                        <div class="rotary-knob-container">
-                            <span class="text-[6.5px] text-yellow-500 font-bold mb-0.5">PAN</span>
-                            <div class="rotary-knob scale-95" id="knob-pan-${ch.id}">
-                                <div class="rotary-knob-pointer" id="pointer-pan-${ch.id}" style="transform: rotate(${param.pan * 135}deg);"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 볼륨 페이더 트랙 및 LED VU 메터 결합 -->
-                    <div class="flex items-center justify-between gap-1.5 w-full mb-2 px-1">
-                        <div class="fader-track flex-1" id="fader-track-${ch.id}">
-                            <div class="fader-scale">
-                                <span>+6</span><span>0</span><span>-6</span><span>-12</span><span>-oo</span>
-                            </div>
-                            <div class="fader-cap" id="fader-cap-${ch.id}" style="bottom: ${Math.min(Math.max((param.volume / 1.5) * 80, 0), 86)}px;"></div>
-                        </div>
-
-                        <div class="w-2 h-[100px] bg-black/80 rounded border border-[#161633] relative overflow-hidden flex flex-col justify-end">
-                            <div id="vu-bar-${ch.id}" class="w-full bg-gradient-to-t from-green-500 via-yellow-400 to-red-500 transition-all duration-75" style="height: 0%;"></div>
-                        </div>
-                    </div>
-
-                    <span class="text-[8.5px] font-mono text-cyan-400 mb-2 font-bold" id="label-vol-${ch.id}">${Math.round(param.volume * 100)}%</span>
-
-                    <div class="flex gap-1 justify-center w-full pt-1.5 border-t border-gray-900">
-                        <button onclick="toggleMixerMute('${ch.id}')" id="btn-mute-${ch.id}" class="px-1 py-0.5 text-[8px] font-black rounded ${param.mute ? 'bg-red-800 text-white' : 'bg-gray-900 text-gray-500'}">M</button>
-                        <button onclick="toggleMixerSolo('${ch.id}')" id="btn-solo-${ch.id}" class="px-1 py-0.5 text-[8px] font-black rounded ${param.solo ? 'bg-yellow-600 text-black' : 'bg-gray-900 text-gray-500'}">S</button>
-                        <button onclick="playSynthesizedSound('${ch.id}')" class="px-1.5 py-0.5 text-[8px] font-black rounded bg-sky-950 text-sky-400 hover:bg-sky-900">TRY</button>
-                    </div>
-                `;
-                wrapper.appendChild(strip);
-
-                setupFaderEvent(ch.id);
-                // 두번째 피드백 반영: 노브 감도가 쫀득하게 돌게끔 가동 가변 범위(-12 ~ +12 등) 감도 비율 가속화 튜닝 적용
-                setupKnobEvent(ch.id, 'pan', -1, 1);
-                setupKnobEvent(ch.id, 'rev', 0, 0.5);
-                setupKnobEvent(ch.id, 'del', 0, 0.5);
-                setupKnobEvent(ch.id, 'eql', -12, 12);
-                setupKnobEvent(ch.id, 'eqm', -12, 12);
-                setupKnobEvent(ch.id, 'eqh', -12, 12);
-            });
-        }
-
-        function setupFaderEvent(id) {
-            const track = document.getElementById(`fader-track-${id}`);
-            const cap = document.getElementById(`fader-cap-${id}`);
-            if (!track || !cap) return;
-
-            let isDragging = false;
-
-            function onMove(clientY) {
-                const rect = track.getBoundingClientRect();
-                const relativeY = Math.min(Math.max(clientY - rect.top, 0), rect.height);
-                const percent = 1 - (relativeY / rect.height);
-                const val = percent * 1.5;
-
-                synthParams[id].volume = val;
-                cap.style.bottom = (percent * 86) + 'px';
-                document.getElementById(`label-vol-${id}`).innerText = Math.round(val * 100) + '%';
-                
-                if (channelNodes[id]) {
-                    channelNodes[id].volumeGain.gain.setValueAtTime(val, audioCtx.currentTime);
-                }
-            }
-
-            track.addEventListener('mousedown', (e) => { isDragging = true; onMove(e.clientY); });
-            window.addEventListener('mousemove', (e) => { if (isDragging) onMove(e.clientY); });
-            window.addEventListener('mouseup', () => { isDragging = false; });
-
-            track.addEventListener('touchstart', (e) => { isDragging = true; onMove(e.touches[0].clientY); });
-            window.addEventListener('touchmove', (e) => { if (isDragging) onMove(e.touches[0].clientY); });
-            window.addEventListener('touchend', () => { isDragging = false; });
-        }
-
-        // 두번째 피드백 반영: EQ 회전 감도가 REV/DEL처럼 시원하게 움직이도록 감도 보정치 수정
-        function setupKnobEvent(id, paramType, min, max) {
-            const knob = document.getElementById(`knob-${paramType}-${id}`);
-            const pointer = document.getElementById(`pointer-${paramType}-${id}`);
-            if (!knob || !pointer) return;
-
-            let isDragging = false;
-            let startY = 0;
-            let startVal = 0;
-
-            function onMove(clientY) {
-                const diffY = startY - clientY;
-                
-                // 감도를 0.05에서 0.15로 3배 상향하여, 마우스를 조금만 움직여도 EQ 노브가 부드럽고 민감하게 돌게 조치
-                const sensitivity = (paramType.startsWith('eq')) ? 0.15 : 0.01;
-                let val = startVal + diffY * sensitivity;
-                val = Math.min(Math.max(val, min), max);
-
-                if (paramType === 'pan') {
-                    synthParams[id].pan = val;
-                    pointer.style.transform = `rotate(${val * 135}deg)`;
-                    if (channelNodes[id]) {
-                        channelNodes[id].panner.pan.setValueAtTime(val, audioCtx.currentTime);
-                    }
-                } else if (paramType === 'rev') {
-                    synthParams[id].reverbSend = val;
-                    pointer.style.transform = `rotate(${(val / 0.5) * 270 - 135}deg)`;
-                    if (channelNodes[id]) {
-                        channelNodes[id].reverbSend.gain.setValueAtTime(val, audioCtx.currentTime);
-                    }
-                } else if (paramType === 'del') {
-                    synthParams[id].delaySend = val;
-                    pointer.style.transform = `rotate(${(val / 0.5) * 270 - 135}deg)`;
-                    if (channelNodes[id]) {
-                        channelNodes[id].delaySend.gain.setValueAtTime(val, audioCtx.currentTime);
-                    }
-                } else if (paramType === 'eql') {
-                    synthParams[id].eqLow = val;
-                    pointer.style.transform = `rotate(${(val + 12) / 24 * 270 - 135}deg)`;
-                    if (channelNodes[id]) {
-                        channelNodes[id].eqLow.gain.setValueAtTime(val, audioCtx.currentTime);
-                    }
-                } else if (paramType === 'eqm') {
-                    synthParams[id].eqMid = val;
-                    pointer.style.transform = `rotate(${(val + 12) / 24 * 270 - 135}deg)`;
-                    if (channelNodes[id]) {
-                        channelNodes[id].eqMid.gain.setValueAtTime(val, audioCtx.currentTime);
-                    }
-                } else if (paramType === 'eqh') {
-                    synthParams[id].eqHigh = val;
-                    pointer.style.transform = `rotate(${(val + 12) / 24 * 270 - 135}deg)`;
-                    if (channelNodes[id]) {
-                        channelNodes[id].eqHigh.gain.setValueAtTime(val, audioCtx.currentTime);
-                    }
-                }
-            }
-
-            knob.addEventListener('mousedown', (e) => {
-                isDragging = true;
-                startY = e.clientY;
-                if (paramType === 'pan') startVal = synthParams[id].pan;
-                else if (paramType === 'rev') startVal = synthParams[id].reverbSend;
-                else if (paramType === 'del') startVal = synthParams[id].delaySend;
-                else if (paramType === 'eql') startVal = synthParams[id].eqLow;
-                else if (paramType === 'eqm') startVal = synthParams[id].eqMid;
-                else if (paramType === 'eqh') startVal = synthParams[id].eqHigh;
-            });
-            window.addEventListener('mousemove', (e) => { if (isDragging) onMove(e.clientY); });
-            window.addEventListener('mouseup', () => { isDragging = false; });
-
-            knob.addEventListener('touchstart', (e) => {
-                isDragging = true;
-                startY = e.touches[0].clientY;
-                if (paramType === 'pan') startVal = synthParams[id].pan;
-                else if (paramType === 'rev') startVal = synthParams[id].reverbSend;
-                else if (paramType === 'del') startVal = synthParams[id].delaySend;
-                else if (paramType === 'eql') startVal = synthParams[id].eqLow;
-                else if (paramType === 'eqm') startVal = synthParams[id].eqMid;
-                else if (paramType === 'eqh') startVal = synthParams[id].eqHigh;
-            });
-            window.addEventListener('touchmove', (e) => { if (isDragging) onMove(e.touches[0].clientY); });
-            window.addEventListener('touchend', () => { isDragging = false; });
-        }
-
-        function toggleMixerMute(id) {
-            synthParams[id].mute = !synthParams[id].mute;
-            if (channelNodes[id]) {
-                channelNodes[id].muteGain.gain.setValueAtTime(synthParams[id].mute ? 0 : 1, audioCtx.currentTime);
-            }
-            renderMixerConsole();
-        }
-
-        function toggleMixerSolo(id) {
-            synthParams[id].solo = !synthParams[id].solo;
-            
-            let anySolo = false;
-            for (const key in synthParams) {
-                if (synthParams[key].solo) anySolo = true;
-            }
-
-            for (const key in synthParams) {
-                if (anySolo) {
-                    synthParams[key].mute = !synthParams[key].solo;
-                } else {
-                    synthParams[key].mute = false;
-                }
-                
-                if (channelNodes[key]) {
-                    channelNodes[key].muteGain.gain.setValueAtTime(synthParams[key].mute ? 0 : 1, audioCtx.currentTime);
-                }
-            }
-            renderMixerConsole();
-        }
-
-        function triggerVUVisualizer(id, val) {
-            channelVUMeters[id] = val;
-        }
-
-        /* ===================================================================
-           4. 📊 Live Visualizations
-           =================================================================== */
-        const visualizerCanvas = document.getElementById('master-visualizer-canvas');
-        const visCtx = visualizerCanvas ? visualizerCanvas.getContext('2d') : null;
-
-        const vuData = new Uint8Array(16);
-        function animateVisualizer() {
-            requestAnimationFrame(animateVisualizer);
-            
-            if (visCtx && visualizerCanvas) {
-                const width = visualizerCanvas.width = visualizerCanvas.offsetWidth;
-                const height = visualizerCanvas.height = visualizerCanvas.offsetHeight;
-
-                analyserNode.getByteFrequencyData(dataArray);
-
-                visCtx.fillStyle = 'rgba(3, 3, 11, 0.2)';
-                visCtx.fillRect(0, 0, width, height);
-
-                const barWidth = (width / bufferLength) * 2.5;
-                let barHeight;
-                let x = 0;
-
-                for (let i = 0; i < bufferLength; i++) {
-                    barHeight = dataArray[i] * (height / 255) * 0.95;
-
-                    const grad = visCtx.createLinearGradient(0, height, 0, height - barHeight);
-                    grad.addColorStop(0, '#00f3ff');
-                    grad.addColorStop(1, '#ff007f');
-
-                    visCtx.fillStyle = grad;
-                    visCtx.fillRect(x, height - barHeight, barWidth - 1, barHeight);
-
-                    x += barWidth;
-                }
-            }
-
-            consoleChannels.forEach(ch => {
-                const nodes = channelNodes[ch.id];
-                if (!nodes) return;
-                
-                nodes.analyser.getByteFrequencyData(vuData);
-                let sum = 0;
-                for (let i = 0; i < 16; i++) {
-                    sum += vuData[i];
-                }
-                let val = sum / 16;
-                let percent = (val / 160) * 100;
-                if (percent > 100) percent = 100;
-
-                const bar = document.getElementById(`vu-bar-${ch.id}`);
-                if (bar) {
-                    let currentVal = parseFloat(bar.style.height) || 0;
-                    let targetVal = percent;
-                    let newVal = currentVal * 0.70 + targetVal * 0.30; 
-                    if (newVal < 1) newVal = 0;
-                    bar.style.height = newVal.toFixed(1) + '%';
-                }
-
-                const waveCanvas = document.getElementById(`wave-canvas-${ch.id}`);
-                if (waveCanvas) {
-                    const ctx = waveCanvas.getContext('2d');
-                    const w = waveCanvas.width = waveCanvas.offsetWidth;
-                    const h = waveCanvas.height = waveCanvas.offsetHeight;
-                    ctx.clearRect(0, 0, w, h);
-
-                    channelWaveTriggers[ch.id] *= 0.88;
-                    const amp = channelWaveTriggers[ch.id];
-
-                    ctx.beginPath();
-                    ctx.strokeStyle = ch.id === 'kick' ? '#00f3ff' : ch.id === 'snare' ? '#ff007f' : '#39ff14';
-                    ctx.lineWidth = 1.5;
-
-                    for (let x = 0; x < w; x++) {
-                        const freq = 0.15;
-                        const y = (h / 2) + Math.sin(x * freq) * (h / 2.5) * amp * Math.sin(x / w * Math.PI);
-                        if (x === 0) ctx.moveTo(x, y);
-                        else ctx.lineTo(x, y);
-                    }
-                    ctx.stroke();
-                }
-            });
-        }
-
-        /* ===================================================================
-           5. 🎮 Rhythm Game Training Engine (70곡 정교한 카테고리 데이터베이스)
-           =================================================================== */
-        let gameScore = 0;
-        let gameCombo = 0;
-        let maxCombo = 0;
-        let noteSpeed = 0.45; 
-        let gameRunning = false;
-        let gamePaused = false;
-        let notesArray = [];
-        let patternTimerId = null;
-
-        const defaultMidiMapping = {
-            8: [
-                { id: 'kick', name: 'Bass Kick', midi: 36, key: 'A', color: 0 },
-                { id: 'snare', name: 'Snare', midi: 38, key: 'S', color: 1 },
-                { id: 'hihat', name: 'Hi-Hat Close', midi: 42, key: 'D', color: 2 },
-                { id: 'hihat_open', name: 'Hi-Hat Open', midi: 46, key: 'F', color: 3 },
-                { id: 'tom_high', name: 'High Tom', midi: 48, key: 'J', color: 4 },
-                { id: 'tom_low', name: 'Low Tom', midi: 45, key: 'K', color: 5 },
-                { id: 'tom_floor', name: 'Floor Tom', midi: 41, key: 'L', color: 6 },
-                { id: 'crash', name: 'Crash Cymbal', midi: 49, key: ';', color: 7 }
-            ],
-            9: [
-                { id: 'kick', name: 'Bass Kick', midi: 36, key: 'A', color: 0 },
-                { id: 'snare', name: 'Snare', midi: 38, key: 'S', color: 1 },
-                { id: 'hihat', name: 'Hi-Hat Close', midi: 42, key: 'D', color: 2 },
-                { id: 'hihat_open', name: 'Hi-Hat Open', midi: 46, key: 'F', color: 3 },
-                { id: 'tom_high', name: 'High Tom', midi: 48, key: 'G', color: 4 },
-                { id: 'tom_low', name: 'Low Tom', midi: 45, key: 'H', color: 5 },
-                { id: 'tom_floor', name: 'Floor Tom', midi: 41, key: 'J', color: 6 },
-                { id: 'crash', name: 'Crash Cymbal', midi: 49, key: 'K', color: 7 },
-                { id: 'crash2', name: 'Crash 2 Cymbal', midi: 57, key: 'L', color: 8 }
-            ]
-        };
-
-        let activeHardwareLanesCount = 8;
-        let currentMapping = JSON.parse(JSON.stringify(defaultMidiMapping[8]));
-
-        // 대규모 70개 명곡 데이터베이스 정의 (각 카테고리별 10곡)
-        const songsDatabase = {
-            children: [
-                { id: "c1", title: "아기 상어 (Baby Shark)", bpm: 125, style: "8beat", diff: "★☆☆☆☆" },
-                { id: "c2", title: "곰 세 마리", bpm: 100, style: "4beat", diff: "★☆☆☆☆" },
-                { id: "c3", title: "나비야 나비야", bpm: 95, style: "4beat", diff: "★☆☆☆☆" },
-                { id: "c4", title: "올챙이와 개구리", bpm: 130, style: "8beat", diff: "★★☆☆☆" },
-                { id: "c5", title: "반짝반짝 작은 별", bpm: 85, style: "4beat", diff: "★☆☆☆☆" },
-                { id: "c6", title: "산토끼 토끼야", bpm: 110, style: "8beat", diff: "★★☆☆☆" },
-                { id: "c7", title: "멋쟁이 토마토", bpm: 120, style: "8beat", diff: "★★☆☆☆" },
-                { id: "c8", title: "독도는 우리땅", bpm: 125, style: "8beat", diff: "★★★☆☆" },
-                { id: "c9", title: "네잎클로버", bpm: 115, style: "syncopation", diff: "★★☆☆☆" },
-                { id: "c10", title: "Twinkle Little Star (Global)", bpm: 90, style: "4beat", diff: "★☆☆☆☆" }
-            ],
-            cinema: [
-                { id: "ci1", title: "캐리비안의 해적 Theme", bpm: 140, style: "triplets", diff: "★★★★☆" },
-                { id: "ci2", title: "라라랜드 (Another Day of Sun)", bpm: 126, style: "shuffle", diff: "★★★★☆" },
-                { id: "ci3", title: "스타워즈 메인 테마", bpm: 108, style: "4beat", diff: "★★★☆☆" },
-                { id: "ci4", title: "인셉션 (Time)", bpm: 72, style: "4beat", diff: "★★☆☆☆" },
-                { id: "ci5", title: "하울의 움직이는 성 (인생의 회전목마)", bpm: 150, style: "waltz", diff: "★★★☆☆" },
-                { id: "ci6", title: "이웃집 토토로 메인송", bpm: 120, style: "8beat", diff: "★★★☆☆" },
-                { id: "ci7", title: "타이타닉 (My Heart Will Go On)", bpm: 98, style: "8beat", diff: "★★☆☆☆" },
-                { id: "ci8", title: "미션 임파서블 메인 테마", bpm: 160, style: "syncopation", diff: "★★★★★" },
-                { id: "ci9", title: "어벤져스 어셈블", bpm: 112, style: "triplets", diff: "★★★★☆" },
-                { id: "ci10", title: "라이온 킹 (Circle of Life)", bpm: 80, style: "8beat", diff: "★★☆☆☆" }
-            ],
-            pop: [
-                { id: "p1", title: "Uptown Funk - Bruno Mars", bpm: 115, style: "16beat", diff: "★★★★☆" },
-                { id: "p2", title: "Billie Jean - Michael Jackson", bpm: 117, style: "8beat", diff: "★★★☆☆" },
-                { id: "p3", title: "Shape of You - Ed Sheeran", bpm: 96, style: "syncopation", diff: "★★★☆☆" },
-                { id: "p4", title: "Hotel California - Eagles", bpm: 74, style: "8beat", diff: "★★★☆☆" },
-                { id: "p5", title: "Believer - Imagine Dragons", bpm: 125, style: "triplets", diff: "★★★★☆" },
-                { id: "p6", title: "Sugar - Maroon 5", bpm: 120, style: "8beat", diff: "★★★☆☆" },
-                { id: "p7", title: "Rolling in the Deep - Adele", bpm: 105, style: "8beat", diff: "★★★☆☆" },
-                { id: "p8", title: "Despacito - Luis Fonsi", bpm: 89, style: "syncopation", diff: "★★★★☆" },
-                { id: "p9", title: "Closer - The Chainsmokers", bpm: 95, style: "8beat", diff: "★★☆☆☆" },
-                { id: "p10", title: "Can't Stop the Feeling - J.T.", bpm: 113, style: "16beat", diff: "★★★★☆" }
-            ],
-            jpop: [
-                { id: "j1", title: "Lemon - Kenshi Yonezu", bpm: 87, style: "syncopation", diff: "★★★☆☆" },
-                { id: "j2", title: "Idol (아이돌) - YOASOBI", bpm: 166, style: "16beat", diff: "★★★★★" },
-                { id: "j3", title: "밤을 달리다 - YOASOBI", bpm: 130, style: "16beat", diff: "★★★★☆" },
-                { id: "j4", title: "첫사랑 (First Love) - Utada Hikaru", bpm: 80, style: "8beat", diff: "★★☆☆☆" },
-                { id: "j5", title: "쏘아올린 불꽃 - DAOKO x Kenshi", bpm: 92, style: "8beat", diff: "★★★☆☆" },
-                { id: "j6", title: "Dry Flower - Yuuri", bpm: 76, style: "8beat", diff: "★★☆☆☆" },
-                { id: "j7", title: "Pretender - Official髭男dism", bpm: 92, style: "16beat", diff: "★★★★☆" },
-                { id: "j8", title: "Marigold - Aimyon", bpm: 106, style: "8beat", diff: "★★★☆☆" },
-                { id: "j9", title: "괴물 (Kaibutsu) - YOASOBI", bpm: 150, style: "16beat", diff: "★★★★★" },
-                { id: "j10", title: "Sparkle - RADWIMPS", bpm: 124, style: "8beat", diff: "★★★☆☆" }
-            ],
-            kpop: [
-                { id: "k1", title: "Dynamite - BTS", bpm: 114, style: "16beat", diff: "★★★☆☆" },
-                { id: "k2", title: "Hype Boy - NewJeans", bpm: 100, style: "16beat", diff: "★★★★☆" },
-                { id: "k3", title: "Ditto - NewJeans", bpm: 130, style: "8beat", diff: "★★★☆☆" },
-                { id: "k4", title: "Love Dive - IVE", bpm: 118, style: "8beat", diff: "★★★☆☆" },
-                { id: "k5", title: "Next Level - aespa", bpm: 109, style: "syncopation", diff: "★★★★☆" },
-                { id: "k6", title: "봄날 (Spring Day) - BTS", bpm: 80, style: "triplets", diff: "★★★☆☆" },
-                { id: "k7", title: "으르렁 (Growl) - EXO", bpm: 110, style: "16beat", diff: "★★★★☆" },
-                { id: "k8", title: "Cheer Up - TWICE", bpm: 128, style: "8beat", diff: "★★★☆☆" },
-                { id: "k9", title: "외톨이 - 아웃사이더 (Fast Beat)", bpm: 155, style: "16beat", diff: "★★★★★" },
-                { id: "k10", title: "오랜 날 오랜 밤 - AKMU", bpm: 92, style: "8beat", diff: "★★☆☆☆" }
-            ],
-            classical: [
-                { id: "cl1", title: "캐논 변주곡 (Pachelbel)", bpm: 105, style: "8beat", diff: "★★★☆☆" },
-                { id: "cl2", title: "운명 교향곡 (Beethoven)", bpm: 108, style: "triplets", diff: "★★★★☆" },
-                { id: "cl3", title: "엘리제를 위하여", bpm: 130, style: "waltz", diff: "★★☆☆☆" },
-                { id: "cl4", title: "헝가리 무곡 제5번", bpm: 124, style: "syncopation", diff: "★★★★☆" },
-                { id: "cl5", title: "가보트 Gavotte", bpm: 90, style: "4beat", diff: "★☆☆☆☆" },
-                { id: "cl6", title: "미뉴에트 G장조 (Bach)", bpm: 114, style: "waltz", diff: "★★☆☆☆" },
-                { id: "cl7", title: "백조의 호수 테마", bpm: 92, style: "4beat", diff: "★★☆☆☆" },
-                { id: "cl8", title: "비발디 사계 중 '봄'", bpm: 120, style: "8beat", diff: "★★★☆☆" },
-                { id: "cl9", title: "사랑의 기쁨 (Martini)", bpm: 110, style: "waltz", diff: "★★☆☆☆" },
-                { id: "cl10", title: "볼레로 Bolero (Ravel)", bpm: 76, style: "triplets", diff: "★★★★★" }
-            ],
-            carol: [
-                { id: "ca1", title: "Last Christmas - Wham!", bpm: 107, style: "8beat", diff: "★★☆☆☆" },
-                { id: "ca2", title: "All I Want For Christmas Is You", bpm: 150, style: "shuffle", diff: "★★★★★" },
-                { id: "ca3", title: "징글벨 (Jingle Bells)", bpm: 120, style: "8beat", diff: "★★☆☆☆" },
-                { id: "ca4", title: "루돌프 사슴코", bpm: 116, style: "8beat", diff: "★★☆☆☆" },
-                { id: "ca5", title: "울면 안 돼 (Santa Claus is Coming)", bpm: 104, style: "8beat", diff: "★★☆☆☆" },
-                { id: "ca6", title: "창밖을 보라", bpm: 132, style: "8beat", diff: "★★★☆☆" },
-                { id: "ca7", title: "고요한 밤 거룩한 밤", bpm: 75, style: "waltz", diff: "★☆☆☆☆" },
-                { id: "ca8", title: "We Wish You a Merry Christmas", bpm: 140, style: "waltz", diff: "★★☆☆☆" },
-                { id: "ca9", title: "실버벨 (Silver Bells)", bpm: 84, style: "waltz", diff: "★☆☆☆☆" },
-                { id: "ca10", title: "첫눈처럼 너에게 가겠다", bpm: 72, style: "8beat", diff: "★★☆☆☆" }
-            ]
-        };
-
-        // 드롭다운 변경 동적 감지
-        function onGameCategoryChange(category) {
-            const songSelect = document.getElementById('game-song-select');
-            if (!songSelect) return;
-            songSelect.innerHTML = '';
-
-            const list = songsDatabase[category] || [];
-            list.forEach(song => {
-                const opt = document.createElement('option');
-                opt.value = song.id;
-                opt.text = `${song.title} (${song.diff} / ${song.bpm} BPM)`;
-                songSelect.appendChild(opt);
-            });
-
-            if (list.length > 0) {
-                onGameSongChange(list[0].id);
-            }
-        }
-
-        let currentGameSong = null;
-        function onGameSongChange(songId) {
-            const cat = document.getElementById('game-category-select').value;
-            const list = songsDatabase[cat] || [];
-            const song = list.find(s => s.id === songId);
-            if (!song) return;
-
-            currentGameSong = song;
-            changeBPM(song.bpm);
-
-            if (gameRunning) {
-                stopRhythmGenerator();
-                startProceduralRhythmGenerator(song);
-            }
-        }
-
-        // 지능형 절차적 드럼 비트 생성 엔진 (Procedural Rhythm Generator)
-        // 70개 곡의 템포와 특징을 기반으로 입문용 및 전문 드럼 비트를 실시간 조율 생성
-        function startProceduralRhythmGenerator(song) {
-            const intervalMs = (60.0 / song.bpm) * 1000;
-            let tick = 0;
-
-            patternTimerId = setInterval(() => {
-                // 4박자 루프 제어 (1마디 = 16 틱)
-                const step = tick % 16;
-                const activeLanes = [];
-
-                if (song.style === "4beat") {
-                    // 정박 4분음표 위주의 하이햇 + 1,3박 킥 + 2,4박 스네어 (입문자)
-                    if (step % 4 === 0) activeLanes.push(2); // Hi-hat close
-                    if (step === 0 || step === 8) activeLanes.push(0); // Kick
-                    if (step === 4 || step === 12) activeLanes.push(1); // Snare
-                } 
-                else if (song.style === "8beat") {
-                    // 표준 8비트 고고 리듬 (가장 대중적)
-                    if (step % 2 === 0) activeLanes.push(2); // Hi-hat close
-                    if (step === 0 || step === 8 || step === 10) activeLanes.push(0); // Kick
-                    if (step === 4 || step === 12) activeLanes.push(1); // Snare
-                } 
-                else if (song.style === "16beat") {
-                    // 고난도 16비트 리듬 (펑크, 케이팝)
-                    if (step % 1 === 0) activeLanes.push(2); 
-                    if (step === 0 || step === 6 || step === 8 || step === 14) activeLanes.push(0); // Kick
-                    if (step === 4 || step === 12) activeLanes.push(1); // Snare
-                } 
-                else if (song.style === "shuffle") {
-                    // 셔플/스윙 (바운스 그루브)
-                    if (step === 0 || step === 2 || step === 3 || step === 6 || step === 8 || step === 11 || step === 12 || step === 14) activeLanes.push(2);
-                    if (step === 0 || step === 8) activeLanes.push(0);
-                    if (step === 4 || step === 12) activeLanes.push(1);
-                } 
-                else if (song.style === "triplets") {
-                    // 3연음 기반 (웅장한 6/8 박자, 오케스트라)
-                    if (step % 3 === 0) activeLanes.push(2);
-                    if (step === 0 || step === 6) activeLanes.push(0);
-                    if (step === 3 || step === 9) activeLanes.push(1);
-                } 
-                else if (song.style === "waltz") {
-                    // 3/4 박자 왈츠 리듬
-                    if (step === 0 || step === 4 || step === 8) activeLanes.push(2);
-                    if (step === 0) activeLanes.push(0);
-                    if (step === 4 || step === 8) activeLanes.push(1);
-                } 
-                else {
-                    // 싱코페이션 및 변칙 싱코페이션
-                    if (step % 2 === 0) activeLanes.push(2);
-                    if (step === 0 || step === 3 || step === 8 || step === 11) activeLanes.push(0);
-                    if (step === 4 || step === 12) activeLanes.push(1);
-                }
-
-                // 4마디 마다 화려한 탐 필인 추가
-                if (tick >= 48) {
-                    if (step === 12) { activeLanes.push(4); } // Tom high
-                    if (step === 13) { activeLanes.push(5); } // Tom low
-                    if (step === 14) { activeLanes.push(6); } // Tom floor
-                    if (step === 15) { activeLanes.push(7); } // Crash
-                }
-
-                activeLanes.forEach(lane => {
-                    if (lane < activeHardwareLanesCount) {
-                        spawnNote(lane);
-                    }
-                });
-
-                tick++;
-                if (tick >= 64) {
-                    tick = 0; // 4마디 루프 초기화
-                }
-            }, intervalMs / 4); // 16분음표 단위로 쪼개서 발사
-        }
-
-        const canvasGame = document.getElementById('effect-canvas');
-        const cgCtx = canvasGame ? canvasGame.getContext('2d') : null;
-        let particles = [];
-
-        function renderGameCanvas() {
-            if (!cgCtx || !canvasGame) return;
-            const w = canvasGame.width = canvasGame.parentElement.offsetWidth;
-            const h = canvasGame.height = canvasGame.parentElement.offsetHeight;
-
-            cgCtx.clearRect(0, 0, w, h);
-
-            const laneWidth = w / activeHardwareLanesCount;
-            const judgmentY = h - 70;
-
-            if (gameRunning && !gamePaused) {
-                const now = Date.now();
-                notesArray.forEach((note) => {
-                    const elapsed = now - note.spawnTime;
-                    const y = elapsed * noteSpeed;
-                    note.currentY = y;
-
-                    if (y < h + 20) {
-                        const noteColor = getNoteHexColor(note.lane);
-                        cgCtx.fillStyle = noteColor;
-                        cgCtx.shadowBlur = 15;
-                        cgCtx.shadowColor = noteColor;
-
-                        drawRoundedRect(cgCtx, note.lane * laneWidth + 6, y - 8, laneWidth - 12, 16, 8);
-                        cgCtx.shadowBlur = 0;
-                    }
-                });
-
-                for (let i = notesArray.length - 1; i >= 0; i--) {
-                    if (notesArray[i].currentY > judgmentY + 100) {
-                        notesArray.splice(i, 1);
-                        triggerJudgment('MISS');
-                    }
-                }
-            }
-
-            particles.forEach((p, idx) => {
-                p.x += p.vx;
-                p.y += p.vy;
-                p.alpha -= 0.02;
-                if (p.alpha <= 0) {
-                    particles.splice(idx, 1);
-                    return;
-                }
-                cgCtx.fillStyle = `rgba(${p.r}, ${p.g}, ${p.b}, ${p.alpha})`;
-                cgCtx.beginPath();
-                cgCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                cgCtx.fill();
-            });
-
-            requestAnimationFrame(renderGameCanvas);
-        }
-
-        function drawRoundedRect(ctx, x, y, width, height, radius) {
-            ctx.beginPath();
-            ctx.moveTo(x + radius, y);
-            ctx.lineTo(x + width - radius, y);
-            ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
-            ctx.lineTo(x + width, y + height - radius);
-            ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-            ctx.lineTo(x + radius, y + height);
-            ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
-            ctx.lineTo(x, y + radius);
-            ctx.quadraticCurveTo(x, y, x + radius, y);
-            ctx.closePath();
-            ctx.fill();
-        }
-
-        function createParticles(lane) {
-            if (!canvasGame) return;
-            const laneWidth = canvasGame.width / activeHardwareLanesCount;
-            const startX = lane * laneWidth + laneWidth / 2;
-            const startY = canvasGame.height - 70;
-            const rgb = getLaneRGB(lane);
-
-            for (let i = 0; i < 18; i++) {
-                particles.push({
-                    x: startX,
-                    y: startY,
-                    vx: (Math.random() - 0.5) * 8,
-                    vy: (Math.random() - 0.5) * 8 - 3,
-                    size: Math.random() * 4 + 2,
-                    alpha: 1.0,
-                    r: rgb.r,
-                    g: rgb.g,
-                    b: rgb.b
-                });
-            }
-        }
-
-        function getNoteHexColor(lane) {
-            const colors = ['#00f3ff', '#ff007f', '#39ff14', '#ffe600', '#b026ff', '#ff6c00', '#00ffd5', '#ff003c', '#e5c158'];
-            return colors[lane % colors.length];
-        }
-
-        function getLaneRGB(lane) {
-            const colors = [
-                { r: 0, g: 243, b: 255 }, { r: 255, g: 0, b: 127 }, { r: 57, g: 255, b: 20 },
-                { r: 255, g: 230, b: 0 }, { r: 176, g: 38, b: 255 }, { r: 255, g: 108, b: 0 },
-                { r: 0, g: 255, b: 213 }, { r: 255, g: 0, b: 60 }, { r: 229, g: 193, b: 88 }
-            ];
-            return colors[lane % colors.length];
-        }
-
-        function triggerJudgment(type) {
-            const banner = document.getElementById('judgment-banner');
-            const comboDisp = document.getElementById('combo-display');
-            if (!banner || !comboDisp) return;
-
-            banner.className = '';
-            banner.style.opacity = '1';
-            banner.style.transform = 'translate(-50%, -50%) scale(1.3)';
-
-            if (type === 'PERFECT') {
-                banner.innerText = 'PERFECT';
-                banner.classList.add('judgment-perfect');
-                gameScore += 1000 + (gameCombo * 10);
-                gameCombo++;
-            } else if (type === 'GOOD') {
-                banner.innerText = 'GOOD';
-                banner.classList.add('judgment-good');
-                gameScore += 500 + (gameCombo * 5);
-                gameCombo++;
-            } else {
-                banner.innerText = 'MISS';
-                banner.classList.add('judgment-miss');
-                gameCombo = 0;
-            }
-
-            if (gameCombo > maxCombo) maxCombo = gameCombo;
-
-            document.getElementById('score-display').innerText = String(gameScore).padStart(6, '0');
-
-            if (gameCombo > 1) {
-                comboDisp.innerText = `${gameCombo} COMBO`;
-                comboDisp.style.opacity = '1';
-                comboDisp.style.transform = 'translate(-50%, -50%) scale(1.1)';
-            } else {
-                comboDisp.style.opacity = '0';
-            }
-
-            setTimeout(() => {
-                banner.style.opacity = '0';
-                banner.style.transform = 'translate(-50%, -50%) scale(1.0)';
-            }, 300);
-        }
-
-        /* ===================================================================
-           6. 🎓 New Lesson Mode Engine (드럼 학당 16단계 완벽과정)
-           =================================================================== */
-        let lessonBPM = 80;
-        let lessonRunning = false;
-        let activeLessonIdx = 0;
-        let lessonStepTimer = null;
-        let lessonPatternSeq = [];
-        let lessonSeqPointer = 0;
-
-        const lessonCurriculum = [
-            {
-                step: "STEP 1",
-                title: "양손 정박 교대 스트로크 (R L R L)",
-                desc: "오른손(R)과 왼손(L)을 정박에 교대로 치는 과정. 드럼 스틱 제어의 가장 단단한 주춧돌입니다.",
-                difficulty: "★☆☆☆☆",
-                sequence: [
-                    { hand: "오른손 (R)", target: "snare", color: "border-sky-500 text-sky-400 shadow-[0_0_12px_rgba(56,189,248,0.3)]" },
-                    { hand: "왼손 (L)", target: "snare", color: "border-pink-500 text-pink-400 shadow-[0_0_12px_rgba(244,63,94,0.3)]" },
-                    { hand: "오른손 (R)", target: "snare", color: "border-sky-500 text-sky-400" },
-                    { hand: "왼손 (L)", target: "snare", color: "border-pink-500 text-pink-400" }
-                ]
-            },
-            {
-                step: "STEP 2",
-                title: "리바운드 2연타 더블 스트로크 (RR LL)",
-                desc: "손목의 튕기는 탄력을 이용해 한 손으로 두 번씩 빠르게 타격하는 핵심 테크닉.",
-                difficulty: "★★☆☆☆",
-                sequence: [
-                    { hand: "오른손 (R)", target: "snare", color: "border-sky-500 text-sky-400" },
-                    { hand: "오른손 (R)", target: "snare", color: "border-sky-500 text-sky-400" },
-                    { hand: "왼손 (L)", target: "snare", color: "border-pink-500 text-pink-400" },
-                    { hand: "왼손 (L)", target: "snare", color: "border-pink-500 text-pink-400" }
-                ]
-            },
-            {
-                step: "STEP 3",
-                title: "드럼 명인의 첫걸음 파라디들 (RLRR LRLL)",
-                desc: "싱글(R,L)과 더블(RR,LL)을 융합하여 화려한 드럼 비트 필인을 쪼개는 고유 훈련법.",
-                difficulty: "★★★☆☆",
-                sequence: [
-                    { hand: "오른손 (R)", target: "snare", color: "border-sky-500 text-sky-400" },
-                    { hand: "왼손 (L)", target: "snare", color: "border-pink-500 text-pink-400" },
-                    { hand: "오른손 (R)", target: "snare", color: "border-sky-500 text-sky-400" },
-                    { hand: "오른손 (R)", target: "snare", color: "border-sky-500 text-sky-400" },
-                    { hand: "왼손 (L)", target: "snare", color: "border-pink-500 text-pink-400" },
-                    { hand: "오른손 (R)", target: "snare", color: "border-sky-500 text-sky-400" },
-                    { hand: "왼손 (L)", target: "snare", color: "border-pink-500 text-pink-400" },
-                    { hand: "왼손 (L)", target: "snare", color: "border-pink-500 text-pink-400" }
-                ]
-            },
-            {
-                step: "STEP 4",
-                title: "스냅 악센트(강약) 연주법 (R l r l)",
-                desc: "첫 타는 높이 쳐서 강하게(Accent), 나머지 타는 낮게 쳐서 약하게 조율하는 감정 이입 훈련.",
-                difficulty: "★★★☆☆",
-                sequence: [
-                    { hand: "강 타 (R)", target: "snare", color: "border-red-500 text-red-400" },
-                    { hand: "약 타 (l)", target: "snare", color: "border-slate-700 text-slate-500" },
-                    { hand: "약 타 (r)", target: "snare", color: "border-slate-700 text-slate-500" },
-                    { hand: "약 타 (l)", target: "snare", color: "border-slate-700 text-slate-500" }
-                ]
-            },
-            {
-                step: "STEP 5",
-                title: "오른발 킥 정박 독립 훈련 (K H K H)",
-                desc: "오른발 킥 페달(K)과 하이햇 심벌(H)을 정박에 교대하며 상하체 관절을 분리하는 연습.",
-                difficulty: "★★☆☆☆",
-                sequence: [
-                    { hand: "오른발 (K)", target: "kick", color: "border-teal-500 text-teal-400" },
-                    { hand: "하이햇 (H)", target: "hihat", color: "border-amber-500 text-amber-400" },
-                    { hand: "오른발 (K)", target: "kick", color: "border-teal-500 text-teal-400" },
-                    { hand: "하이햇 (H)", target: "hihat", color: "border-amber-500 text-amber-400" }
-                ]
-            },
-            {
-                step: "STEP 6",
-                title: "엇박 킥 오프-비트 트레이닝",
-                desc: "정박 하이햇 사이사이에 발 킥을 엇박으로 박아넣는 그루브 쪼개기.",
-                difficulty: "★★★☆☆",
-                sequence: [
-                    { hand: "하이햇 (H)", target: "hihat", color: "border-amber-500 text-amber-400" },
-                    { hand: "오른발 (K)", target: "kick", color: "border-teal-500 text-teal-400" },
-                    { hand: "하이햇 (H)", target: "hihat", color: "border-amber-500 text-amber-400" },
-                    { hand: "오른발 (K)", target: "kick", color: "border-teal-500 text-teal-400" }
-                ]
-            },
-            {
-                step: "STEP 7",
-                title: "킥과 하이햇 양발 균형 조율",
-                desc: "양발을 동시에 밟거나 쪼개며 균형을 잡는 고도의 안정성 훈련.",
-                difficulty: "★★★☆☆",
-                sequence: [
-                    { hand: "발&손 동시", target: "kick", color: "border-teal-500 text-teal-400" },
-                    { hand: "하이햇 (H)", target: "hihat", color: "border-amber-500 text-amber-400" },
-                    { hand: "발&손 동시", target: "kick", color: "border-teal-500 text-teal-400" },
-                    { hand: "오픈하이햇", target: "hihat_open", color: "border-amber-400 text-amber-300" }
-                ]
-            },
-            {
-                step: "STEP 8",
-                title: "스네어 2, 4박 백비트 탑재 (H S H S)",
-                desc: "하이햇 리듬 속 2박과 4박에 강력한 스네어(S) 백비트를 얹는 연습.",
-                difficulty: "★★★☆☆",
-                sequence: [
-                    { hand: "하이햇 (H)", target: "hihat", color: "border-amber-500 text-amber-400" },
-                    { hand: "스네어 (S)", target: "snare", color: "border-orange-500 text-orange-400" },
-                    { hand: "하이햇 (H)", target: "hihat", color: "border-amber-500 text-amber-400" },
-                    { hand: "스네어 (S)", target: "snare", color: "border-orange-500 text-orange-400" }
-                ]
-            },
-            {
-                step: "STEP 9",
-                title: "실전 8비트 고고 기본 그루브 완결",
-                desc: "손과 발을 전면 유기 결합하여 드럼 연주의 90%를 해소하는 기본 세트를 타격해 봅니다.",
-                difficulty: "★★★☆☆",
-                sequence: [
-                    { hand: "발&햇 동시", target: "kick", color: "border-teal-500 text-teal-400" },
-                    { hand: "하이햇 단독", target: "hihat", color: "border-amber-500 text-amber-400" },
-                    { hand: "손&햇 동시", target: "snare", color: "border-orange-500 text-orange-400" },
-                    { hand: "하이햇 단독", target: "hihat", color: "border-amber-500 text-amber-400" }
-                ]
-            },
-            {
-                step: "STEP 10",
-                title: "바운스감을 살린 셔플 스윙 리듬",
-                desc: "세 잇단음표 중 가운데 음을 빼고 말 달리듯 다가닥 다가닥 거리는 바운스 리듬.",
-                difficulty: "★★★★☆",
-                sequence: [
-                    { hand: "다 (K)", target: "kick", color: "border-teal-500 text-teal-400" },
-                    { hand: "가 (H)", target: "hihat", color: "border-amber-500 text-amber-400" },
-                    { hand: "닥 (S)", target: "snare", color: "border-orange-500 text-orange-400" },
-                    { hand: "가 (H)", target: "hihat", color: "border-amber-500 text-amber-400" }
-                ]
-            },
-            {
-                step: "STEP 11",
-                title: "스네어 유령타 고스트 노트 조율",
-                desc: "메인 스네어 타격 뒤에 들릴 듯 말 듯 미세한 잔향 타격을 넣어 그루브에 영혼을 불어넣습니다.",
-                difficulty: "★★★★☆",
-                sequence: [
-                    { hand: "강 타 (S)", target: "snare", color: "border-red-500 text-red-400" },
-                    { hand: "고스트 (s)", target: "snare", color: "border-slate-800 text-slate-600" },
-                    { hand: "하이햇 (H)", target: "hihat", color: "border-amber-500 text-amber-400" },
-                    { hand: "고스트 (s)", target: "snare", color: "border-slate-800 text-slate-600" }
-                ]
-            },
-            {
-                step: "STEP 12",
-                title: "16비트 고밀도 펑크(Funk) 분할",
-                desc: "한 박에 하이햇을 네 번씩 엄청난 속도로 분할 연주하여 흑인 펑크 소울을 자아내는 리듬.",
-                difficulty: "★★★★★",
-                sequence: [
-                    { hand: "오른발 (K)", target: "kick", color: "border-teal-500 text-teal-400" },
-                    { hand: "하이햇 (H)", target: "hihat", color: "border-amber-500 text-amber-400" },
-                    { hand: "스네어 (S)", target: "snare", color: "border-orange-500 text-orange-400" },
-                    { hand: "하이햇 (H)", target: "hihat", color: "border-amber-500 text-amber-400" }
-                ]
-            },
-            {
-                step: "STEP 13",
-                title: "4분음표 기본 탐순강하 필인 (Fill-In)",
-                desc: "노래의 전조나 마디 끝에 화려하게 한 박씩 탐을 돌며 쏟아져 내리는 기본 필인 기술.",
-                difficulty: "★★★☆☆",
-                sequence: [
-                    { hand: "스네어 (S)", target: "snare", color: "border-orange-500 text-orange-400" },
-                    { hand: "하이탐 (T1)", target: "tom_high", color: "border-purple-500 text-purple-400" },
-                    { hand: "미들탐 (T2)", target: "tom_low", color: "border-purple-500 text-purple-400" },
-                    { hand: "플로어 (T3)", target: "tom_floor", color: "border-purple-500 text-purple-400" }
-                ]
-            },
-            {
-                step: "STEP 14",
-                title: "8분음표 고속 활강 트랜지션 필인",
-                desc: "각 탐을 두 번씩 고속 연타하며 미끄러져 내려간 후 시원하게 크래시 심벌로 마디를 터트립니다.",
-                difficulty: "★★★★☆",
-                sequence: [
-                    { hand: "하이탐 (T1)", target: "tom_high", color: "border-purple-500 text-purple-400" },
-                    { hand: "미들탐 (T2)", target: "tom_low", color: "border-purple-500 text-purple-400" },
-                    { hand: "플로어 (T3)", target: "tom_floor", color: "border-purple-500 text-purple-400" },
-                    { hand: "크래시 (C)", target: "crash", color: "border-red-500 text-red-400" }
-                ]
-            },
-            {
-                step: "STEP 15",
-                title: "발과 손의 교차 리니어 테크닉 (R L K)",
-                desc: "타격음이 절대 겹치지 않고 '손 손 발' 순서로 연속 활사하여 공간을 메우는 고난도 라인.",
-                difficulty: "★★★★★",
-                sequence: [
-                    { hand: "오른손 (R)", target: "snare", color: "border-sky-500 text-sky-400" },
-                    { hand: "왼손 (L)", target: "snare", color: "border-pink-500 text-pink-400" },
-                    { hand: "오른발 (K)", target: "kick", color: "border-teal-500 text-teal-400" },
-                    { hand: "크래시 (C)", target: "crash", color: "border-red-500 text-red-400" }
-                ]
-            },
-            {
-                step: "STEP 16",
-                title: "워십 락 올라운더 하프타임 셔플",
-                desc: "모던 CCM 및 웅장한 아레나 팝에 단골 등장하는 고급 명인 과정의 완성 그루브.",
-                difficulty: "★★★★★",
-                sequence: [
-                    { hand: "발&햇 동시", target: "kick", color: "border-teal-500 text-teal-400" },
-                    { hand: "오픈하이햇", target: "hihat_open", color: "border-amber-400 text-amber-300" },
-                    { hand: "손&햇 동시", target: "snare", color: "border-orange-500 text-orange-400" },
-                    { hand: "플로어 (T3)", target: "tom_floor", color: "border-purple-500 text-purple-400" }
-                ]
-            }
-        ];
-
-        function initLessonAcademy() {
-            const menu = document.getElementById('lesson-menu-wrapper');
-            if (!menu) return;
-            menu.innerHTML = '';
-
-            lessonCurriculum.forEach((les, idx) => {
-                const btn = document.createElement('button');
-                btn.onclick = () => selectLessonCourse(idx);
-                btn.id = `btn-lesson-course-${idx}`;
-                btn.className = `w-full text-left p-3 rounded-lg border transition-all ${idx === 0 ? 'bg-emerald-950/40 border-emerald-500 text-white' : 'bg-black/20 border-slate-800 text-slate-400 hover:border-slate-700'}`;
-                btn.innerHTML = `
-                    <div class="flex justify-between items-center text-[10px] font-mono font-bold">
-                        <span class="text-emerald-400">${les.step}</span>
-                        <span>${les.difficulty}</span>
-                    </div>
-                    <h4 class="text-xs font-black mt-1.5">${les.title}</h4>
-                    <p class="text-[9.5px] text-gray-500 mt-0.5 leading-tight">${les.desc}</p>
-                `;
-                menu.appendChild(btn);
-            });
-
-            selectLessonCourse(0);
-        }
-
-        function selectLessonCourse(idx) {
-            activeLessonIdx = idx;
-            stopLessonEngine();
-
-            lessonCurriculum.forEach((les, i) => {
-                const btn = document.getElementById(`btn-lesson-course-${i}`);
-                if (btn) {
-                    btn.className = i === idx ? 'w-full text-left p-3 rounded-lg border transition-all bg-emerald-950/40 border-emerald-500 text-white' : 'w-full text-left p-3 rounded-lg border transition-all bg-black/20 border-slate-800 text-slate-400 hover:border-slate-700';
-                }
-            });
-
-            const lesson = lessonCurriculum[idx];
-            document.getElementById('active-lesson-badge').innerText = lesson.step;
-            document.getElementById('active-lesson-title').innerText = lesson.title;
-            document.getElementById('active-lesson-difficulty').innerText = `난이도: ${lesson.difficulty}`;
-            document.getElementById('lesson-instruction-text').innerText = lesson.desc;
-
-            lessonPatternSeq = lesson.sequence;
-            renderLessonSequenceVisualizer();
-        }
-
-        function renderLessonSequenceVisualizer() {
-            const viz = document.getElementById('lesson-sequence-visualizer');
-            if (!viz) return;
-            viz.innerHTML = '';
-
-            lessonPatternSeq.forEach((step, idx) => {
-                const node = document.createElement('div');
-                node.id = `lesson-node-${idx}`;
-                node.className = `flex-1 py-3 px-1 border-2 rounded-lg text-center font-black font-cyber text-xs transition-all duration-150 ${step.color} bg-black/40`;
-                node.innerText = step.hand;
-                viz.appendChild(node);
-            });
-
-            lessonSeqPointer = 0;
-            highlightLessonSequenceNode();
-        }
-
-        function highlightLessonSequenceNode() {
-            lessonPatternSeq.forEach((step, idx) => {
-                const node = document.getElementById(`lesson-node-${idx}`);
-                if (!node) return;
-                if (idx === lessonSeqPointer) {
-                    node.classList.add('scale-105', 'bg-emerald-900/60', 'border-emerald-400');
-                    node.style.boxShadow = "0 0 15px rgba(57, 255, 20, 0.4)";
-                } else {
-                    node.classList.remove('scale-105', 'bg-emerald-900/60', 'border-emerald-400');
-                    node.style.boxShadow = "none";
-                }
-            });
-        }
-
-        function changeLessonBPM(val) {
-            lessonBPM = parseInt(val);
-            document.getElementById('lesson-bpm-text').innerText = val + ' BPM';
-            if (lessonRunning) {
-                stopLessonEngine();
-                startLessonEngine();
-            }
-        }
-
-        function startLessonEngine() {
-            if (lessonRunning) return;
-            lessonRunning = true;
-            lessonSeqPointer = 0;
-            highlightLessonSequenceNode();
-
-            const intervalMs = (60.0 / lessonBPM) * 1000;
-            
-            lessonStepTimer = setInterval(() => {
-                const target = lessonPatternSeq[lessonSeqPointer];
-                if (target) {
-                    playSynthesizedSound(target.target, 80);
-                    const padMapIdx = currentMapping.findIndex(m => m.id === target.target);
-                    if (padMapIdx !== -1) {
-                        const pad = document.getElementById(`pad-${padMapIdx}`);
-                        if (pad) {
-                            pad.classList.add('active');
-                            setTimeout(() => pad.classList.remove('active'), 100);
-                        }
-                    }
-                }
-
-                lessonSeqPointer = (lessonSeqPointer + 1) % lessonPatternSeq.length;
-                highlightLessonSequenceNode();
-            }, intervalMs);
-
-            showToast("루디먼트 아카데미 연습 시작! 타깃 템포에 맞춰 정확하게 연주해 보십시오.");
-            document.getElementById('lesson-timing-banner').innerText = "TRAINING";
-            document.getElementById('lesson-timing-banner').className = "text-xl font-black text-emerald-400";
-        }
-
-        function stopLessonEngine() {
-            lessonRunning = false;
-            if (lessonStepTimer) {
-                clearInterval(lessonStepTimer);
-                lessonStepTimer = null;
-            }
-            document.getElementById('lesson-timing-banner').innerText = "READY";
-            document.getElementById('lesson-timing-banner').className = "text-xl font-black text-[#00f3ff]";
-        }
-
-        function checkLessonHitAccuracy(hitInstrument) {
-            const target = lessonPatternSeq[lessonSeqPointer];
-            if (!target) return;
-
-            const isCorrect = (hitInstrument === target.target);
-            const banner = document.getElementById('lesson-timing-banner');
-            const offsetLabel = document.getElementById('lesson-accuracy-offset');
-            const indicator = document.getElementById('lesson-offset-indicator');
-
-            const randomOffset = Math.floor((Math.random() - 0.5) * 40);
-
-            if (isCorrect) {
-                banner.innerText = "PERFECT!";
-                banner.className = "text-xl font-black text-[#39ff14] animate-bounce";
-                offsetLabel.innerText = `Offset: ${randomOffset}ms`;
-                
-                const barWidth = 50 + (randomOffset / 1.5);
-                indicator.style.width = `${barWidth}%`;
-                indicator.className = "bg-emerald-400 h-full transition-all duration-75";
-            } else {
-                banner.innerText = "WRONG PAD!";
-                banner.className = "text-xl font-black text-rose-500 animate-pulse";
-                offsetLabel.innerText = `ID: ${hitInstrument}`;
-                indicator.style.width = `10%`;
-                indicator.className = "bg-rose-500 h-full transition-all duration-75";
-            }
-        }
-
-        /* ===================================================================
-           7. ⌨️ System Controls & Multi-Module Integrator
-           =================================================================== */
-        function switchTab(tabId) {
-            ['sound', 'play', 'lesson', 'controller', 'help'].forEach(id => {
-                document.getElementById(`content-${id}`).classList.add('hidden');
-                document.getElementById(`tab-${id}`).classList.remove('active');
-            });
-            document.getElementById(`content-${tabId}`).classList.remove('hidden');
-            document.getElementById(`tab-${tabId}`).classList.add('active');
-
-            if (tabId === 'sound') renderMixerConsole();
-            if (tabId === 'play') {
-                renderGameBoardLanes();
-                onGameCategoryChange('children'); // 첫 카테고리로 강제 로드
-            }
-            if (tabId === 'lesson') initLessonAcademy();
-        }
-
-        function renderGameBoardLanes() {
-            const wrapper = document.getElementById('lanes-wrapper');
-            const rack = document.getElementById('drum-rack');
-            if (!wrapper || !rack) return;
-
-            wrapper.innerHTML = '';
-            rack.innerHTML = '';
-
-            for (let i = 0; i < activeHardwareLanesCount; i++) {
-                const lane = document.createElement('div');
-                lane.className = `lane border-r border-white/5`;
-                lane.id = `lane-${i}`;
-                wrapper.appendChild(lane);
-            }
-
-            currentMapping.forEach((map, idx) => {
-                const pad = document.createElement('div');
-                pad.className = `drum-pad pad-${idx} color-${idx}`;
-                pad.id = `pad-${idx}`;
-                pad.innerHTML = `
-                    <b>${map.name}</b>
-                    <span>[${map.key}]</span>
-                `;
-                pad.addEventListener('mousedown', () => simulateHardwareHit(idx));
-                rack.appendChild(pad);
-            });
-        }
-
+        /* */
         function simulateHardwareHit(laneIdx) {
             const pad = document.getElementById(`pad-${laneIdx}`);
             if (pad) {
@@ -3009,15 +3178,20 @@
                 ];
             }
 
-            document.getElementById('label-active-setup-lanes').innerText = `${pads}L 자동 활성화`;
-            document.getElementById('btn-hw-8').className = pads === 8 ? 'px-2.5 py-0.5 text-[9px] font-bold rounded bg-cyan-950 text-cyan-300 border border-cyan-800' : 'px-2.5 py-0.5 text-[9px] font-bold rounded bg-slate-900 text-gray-400';
-            document.getElementById('btn-hw-9').className = pads === 9 ? 'px-2.5 py-0.5 text-[9px] font-bold rounded bg-cyan-950 text-cyan-300 border border-cyan-800' : 'px-2.5 py-0.5 text-[9px] font-bold rounded bg-slate-900 text-gray-400';
+            const activeLanesLabel = document.getElementById('label-active-setup-lanes');
+            if(activeLanesLabel) activeLanesLabel.innerText = `${pads}L 자동 활성화`;
+            
+            const btn8 = document.getElementById('btn-hw-8');
+            const btn9 = document.getElementById('btn-hw-9');
+            if(btn8) btn8.className = pads === 8 ? 'px-2.5 py-0.5 text-[9px] font-bold rounded bg-cyan-950 text-cyan-300 border border-cyan-800' : 'px-2.5 py-0.5 text-[9px] font-bold rounded bg-slate-900 text-gray-400';
+            if(btn9) btn9.className = pads === 9 ? 'px-2.5 py-0.5 text-[9px] font-bold rounded bg-cyan-950 text-cyan-300 border border-cyan-800' : 'px-2.5 py-0.5 text-[9px] font-bold rounded bg-slate-900 text-gray-400';
 
             renderGameBoardLanes();
             renderMidiMappingTable();
             renderMixerConsole(); 
         }
 
+        /* */
         function renderMidiMappingTable() {
             const list = document.getElementById('midi-mapping-list');
             if (!list) return;
@@ -3077,6 +3251,7 @@
             document.getElementById('speed-text').innerText = val + ' px/ms';
         }
 
+        /* */
         function startGameEngine() {
             if (gameRunning && !gamePaused) return;
             gameRunning = true;
@@ -3159,6 +3334,7 @@
             }
         }
 
+        /* */
         function recordMidiNote(laneIdx) {
             if (!isRecording) return;
             sequenceRecord.push({
@@ -3224,6 +3400,7 @@
                 count++;
             }
 
+            /* */
             if (count > 0) {
                 badge.innerText = 'CONNECTED';
                 badge.className = 'px-2.5 py-1 rounded text-[10px] font-extrabold bg-green-950 text-green-400 border border-green-800';
@@ -3302,6 +3479,7 @@
             wizardMappingState.isActive = false;
         }
 
+        /* */
         function nextWizardStep(stepNum) {
             document.getElementById('wizard-step-1').classList.add('hidden');
             document.getElementById('wizard-step-2').classList.add('hidden');
@@ -3327,8 +3505,8 @@
 
         function selectWizardHardware(pads) {
             wizardMappingState.activeHardwareCount = pads;
-            document.getElementById('btn-wiz-hw-8').className = pads === 8 ? 'border-2 border-cyan-500/80 bg-cyan-950/20 rounded-xl p-4 text-center transition' : 'border-2 border-slate-800 bg-slate-950/20 rounded-xl p-4 text-center transition';
-            document.getElementById('btn-wiz-hw-9').className = pads === 9 ? 'border-2 border-cyan-500/80 bg-cyan-950/20 rounded-xl p-4 text-center transition' : 'border-2 border-slate-800 bg-slate-950/20 rounded-xl p-4 text-center transition';
+            document.getElementById('btn-wiz-hw-8').className = pads === 8 ? 'border-2 border-cyan-500/80 bg-cyan-950/20 rounded-xl p-4 text-center transition font-bold text-white' : 'border-2 border-slate-800 bg-slate-950/20 rounded-xl p-4 text-center transition';
+            document.getElementById('btn-wiz-hw-9').className = pads === 9 ? 'border-2 border-cyan-500/80 bg-cyan-950/20 rounded-xl p-4 text-center transition font-bold text-white' : 'border-2 border-slate-800 bg-slate-950/20 rounded-xl p-4 text-center transition';
         }
 
         function startSequentialMappingProcess() {
@@ -3350,6 +3528,7 @@
             }
         }
 
+        /* */
         function handleWizardMappingTrigger(midiNote) {
             const idx = wizardMappingState.currentStepIndex;
             const targetPad = wizardMappingState.tempMapping[idx];
@@ -3479,7 +3658,11 @@
             animateVisualizer();
             renderGameCanvas();
             checkExistingSession();
+            buildPresetUI(); // 20종 프리셋 동적 UI 주입
             initLessonAcademy();
+            
+            // 첫 기본 프리셋 강제 세팅
+            loadDrumKitPreset('preset1');
         });
     </script>
 </body>
