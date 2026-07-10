@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOUNDGLUCK | DRUM TULZ v4.3.3 Pro-Academy Ultimate</title>
+    <title>SOUNDGLUCK | DRUM TULZ v4.4.0 Pro-Academy Ultimate</title>
     <!-- 고품질 오픈소스 프레임워크 로드 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -417,7 +417,7 @@
             </div>
             
             <h2 class="text-2xl font-black tracking-widest text-white mb-2 uppercase whitespace-nowrap">SOUNDGLUCK &nbsp;|&nbsp; DRUM TULZ</h2>
-            <p class="text-[11px] text-[#ff007f] font-mono tracking-wider uppercase mb-8">Drum Tulz v4.3.3 Pro-Lesson Academy</p>
+            <p class="text-[11px] text-[#ff007f] font-mono tracking-wider uppercase mb-8">Drum Tulz v4.4.0 Pro-Lesson Academy</p>
             
             <form onsubmit="handleLogin(event)" class="space-y-6">
                 <div class="text-left">
@@ -442,7 +442,7 @@
                     <i class="fa-solid fa-cloud-arrow-up text-[10px]"></i> Google Sheets Cloud Security Enabled
                 </span>
             </div>
-            <p class="text-[10px] text-gray-600 mt-6 font-mono">AUTHORIZED PERSONNEL ONLY // v4.3.3</p>
+            <p class="text-[10px] text-gray-600 mt-6 font-mono">AUTHORIZED PERSONNEL ONLY // v4.4.0</p>
         </div>
     </div>
 
@@ -454,6 +454,15 @@
                 <span class="text-[10px] text-cyan-400 font-mono tracking-widest uppercase">SoundGluck Welcome System</span>
                 <h2 class="text-2xl font-black text-white mt-1">전자드럼 셋업 및 도구 시작</h2>
                 <p class="text-xs text-gray-400 mt-1">SoundGluck Drum Tulz의 최적 성능을 위한 시작 방식을 선택해 주세요.</p>
+            </div>
+
+            <div class="mb-4 p-3.5 bg-yellow-950/25 border border-yellow-700/60 rounded-xl text-left">
+                <p class="text-[11px] font-bold text-yellow-400 flex items-center gap-1.5"><i class="fa-solid fa-circle-exclamation"></i> 브라우저 확인</p>
+                <p class="text-[10.5px] text-gray-400 mt-1 leading-relaxed">DRUM TULZ는 <b class="text-gray-200">구글 크롬(Chrome)</b>과 <b class="text-gray-200">윈도우 엣지(Edge)</b> 브라우저에 최적화되어 있습니다. 그 외 브라우저(사파리, 익스플로러 등)는 드럼 인식이 안되거나 일부 기능 사용이 어려울 수 있습니다.</p>
+            </div>
+            <div id="onboarding-midi-hint" class="mb-1 p-3.5 bg-black/40 border border-gray-800 rounded-xl text-left">
+                <p class="text-[11px] font-bold text-gray-300 flex items-center gap-1.5"><i class="fa-solid fa-plug-circle-exclamation text-red-400"></i> MIDI 연결 상태가 감지되지 않을 때는?</p>
+                <p class="text-[10.5px] text-gray-500 mt-1 leading-relaxed">드럼과의 MIDI 연결이 감지되지 않습니다. ① 드럼과 PC를 연결한 USB 케이블 양쪽이 제대로 꽂혀 있는지, ② 사용 중인 드럼 제품이 USB MIDI 기능을 지원하는지 확인해 주세요.</p>
             </div>
 
             <div id="onboarding-menu-list" class="space-y-3.5">
@@ -576,47 +585,54 @@
     <!-- 메인 어플리케이션 컨테이너 -->
     <div id="app-container">
         
-        <header class="flex flex-col xl:flex-row justify-between items-center bg-[#07071c]/95 border-2 border-[#151538] rounded-2xl p-4 gap-4 w-full">
-            <div class="flex items-center gap-3 shrink-0">
-                <div class="w-11 h-11 rounded-full bg-cyan-950/45 border border-cyan-500 flex items-center justify-center">
-                    <i class="fa-solid fa-drum text-2xl text-[#00f3ff] drop-shadow-[0_0_10px_#00f3ff]"></i>
+        <header class="flex flex-col bg-[#07071c]/95 border-2 border-[#151538] rounded-2xl p-4 gap-3 w-full">
+            <div class="flex flex-col xl:flex-row justify-between items-center gap-3 w-full">
+                <div class="flex items-center gap-3 shrink-0">
+                    <div class="w-11 h-11 rounded-full bg-cyan-950/45 border border-cyan-500 flex items-center justify-center">
+                        <i class="fa-solid fa-drum text-2xl text-[#00f3ff] drop-shadow-[0_0_10px_#00f3ff]"></i>
+                    </div>
+                    <div class="whitespace-nowrap">
+                        <h1 class="text-xl font-black tracking-widest text-white flex items-center gap-2">
+                            SOUNDGLUCK <span class="text-cyan-500 font-light">|</span> DRUM TULZ <span class="text-[#ff007f] font-mono text-[10px] border border-pink-900 px-2 py-0.5 rounded">V4.4.0</span>
+                        </h1>
+                        <p class="text-[10px] text-gray-500 font-mono">Analog Synthesizer & Professional Training Academy</p>
+                    </div>
                 </div>
-                <div class="whitespace-nowrap">
-                    <h1 class="text-xl font-black tracking-widest text-white flex items-center gap-2">
-                        SOUNDGLUCK <span class="text-cyan-500 font-light">|</span> DRUM TULZ <span class="text-[#ff007f] font-mono text-[10px] border border-pink-900 px-2 py-0.5 rounded">V4.3.3 Ultimate</span>
-                    </h1>
-                    <p class="text-[10px] text-gray-500 font-mono">Analog Synthesizer & Professional Training Academy</p>
-                </div>
-            </div>
-            
-            <div class="flex flex-col md:flex-row items-center gap-3 w-full xl:w-auto justify-end">
-                <nav class="flex flex-wrap md:flex-nowrap gap-1 bg-black/60 p-1 rounded-xl border border-gray-800 shrink-0">
-                    <button onclick="switchTab('sound')" id="tab-sound" class="nav-tab active px-3 py-2.5 text-[11px] font-extrabold text-gray-400 hover:text-white rounded-lg flex items-center gap-1 whitespace-nowrap">
-                        <i class="fa-solid fa-sliders"></i> PERFORMANCE MODE (20종 음색)
-                    </button>
-                    <button onclick="switchTab('play')" id="tab-play" class="nav-tab px-3 py-2.5 text-[11px] font-extrabold text-gray-400 hover:text-white rounded-lg flex items-center gap-1 whitespace-nowrap">
-                        <i class="fa-solid fa-gamepad"></i> GAME MODE (70곡 리듬게임)
-                    </button>
-                    <button onclick="switchTab('lesson')" id="tab-lesson" class="nav-tab px-3 py-2.5 text-[11px] font-extrabold text-gray-400 hover:text-white rounded-lg flex items-center gap-1 whitespace-nowrap">
-                        <i class="fa-solid fa-graduation-cap text-[#39ff14]"></i> LESSON MODE (하드웨어 직관가이드)
-                    </button>
-                    <button onclick="switchTab('controller')" id="tab-controller" class="nav-tab px-3 py-2.5 text-[11px] font-extrabold text-gray-400 hover:text-white rounded-lg flex items-center gap-1 whitespace-nowrap">
-                        <i class="fa-solid fa-circle-nodes"></i> 컨트롤러 맵핑
-                    </button>
-                    <button onclick="switchTab('help')" id="tab-help" class="nav-tab px-3 py-2.5 text-[11px] font-extrabold text-gray-400 hover:text-white rounded-lg flex items-center gap-1 whitespace-nowrap">
-                        <i class="fa-solid fa-circle-question"></i> 사용 가이드 & 팁
-                    </button>
-                </nav>
 
-                <div class="flex items-center gap-2 shrink-0">
+                <div class="flex flex-wrap items-center gap-2 shrink-0 justify-end">
+                    <div id="connection-status-badge" class="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-gray-800 bg-black/50 text-[10px] font-black font-mono whitespace-nowrap">
+                        <span id="connection-status-light" class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_6px_#22c55e]"></span>
+                        <span id="connection-status-text" class="text-green-400">ONLINE</span>
+                    </div>
+                    <button onclick="switchTab('help')" id="tab-help" class="nav-tab px-3.5 py-2.5 text-[11px] font-extrabold text-gray-300 hover:text-white bg-black/40 hover:bg-black/60 border border-gray-800 rounded-lg flex items-center gap-1.5 transition whitespace-nowrap">
+                        <i class="fa-solid fa-circle-question"></i> 사용가이드
+                    </button>
                     <button onclick="openChannelModal()" class="px-3.5 py-2.5 text-[11px] font-extrabold text-cyan-400 bg-cyan-950/45 hover:bg-cyan-900/60 border border-cyan-800 rounded-lg flex items-center gap-1.5 transition cursor-pointer whitespace-nowrap">
-                        <i class="fa-solid fa-bars"></i> 공식 채널
+                        <i class="fa-solid fa-bars"></i> 사운드글룩
+                    </button>
+                    <button onclick="openMyPageModal()" class="px-3.5 py-2.5 text-[11px] font-extrabold text-purple-300 bg-purple-950/40 hover:bg-purple-900/60 border border-purple-800 rounded-lg flex items-center gap-1.5 transition whitespace-nowrap">
+                        <i class="fa-solid fa-user"></i> 마이페이지
                     </button>
                     <button onclick="handleLogout()" class="px-3.5 py-2.5 text-[11px] font-black bg-red-950 hover:bg-red-900/60 border border-red-800 text-red-300 rounded-lg transition whitespace-nowrap">
                         로그아웃
                     </button>
                 </div>
             </div>
+
+            <nav class="flex flex-wrap md:flex-nowrap gap-1 bg-black/60 p-1 rounded-xl border border-gray-800 w-full justify-center">
+                <button onclick="switchTab('sound')" id="tab-sound" class="nav-tab active flex-1 px-3 py-2.5 text-[11px] font-extrabold text-gray-400 hover:text-white rounded-lg flex items-center justify-center gap-1.5 whitespace-nowrap">
+                    <i class="fa-solid fa-sliders"></i> 퍼포먼스 모드
+                </button>
+                <button onclick="switchTab('play')" id="tab-play" class="nav-tab flex-1 px-3 py-2.5 text-[11px] font-extrabold text-gray-400 hover:text-white rounded-lg flex items-center justify-center gap-1.5 whitespace-nowrap">
+                    <i class="fa-solid fa-gamepad"></i> 게임 모드
+                </button>
+                <button onclick="switchTab('lesson')" id="tab-lesson" class="nav-tab flex-1 px-3 py-2.5 text-[11px] font-extrabold text-gray-400 hover:text-white rounded-lg flex items-center justify-center gap-1.5 whitespace-nowrap">
+                    <i class="fa-solid fa-graduation-cap text-[#39ff14]"></i> 레슨 모드
+                </button>
+                <button onclick="switchTab('controller')" id="tab-controller" class="nav-tab flex-1 px-3 py-2.5 text-[11px] font-extrabold text-gray-400 hover:text-white rounded-lg flex items-center justify-center gap-1.5 whitespace-nowrap">
+                    <i class="fa-solid fa-circle-nodes"></i> 컨트롤러 맵핑
+                </button>
+            </nav>
         </header>
 
         <!-- -->
@@ -638,7 +654,7 @@
             <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center border-b border-[#1c1c3f] pb-4 gap-4">
                 <div>
                     <h2 class="text-sm font-black text-[#00f3ff] tracking-widest uppercase flex items-center gap-1.5">
-                        <i class="fa-solid fa-wave-square text-cyan-400"></i> SoundGluck Performance Workspace v4.3.3 Ultimate
+                        <i class="fa-solid fa-wave-square text-cyan-400"></i> SoundGluck Performance Workspace v4.4.0 Ultimate
                     </h2>
                     <p class="text-[11px] text-gray-400 mt-1 font-sans">고해상도 실시간 하이브리드 FFT 오실로스코프 탑재 믹서 시스템</p>
                 </div>
@@ -1128,7 +1144,7 @@
         <div id="content-help" class="hidden bg-[#06061a]/95 border border-[#141432] rounded-2xl p-6">
             <div class="border-b border-gray-800 pb-4 mb-6">
                 <h2 class="text-base font-black text-[#00f3ff] tracking-widest uppercase flex items-center gap-2">
-                    <i class="fa-solid fa-circle-info text-cyan-400"></i> SOUNDGLUCK DRUMTULZ v4.3.3 초보자 맞춤형 정밀 가이드
+                    <i class="fa-solid fa-circle-info text-cyan-400"></i> SOUNDGLUCK DRUMTULZ v4.4.0 초보자 맞춤형 정밀 가이드
                 </h2>
                 <p class="text-xs text-gray-400 mt-1">전자드럼 최초 결속부터 오디오 성능을 300% 극대화하는 전문가 셋업 노하우까지 한눈에 확인하세요.</p>
             </div>
@@ -1254,6 +1270,46 @@
         </div>
     </div>
 
+    <!-- 마이페이지 모달 -->
+    <div id="mypage-modal" class="fixed inset-0 flex items-center justify-center bg-black/85 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 z-[1200]">
+        <div class="bg-[#08081a] border-2 border-purple-500 shadow-[0_0_50px_rgba(176,38,255,0.25)] rounded-2xl p-8 max-w-md w-full relative transform scale-95 transition-transform duration-300 max-h-[85vh] overflow-y-auto" id="mypage-modal-content">
+            <button onclick="closeMyPageModal()" class="absolute top-4 right-4 text-gray-500 hover:text-white transition text-2xl outline-none">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 rounded-full bg-purple-950/45 border border-purple-400 flex items-center justify-center mx-auto mb-2">
+                    <i class="fa-solid fa-user text-2xl text-purple-300"></i>
+                </div>
+                <h3 class="text-lg font-black text-white tracking-widest uppercase">마이페이지</h3>
+                <p class="text-[10px] text-purple-400 font-mono">닉네임 / 비밀번호 / 연습 기록 관리</p>
+            </div>
+
+            <div class="space-y-3 text-left mb-5">
+                <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest block mb-1">닉네임</label>
+                <div class="flex gap-2">
+                    <input type="text" id="mypage-nickname-input" placeholder="닉네임 입력" class="flex-1 bg-black/60 border border-gray-800 focus:border-purple-500 rounded-lg py-2.5 px-4 text-sm text-white outline-none font-semibold transition">
+                    <button onclick="saveMyNickname()" class="px-4 py-2.5 bg-purple-950/60 hover:bg-purple-900/80 border border-purple-700 text-purple-300 text-xs font-bold rounded-lg transition whitespace-nowrap">저장</button>
+                </div>
+            </div>
+
+            <div class="space-y-3 text-left mb-2 pt-4 border-t border-gray-900">
+                <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest block mb-1">비밀번호 변경</label>
+                <input type="password" id="mypage-newpw-input" placeholder="새 비밀번호 (4자 이상)" class="w-full bg-black/60 border border-gray-800 focus:border-purple-500 rounded-lg py-2.5 px-4 text-sm text-white outline-none font-semibold transition mb-2">
+                <input type="password" id="mypage-newpw-confirm" placeholder="새 비밀번호 확인" class="w-full bg-black/60 border border-gray-800 focus:border-purple-500 rounded-lg py-2.5 px-4 text-sm text-white outline-none font-semibold transition">
+                <button onclick="changeMyPassword()" class="w-full mt-2 py-2.5 bg-purple-950/60 hover:bg-purple-900/80 border border-purple-700 text-purple-300 text-xs font-bold rounded-lg transition">비밀번호 변경</button>
+                <div id="mypage-pw-status" class="text-[11px] font-bold h-4 mt-1"></div>
+            </div>
+
+            <div class="text-left pt-4 border-t border-gray-900">
+                <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest block mb-2">모드별 누적 연습 시간</label>
+                <div id="mypage-history-list" class="space-y-1.5 text-[11px] text-gray-400 font-mono">
+                    <p class="text-gray-600">기록을 불러오는 중...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- -->
     <script>
         /* ===================================================================
@@ -1294,6 +1350,177 @@
             content.classList.remove('scale-100');
         }
 
+        /* ===================================================================
+           1-B. 🙋 마이페이지 (닉네임 / 비밀번호 변경 / 연습시간)
+           =================================================================== */
+        const MODE_LABELS = { sound: '퍼포먼스 모드', play: '게임 모드', lesson: '레슨 모드', controller: '컨트롤러 맵핑' };
+        let modeTimerState = { mode: null, startTime: null };
+
+        function trackModeTimeSwitch(newMode) {
+            flushModeTime();
+            if (MODE_LABELS[newMode]) {
+                modeTimerState = { mode: newMode, startTime: Date.now() };
+            } else {
+                modeTimerState = { mode: null, startTime: null };
+            }
+        }
+
+        function flushModeTime() {
+            if (!modeTimerState.mode || !modeTimerState.startTime) return;
+            const minutes = (Date.now() - modeTimerState.startTime) / 60000;
+            if (minutes > 0.05) {
+                logPracticeToServer(modeTimerState.mode, minutes);
+            }
+            modeTimerState = { mode: null, startTime: null };
+        }
+
+        async function logPracticeToServer(mode, minutes) {
+            const id = sessionStorage.getItem('soundgluck_user_id');
+            const pw = sessionStorage.getItem('soundgluck_user_pw');
+            if (!id || !pw || !GOOGLE_SHEET_API_URL) return;
+            try {
+                await fetch(GOOGLE_SHEET_API_URL, {
+                    method: 'POST', mode: 'cors', redirect: 'follow',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify({ action: 'logPractice', id, pw, mode, minutes: Math.round(minutes * 10) / 10 })
+                });
+            } catch (e) { /* 연습기록 저장 실패는 조용히 무시 */ }
+        }
+
+        function openMyPageModal() {
+            const modal = document.getElementById('mypage-modal');
+            const content = document.getElementById('mypage-modal-content');
+            const nickInput = document.getElementById('mypage-nickname-input');
+            if (nickInput) nickInput.value = sessionStorage.getItem('soundgluck_nickname') || '';
+            document.getElementById('mypage-pw-status').innerText = '';
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('opacity-100');
+            content.classList.remove('scale-95');
+            content.classList.add('scale-100');
+            loadMyPageHistory();
+        }
+
+        function closeMyPageModal() {
+            const modal = document.getElementById('mypage-modal');
+            const content = document.getElementById('mypage-modal-content');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.classList.remove('opacity-100');
+            content.classList.add('scale-95');
+            content.classList.remove('scale-100');
+        }
+
+        async function saveMyNickname() {
+            const id = sessionStorage.getItem('soundgluck_user_id');
+            const pw = sessionStorage.getItem('soundgluck_user_pw');
+            const nickname = document.getElementById('mypage-nickname-input').value.trim();
+            if (!nickname) { showToast('닉네임을 입력해 주세요.'); return; }
+            if (!id || !pw) { showToast('오프라인 모드에서는 닉네임 저장이 지원되지 않습니다.'); return; }
+            try {
+                const response = await fetch(GOOGLE_SHEET_API_URL, {
+                    method: 'POST', mode: 'cors', redirect: 'follow',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify({ action: 'updateDisplayName', id, pw, displayName: nickname })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    sessionStorage.setItem('soundgluck_nickname', nickname);
+                    showToast('닉네임이 저장되었습니다!');
+                } else {
+                    showToast(result.message || '닉네임 저장 실패');
+                }
+            } catch (e) {
+                showToast('서버 통신 오류로 닉네임 저장에 실패했습니다.');
+            }
+        }
+
+        async function changeMyPassword() {
+            const id = sessionStorage.getItem('soundgluck_user_id');
+            const pw = sessionStorage.getItem('soundgluck_user_pw');
+            const newPw = document.getElementById('mypage-newpw-input').value.trim();
+            const newPwConfirm = document.getElementById('mypage-newpw-confirm').value.trim();
+            const statusEl = document.getElementById('mypage-pw-status');
+            if (!id || !pw) { statusEl.className = 'text-[11px] font-bold h-4 mt-1 text-red-400'; statusEl.innerText = '오프라인 모드에서는 지원되지 않습니다.'; return; }
+            if (!newPw || newPw.length < 4) { statusEl.className = 'text-[11px] font-bold h-4 mt-1 text-red-400'; statusEl.innerText = '새 비밀번호는 4자 이상이어야 합니다.'; return; }
+            if (newPw !== newPwConfirm) { statusEl.className = 'text-[11px] font-bold h-4 mt-1 text-red-400'; statusEl.innerText = '비밀번호 확인이 일치하지 않습니다.'; return; }
+            try {
+                const response = await fetch(GOOGLE_SHEET_API_URL, {
+                    method: 'POST', mode: 'cors', redirect: 'follow',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify({ action: 'changePassword', id, pw, newPw })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    sessionStorage.setItem('soundgluck_user_pw', newPw);
+                    statusEl.className = 'text-[11px] font-bold h-4 mt-1 text-green-400';
+                    statusEl.innerText = '비밀번호가 변경되었습니다!';
+                    document.getElementById('mypage-newpw-input').value = '';
+                    document.getElementById('mypage-newpw-confirm').value = '';
+                } else {
+                    statusEl.className = 'text-[11px] font-bold h-4 mt-1 text-red-400';
+                    statusEl.innerText = result.message || '변경 실패';
+                }
+            } catch (e) {
+                statusEl.className = 'text-[11px] font-bold h-4 mt-1 text-red-400';
+                statusEl.innerText = '서버 통신 오류가 발생했습니다.';
+            }
+        }
+
+        async function loadMyPageHistory() {
+            const listEl = document.getElementById('mypage-history-list');
+            const id = sessionStorage.getItem('soundgluck_user_id');
+            const pw = sessionStorage.getItem('soundgluck_user_pw');
+            if (!id || !pw || !GOOGLE_SHEET_API_URL) {
+                listEl.innerHTML = '<p class="text-gray-600">오프라인 모드에서는 연습기록이 지원되지 않습니다.</p>';
+                return;
+            }
+            try {
+                const response = await fetch(GOOGLE_SHEET_API_URL, {
+                    method: 'POST', mode: 'cors', redirect: 'follow',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify({ action: 'getHistory', id, pw })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    const totals = result.totalsByMode || {};
+                    const keys = Object.keys(totals);
+                    if (keys.length === 0) {
+                        listEl.innerHTML = '<p class="text-gray-600">아직 기록된 연습 시간이 없습니다.</p>';
+                        return;
+                    }
+                    listEl.innerHTML = keys.map(k => {
+                        const label = MODE_LABELS[k] || k;
+                        const mins = Math.round(totals[k] * 10) / 10;
+                        return `<div class="flex justify-between px-2 py-1.5 bg-black/40 rounded border border-gray-900"><span>${label}</span><span class="text-purple-300 font-bold">${mins}분</span></div>`;
+                    }).join('');
+                } else {
+                    listEl.innerHTML = `<p class="text-red-400">${result.message || '기록 불러오기 실패'}</p>`;
+                }
+            } catch (e) {
+                listEl.innerHTML = '<p class="text-red-400">서버 통신 오류로 기록을 불러오지 못했습니다.</p>';
+            }
+        }
+
+        /* ===================================================================
+           1-C. 📶 온라인/오프라인 연결 상태 표시
+           =================================================================== */
+        function updateConnectionStatus() {
+            const light = document.getElementById('connection-status-light');
+            const text = document.getElementById('connection-status-text');
+            if (!light || !text) return;
+            if (navigator.onLine) {
+                light.className = 'w-2 h-2 rounded-full bg-green-500 shadow-[0_0_6px_#22c55e]';
+                text.className = 'text-green-400';
+                text.innerText = 'ONLINE';
+            } else {
+                light.className = 'w-2 h-2 rounded-full bg-red-500 shadow-[0_0_6px_#ef4444]';
+                text.className = 'text-red-400';
+                text.innerText = 'OFFLINE';
+            }
+        }
+        window.addEventListener('online', updateConnectionStatus);
+        window.addEventListener('offline', updateConnectionStatus);
+        window.addEventListener('beforeunload', flushModeTime);
+
         function checkExistingSession() {
             const isLoggedIn = sessionStorage.getItem('soundgluck_logged_in');
             if (isLoggedIn === 'true') {
@@ -1319,6 +1546,8 @@
                 if (!GOOGLE_SHEET_API_URL || GOOGLE_SHEET_API_URL.trim() === "") {
                     if ((inputId === "jee" && inputPw === "min") || (inputId === "sound" && inputPw === "gluck")) {
                         sessionStorage.setItem('soundgluck_logged_in', 'true');
+                        sessionStorage.setItem('soundgluck_user_id', inputId);
+                        sessionStorage.setItem('soundgluck_user_pw', inputPw);
                         showToast("오프라인 개발자 계정으로 로그인 성공!");
                         bypassLogin();
                     } else {
@@ -1333,8 +1562,9 @@
                             'Content-Type': 'text/plain' 
                         },
                         body: JSON.stringify({
-                            username: inputId,
-                            password: inputPw
+                            action: 'login',
+                            id: inputId,
+                            pw: inputPw
                         })
                     });
 
@@ -1343,6 +1573,9 @@
                     const result = await response.json();
                     if (result.success) {
                         sessionStorage.setItem('soundgluck_logged_in', 'true');
+                        sessionStorage.setItem('soundgluck_user_id', inputId);
+                        sessionStorage.setItem('soundgluck_user_pw', inputPw);
+                        if (result.displayName) sessionStorage.setItem('soundgluck_nickname', result.displayName);
                         showToast(`구글 스프레드시트 인증 성공!`);
                         bypassLogin();
                     } else {
@@ -1367,11 +1600,16 @@
             loginScreen.style.visibility = "hidden";
             
             onboardingScreen.style.display = "flex";
-            initMIDI(); 
+            initMIDI();
+            updateConnectionStatus();
         }
 
         function handleLogout() {
+            flushModeTime();
             sessionStorage.removeItem('soundgluck_logged_in');
+            sessionStorage.removeItem('soundgluck_user_id');
+            sessionStorage.removeItem('soundgluck_user_pw');
+            sessionStorage.removeItem('soundgluck_nickname');
             showToast("안전하게 로그아웃되었습니다.");
             setTimeout(() => {
                 window.location.reload();
@@ -1750,9 +1988,11 @@
         }
 
         function scheduler() {
-            while (nextTickTime < audioCtx.currentTime + 0.1) {
+            let loopCount = 0;
+            while (nextTickTime < audioCtx.currentTime + 0.1 && loopCount < 100) {
                 scheduleNextTick(beatCount, nextTickTime);
                 advanceNextTick();
+                loopCount++;
             }
             if (metronomeEnabled) {
                 metroIntervalId = setTimeout(scheduler, 25);
@@ -2064,8 +2304,14 @@
             requestAnimationFrame(animateVisualizer);
             
             if (visCtx && visualizerCanvas) {
-                const width = visualizerCanvas.width = visualizerCanvas.offsetWidth;
-                const height = visualizerCanvas.height = visualizerCanvas.offsetHeight;
+                const targetWidth = visualizerCanvas.offsetWidth;
+                const targetHeight = visualizerCanvas.offsetHeight;
+                if (visualizerCanvas.width !== targetWidth || visualizerCanvas.height !== targetHeight) {
+                    visualizerCanvas.width = targetWidth;
+                    visualizerCanvas.height = targetHeight;
+                }
+                const width = visualizerCanvas.width;
+                const height = visualizerCanvas.height;
 
                 analyserNode.getByteFrequencyData(dataArray);
 
@@ -2114,8 +2360,14 @@
                 const waveCanvas = document.getElementById(`wave-canvas-${ch.id}`);
                 if (waveCanvas) {
                     const ctx = waveCanvas.getContext('2d');
-                    const w = waveCanvas.width = waveCanvas.offsetWidth;
-                    const h = waveCanvas.height = waveCanvas.offsetHeight;
+                    const targetW = waveCanvas.offsetWidth;
+                    const targetH = waveCanvas.offsetHeight;
+                    if (waveCanvas.width !== targetW || waveCanvas.height !== targetH) {
+                        waveCanvas.width = targetW;
+                        waveCanvas.height = targetH;
+                    }
+                    const w = waveCanvas.width;
+                    const h = waveCanvas.height;
                     ctx.clearRect(0, 0, w, h);
 
                     channelWaveTriggers[ch.id] *= 0.88;
@@ -2385,8 +2637,14 @@
         /* */
         function renderGameCanvas() {
             if (!cgCtx || !canvasGame) return;
-            const w = canvasGame.width = canvasGame.parentElement.offsetWidth;
-            const h = canvasGame.height = canvasGame.parentElement.offsetHeight;
+            const targetW = canvasGame.parentElement.offsetWidth;
+            const targetH = canvasGame.parentElement.offsetHeight;
+            if (canvasGame.width !== targetW || canvasGame.height !== targetH) {
+                canvasGame.width = targetW;
+                canvasGame.height = targetH;
+            }
+            const w = canvasGame.width;
+            const h = canvasGame.height;
 
             cgCtx.clearRect(0, 0, w, h);
 
@@ -2943,6 +3201,7 @@
            7. ⌨️ System Controls & Multi-Module Integrator
            =================================================================== */
         function switchTab(tabId) {
+            trackModeTimeSwitch(tabId);
             ['sound', 'play', 'lesson', 'controller', 'help'].forEach(id => {
                 document.getElementById(`content-${id}`).classList.add('hidden');
                 document.getElementById(`tab-${id}`).classList.remove('active');
@@ -3386,11 +3645,9 @@
             if (!select || !badge) return;
 
             select.innerHTML = '';
-            const inputs = midiAccess.inputs.values();
             let count = 0;
 
-            for (let input = inputs.next(); input && !input.done; input = inputs.next()) {
-                const device = input.value;
+            midiAccess.inputs.forEach((device) => {
                 const option = document.createElement('option');
                 option.value = device.id;
                 option.text = device.name;
@@ -3398,7 +3655,7 @@
                 
                 device.onmidimessage = onMIDIMessage;
                 count++;
-            }
+            });
 
             /* */
             if (count > 0) {
@@ -3412,15 +3669,28 @@
                     wizardNextBtn.disabled = false;
                     wizardNextBtn.className = 'px-5 py-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-xs rounded-lg font-bold cursor-pointer';
                 }
-                showToast("MIDI 인터페이스가 성공적으로 결속되었습니다!");
+                showToast("✅ MIDI 연결 성공! 드럼 인터페이스가 정상적으로 결속되었습니다.");
             } else {
                 badge.innerText = 'OFFLINE';
                 badge.className = 'px-2.5 py-1 rounded text-[10px] font-extrabold bg-red-950 text-red-400 border border-red-800';
+                if (wizardIndicator && wizardText) {
+                    wizardIndicator.className = 'w-2.5 h-2.5 rounded-full bg-red-500';
+                    wizardText.innerText = 'OFFLINE';
+                    wizardText.className = 'text-[10px] font-black text-red-500 font-mono';
+                }
+                showToast("⚠️ 드럼과의 MIDI 연결이 감지되지 않습니다. USB 케이블 연결과 드럼의 USB MIDI 지원 여부를 확인해 주세요.");
             }
         }
 
         function onMIDIFailure() {
-            showToast("MIDI 장치 인터페이스 접근 실패.");
+            const wizardIndicator = document.getElementById('wizard-midi-indicator');
+            const wizardText = document.getElementById('wizard-midi-text');
+            if (wizardIndicator && wizardText) {
+                wizardIndicator.className = 'w-2.5 h-2.5 rounded-full bg-red-500';
+                wizardText.innerText = 'OFFLINE';
+                wizardText.className = 'text-[10px] font-black text-red-500 font-mono';
+            }
+            showToast("⚠️ MIDI 장치 접근 실패. USB 케이블 연결과 드럼의 USB MIDI 지원 여부, 브라우저(Chrome/Edge 권장)를 확인해 주세요.");
         }
 
         function onMIDIMessage(event) {
@@ -3557,7 +3827,7 @@
 
             document.getElementById('onboarding-screen').style.display = 'none';
             document.getElementById('app-container').style.display = 'flex';
-            showToast("SOUNDGLUCK | Drum Tulz v4.3.3 콘솔이 안전하게 가동되었습니다!");
+            showToast("SOUNDGLUCK | Drum Tulz v4.4.0 콘솔이 안전하게 가동되었습니다!");
         }
 
         function bypassOnboardingDirectly() {
