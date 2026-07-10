@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOUNDGLUCK | DRUM TULZ v4.7.0 Pro-Academy Ultimate</title>
+    <title>SOUNDGLUCK | DRUM TULZ v4.8.0 Pro-Academy Ultimate</title>
     <!-- 고품질 오픈소스 프레임워크 로드 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -159,7 +159,7 @@
 
         #laser-judgment-line {
             position: absolute;
-            bottom: 70px;
+            bottom: 30px;
             width: 100%;
             height: 4px;
             background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.7), rgba(255, 0, 127, 0.7), rgba(0, 243, 255, 0.7), transparent);
@@ -443,7 +443,7 @@
             </div>
             
             <h2 class="text-2xl font-black tracking-widest text-white mb-2 uppercase whitespace-nowrap">SOUNDGLUCK &nbsp;|&nbsp; DRUM TULZ</h2>
-            <p class="text-[11px] text-[#ff007f] font-mono tracking-wider uppercase mb-8">Drum Tulz v4.7.0 Pro-Lesson Academy</p>
+            <p class="text-[11px] text-[#ff007f] font-mono tracking-wider uppercase mb-8">Drum Tulz v4.8.0 Pro-Lesson Academy</p>
             
             <form onsubmit="handleLogin(event)" class="space-y-6">
                 <div class="text-left">
@@ -468,7 +468,7 @@
                     <i class="fa-solid fa-cloud-arrow-up text-[10px]"></i> Google Sheets Cloud Security Enabled
                 </span>
             </div>
-            <p class="text-[10px] text-gray-600 mt-6 font-mono">AUTHORIZED PERSONNEL ONLY // v4.7.0</p>
+            <p class="text-[10px] text-gray-600 mt-6 font-mono">AUTHORIZED PERSONNEL ONLY // v4.8.0</p>
         </div>
     </div>
 
@@ -619,7 +619,7 @@
                     </div>
                     <div class="whitespace-nowrap">
                         <h1 class="text-xl font-black tracking-widest text-white flex items-center gap-2">
-                            SOUNDGLUCK <span class="text-cyan-500 font-light">|</span> DRUM TULZ <span class="text-[#ff007f] font-mono text-[10px] border border-pink-900 px-2 py-0.5 rounded">V4.7.0</span>
+                            SOUNDGLUCK <span class="text-cyan-500 font-light">|</span> DRUM TULZ <span class="text-[#ff007f] font-mono text-[10px] border border-pink-900 px-2 py-0.5 rounded">V4.8.0</span>
                         </h1>
                         <p class="text-[10px] text-gray-500 font-mono">Analog Synthesizer & Professional Training Academy</p>
                     </div>
@@ -680,7 +680,7 @@
             <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center border-b border-[#1c1c3f] pb-4 gap-4">
                 <div>
                     <h2 class="text-sm font-black text-[#00f3ff] tracking-widest uppercase flex items-center gap-1.5">
-                        <i class="fa-solid fa-wave-square text-cyan-400"></i> SoundGluck Performance Workspace v4.7.0 Ultimate
+                        <i class="fa-solid fa-wave-square text-cyan-400"></i> SoundGluck Performance Workspace v4.8.0 Ultimate
                     </h2>
                     <p class="text-[11px] text-gray-400 mt-1 font-sans">고해상도 실시간 하이브리드 FFT 오실로스코프 탑재 믹서 시스템</p>
                 </div>
@@ -1182,7 +1182,7 @@
         <div id="content-help" class="hidden bg-[#06061a]/95 border border-[#141432] rounded-2xl p-6" role="tabpanel" aria-labelledby="tab-help">
             <div class="border-b border-gray-800 pb-4 mb-6">
                 <h2 class="text-base font-black text-[#00f3ff] tracking-widest uppercase flex items-center gap-2">
-                    <i class="fa-solid fa-circle-info text-cyan-400"></i> SOUNDGLUCK DRUMTULZ v4.7.0 초보자 맞춤형 정밀 가이드
+                    <i class="fa-solid fa-circle-info text-cyan-400"></i> SOUNDGLUCK DRUMTULZ v4.8.0 초보자 맞춤형 정밀 가이드
                 </h2>
                 <p class="text-xs text-gray-400 mt-1">전자드럼 최초 결속부터 오디오 성능을 300% 극대화하는 전문가 셋업 노하우까지 한눈에 확인하세요.</p>
             </div>
@@ -2837,7 +2837,12 @@
                 }
 
                 activeLanes.forEach(lane => {
-                    if (lane < activeHardwareLanesCount) {
+                    if (lane >= activeHardwareLanesCount) return;
+                    if (lane === 2) {
+                        // 하이햇은 배경 그루브로 자동 재생 (판정 노트로 스폰하지 않음) - 초보자 난이도 과부하 방지
+                        const instMap = currentMapping[lane];
+                        if (instMap) playSynthesizedSound(instMap.id, 55);
+                    } else {
                         spawnNote(lane);
                     }
                 });
@@ -2868,7 +2873,7 @@
             cgCtx.clearRect(0, 0, w, h);
 
             const laneWidth = w / activeHardwareLanesCount;
-            const judgmentY = h - 70;
+            const judgmentY = h - 30;
 
             if (gameRunning) {
                 if (!gamePaused) {
@@ -3625,9 +3630,11 @@
                 playSynthesizedSound(instMap.id);
             }
 
+            if (isRecording) recordMidiNote(laneIdx);
+
             if (gameRunning && !gamePaused) {
                 createParticles(laneIdx);
-                const hitLineY = canvasGame.height - 70;
+                const hitLineY = canvasGame.height - 30;
                 let hitNote = null;
                 let minDiff = 99999;
 
@@ -3642,10 +3649,10 @@
                 });
 
                 if (hitNote) {
-                    if (minDiff < 20) {
+                    if (minDiff < 28) {
                         triggerJudgment('PERFECT');
                         notesArray.splice(notesArray.indexOf(hitNote), 1);
-                    } else if (minDiff < 45) {
+                    } else if (minDiff < 60) {
                         triggerJudgment('GOOD');
                         notesArray.splice(notesArray.indexOf(hitNote), 1);
                     }
@@ -3995,7 +4002,6 @@
                 const laneIdx = currentMapping.findIndex(m => m.midi === note);
                 if (laneIdx !== -1) {
                     simulateHardwareHit(laneIdx);
-                    if (isRecording) recordMidiNote(laneIdx);
                 }
             }
         }
@@ -4100,7 +4106,7 @@
 
             document.getElementById('onboarding-screen').style.display = 'none';
             document.getElementById('app-container').style.display = 'flex';
-            showToast("SOUNDGLUCK | Drum Tulz v4.7.0 콘솔이 안전하게 가동되었습니다!");
+            showToast("SOUNDGLUCK | Drum Tulz v4.8.0 콘솔이 안전하게 가동되었습니다!");
         }
 
         function bypassOnboardingDirectly() {
