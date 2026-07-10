@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOUNDGLUCK | DRUM TULZ v4.4.0 Pro-Academy Ultimate</title>
+    <title>SOUNDGLUCK | DRUM TULZ v4.6.0 Pro-Academy Ultimate</title>
     <!-- 고품질 오픈소스 프레임워크 로드 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -367,6 +367,23 @@
             width: 100%;
         }
 
+        button, select, .nav-tab { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+        /* 호버 도움말 툴팁 */
+        .help-tooltip{position:fixed;z-index:2000;max-width:260px;background:#0c0c22;border:1px solid #2e2e5a;
+          border-radius:10px;padding:10px 12px;font-size:11px;line-height:1.5;color:#d8d8ec;
+          box-shadow:0 8px 30px rgba(0,0,0,0.5);pointer-events:none;opacity:0;transition:opacity .12s ease;}
+        .help-tooltip.show{opacity:1;}
+        .help-tooltip .ht-desc{color:#e8e8f5;margin-bottom:5px;}
+        .help-tooltip .ht-tip{color:#39ff14;font-weight:700;}
+        .help-tooltip .ht-tip::before{content:'TIP  ';color:#ffe600;}
+        [data-help]{cursor:help;}
+        #orientation-banner{position:fixed;top:0;left:0;right:0;z-index:3000;display:none;align-items:center;justify-content:center;gap:10px;
+            background:linear-gradient(90deg, rgba(255,230,0,0.95), rgba(255,108,0,0.95));color:#1a1a00;padding:9px 14px;font-size:12px;font-weight:800;
+            text-align:center;box-shadow:0 2px 12px rgba(0,0,0,0.4);}
+        #orientation-banner.show{display:flex;}
+        #orientation-banner i.fa-mobile{animation:og-rotate 1.6s ease-in-out infinite;}
+        @keyframes og-rotate{0%,100%{transform:rotate(0deg);}50%{transform:rotate(90deg);}}
+        #orientation-banner-close{background:rgba(0,0,0,0.15);border:none;color:#1a1a00;border-radius:6px;padding:2px 8px;font-weight:900;cursor:pointer;}
         .category-tab-button {
             padding: 12px 6px;
             border-radius: 10px;
@@ -400,6 +417,11 @@
     </style>
 </head>
 <body>
+    <div id="orientation-banner">
+        <i class="fa-solid fa-mobile fa-rotate-90"></i>
+        <span>DRUM TULZ는 가로 모드로 최적화되어 있습니다. 모바일 및 태블릿을 가로 모드로 돌려주세요.</span>
+        <button id="orientation-banner-close" onclick="dismissOrientationBanner()">닫기</button>
+    </div>
 
     <!-- 실시간 알림 토스트 -->
     <div id="notification-toast" class="fixed top-5 right-5 bg-slate-900 border border-cyan-500 text-cyan-300 px-4 py-2.5 rounded-lg shadow-lg opacity-0 transition-all duration-300 pointer-events-none z-[1300] text-xs font-bold flex items-center gap-2">
@@ -409,7 +431,7 @@
     <!-- -->
     <!-- 로그인 화면 -->
     <div id="login-screen">
-        <div class="bg-[#070715]/95 border-2 border-[#00f3ff] shadow-[0_0_40px_rgba(0,243,255,0.2)] rounded-2xl p-10 max-w-lg w-full text-center backdrop-blur-md transition-all duration-300">
+        <div class="bg-[#070715]/95 border-2 border-[#00f3ff] shadow-[0_0_40px_rgba(0,243,255,0.2)] rounded-2xl p-10 max-w-lg w-full text-center backdrop-blur-md transition-all duration-300 max-h-[85vh] overflow-y-auto">
             <div class="flex justify-center mb-6">
                 <div class="w-20 h-20 rounded-full bg-cyan-950/45 border-2 border-cyan-500 flex items-center justify-center shadow-[0_0_20px_rgba(0,243,255,0.35)]">
                     <i class="fa-solid fa-drum text-4xl text-[#00f3ff]"></i>
@@ -417,7 +439,7 @@
             </div>
             
             <h2 class="text-2xl font-black tracking-widest text-white mb-2 uppercase whitespace-nowrap">SOUNDGLUCK &nbsp;|&nbsp; DRUM TULZ</h2>
-            <p class="text-[11px] text-[#ff007f] font-mono tracking-wider uppercase mb-8">Drum Tulz v4.4.0 Pro-Lesson Academy</p>
+            <p class="text-[11px] text-[#ff007f] font-mono tracking-wider uppercase mb-8">Drum Tulz v4.6.0 Pro-Lesson Academy</p>
             
             <form onsubmit="handleLogin(event)" class="space-y-6">
                 <div class="text-left">
@@ -442,13 +464,13 @@
                     <i class="fa-solid fa-cloud-arrow-up text-[10px]"></i> Google Sheets Cloud Security Enabled
                 </span>
             </div>
-            <p class="text-[10px] text-gray-600 mt-6 font-mono">AUTHORIZED PERSONNEL ONLY // v4.4.0</p>
+            <p class="text-[10px] text-gray-600 mt-6 font-mono">AUTHORIZED PERSONNEL ONLY // v4.6.0</p>
         </div>
     </div>
 
     <!-- 온보딩 카드 맵핑 스크린 -->
     <div id="onboarding-screen">
-        <div id="onboarding-card-main" class="bg-[#0a0a20] border-2 border-cyan-500/80 shadow-[0_0_50px_rgba(0,243,255,0.15)] rounded-2xl p-8 max-w-lg w-full backdrop-blur-md">
+        <div id="onboarding-card-main" class="bg-[#0a0a20] border-2 border-cyan-500/80 shadow-[0_0_50px_rgba(0,243,255,0.15)] rounded-2xl p-8 max-w-lg w-full backdrop-blur-md max-h-[85vh] overflow-y-auto">
             <!-- -->
             <div class="text-center mb-6">
                 <span class="text-[10px] text-cyan-400 font-mono tracking-widest uppercase">SoundGluck Welcome System</span>
@@ -593,24 +615,24 @@
                     </div>
                     <div class="whitespace-nowrap">
                         <h1 class="text-xl font-black tracking-widest text-white flex items-center gap-2">
-                            SOUNDGLUCK <span class="text-cyan-500 font-light">|</span> DRUM TULZ <span class="text-[#ff007f] font-mono text-[10px] border border-pink-900 px-2 py-0.5 rounded">V4.4.0</span>
+                            SOUNDGLUCK <span class="text-cyan-500 font-light">|</span> DRUM TULZ <span class="text-[#ff007f] font-mono text-[10px] border border-pink-900 px-2 py-0.5 rounded">V4.6.0</span>
                         </h1>
                         <p class="text-[10px] text-gray-500 font-mono">Analog Synthesizer & Professional Training Academy</p>
                     </div>
                 </div>
 
                 <div class="flex flex-wrap items-center gap-2 shrink-0 justify-end">
-                    <div id="connection-status-badge" class="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-gray-800 bg-black/50 text-[10px] font-black font-mono whitespace-nowrap">
-                        <span id="connection-status-light" class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_6px_#22c55e]"></span>
-                        <span id="connection-status-text" class="text-green-400">ONLINE</span>
+                    <div id="connection-status-badge" class="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-gray-800 bg-black/50 text-[10px] font-black font-mono whitespace-nowrap" data-help="전자드럼과의 실시간 MIDI 연결 상태를 보여줍니다. 연결되면 초록 ONLINE, 끊기면 빨강 OFFLINE으로 바뀝니다." data-tip="연결이 안 될 땐 USB 케이블과 브라우저(Chrome/Edge)를 먼저 확인해 보세요.">
+                        <span id="connection-status-light" class="w-2 h-2 rounded-full bg-red-500 shadow-[0_0_6px_#ef4444]"></span>
+                        <span id="connection-status-text" class="text-red-400">OFFLINE</span>
                     </div>
-                    <button onclick="switchTab('help')" id="tab-help" class="nav-tab px-3.5 py-2.5 text-[11px] font-extrabold text-gray-300 hover:text-white bg-black/40 hover:bg-black/60 border border-gray-800 rounded-lg flex items-center gap-1.5 transition whitespace-nowrap">
+                    <button onclick="switchTab('help')" id="tab-help" class="nav-tab px-3.5 py-2.5 text-[11px] font-extrabold text-gray-300 hover:text-white bg-black/40 hover:bg-black/60 border border-gray-800 rounded-lg flex items-center gap-1.5 transition whitespace-nowrap" data-help="브라우저 호환성, MIDI 연결, 모드별 사용법 등 자세한 사용 설명서를 확인합니다." data-tip="처음 오셨다면 여기부터 확인해 보세요." role="tab" aria-selected="false" aria-controls="content-help">
                         <i class="fa-solid fa-circle-question"></i> 사용가이드
                     </button>
-                    <button onclick="openChannelModal()" class="px-3.5 py-2.5 text-[11px] font-extrabold text-cyan-400 bg-cyan-950/45 hover:bg-cyan-900/60 border border-cyan-800 rounded-lg flex items-center gap-1.5 transition cursor-pointer whitespace-nowrap">
+                    <button onclick="openChannelModal()" class="px-3.5 py-2.5 text-[11px] font-extrabold text-cyan-400 bg-cyan-950/45 hover:bg-cyan-900/60 border border-cyan-800 rounded-lg flex items-center gap-1.5 transition cursor-pointer whitespace-nowrap" data-help="사운드글룩 공식 쇼핑몰, SNS, 고객센터로 바로 이동할 수 있는 채널 모음입니다." data-tip="제품 문의나 A/S는 카카오톡 채널로 문의하세요.">
                         <i class="fa-solid fa-bars"></i> 사운드글룩
                     </button>
-                    <button onclick="openMyPageModal()" class="px-3.5 py-2.5 text-[11px] font-extrabold text-purple-300 bg-purple-950/40 hover:bg-purple-900/60 border border-purple-800 rounded-lg flex items-center gap-1.5 transition whitespace-nowrap">
+                    <button onclick="openMyPageModal()" class="px-3.5 py-2.5 text-[11px] font-extrabold text-purple-300 bg-purple-950/40 hover:bg-purple-900/60 border border-purple-800 rounded-lg flex items-center gap-1.5 transition whitespace-nowrap" data-help="닉네임 변경, 비밀번호 변경, 모드별 누적 연습시간을 확인합니다." data-tip="구글 계정으로 로그인했다면 다른 기기에서도 연습기록이 이어집니다.">
                         <i class="fa-solid fa-user"></i> 마이페이지
                     </button>
                     <button onclick="handleLogout()" class="px-3.5 py-2.5 text-[11px] font-black bg-red-950 hover:bg-red-900/60 border border-red-800 text-red-300 rounded-lg transition whitespace-nowrap">
@@ -619,25 +641,25 @@
                 </div>
             </div>
 
-            <nav class="flex flex-wrap md:flex-nowrap gap-1 bg-black/60 p-1 rounded-xl border border-gray-800 w-full justify-center">
-                <button onclick="switchTab('sound')" id="tab-sound" class="nav-tab active flex-1 px-3 py-2.5 text-[11px] font-extrabold text-gray-400 hover:text-white rounded-lg flex items-center justify-center gap-1.5 whitespace-nowrap">
-                    <i class="fa-solid fa-sliders"></i> 퍼포먼스 모드
+            <nav class="flex flex-wrap md:flex-nowrap gap-1 bg-black/60 p-1 rounded-xl border border-gray-800 w-full justify-center" role="tablist" aria-label="드럼 툴즈 모드 선택">
+                <button onclick="switchTab('sound')" id="tab-sound" class="nav-tab active flex-1 px-3 py-2.5 text-[11px] font-extrabold text-gray-400 hover:text-white rounded-lg flex items-center justify-center gap-1.5 whitespace-nowrap" role="tab" aria-selected="true" aria-controls="content-sound">
+                    <i class="fa-solid fa-sliders"></i> PERFORMANCE MODE
                 </button>
-                <button onclick="switchTab('play')" id="tab-play" class="nav-tab flex-1 px-3 py-2.5 text-[11px] font-extrabold text-gray-400 hover:text-white rounded-lg flex items-center justify-center gap-1.5 whitespace-nowrap">
-                    <i class="fa-solid fa-gamepad"></i> 게임 모드
+                <button onclick="switchTab('play')" id="tab-play" class="nav-tab flex-1 px-3 py-2.5 text-[11px] font-extrabold text-gray-400 hover:text-white rounded-lg flex items-center justify-center gap-1.5 whitespace-nowrap" role="tab" aria-selected="false" aria-controls="content-play">
+                    <i class="fa-solid fa-gamepad"></i> GAME MODE
                 </button>
-                <button onclick="switchTab('lesson')" id="tab-lesson" class="nav-tab flex-1 px-3 py-2.5 text-[11px] font-extrabold text-gray-400 hover:text-white rounded-lg flex items-center justify-center gap-1.5 whitespace-nowrap">
-                    <i class="fa-solid fa-graduation-cap text-[#39ff14]"></i> 레슨 모드
+                <button onclick="switchTab('lesson')" id="tab-lesson" class="nav-tab flex-1 px-3 py-2.5 text-[11px] font-extrabold text-gray-400 hover:text-white rounded-lg flex items-center justify-center gap-1.5 whitespace-nowrap" role="tab" aria-selected="false" aria-controls="content-lesson">
+                    <i class="fa-solid fa-graduation-cap text-[#39ff14]"></i> LESSON MODE
                 </button>
-                <button onclick="switchTab('controller')" id="tab-controller" class="nav-tab flex-1 px-3 py-2.5 text-[11px] font-extrabold text-gray-400 hover:text-white rounded-lg flex items-center justify-center gap-1.5 whitespace-nowrap">
-                    <i class="fa-solid fa-circle-nodes"></i> 컨트롤러 맵핑
+                <button onclick="switchTab('controller')" id="tab-controller" class="nav-tab flex-1 px-3 py-2.5 text-[11px] font-extrabold text-gray-400 hover:text-white rounded-lg flex items-center justify-center gap-1.5 whitespace-nowrap" role="tab" aria-selected="false" aria-controls="content-controller">
+                    <i class="fa-solid fa-circle-nodes"></i> CONTROLLER MAPPING
                 </button>
             </nav>
         </header>
 
         <!-- -->
         <!-- [1] 퍼포먼스 모드 영역 -->
-        <div id="content-sound" class="flex flex-col gap-4 bg-[#06061a]/95 border border-[#141432] rounded-2xl p-5">
+        <div id="content-sound" class="flex flex-col gap-4 bg-[#06061a]/95 border border-[#141432] rounded-2xl p-5" role="tabpanel" aria-labelledby="tab-sound">
             <!-- 드럼 아나토미 맵 입문 교육 판독용 도구 블록 -->
             <div class="bg-gradient-to-r from-blue-950/30 to-purple-950/30 border border-cyan-900/40 rounded-xl p-4 flex flex-col md:flex-row items-center gap-4">
                 <div class="text-cyan-400 text-3xl shrink-0"><i class="fa-solid fa-drum-steelpan"></i></div>
@@ -654,7 +676,7 @@
             <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center border-b border-[#1c1c3f] pb-4 gap-4">
                 <div>
                     <h2 class="text-sm font-black text-[#00f3ff] tracking-widest uppercase flex items-center gap-1.5">
-                        <i class="fa-solid fa-wave-square text-cyan-400"></i> SoundGluck Performance Workspace v4.4.0 Ultimate
+                        <i class="fa-solid fa-wave-square text-cyan-400"></i> SoundGluck Performance Workspace v4.6.0 Ultimate
                     </h2>
                     <p class="text-[11px] text-gray-400 mt-1 font-sans">고해상도 실시간 하이브리드 FFT 오실로스코프 탑재 믹서 시스템</p>
                 </div>
@@ -662,7 +684,9 @@
                 <div class="flex flex-wrap items-center gap-4">
                     <div class="flex flex-wrap items-center gap-3 bg-black/40 px-3 py-2 rounded-lg border border-gray-800">
                         <div class="flex items-center gap-2">
-                            <span class="text-xs font-bold text-gray-400"><i class="fa-solid fa-clock text-green-400 mr-1"></i> 메트로놈</span>
+                            <span class="text-xs font-bold text-gray-400" data-help="설정한 BPM/박자에 맞춰 클릭음을 재생하고, 옆의 원이 박자에 맞춰 깜빡입니다." data-tip="다른 모드로 이동하면 메트로놈은 자동으로 꺼집니다.">
+                                <i class="fa-solid fa-clock text-green-400 mr-1"></i> 메트로놈</span>
+                            <span id="metro-light-sound" class="w-2.5 h-2.5 rounded-full bg-gray-800 border border-gray-700 transition-all duration-75"></span>
                             <label class="inline-flex items-center cursor-pointer">
                                 <input type="checkbox" id="metronome-enable" class="sr-only peer" onchange="syncMetronomeToggle(this.checked)">
                                 <div class="relative w-9 h-5 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-500"></div>
@@ -695,16 +719,25 @@
             </div>
 
             <!-- -->
-            <!-- 완전히 복구 및 20개 음색으로 극대화 확장된 사운드 프리셋 셀렉트 라인 -->
+            <!-- 음색 라이브러리: 카테고리 직관 선택 + 드롭다운 -->
             <div class="bg-black/30 border border-gray-800 p-4 rounded-xl space-y-3">
                 <div class="flex items-center justify-between border-b border-gray-900 pb-2">
                     <span class="text-[11px] font-black text-[#ffe600] uppercase tracking-wider flex items-center gap-1">
-                        <i class="fa-solid fa-compact-disc animate-spin"></i> 🥁 20 ULTRA PRESET SOUND LIBRARIES (사운드 음색 프리셋 20종 완벽구축)
+                        <i class="fa-solid fa-compact-disc animate-spin"></i> 🥁 사운드 음색 라이브러리 (20종 / 4개 카테고리)
                     </span>
                     <span class="text-[10px] font-mono text-gray-500">Real-time Audio Graph Re-routing System</span>
                 </div>
-                <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-2" id="preset-buttons-container">
-                    <!-- JS를 통해 음색 20개 즉각 자동 주입 -->
+                <div class="space-y-2.5">
+                    <span class="text-[10px] font-bold text-cyan-400 uppercase tracking-widest block">음색 카테고리 직관 선택</span>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2" id="preset-category-tab-wrapper">
+                        <!-- JS에서 동적 주입 -->
+                    </div>
+                </div>
+                <div class="flex flex-col gap-1.5 bg-black/60 p-3 rounded-lg border border-slate-900">
+                    <span class="text-[9px] font-black text-slate-500 uppercase tracking-wider block">음색 선택</span>
+                    <select id="preset-select" onchange="loadDrumKitPreset(this.value)" class="bg-[#0b0b24] border border-cyan-500/50 text-cyan-300 font-black text-xs px-3 py-2 rounded-lg outline-none cursor-pointer w-full">
+                        <!-- JS를 통해 동적 주입 -->
+                    </select>
                 </div>
             </div>
 
@@ -737,7 +770,7 @@
                         <!-- -->
                         <div class="grid grid-cols-2 gap-3">
                             <div class="flex flex-col gap-1 bg-black/40 p-2 rounded-lg border border-pink-900/40">
-                                <span class="text-[9px] font-black text-pink-400 uppercase tracking-widest mb-1 flex items-center gap-1">
+                                <span class="text-[9px] font-black text-pink-400 uppercase tracking-widest mb-1 flex items-center gap-1" data-help="음량 편차를 줄여 전체 사운드를 안정적으로 다듬는 컴프레서입니다." data-tip="Ratio를 너무 세게 걸면 다이내믹(강약)이 사라지니 적당히 사용하세요.">
                                     <i class="fa-solid fa-compress text-[10px]"></i> Compressor
                                 </span>
                                 <div class="flex flex-col gap-1.5">
@@ -753,7 +786,7 @@
                             </div>
 
                             <div class="flex flex-col gap-1 bg-black/40 p-2 rounded-lg border border-cyan-900/40">
-                                <span class="text-[9px] font-black text-cyan-400 uppercase tracking-widest mb-1 flex items-center gap-1">
+                                <span class="text-[9px] font-black text-cyan-400 uppercase tracking-widest mb-1 flex items-center gap-1" data-help="배음을 더하는 새추레이션과 소리를 넓게 퍼뜨리는 코러스를 조절합니다." data-tip="과하게 걸면 음이 탁하게 들리니 소량만 사용하세요.">
                                     <i class="fa-solid fa-wave-square text-[10px]"></i> Dynamics
                                 </span>
                                 <div class="flex flex-col gap-1.5">
@@ -809,7 +842,7 @@
 
         <!-- -->
         <!-- [2] 게임 모드 영역 -->
-        <div id="content-play" class="hidden flex flex-col gap-4">
+        <div id="content-play" class="hidden flex flex-col gap-4" role="tabpanel" aria-labelledby="tab-play">
             
             <div class="bg-black/40 border border-cyan-500/20 p-4 rounded-xl flex flex-col gap-4">
                 <div class="flex items-center gap-3">
@@ -864,8 +897,9 @@
                 <div class="flex flex-col gap-1 bg-black/40 p-2 rounded-lg border border-gray-800/60 col-span-1 lg:col-span-2">
                     <div class="flex justify-between items-center text-[9px] font-black text-gray-400 uppercase">
                         <span>⏱️ 정밀 메트로놈</span>
-                        <div class="flex gap-2">
+                        <div class="flex gap-2 items-center">
                             <span id="bpm-text" class="text-green-400">120 BPM</span>
+                            <span id="metro-light-play" class="w-2.5 h-2.5 rounded-full bg-gray-800 border border-gray-700 transition-all duration-75"></span>
                             <label class="inline-flex items-center cursor-pointer scale-75">
                                 <input type="checkbox" id="play-metronome-enable" class="sr-only peer" onchange="syncMetronomeToggle(this.checked)">
                                 <div class="relative w-9 h-5 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-500"></div>
@@ -884,16 +918,16 @@
             <!-- -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 bg-[#0a0a20] border-2 border-cyan-500/30 rounded-xl p-3 items-center">
                 <div class="lg:col-span-6 flex flex-wrap items-center gap-2 bg-black/40 p-2 rounded-lg border border-gray-800/80">
-                    <button onclick="startGameEngine()" class="px-4 py-2 bg-green-950 hover:bg-green-900 text-green-300 border border-green-800 text-xs font-black rounded-lg transition flex items-center gap-1.5 shadow-md shadow-green-950">
+                    <button onclick="startGameEngine()" class="px-4 py-2 bg-green-950 hover:bg-green-900 text-green-300 border border-green-800 text-xs font-black rounded-lg transition flex items-center gap-1.5 shadow-md shadow-green-950" data-help="선택한 곡의 리듬 노트가 화면 위에서 떨어지기 시작합니다." data-tip="처음엔 느린 곡으로 시작해서 콤보를 이어가 보세요.">
                         <i class="fa-solid fa-play"></i> PLAY
                     </button>
-                    <button onclick="pauseGameEngine()" class="px-4 py-2 bg-amber-950 hover:bg-amber-900 text-amber-300 border border-amber-800 text-xs font-black rounded-lg transition flex items-center gap-1.5 shadow-md shadow-amber-950">
+                    <button onclick="pauseGameEngine()" class="px-4 py-2 bg-amber-950 hover:bg-amber-900 text-amber-300 border border-amber-800 text-xs font-black rounded-lg transition flex items-center gap-1.5 shadow-md shadow-amber-950" data-help="현재 점수와 진행 상태를 유지한 채 잠시 멈춥니다." data-tip="다시 PLAY를 누르면 이어서 진행됩니다.">
                         <i class="fa-solid fa-pause"></i> PAUSE
                     </button>
-                    <button onclick="stopGameEngine()" class="px-4 py-2 bg-red-950 hover:bg-red-900 text-red-300 border border-red-800 text-xs font-black rounded-lg transition flex items-center gap-1.5 shadow-md shadow-red-950">
+                    <button onclick="stopGameEngine()" class="px-4 py-2 bg-red-950 hover:bg-red-900 text-red-300 border border-red-800 text-xs font-black rounded-lg transition flex items-center gap-1.5 shadow-md shadow-red-950" data-help="게임을 완전히 종료하고 최종 점수 리포트를 보여줍니다." data-tip="점수를 기록하고 싶다면 STOP으로 마무리하세요.">
                         <i class="fa-solid fa-stop"></i> STOP
                     </button>
-                    <button onclick="resetGameEngine()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 text-xs font-black rounded-lg transition flex items-center gap-1.5">
+                    <button onclick="resetGameEngine()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 text-xs font-black rounded-lg transition flex items-center gap-1.5" data-help="점수와 콤보를 0으로 초기화합니다." data-tip="같은 곡을 처음부터 다시 도전할 때 눌러주세요.">
                         <i class="fa-solid fa-rotate-left"></i> RESET
                     </button>
                 </div>
@@ -907,10 +941,10 @@
                             </div>
                         </div>
                         <div class="flex gap-1">
-                            <button id="record-btn" onclick="toggleRecording()" class="px-2.5 py-1 bg-red-950/40 border border-red-800 text-[10px] text-red-400 rounded-lg font-bold hover:bg-red-950 transition flex items-center gap-1">
+                            <button id="record-btn" onclick="toggleRecording()" class="px-2.5 py-1 bg-red-950/40 border border-red-800 text-[10px] text-red-400 rounded-lg font-bold hover:bg-red-950 transition flex items-center gap-1" data-help="실제로 연주한 드럼 타격을 시퀀스로 녹음합니다." data-tip="녹음 후 리플레이 버튼으로 바로 재생해 확인할 수 있어요.">
                                 <i class="fa-solid fa-circle text-[8px]" id="rec-icon"></i> 녹음
                             </button>
-                            <button id="replay-btn" disabled onclick="startReplay()" class="px-2.5 py-1 bg-cyan-950/20 opacity-50 border border-cyan-900 text-[10px] text-cyan-400 rounded-lg font-bold transition flex items-center gap-1">
+                            <button id="replay-btn" disabled onclick="startReplay()" class="px-2.5 py-1 bg-cyan-950/20 opacity-50 border border-cyan-900 text-[10px] text-cyan-400 rounded-lg font-bold transition flex items-center gap-1" data-help="방금 녹음한 시퀀스를 그대로 재생합니다." data-tip="자신의 연주를 들어보며 타이밍을 점검해 보세요.">
                                 <i class="fa-solid fa-play text-[8px]"></i> 리플레이
                             </button>
                         </div>
@@ -942,7 +976,7 @@
 
         <!-- -->
         <!-- [3] 🎓 레슨 모드 영역 -->
-        <div id="content-lesson" class="hidden flex flex-col gap-4 bg-[#05051a] border-2 border-emerald-500/30 rounded-2xl p-6">
+        <div id="content-lesson" class="hidden flex flex-col gap-4 bg-[#05051a] border-2 border-emerald-500/30 rounded-2xl p-6" role="tabpanel" aria-labelledby="tab-lesson">
             <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center border-b border-emerald-950 pb-4 gap-4">
                 <div>
                     <h2 class="text-sm font-black text-[#39ff14] tracking-widest uppercase flex items-center gap-2">
@@ -1064,10 +1098,10 @@
                     <!-- 레슨 제어 및 가이드 사운드 버튼 랙 -->
                     <div class="flex justify-between items-center border-t border-slate-800 pt-4 mt-2">
                         <div class="flex gap-2">
-                            <button onclick="startLessonEngine()" id="btn-lesson-start" class="px-4 py-2 bg-emerald-950 hover:bg-emerald-900 border border-emerald-800 text-xs font-black text-emerald-300 rounded-lg flex items-center gap-1.5 transition">
+                            <button onclick="startLessonEngine()" id="btn-lesson-start" class="px-4 py-2 bg-emerald-950 hover:bg-emerald-900 border border-emerald-800 text-xs font-black text-emerald-300 rounded-lg flex items-center gap-1.5 transition" data-help="선택한 루디먼트 패턴을 지정한 템포로 자동 재생하며 따라 연주하도록 안내합니다." data-tip="느린 템포부터 정확하게 익힌 뒤 속도를 올려보세요.">
                                 <i class="fa-solid fa-play"></i> 연습 시작
                             </button>
-                            <button onclick="stopLessonEngine()" id="btn-lesson-stop" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs font-black text-slate-300 rounded-lg flex items-center gap-1.5 transition">
+                            <button onclick="stopLessonEngine()" id="btn-lesson-stop" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs font-black text-slate-300 rounded-lg flex items-center gap-1.5 transition" data-help="진행 중인 레슨 연습을 멈춥니다." data-tip="다른 패턴으로 바꿔서 다시 연습해 보세요.">
                                 <i class="fa-solid fa-stop"></i> 정지
                             </button>
                         </div>
@@ -1080,7 +1114,7 @@
         </div>
 
         <!-- [4] 컨트롤러 맵핑 영역 -->
-        <div id="content-controller" class="hidden flex flex-col gap-4 bg-[#06061a]/95 border border-[#141432] rounded-2xl p-5">
+        <div id="content-controller" class="hidden flex flex-col gap-4 bg-[#06061a]/95 border border-[#141432] rounded-2xl p-5" role="tabpanel" aria-labelledby="tab-controller">
             <div class="flex justify-between items-center border-b border-gray-800 pb-3 mb-2">
                 <div>
                     <h2 class="text-sm font-black text-[#ff007f] tracking-widest uppercase flex items-center gap-1.5">
@@ -1141,10 +1175,10 @@
 
         <!-- -->
         <!-- [5] 사용 가이드 팁 영역 -->
-        <div id="content-help" class="hidden bg-[#06061a]/95 border border-[#141432] rounded-2xl p-6">
+        <div id="content-help" class="hidden bg-[#06061a]/95 border border-[#141432] rounded-2xl p-6" role="tabpanel" aria-labelledby="tab-help">
             <div class="border-b border-gray-800 pb-4 mb-6">
                 <h2 class="text-base font-black text-[#00f3ff] tracking-widest uppercase flex items-center gap-2">
-                    <i class="fa-solid fa-circle-info text-cyan-400"></i> SOUNDGLUCK DRUMTULZ v4.4.0 초보자 맞춤형 정밀 가이드
+                    <i class="fa-solid fa-circle-info text-cyan-400"></i> SOUNDGLUCK DRUMTULZ v4.6.0 초보자 맞춤형 정밀 가이드
                 </h2>
                 <p class="text-xs text-gray-400 mt-1">전자드럼 최초 결속부터 오디오 성능을 300% 극대화하는 전문가 셋업 노하우까지 한눈에 확인하세요.</p>
             </div>
@@ -1186,11 +1220,59 @@
                         </p>
                     </div>
                 </div>
+
+                <div class="bg-black/40 border-2 border-red-500/20 rounded-xl p-5 space-y-4">
+                    <h3 class="text-sm font-black text-red-300 border-b border-red-900 pb-2 uppercase flex items-center gap-1.5">
+                        <i class="fa-solid fa-globe"></i> 4. 브라우저 호환성 안내
+                    </h3>
+                    <div class="text-xs text-gray-300 space-y-3 leading-relaxed">
+                        <p>
+                            <b class="text-white">🌐 권장 브라우저:</b><br>
+                            DRUM TULZ는 <span class="text-red-400 font-bold">구글 크롬(Chrome)</span>과 <span class="text-red-400 font-bold">윈도우 엣지(Edge)</span> 브라우저에 최적화되어 있습니다. 사파리, 익스플로러 등 그 외 브라우저는 Web MIDI API를 지원하지 않아 드럼 인식이 안되거나 일부 기능 사용이 어려울 수 있습니다.
+                        </p>
+                        <p>
+                            <b class="text-white">⚠️ MIDI 연결이 감지되지 않을 때:</b><br>
+                            ① 드럼과 PC를 연결한 USB 케이블 양쪽이 제대로 꽂혀 있는지, ② 사용 중인 드럼 제품이 USB MIDI 기능을 지원하는지 확인해 주세요.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-black/40 border-2 border-emerald-500/20 rounded-xl p-5 space-y-4">
+                    <h3 class="text-sm font-black text-emerald-300 border-b border-emerald-900 pb-2 uppercase flex items-center gap-1.5">
+                        <i class="fa-solid fa-mobile-screen"></i> 5. 모바일 · 태블릿 사용 안내
+                    </h3>
+                    <div class="text-xs text-gray-300 space-y-3 leading-relaxed">
+                        <p>
+                            <b class="text-white">💻 권장 기기:</b><br>
+                            믹서, FX랙 등 정밀한 컨트롤이 많은 앱 특성상 데스크톱/노트북 PC 사용을 권장합니다.
+                        </p>
+                        <p>
+                            <b class="text-white">📱 모바일/태블릿 이용 시:</b><br>
+                            반드시 <span class="text-emerald-400 font-bold">가로 모드</span>로 전환해 주세요. 세로 모드로 접속하면 화면 상단에 가로 모드 전환 안내 배너가 표시됩니다.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-black/40 border-2 border-purple-500/20 rounded-xl p-5 space-y-4">
+                    <h3 class="text-sm font-black text-purple-300 border-b border-purple-900 pb-2 uppercase flex items-center gap-1.5">
+                        <i class="fa-solid fa-user"></i> 6. 계정 · 마이페이지 안내
+                    </h3>
+                    <div class="text-xs text-gray-300 space-y-3 leading-relaxed">
+                        <p>
+                            <b class="text-white">🙋 마이페이지:</b><br>
+                            헤더의 <span class="text-purple-400 font-bold">마이페이지</span> 버튼에서 닉네임 저장, 비밀번호 변경, 모드별 누적 연습 시간을 확인할 수 있습니다.
+                        </p>
+                        <p>
+                            <b class="text-white">📶 연결 상태 표시등:</b><br>
+                            헤더 우측의 표시등은 전자드럼과의 실시간 MIDI 연결 여부를 보여줍니다 (초록 ONLINE / 빨강 OFFLINE).
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- 결과 레포트 오버레이 -->
-        <div id="report-modal" class="fixed inset-0 flex items-center justify-center bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 z-50">
+        <div id="report-modal" class="fixed inset-0 flex items-center justify-center bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 z-50" role="dialog" aria-modal="true" aria-label="게임 결과 리포트">
             <div class="bg-[#0b0b1e] border-2 border-[#ff007f] shadow-[0_0_30px_rgba(255,0,127,0.4)] rounded-2xl p-6 max-w-sm w-full text-center">
                 <h3 class="text-xl font-black text-[#ff007f] tracking-widest mb-4 flex items-center justify-center gap-2">
                     <i class="fa-solid fa-chart-line text-[#ff007f]"></i> PERFORMANCE REPORT
@@ -1224,9 +1306,9 @@
     </div>
 
     <!-- 공식 채널 모달 -->
-    <div id="channel-modal" class="fixed inset-0 flex items-center justify-center bg-black/85 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 z-[1200]">
-        <div class="bg-[#08081a] border-2 border-cyan-500 shadow-[0_0_50px_rgba(0,243,255,0.3)] rounded-2xl p-8 max-w-md w-full relative transform scale-95 transition-transform duration-300" id="channel-modal-content">
-            <button onclick="closeChannelModal()" class="absolute top-4 right-4 text-gray-500 hover:text-white transition text-2xl outline-none">
+    <div id="channel-modal" class="fixed inset-0 flex items-center justify-center bg-black/85 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 z-[1200]" role="dialog" aria-modal="true" aria-label="공식 채널 안내">
+        <div class="bg-[#08081a] border-2 border-cyan-500 shadow-[0_0_50px_rgba(0,243,255,0.3)] rounded-2xl p-8 max-w-md w-full relative transform scale-95 transition-transform duration-300 max-h-[85vh] overflow-y-auto" id="channel-modal-content">
+            <button onclick="closeChannelModal()" class="absolute top-4 right-4 text-gray-500 hover:text-white transition text-2xl outline-none" aria-label="닫기">
                 <i class="fa-solid fa-xmark"></i>
             </button>
             
@@ -1261,6 +1343,13 @@
                     <i class="fa-solid fa-arrow-up-right-from-square text-xs text-pink-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition"></i>
                 </a>
 
+                <a href="https://x.com/soundgluck" target="_blank" class="flex items-center justify-between p-3.5 bg-slate-800/20 hover:bg-slate-800/50 border border-slate-600/50 rounded-xl transition group">
+                    <span class="flex items-center gap-3 text-sm font-bold text-gray-200 group-hover:text-slate-200">
+                        <i class="fa-brands fa-x-twitter text-slate-300 text-lg w-5 text-center"></i> 공식 X (트위터)
+                    </span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition"></i>
+                </a>
+
                 <div class="p-4 bg-yellow-950/20 rounded-xl border border-yellow-800/60 mt-4 text-center">
                     <span class="text-[10px] font-black text-yellow-500 uppercase tracking-widest block">KAKAO CS CENTER</span>
                     <span class="text-sm font-black text-yellow-300 block mt-1.5"><i class="fa-solid fa-comment mr-1"></i> 카카오톡 채널 '사운드글룩' 검색</span>
@@ -1271,9 +1360,9 @@
     </div>
 
     <!-- 마이페이지 모달 -->
-    <div id="mypage-modal" class="fixed inset-0 flex items-center justify-center bg-black/85 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 z-[1200]">
+    <div id="mypage-modal" class="fixed inset-0 flex items-center justify-center bg-black/85 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 z-[1200]" role="dialog" aria-modal="true" aria-label="마이페이지">
         <div class="bg-[#08081a] border-2 border-purple-500 shadow-[0_0_50px_rgba(176,38,255,0.25)] rounded-2xl p-8 max-w-md w-full relative transform scale-95 transition-transform duration-300 max-h-[85vh] overflow-y-auto" id="mypage-modal-content">
-            <button onclick="closeMyPageModal()" class="absolute top-4 right-4 text-gray-500 hover:text-white transition text-2xl outline-none">
+            <button onclick="closeMyPageModal()" class="absolute top-4 right-4 text-gray-500 hover:text-white transition text-2xl outline-none" aria-label="닫기">
                 <i class="fa-solid fa-xmark"></i>
             </button>
 
@@ -1311,7 +1400,78 @@
     </div>
 
     <!-- -->
+    <div id="app-tooltip" class="help-tooltip"></div>
     <script>
+        /* ===================== 우클릭/개발자도구 단축키 차단 (참고: 완벽한 보안이 아닌 단순 접근 방지) =====================
+           이 앱은 서버 없이 배포되는 단일 HTML 파일이라, 브라우저가 렌더링하려면 소스 전체를 내려받아야 하는 구조적 특성상
+           완전한 코드 은닉은 불가능함. 아래 처리는 '우클릭 → 페이지 소스 보기'처럼 캐주얼한 접근만 막을 뿐,
+           브라우저 메뉴를 통한 개발자도구 진입이나 파일 자체를 텍스트 에디터로 여는 것까지는 막지 못함. */
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+        document.addEventListener('keydown', (e) => {
+            const k = e.key ? e.key.toUpperCase() : '';
+            if (k === 'F12') { e.preventDefault(); return; }
+            if ((e.ctrlKey || e.metaKey) && e.shiftKey && (k === 'I' || k === 'J' || k === 'C')) { e.preventDefault(); return; }
+            if ((e.ctrlKey || e.metaKey) && k === 'U') { e.preventDefault(); return; }
+        });
+
+        /* ===================== 호버 도움말 툴팁 시스템 (데스크톱 전용) ===================== */
+        function initHelpTooltips() {
+            const isTouchPrimary = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+            if (isTouchPrimary) return;
+            const tip = document.getElementById('app-tooltip');
+            if (!tip) return;
+            let activeEl = null;
+            document.addEventListener('mouseover', (e) => {
+                const el = e.target.closest('[data-help]');
+                if (!el || el === activeEl) return;
+                activeEl = el;
+                const desc = el.dataset.help || '';
+                const hint = el.dataset.tip || '';
+                tip.innerHTML = `<div class="ht-desc">${desc}</div>` + (hint ? `<div class="ht-tip">${hint}</div>` : '');
+                tip.classList.add('show');
+            });
+            document.addEventListener('mousemove', (e) => {
+                if (!activeEl) return;
+                const pad = 14;
+                const rect = tip.getBoundingClientRect();
+                let x = e.clientX + pad, y = e.clientY + pad;
+                if (x + rect.width > window.innerWidth - 8) x = e.clientX - rect.width - pad;
+                if (y + rect.height > window.innerHeight - 8) y = e.clientY - rect.height - pad;
+                tip.style.left = x + 'px';
+                tip.style.top = y + 'px';
+            });
+            document.addEventListener('mouseout', (e) => {
+                if (!activeEl) return;
+                if (e.relatedTarget && activeEl.contains(e.relatedTarget)) return;
+                activeEl = null;
+                tip.classList.remove('show');
+            });
+        }
+
+        /* ===================== 모바일/태블릿 세로모드 안내 배너 ===================== */
+        let orientationBannerDismissed = false;
+        function checkOrientationBanner() {
+            const banner = document.getElementById('orientation-banner');
+            if (!banner) return;
+            const isTouchDevice = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+            const isPortrait = window.innerHeight > window.innerWidth;
+            if (isTouchDevice && isPortrait && !orientationBannerDismissed) {
+                banner.classList.add('show');
+            } else {
+                banner.classList.remove('show');
+            }
+        }
+        function dismissOrientationBanner() {
+            orientationBannerDismissed = true;
+            const banner = document.getElementById('orientation-banner');
+            if (banner) banner.classList.remove('show');
+        }
+        window.addEventListener('resize', checkOrientationBanner);
+        window.addEventListener('orientationchange', () => {
+            orientationBannerDismissed = false;
+            setTimeout(checkOrientationBanner, 200);
+        });
+
         /* ===================================================================
            1. 🔑 Session Security Management (Google Sheet Cloud Auth)
            =================================================================== */
@@ -1503,11 +1663,11 @@
         /* ===================================================================
            1-C. 📶 온라인/오프라인 연결 상태 표시
            =================================================================== */
-        function updateConnectionStatus() {
+        function updateConnectionStatus(midiConnected) {
             const light = document.getElementById('connection-status-light');
             const text = document.getElementById('connection-status-text');
             if (!light || !text) return;
-            if (navigator.onLine) {
+            if (midiConnected) {
                 light.className = 'w-2 h-2 rounded-full bg-green-500 shadow-[0_0_6px_#22c55e]';
                 text.className = 'text-green-400';
                 text.innerText = 'ONLINE';
@@ -1517,8 +1677,6 @@
                 text.innerText = 'OFFLINE';
             }
         }
-        window.addEventListener('online', updateConnectionStatus);
-        window.addEventListener('offline', updateConnectionStatus);
         window.addEventListener('beforeunload', flushModeTime);
 
         function checkExistingSession() {
@@ -1601,7 +1759,6 @@
             
             onboardingScreen.style.display = "flex";
             initMIDI();
-            updateConnectionStatus();
         }
 
         function handleLogout() {
@@ -1831,29 +1988,36 @@
         /* */
         // 피드백 반영: 대규모 사운드 라이브러리 프리셋 20종 구현
         const presets = {
-            preset1: { name: "Acoustic Studio (기본)", pitch: 120, decay: 0.28, vol: 1.0 },
-            preset2: { name: "Deep Sub 808", pitch: 55, decay: 0.85, vol: 1.2 },
-            preset3: { name: "Cyber Retro 80s", pitch: 160, decay: 0.4, vol: 1.0 },
-            preset4: { name: "Industrial Metal", pitch: 140, decay: 0.35, vol: 1.1 },
-            preset5: { name: "Jazz Session", pitch: 130, decay: 0.22, vol: 0.9 },
-            preset6: { name: "Symphony Orchestral", pitch: 100, decay: 0.5, vol: 1.0 },
-            preset7: { name: "EDM Club Electro", pitch: 65, decay: 0.6, vol: 1.2 },
-            preset8: { name: "Hyper Synthwave", pitch: 145, decay: 0.3, vol: 1.05 },
-            preset9: { name: "Latin Percussion", pitch: 180, decay: 0.15, vol: 0.85 },
-            preset10: { name: "Reggae Dub System", pitch: 110, decay: 0.45, vol: 1.15 },
-            preset11: { name: "Vintage Vinyl Lo-Fi", pitch: 95, decay: 0.25, vol: 0.8 },
-            preset12: { name: "Futuristic Sci-Fi Synth", pitch: 200, decay: 0.55, vol: 1.0 },
-            preset13: { name: "Heavy Rock Arena", pitch: 125, decay: 0.32, vol: 1.15 },
-            preset14: { name: "Funk Groove Deluxe", pitch: 135, decay: 0.2, vol: 0.95 },
-            preset15: { name: "Cinematic Impact", pitch: 80, decay: 0.7, vol: 1.25 },
-            preset16: { name: "Neo-Soul Smooth", pitch: 115, decay: 0.28, vol: 0.9 },
-            preset17: { name: "Drill Slide 140", pitch: 50, decay: 0.9, vol: 1.3 },
-            preset18: { name: "Tribal African Drum", pitch: 150, decay: 0.38, vol: 1.1 },
-            preset19: { name: "Chiptune 8-Bit Retro", pitch: 250, decay: 0.18, vol: 0.85 },
-            preset20: { name: "Experimental Glitch Core", pitch: 300, decay: 0.12, vol: 1.0 }
+            preset1: { name: "Acoustic Studio (기본)", category: "acoustic", pitch: 120, decay: 0.28, vol: 1.0 },
+            preset2: { name: "Deep Sub 808", category: "electronic", pitch: 55, decay: 0.85, vol: 1.2 },
+            preset3: { name: "Cyber Retro 80s", category: "electronic", pitch: 160, decay: 0.4, vol: 1.0 },
+            preset4: { name: "Industrial Metal", category: "rock", pitch: 140, decay: 0.35, vol: 1.1 },
+            preset5: { name: "Jazz Session", category: "acoustic", pitch: 130, decay: 0.22, vol: 0.9 },
+            preset6: { name: "Symphony Orchestral", category: "rock", pitch: 100, decay: 0.5, vol: 1.0 },
+            preset7: { name: "EDM Club Electro", category: "electronic", pitch: 65, decay: 0.6, vol: 1.2 },
+            preset8: { name: "Hyper Synthwave", category: "electronic", pitch: 145, decay: 0.3, vol: 1.05 },
+            preset9: { name: "Latin Percussion", category: "world", pitch: 180, decay: 0.15, vol: 0.85 },
+            preset10: { name: "Reggae Dub System", category: "world", pitch: 110, decay: 0.45, vol: 1.15 },
+            preset11: { name: "Vintage Vinyl Lo-Fi", category: "acoustic", pitch: 95, decay: 0.25, vol: 0.8 },
+            preset12: { name: "Futuristic Sci-Fi Synth", category: "rock", pitch: 200, decay: 0.55, vol: 1.0 },
+            preset13: { name: "Heavy Rock Arena", category: "rock", pitch: 125, decay: 0.32, vol: 1.15 },
+            preset14: { name: "Funk Groove Deluxe", category: "acoustic", pitch: 135, decay: 0.2, vol: 0.95 },
+            preset15: { name: "Cinematic Impact", category: "rock", pitch: 80, decay: 0.7, vol: 1.25 },
+            preset16: { name: "Neo-Soul Smooth", category: "acoustic", pitch: 115, decay: 0.28, vol: 0.9 },
+            preset17: { name: "Drill Slide 140", category: "electronic", pitch: 50, decay: 0.9, vol: 1.3 },
+            preset18: { name: "Tribal African Drum", category: "world", pitch: 150, decay: 0.38, vol: 1.1 },
+            preset19: { name: "Chiptune 8-Bit Retro", category: "world", pitch: 250, decay: 0.18, vol: 0.85 },
+            preset20: { name: "Experimental Glitch Core", category: "world", pitch: 300, decay: 0.12, vol: 1.0 }
         };
 
         /* */
+        const PRESET_CATEGORIES = {
+            acoustic:   { label: '🎷 어쿠스틱 & 재즈',   color: '#00f3ff' },
+            electronic: { label: '🎛️ 일렉트로닉 & EDM',  color: '#ff007f' },
+            rock:       { label: '🎸 락 & 오케스트라',    color: '#ff6c00' },
+            world:      { label: '🌍 월드 & 레트로',      color: '#39ff14' }
+        };
+
         function loadDrumKitPreset(presetKey) {
             const preset = presets[presetKey];
             if (!preset) return;
@@ -1875,35 +2039,69 @@
             }
 
             renderMixerConsole();
-            
-            // 프리셋 버튼 시각적 활성화
-            document.querySelectorAll('.preset-btn-element').forEach(btn => {
-                btn.classList.remove('bg-cyan-600', 'text-white');
-                btn.classList.add('bg-cyan-950/40', 'text-cyan-300');
-            });
-            const activeBtn = document.getElementById(`btn-preset-${presetKey}`);
-            if (activeBtn) {
-                activeBtn.classList.remove('bg-cyan-950/40', 'text-cyan-300');
-                activeBtn.classList.add('bg-cyan-600', 'text-white');
-            }
+
+            const select = document.getElementById('preset-select');
+            if (select && select.value !== presetKey) select.value = presetKey;
 
             showToast(`사운드 라이브러리 프리셋 [${preset.name}] 로드 완료!`);
         }
 
-        // 20종 프리셋을 UI 컨테이너에 렌더링하는 함수
-        function buildPresetUI() {
-            const container = document.getElementById('preset-buttons-container');
-            if (!container) return;
-            container.innerHTML = '';
+        // 카테고리 탭 전환: 해당 카테고리 음색만 드롭다운에 채우고 첫 음색 자동 로드
+        function changePresetCategory(category) {
+            document.querySelectorAll('.preset-cat-tab').forEach(btn => {
+                const isActive = btn.dataset.cat === category;
+                const color = PRESET_CATEGORIES[btn.dataset.cat].color;
+                btn.classList.toggle('active', isActive);
+                if (isActive) {
+                    btn.style.borderColor = color;
+                    btn.style.color = color;
+                    btn.style.boxShadow = `0 0 15px ${color}55`;
+                    btn.style.background = `${color}22`;
+                } else {
+                    btn.style.borderColor = '#1c1c3f';
+                    btn.style.color = '#9ca3af';
+                    btn.style.boxShadow = 'none';
+                    btn.style.background = '#09091f';
+                }
+            });
 
-            for (const key in presets) {
+            const select = document.getElementById('preset-select');
+            if (!select) return;
+            select.innerHTML = '';
+            const keys = Object.keys(presets).filter(k => presets[k].category === category);
+            keys.forEach(key => {
+                const opt = document.createElement('option');
+                opt.value = key;
+                opt.text = presets[key].name;
+                select.appendChild(opt);
+            });
+            if (keys.length > 0) loadDrumKitPreset(keys[0]);
+        }
+
+        // 카테고리 탭 UI를 동적으로 렌더링하는 함수
+        function buildPresetUI() {
+            const wrapper = document.getElementById('preset-category-tab-wrapper');
+            if (!wrapper) return;
+            wrapper.innerHTML = '';
+            const catHelp = {
+                acoustic: ['자연스러운 어쿠스틱 드럼과 재즈/펑크 계열 음색 모음입니다.', '발라드나 재즈 연주에 잘 어울려요.'],
+                electronic: ['EDM/신스웨이브 등 전자음악에 어울리는 강한 일렉트로닉 음색 모음입니다.', '클럽 사운드나 힙합 비트에 활용해 보세요.'],
+                rock: ['묵직한 락/메탈과 웅장한 오케스트라 계열 음색 모음입니다.', '강렬한 임팩트가 필요한 곡에 잘 맞아요.'],
+                world: ['라틴/레게/아프리칸 등 월드 퍼커션과 레트로 감성 음색 모음입니다.', '독특하고 실험적인 사운드를 원할 때 골라보세요.']
+            };
+            Object.keys(PRESET_CATEGORIES).forEach(cat => {
                 const btn = document.createElement('button');
-                btn.id = `btn-preset-${key}`;
-                btn.onclick = () => loadDrumKitPreset(key);
-                btn.className = "preset-btn-element px-2.5 py-1.5 bg-cyan-950/40 hover:bg-cyan-900 border border-cyan-800 text-[10.5px] text-cyan-300 font-bold rounded-lg transition text-left truncate";
-                btn.innerHTML = `<i class="fa-solid fa-volume-high text-[9px] mr-1"></i> ${presets[key].name}`;
-                container.appendChild(btn);
-            }
+                btn.className = 'preset-cat-tab category-tab-button';
+                btn.dataset.cat = cat;
+                btn.onclick = () => changePresetCategory(cat);
+                btn.innerText = PRESET_CATEGORIES[cat].label;
+                if (catHelp[cat]) {
+                    btn.dataset.help = catHelp[cat][0];
+                    btn.dataset.tip = catHelp[cat][1];
+                }
+                wrapper.appendChild(btn);
+            });
+            changePresetCategory('acoustic');
         }
 
         function updateCompressor(param, value) {
@@ -2037,6 +2235,22 @@
             gain.gain.exponentialRampToValueAtTime(0.01, time + 0.05);
             osc.start(time);
             osc.stop(time + 0.05);
+
+            const flashDelayMs = Math.max(0, (time - audioCtx.currentTime) * 1000);
+            setTimeout(() => flashMetroLight(beat === 0), flashDelayMs);
+        }
+
+        function flashMetroLight(isDownbeat) {
+            ['metro-light-sound', 'metro-light-play'].forEach(id => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                el.className = isDownbeat
+                    ? 'w-2.5 h-2.5 rounded-full bg-[#ffe600] border border-yellow-300 shadow-[0_0_8px_#ffe600] transition-all duration-75'
+                    : 'w-2.5 h-2.5 rounded-full bg-green-400 border border-green-300 shadow-[0_0_6px_#22c55e] transition-all duration-75';
+                setTimeout(() => {
+                    el.className = 'w-2.5 h-2.5 rounded-full bg-gray-800 border border-gray-700 transition-all duration-75';
+                }, 90);
+            });
         }
 
         /* ===================================================================
@@ -3200,14 +3414,35 @@
         /* ===================================================================
            7. ⌨️ System Controls & Multi-Module Integrator
            =================================================================== */
+        function stopAllActiveEngines() {
+            // 게임엔진: 리포트 모달 없이 조용히 정지 (탭 전환 시 팝업 방지)
+            if (typeof gameRunning !== 'undefined' && gameRunning) {
+                gameRunning = false;
+                gamePaused = false;
+                stopRhythmGenerator();
+                notesArray = [];
+            }
+            if (typeof lessonRunning !== 'undefined' && lessonRunning) {
+                stopLessonEngine();
+            }
+            if (typeof metronomeEnabled !== 'undefined' && metronomeEnabled) {
+                syncMetronomeToggle(false);
+            }
+        }
+
         function switchTab(tabId) {
+            stopAllActiveEngines();
             trackModeTimeSwitch(tabId);
             ['sound', 'play', 'lesson', 'controller', 'help'].forEach(id => {
                 document.getElementById(`content-${id}`).classList.add('hidden');
-                document.getElementById(`tab-${id}`).classList.remove('active');
+                const tabEl = document.getElementById(`tab-${id}`);
+                tabEl.classList.remove('active');
+                tabEl.setAttribute('aria-selected', 'false');
             });
             document.getElementById(`content-${tabId}`).classList.remove('hidden');
-            document.getElementById(`tab-${tabId}`).classList.add('active');
+            const activeTabEl = document.getElementById(`tab-${tabId}`);
+            activeTabEl.classList.add('active');
+            activeTabEl.setAttribute('aria-selected', 'true');
 
             if (tabId === 'sound') renderMixerConsole();
             if (tabId === 'play') {
@@ -3467,7 +3702,7 @@
                             <span class="text-[9px] text-gray-500 font-mono">ID: ${map.id} | MIDI: ${map.midi}</span>
                         </div>
                     </div>
-                    <button onclick="learnMidiKey(${idx})" class="px-2.5 py-1 bg-cyan-950 hover:bg-cyan-900 text-[10px] text-cyan-400 border border-cyan-900 font-black rounded-lg transition">신호 맵핑</button>
+                    <button onclick="learnMidiKey(${idx})" class="px-2.5 py-1 bg-cyan-950 hover:bg-cyan-900 text-[10px] text-cyan-400 border border-cyan-900 font-black rounded-lg transition" data-help="이 패드에 어떤 MIDI 신호가 들어오는지 새로 학습(재매핑)합니다." data-tip="버튼을 누른 뒤 실제 드럼 패드를 한 번 쳐서 신호를 등록하세요.">신호 맵핑</button>
                 `;
                 list.appendChild(card);
             });
@@ -3658,6 +3893,7 @@
             });
 
             /* */
+            updateConnectionStatus(count > 0);
             if (count > 0) {
                 badge.innerText = 'CONNECTED';
                 badge.className = 'px-2.5 py-1 rounded text-[10px] font-extrabold bg-green-950 text-green-400 border border-green-800';
@@ -3680,11 +3916,19 @@
                 }
                 showToast("⚠️ 드럼과의 MIDI 연결이 감지되지 않습니다. USB 케이블 연결과 드럼의 USB MIDI 지원 여부를 확인해 주세요.");
             }
+
+            /* 연주 중 실시간 연결 해제/재연결 감지 */
+            midiAccess.onstatechange = () => {
+                let liveCount = 0;
+                midiAccess.inputs.forEach((d) => { if (d.state === 'connected') liveCount++; });
+                updateConnectionStatus(liveCount > 0);
+            };
         }
 
         function onMIDIFailure() {
             const wizardIndicator = document.getElementById('wizard-midi-indicator');
             const wizardText = document.getElementById('wizard-midi-text');
+            updateConnectionStatus(false);
             if (wizardIndicator && wizardText) {
                 wizardIndicator.className = 'w-2.5 h-2.5 rounded-full bg-red-500';
                 wizardText.innerText = 'OFFLINE';
@@ -3827,7 +4071,7 @@
 
             document.getElementById('onboarding-screen').style.display = 'none';
             document.getElementById('app-container').style.display = 'flex';
-            showToast("SOUNDGLUCK | Drum Tulz v4.4.0 콘솔이 안전하게 가동되었습니다!");
+            showToast("SOUNDGLUCK | Drum Tulz v4.6.0 콘솔이 안전하게 가동되었습니다!");
         }
 
         function bypassOnboardingDirectly() {
@@ -3930,6 +4174,8 @@
             checkExistingSession();
             buildPresetUI(); // 20종 프리셋 동적 UI 주입
             initLessonAcademy();
+            initHelpTooltips();
+            checkOrientationBanner();
             
             // 첫 기본 프리셋 강제 세팅
             loadDrumKitPreset('preset1');
