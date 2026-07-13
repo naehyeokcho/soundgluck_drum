@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOUNDGLUCK | DRUM TULZ v4.11.0 Pro-Academy Ultimate</title>
+    <title>SOUNDGLUCK | DRUM TULZ v4.12.0 Pro-Academy Ultimate</title>
     <!-- 고품질 오픈소스 프레임워크 로드 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -468,7 +468,7 @@
             </div>
             
             <h2 class="text-2xl font-black tracking-widest text-white mb-2 uppercase whitespace-nowrap">SOUNDGLUCK &nbsp;|&nbsp; DRUM TULZ</h2>
-            <p class="text-[11px] text-[#ff007f] font-mono tracking-wider uppercase mb-8">Drum Tulz v4.11.0 Pro-Lesson Academy</p>
+            <p class="text-[11px] text-[#ff007f] font-mono tracking-wider uppercase mb-8">Drum Tulz v4.12.0 Pro-Lesson Academy</p>
             
             <form onsubmit="handleLogin(event)" class="space-y-6">
                 <div class="text-left">
@@ -493,7 +493,7 @@
                     <i class="fa-solid fa-cloud-arrow-up text-[10px]"></i> Google Sheets Cloud Security Enabled
                 </span>
             </div>
-            <p class="text-[10px] text-gray-600 mt-6 font-mono">AUTHORIZED PERSONNEL ONLY // v4.11.0</p>
+            <p class="text-[10px] text-gray-600 mt-6 font-mono">AUTHORIZED PERSONNEL ONLY // v4.12.0</p>
         </div>
     </div>
 
@@ -584,7 +584,7 @@
                         </button>
                         <button onclick="selectWizardHardware(9)" id="btn-wiz-hw-9" class="border-2 border-slate-800 bg-slate-950/20 rounded-xl p-4 text-center transition">
                             <h5 class="text-sm font-extrabold text-white">다기능 심벌 확장 사양 (9패드)</h5>
-                            <span class="text-[10px] text-gray-400 mt-1 block leading-relaxed">Crash 2가 추가된 확장형 셋업 규격 (중상급 및 하이엔드 드럼 모델)</span>
+                            <span class="text-[10px] text-gray-400 mt-1 block leading-relaxed">라이드 심벌이 추가된 확장형 셋업 규격 (중상급 및 하이엔드 드럼 모델)</span>
                         </button>
                     </div>
                     <div class="flex justify-between pt-2">
@@ -644,7 +644,7 @@
                     </div>
                     <div class="whitespace-nowrap">
                         <h1 class="text-xl font-black tracking-widest text-white flex items-center gap-2">
-                            SOUNDGLUCK <span class="text-cyan-500 font-light">|</span> DRUM TULZ <span class="text-[#ff007f] font-mono text-[10px] border border-pink-900 px-2 py-0.5 rounded">V4.11.0</span>
+                            SOUNDGLUCK <span class="text-cyan-500 font-light">|</span> DRUM TULZ <span class="text-[#ff007f] font-mono text-[10px] border border-pink-900 px-2 py-0.5 rounded">V4.12.0</span>
                         </h1>
                         <p class="text-[10px] text-gray-500 font-mono">Analog Synthesizer & Professional Training Academy</p>
                     </div>
@@ -705,7 +705,7 @@
             <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center border-b border-[#1c1c3f] pb-4 gap-4">
                 <div>
                     <h2 class="text-sm font-black text-[#00f3ff] tracking-widest uppercase flex items-center gap-1.5">
-                        <i class="fa-solid fa-wave-square text-cyan-400"></i> SoundGluck Performance Workspace v4.11.0 Ultimate
+                        <i class="fa-solid fa-wave-square text-cyan-400"></i> SoundGluck Performance Workspace v4.12.0 Ultimate
                     </h2>
                     <p class="text-[11px] text-gray-400 mt-1 font-sans">고해상도 실시간 하이브리드 FFT 오실로스코프 탑재 믹서 시스템</p>
                 </div>
@@ -820,8 +820,8 @@
                                 </span>
                                 <div class="flex flex-col gap-1.5">
                                     <div class="flex flex-col gap-0.5">
-                                        <span class="text-[8px] text-gray-400 font-bold">Saturate: <span id="label-fx-sat" class="text-cyan-300 font-mono">15%</span></span>
-                                        <input type="range" id="fx-saturate" min="0" max="100" value="15" oninput="updateDynamics('saturation', this.value)">
+                                        <span class="text-[8px] text-gray-400 font-bold">Saturate: <span id="label-fx-sat" class="text-cyan-300 font-mono">0%</span></span>
+                                        <input type="range" id="fx-saturate" min="0" max="100" value="0" oninput="updateDynamics('saturation', this.value)">
                                     </div>
                                     <div class="flex flex-col gap-0.5">
                                         <span class="text-[8px] text-gray-400 font-bold">Chorus: <span id="label-fx-chorus" class="text-cyan-300 font-mono">10%</span></span>
@@ -1074,7 +1074,7 @@
                         <div id="hw-map-crash" class="hardware-map-drum w-16 h-16 rounded-full flex flex-col justify-center items-center text-red-400 font-bold text-[10px] shadow-sm">CRASH 1</div>
                         <div id="hw-map-tom1" class="hardware-map-drum w-14 h-14 rounded-full flex flex-col justify-center items-center text-purple-400 font-bold text-[10px]">TOM 1</div>
                         <div id="hw-map-tom2" class="hardware-map-drum w-14 h-14 rounded-full flex flex-col justify-center items-center text-purple-400 font-bold text-[10px]">TOM 2</div>
-                        <div id="hw-map-crash2" class="hardware-map-drum w-16 h-16 rounded-full flex flex-col justify-center items-center text-red-400 font-bold text-[10px] shadow-sm">CRASH 2</div>
+                        <div id="hw-map-ride" class="hardware-map-drum w-16 h-16 rounded-full flex flex-col justify-center items-center text-yellow-400 font-bold text-[10px] shadow-sm">RIDE</div>
                         <div id="hw-map-hihat" class="hardware-map-drum w-16 h-16 rounded-full flex flex-col justify-center items-center text-amber-400 font-bold text-[10px]">HI-HAT</div>
                         <div id="hw-map-snare" class="hardware-map-drum w-16 h-16 rounded-full flex flex-col justify-center items-center text-orange-400 font-bold text-[10px]">SNARE</div>
                         <div id="hw-map-tom3" class="hardware-map-drum w-16 h-16 rounded-full flex flex-col justify-center items-center text-purple-400 font-bold text-[10px]">FLOOR</div>
@@ -1219,7 +1219,7 @@
         <div id="content-help" class="hidden bg-[#06061a]/95 border border-[#141432] rounded-2xl p-6" role="tabpanel" aria-labelledby="tab-help">
             <div class="border-b border-gray-800 pb-4 mb-6">
                 <h2 class="text-base font-black text-[#00f3ff] tracking-widest uppercase flex items-center gap-2">
-                    <i class="fa-solid fa-circle-info text-cyan-400"></i> SOUNDGLUCK DRUMTULZ v4.11.0 초보자 맞춤형 정밀 가이드
+                    <i class="fa-solid fa-circle-info text-cyan-400"></i> SOUNDGLUCK DRUMTULZ v4.12.0 초보자 맞춤형 정밀 가이드
                 </h2>
                 <p class="text-xs text-gray-400 mt-1">전자드럼 최초 결속부터 오디오 성능을 300% 극대화하는 전문가 셋업 노하우까지 한눈에 확인하세요.</p>
             </div>
@@ -1867,7 +1867,7 @@
             tom_low: { pitch: 170, pitchEnd: 50, decay: 0.3, volume: 0.8, pan: 0.15, eqLow: 2, eqMid: 1, eqHigh: -1, reverbSend: 0.2, delaySend: 0.1, mute: false, solo: false },
             tom_floor: { pitch: 120, pitchEnd: 40, decay: 0.35, volume: 0.8, pan: 0.35, eqLow: 2, eqMid: 1, eqHigh: -1, reverbSend: 0.2, delaySend: 0.1, mute: false, solo: false },
             crash: { pitch: 550, highpass: 2000, decay: 0.6, volume: 0.8, pan: -0.3, eqLow: -2, eqMid: -1, eqHigh: 4, reverbSend: 0.3, delaySend: 0.1, mute: false, solo: false },
-            crash2: { pitch: 650, highpass: 2200, decay: 0.45, volume: 0.8, pan: 0.5, eqLow: -2, eqMid: -1, eqHigh: 4, reverbSend: 0.3, delaySend: 0.1, mute: false, solo: false }
+            ride: { pitch: 480, highpass: 1200, decay: 1.1, volume: 0.75, pan: 0.4, eqLow: -1, eqMid: 0, eqHigh: 2, reverbSend: 0.2, delaySend: 0.05, mute: false, solo: false }
         };
 
         const masterFX = {
@@ -1877,15 +1877,15 @@
             reverbMix: 0.2,
             highpass: 10,
             lowpass: 20000,
-            compThreshold: -24,
-            compRatio: 4,
-            saturation: 15,
+            compThreshold: -18,
+            compRatio: 2.5,
+            saturation: 0,
             chorus: 10,
             roomBleed: 0.1 
         };
 
-        const channelVUMeters = { kick: 0, snare: 0, hihat: 0, hihat_open: 0, tom_high: 0, tom_low: 0, tom_floor: 0, crash: 0, crash2: 0 };
-        const channelWaveTriggers = { kick: 0, snare: 0, hihat: 0, hihat_open: 0, tom_high: 0, tom_low: 0, tom_floor: 0, crash: 0, crash2: 0 };
+        const channelVUMeters = { kick: 0, snare: 0, hihat: 0, hihat_open: 0, tom_high: 0, tom_low: 0, tom_floor: 0, crash: 0, ride: 0 };
+        const channelWaveTriggers = { kick: 0, snare: 0, hihat: 0, hihat_open: 0, tom_high: 0, tom_low: 0, tom_floor: 0, crash: 0, ride: 0 };
 
         let metronomeEnabled = false;
         let timeSignature = '4/4'; 
@@ -1963,7 +1963,7 @@
 
         /* */
         function initChannelStrips() {
-            const allChannelKeys = ['kick', 'snare', 'hihat', 'hihat_open', 'tom_high', 'tom_low', 'tom_floor', 'crash', 'crash2'];
+            const allChannelKeys = ['kick', 'snare', 'hihat', 'hihat_open', 'tom_high', 'tom_low', 'tom_floor', 'crash', 'ride'];
             allChannelKeys.forEach(chId => {
                 const param = synthParams[chId];
                 const inputNode = audioCtx.createGain();
@@ -2094,18 +2094,49 @@
             world:      { label: '🌍 월드 & 레트로',      color: '#39ff14' }
         };
 
+        // 프리셋 값(pitch/decay/vol)을 킥 기준 배율로 정규화한 뒤, 각 채널 기본값에 곱해서 적용.
+        // 극단적인 프리셋(예: 초고음 pitch=300)이라도 채널별 소리가 깨지지 않도록 배율 범위를 clamp함.
+        function clampFactor(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
         function loadDrumKitPreset(presetKey) {
             const preset = presets[presetKey];
             if (!preset) return;
 
-            // 믹서 파라미터 업데이트
+            const pitchFactor = clampFactor(preset.pitch / 150, 0.7, 1.6);
+            const decayFactor = clampFactor(preset.decay / 0.3, 0.5, 3);
+            const volFactor = clampFactor(preset.vol / 1.1, 0.6, 1.5);
+
+            // 킥 / 스네어
             synthParams.kick.pitch = preset.pitch;
             synthParams.kick.decay = preset.decay;
             synthParams.kick.volume = preset.vol;
-            
+
             synthParams.snare.pitch = preset.pitch * 1.5;
             synthParams.snare.decay = preset.decay * 0.8;
             synthParams.snare.volume = preset.vol * 0.9;
+
+            // 하이햇(클로즈/오픈) - 배음이 없는 노이즈 계열이라 decay/volume만 반영
+            synthParams.hihat.decay = clampFactor(0.05 * decayFactor, 0.02, 0.25);
+            synthParams.hihat.volume = 0.7 * volFactor;
+            synthParams.hihat_open.decay = clampFactor(0.15 * decayFactor, 0.05, 0.6);
+            synthParams.hihat_open.volume = 0.7 * volFactor;
+
+            // 탐 3종 - pitch/decay/volume 모두 반영
+            synthParams.tom_high.pitch = 220 * pitchFactor;
+            synthParams.tom_high.decay = 0.25 * decayFactor;
+            synthParams.tom_high.volume = 0.8 * volFactor;
+            synthParams.tom_low.pitch = 170 * pitchFactor;
+            synthParams.tom_low.decay = 0.3 * decayFactor;
+            synthParams.tom_low.volume = 0.8 * volFactor;
+            synthParams.tom_floor.pitch = 120 * pitchFactor;
+            synthParams.tom_floor.decay = 0.35 * decayFactor;
+            synthParams.tom_floor.volume = 0.8 * volFactor;
+
+            // 크래시 / 라이드 - decay/volume 반영(음정 중심축은 심벌 고유 캐릭터 유지를 위해 고정)
+            synthParams.crash.decay = clampFactor(0.6 * decayFactor, 0.3, 1.8);
+            synthParams.crash.volume = 0.8 * volFactor;
+            synthParams.ride.decay = clampFactor(1.1 * decayFactor, 0.5, 3.2);
+            synthParams.ride.volume = 0.75 * volFactor;
 
             // 전체 볼륨게인 반영
             for (const chId in synthParams) {
@@ -2711,7 +2742,7 @@
                 { id: 'tom_low', name: 'Low Tom', midi: 45, key: 'H', color: 5 },
                 { id: 'tom_floor', name: 'Floor Tom', midi: 41, key: 'J', color: 6 },
                 { id: 'crash', name: 'Crash Cymbal', midi: 49, key: 'K', color: 7 },
-                { id: 'crash2', name: 'Crash 2 Cymbal', midi: 57, key: 'L', color: 8 }
+                { id: 'ride', name: 'Ride Cymbal', midi: 51, key: 'L', color: 8 }
             ]
         };
 
@@ -3582,7 +3613,7 @@
             else if (targetId === 'tom_low') mapTarget = 'hw-map-tom2';
             else if (targetId === 'tom_floor') mapTarget = 'hw-map-tom3';
             else if (targetId === 'crash') mapTarget = 'hw-map-crash';
-            else if (targetId === 'crash2') mapTarget = 'hw-map-crash2';
+            else if (targetId === 'ride') mapTarget = 'hw-map-ride';
 
             if (mapTarget) {
                 const element = document.getElementById(mapTarget);
@@ -3833,7 +3864,7 @@
                 osc.start();
                 osc.stop(audioCtx.currentTime + p.decay);
             } 
-            else if (instrument === 'crash' || instrument === 'crash2') {
+            else if (instrument === 'crash') {
                 const noiseNode = createWhiteNoiseNode();
                 const filter = audioCtx.createBiquadFilter();
                 filter.type = 'bandpass';
@@ -3852,6 +3883,38 @@
                     filter.connect(hpFilter);
                     hpFilter.connect(decayGain);
                     decayGain.connect(triggerGain);
+                    try { noiseNode.start(); noiseNode.stop(audioCtx.currentTime + p.decay); } catch(e){}
+                }
+            }
+            else if (instrument === 'ride') {
+                // 라이드 심벌: 크래시(노이즈 위주)와 달리 금속성 "핑" 음정(벨 톤)이 뚜렷하고 서스테인이 길게 남는 소리.
+                // 인하모닉 배음비를 가진 사인/사각 오실레이터 몇 개를 겹쳐 벨 톤을 만들고, 여기에 옅은 하이패스 노이즈(쉬머)를 살짝 얹는다.
+                const bellRatios = [1, 2.4, 3.9, 5.2];
+                bellRatios.forEach((ratio, idx) => {
+                    const bellOsc = audioCtx.createOscillator();
+                    bellOsc.type = idx === 0 ? 'triangle' : 'sine';
+                    bellOsc.frequency.setValueAtTime(p.pitch * ratio, audioCtx.currentTime);
+                    const bellGain = audioCtx.createGain();
+                    const partialGain = 0.5 / (idx + 1);
+                    bellGain.gain.setValueAtTime(partialGain, audioCtx.currentTime);
+                    bellGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + p.decay * (1 - idx * 0.15));
+                    bellOsc.connect(bellGain);
+                    bellGain.connect(triggerGain);
+                    bellOsc.start();
+                    bellOsc.stop(audioCtx.currentTime + p.decay);
+                });
+
+                const noiseNode = createWhiteNoiseNode();
+                const hpFilter = audioCtx.createBiquadFilter();
+                hpFilter.type = 'highpass';
+                hpFilter.frequency.value = p.highpass || 6000;
+                const noiseGain = audioCtx.createGain();
+                noiseGain.gain.setValueAtTime(0.18, audioCtx.currentTime);
+                noiseGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + p.decay * 0.6);
+                if (noiseNode) {
+                    noiseNode.connect(hpFilter);
+                    hpFilter.connect(noiseGain);
+                    noiseGain.connect(triggerGain);
                     try { noiseNode.start(); noiseNode.stop(audioCtx.currentTime + p.decay); } catch(e){}
                 }
             }
@@ -3944,7 +4007,7 @@
                     { id: 'tom_low', name: 'Low Tom' },
                     { id: 'tom_floor', name: 'Floor Tom' },
                     { id: 'crash', name: 'Crash Cym 1' },
-                    { id: 'crash2', name: 'Crash Cym 2' }
+                    { id: 'ride', name: 'Ride Cymbal' }
                 ];
             }
 
@@ -4471,7 +4534,7 @@
 
             document.getElementById('onboarding-screen').style.display = 'none';
             document.getElementById('app-container').style.display = 'flex';
-            showToast("SOUNDGLUCK | Drum Tulz v4.11.0 콘솔이 안전하게 가동되었습니다!");
+            showToast("SOUNDGLUCK | Drum Tulz v4.12.0 콘솔이 안전하게 가동되었습니다!");
         }
 
         function bypassOnboardingDirectly() {
