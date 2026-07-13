@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOUNDGLUCK | DRUM TULZ v4.13.0 Pro-Academy Ultimate</title>
+    <title>SOUNDGLUCK | DRUM TULZ v4.14.0 Pro-Academy Ultimate</title>
     <!-- 고품질 오픈소스 프레임워크 로드 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -468,7 +468,7 @@
             </div>
             
             <h2 class="text-2xl font-black tracking-widest text-white mb-2 uppercase whitespace-nowrap">SOUNDGLUCK &nbsp;|&nbsp; DRUM TULZ</h2>
-            <p class="text-[11px] text-[#ff007f] font-mono tracking-wider uppercase mb-8">Drum Tulz v4.13.0 Pro-Lesson Academy</p>
+            <p class="text-[11px] text-[#ff007f] font-mono tracking-wider uppercase mb-8">Drum Tulz v4.14.0 Pro-Lesson Academy</p>
             
             <form onsubmit="handleLogin(event)" class="space-y-6">
                 <div class="text-left">
@@ -493,7 +493,7 @@
                     <i class="fa-solid fa-cloud-arrow-up text-[10px]"></i> Google Sheets Cloud Security Enabled
                 </span>
             </div>
-            <p class="text-[10px] text-gray-600 mt-6 font-mono">AUTHORIZED PERSONNEL ONLY // v4.13.0</p>
+            <p class="text-[10px] text-gray-600 mt-6 font-mono">AUTHORIZED PERSONNEL ONLY // v4.14.0</p>
         </div>
     </div>
 
@@ -644,7 +644,7 @@
                     </div>
                     <div class="whitespace-nowrap">
                         <h1 class="text-xl font-black tracking-widest text-white flex items-center gap-2">
-                            SOUNDGLUCK <span class="text-cyan-500 font-light">|</span> DRUM TULZ <span class="text-[#ff007f] font-mono text-[10px] border border-pink-900 px-2 py-0.5 rounded">V4.13.0</span>
+                            SOUNDGLUCK <span class="text-cyan-500 font-light">|</span> DRUM TULZ <span class="text-[#ff007f] font-mono text-[10px] border border-pink-900 px-2 py-0.5 rounded">V4.14.0</span>
                         </h1>
                         <p class="text-[10px] text-gray-500 font-mono">Analog Synthesizer & Professional Training Academy</p>
                     </div>
@@ -705,7 +705,7 @@
             <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center border-b border-[#1c1c3f] pb-4 gap-4">
                 <div>
                     <h2 class="text-sm font-black text-[#00f3ff] tracking-widest uppercase flex items-center gap-1.5">
-                        <i class="fa-solid fa-wave-square text-cyan-400"></i> SoundGluck Performance Workspace v4.13.0 Ultimate
+                        <i class="fa-solid fa-wave-square text-cyan-400"></i> SoundGluck Performance Workspace v4.14.0 Ultimate
                     </h2>
                     <p class="text-[11px] text-gray-400 mt-1 font-sans">고해상도 실시간 하이브리드 FFT 오실로스코프 탑재 믹서 시스템</p>
                 </div>
@@ -1226,7 +1226,7 @@
         <div id="content-help" class="hidden bg-[#06061a]/95 border border-[#141432] rounded-2xl p-6" role="tabpanel" aria-labelledby="tab-help">
             <div class="border-b border-gray-800 pb-4 mb-6">
                 <h2 class="text-base font-black text-[#00f3ff] tracking-widest uppercase flex items-center gap-2">
-                    <i class="fa-solid fa-circle-info text-cyan-400"></i> SOUNDGLUCK DRUMTULZ v4.13.0 초보자 맞춤형 정밀 가이드
+                    <i class="fa-solid fa-circle-info text-cyan-400"></i> SOUNDGLUCK DRUMTULZ v4.14.0 초보자 맞춤형 정밀 가이드
                 </h2>
                 <p class="text-xs text-gray-400 mt-1">전자드럼 최초 결속부터 오디오 성능을 300% 극대화하는 전문가 셋업 노하우까지 한눈에 확인하세요.</p>
             </div>
@@ -3863,7 +3863,13 @@
                 osc.type = 'sine';
                 osc.frequency.setValueAtTime(p.pitch, audioCtx.currentTime);
                 osc.frequency.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + p.decay);
-                osc.connect(triggerGain);
+                // 이전엔 진폭 엔벌로프가 없어서 피치가 가청범위 아래로 떨어지는 것에만 기대어 "감쇠"처럼 들렸음.
+                // 실제 볼륨 감쇠 엔벌로프를 추가해서 자연스럽게 잦아들도록 수정.
+                const ampGain = audioCtx.createGain();
+                ampGain.gain.setValueAtTime(1, audioCtx.currentTime);
+                ampGain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + p.decay);
+                osc.connect(ampGain);
+                ampGain.connect(triggerGain);
                 osc.start();
                 osc.stop(audioCtx.currentTime + p.decay);
             } 
@@ -3911,13 +3917,36 @@
                 }
             } 
             else if (instrument.startsWith('tom')) {
+                // 몸통 톤: 피치가 살짝 떨어지는 사인 오실레이터 + 실제 볼륨 감쇠 엔벌로프
+                // (이전엔 진폭 엔벌로프가 없어서 피치가 60Hz 부근의 또렷한 음정으로 남아있는 채
+                //  볼륨이 안 줄어들어 "사이버/애니메이션 효과음"처럼 들렸음)
                 const osc = audioCtx.createOscillator();
                 osc.type = 'sine';
                 osc.frequency.setValueAtTime(p.pitch, audioCtx.currentTime);
                 osc.frequency.exponentialRampToValueAtTime(p.pitchEnd || 60, audioCtx.currentTime + p.decay);
-                osc.connect(triggerGain);
+                const ampGain = audioCtx.createGain();
+                ampGain.gain.setValueAtTime(1, audioCtx.currentTime);
+                ampGain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + p.decay);
+                osc.connect(ampGain);
+                ampGain.connect(triggerGain);
                 osc.start();
                 osc.stop(audioCtx.currentTime + p.decay);
+
+                // 타격 어택: 스틱이 헤드를 치는 순간의 짧은 노이즈 "툭" 성분을 살짝 얹어
+                // 실제 어쿠스틱 탐 특유의 타격감을 더함
+                const attackNoise = createWhiteNoiseNode();
+                const attackFilter = audioCtx.createBiquadFilter();
+                attackFilter.type = 'lowpass';
+                attackFilter.frequency.value = (p.pitch || 150) * 2.2;
+                const attackGain = audioCtx.createGain();
+                attackGain.gain.setValueAtTime(0.5, audioCtx.currentTime);
+                attackGain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.04);
+                if (attackNoise) {
+                    attackNoise.connect(attackFilter);
+                    attackFilter.connect(attackGain);
+                    attackGain.connect(triggerGain);
+                    try { attackNoise.start(); attackNoise.stop(audioCtx.currentTime + 0.05); } catch(e){}
+                }
             } 
             else if (instrument === 'crash') {
                 const noiseNode = createWhiteNoiseNode();
@@ -4589,7 +4618,7 @@
 
             document.getElementById('onboarding-screen').style.display = 'none';
             document.getElementById('app-container').style.display = 'flex';
-            showToast("SOUNDGLUCK | Drum Tulz v4.13.0 콘솔이 안전하게 가동되었습니다!");
+            showToast("SOUNDGLUCK | Drum Tulz v4.14.0 콘솔이 안전하게 가동되었습니다!");
         }
 
         function bypassOnboardingDirectly() {
