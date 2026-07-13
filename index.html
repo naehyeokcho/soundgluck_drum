@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOUNDGLUCK | DRUM TULZ v4.12.0 Pro-Academy Ultimate</title>
+    <title>SOUNDGLUCK | DRUM TULZ v4.13.0 Pro-Academy Ultimate</title>
     <!-- 고품질 오픈소스 프레임워크 로드 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -468,7 +468,7 @@
             </div>
             
             <h2 class="text-2xl font-black tracking-widest text-white mb-2 uppercase whitespace-nowrap">SOUNDGLUCK &nbsp;|&nbsp; DRUM TULZ</h2>
-            <p class="text-[11px] text-[#ff007f] font-mono tracking-wider uppercase mb-8">Drum Tulz v4.12.0 Pro-Lesson Academy</p>
+            <p class="text-[11px] text-[#ff007f] font-mono tracking-wider uppercase mb-8">Drum Tulz v4.13.0 Pro-Lesson Academy</p>
             
             <form onsubmit="handleLogin(event)" class="space-y-6">
                 <div class="text-left">
@@ -493,7 +493,7 @@
                     <i class="fa-solid fa-cloud-arrow-up text-[10px]"></i> Google Sheets Cloud Security Enabled
                 </span>
             </div>
-            <p class="text-[10px] text-gray-600 mt-6 font-mono">AUTHORIZED PERSONNEL ONLY // v4.12.0</p>
+            <p class="text-[10px] text-gray-600 mt-6 font-mono">AUTHORIZED PERSONNEL ONLY // v4.13.0</p>
         </div>
     </div>
 
@@ -644,7 +644,7 @@
                     </div>
                     <div class="whitespace-nowrap">
                         <h1 class="text-xl font-black tracking-widest text-white flex items-center gap-2">
-                            SOUNDGLUCK <span class="text-cyan-500 font-light">|</span> DRUM TULZ <span class="text-[#ff007f] font-mono text-[10px] border border-pink-900 px-2 py-0.5 rounded">V4.12.0</span>
+                            SOUNDGLUCK <span class="text-cyan-500 font-light">|</span> DRUM TULZ <span class="text-[#ff007f] font-mono text-[10px] border border-pink-900 px-2 py-0.5 rounded">V4.13.0</span>
                         </h1>
                         <p class="text-[10px] text-gray-500 font-mono">Analog Synthesizer & Professional Training Academy</p>
                     </div>
@@ -705,7 +705,7 @@
             <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center border-b border-[#1c1c3f] pb-4 gap-4">
                 <div>
                     <h2 class="text-sm font-black text-[#00f3ff] tracking-widest uppercase flex items-center gap-1.5">
-                        <i class="fa-solid fa-wave-square text-cyan-400"></i> SoundGluck Performance Workspace v4.12.0 Ultimate
+                        <i class="fa-solid fa-wave-square text-cyan-400"></i> SoundGluck Performance Workspace v4.13.0 Ultimate
                     </h2>
                     <p class="text-[11px] text-gray-400 mt-1 font-sans">고해상도 실시간 하이브리드 FFT 오실로스코프 탑재 믹서 시스템</p>
                 </div>
@@ -824,8 +824,8 @@
                                         <input type="range" id="fx-saturate" min="0" max="100" value="0" oninput="updateDynamics('saturation', this.value)">
                                     </div>
                                     <div class="flex flex-col gap-0.5">
-                                        <span class="text-[8px] text-gray-400 font-bold">Chorus: <span id="label-fx-chorus" class="text-cyan-300 font-mono">10%</span></span>
-                                        <input type="range" id="fx-chorus" min="0" max="100" value="10" oninput="updateDynamics('chorus', this.value)">
+                                        <span class="text-[8px] text-gray-400 font-bold">Chorus: <span id="label-fx-chorus" class="text-cyan-300 font-mono">0%</span></span>
+                                        <input type="range" id="fx-chorus" min="0" max="100" value="0" oninput="updateDynamics('chorus', this.value)">
                                     </div>
                                 </div>
                             </div>
@@ -841,14 +841,21 @@
                                 <input type="range" id="param-fx-delayFeedback" min="0" max="8" value="3" oninput="updateMasterFX('delayFeedback', this.value / 10, '%')">
                             </div>
                             <div class="flex flex-col gap-1">
+                                <span class="text-[8.5px] font-bold text-gray-400">Delay Mix: <b id="label-fx-delayMix" class="text-cyan-400">0%</b></span>
+                                <input type="range" id="param-fx-delayMix" min="0" max="10" value="0" oninput="updateMasterFX('delayMix', this.value / 10, '%')">
+                            </div>
+                            <div class="flex flex-col gap-1">
                                 <span class="text-[8.5px] font-bold text-gray-400">Reverb Size: <b id="label-fx-reverbSize" class="text-pink-500">1.5s</b></span>
                                 <input type="range" id="param-fx-reverbSize" min="5" max="40" value="15" oninput="updateMasterFX('reverbSize', this.value / 10, 's')">
                             </div>
                             <div class="flex flex-col gap-1">
-                                <span class="text-[8.5px] font-bold text-gray-400">Reverb Mix: <b id="label-fx-reverbMix" class="text-pink-500">20%</b></span>
-                                <input type="range" id="param-fx-reverbMix" min="0" max="8" value="2" oninput="updateMasterFX('reverbMix', this.value / 10, '%')">
+                                <span class="text-[8.5px] font-bold text-gray-400">Reverb Mix: <b id="label-fx-reverbMix" class="text-pink-500">0%</b></span>
+                                <input type="range" id="param-fx-reverbMix" min="0" max="8" value="0" oninput="updateMasterFX('reverbMix', this.value / 10, '%')">
                             </div>
                         </div>
+                        <button onclick="resetMasterFX()" class="w-full mt-3 py-1.5 bg-slate-900/60 hover:bg-slate-800 border border-slate-700 text-[10px] text-slate-300 font-bold rounded-lg transition flex items-center justify-center gap-1.5" data-help="FX 랙(컴프레서/새추레이션/코러스/딜레이/리버브)을 의도된 기본값으로 되돌립니다." data-tip="이펙트를 만지다가 소리가 이상해졌을 때 눌러보세요.">
+                            <i class="fa-solid fa-rotate-left"></i> FX 초기화
+                        </button>
                     </div>
 
                     <div class="border-t border-[#1c1c3f] pt-3 mt-4 space-y-2">
@@ -1219,7 +1226,7 @@
         <div id="content-help" class="hidden bg-[#06061a]/95 border border-[#141432] rounded-2xl p-6" role="tabpanel" aria-labelledby="tab-help">
             <div class="border-b border-gray-800 pb-4 mb-6">
                 <h2 class="text-base font-black text-[#00f3ff] tracking-widest uppercase flex items-center gap-2">
-                    <i class="fa-solid fa-circle-info text-cyan-400"></i> SOUNDGLUCK DRUMTULZ v4.12.0 초보자 맞춤형 정밀 가이드
+                    <i class="fa-solid fa-circle-info text-cyan-400"></i> SOUNDGLUCK DRUMTULZ v4.13.0 초보자 맞춤형 정밀 가이드
                 </h2>
                 <p class="text-xs text-gray-400 mt-1">전자드럼 최초 결속부터 오디오 성능을 300% 극대화하는 전문가 셋업 노하우까지 한눈에 확인하세요.</p>
             </div>
@@ -1873,16 +1880,20 @@
         const masterFX = {
             delayTime: 0.3,
             delayFeedback: 0.3,
+            delayMix: 0,
             reverbSize: 1.5,
-            reverbMix: 0.2,
+            reverbMix: 0,
             highpass: 10,
             lowpass: 20000,
             compThreshold: -18,
             compRatio: 2.5,
             saturation: 0,
-            chorus: 10,
+            chorus: 0,
             roomBleed: 0.1 
         };
+
+        // 의도된 "정상 어쿠스틱" 기본값 스냅샷 (초기화 버튼이 되돌아갈 목표값)
+        const DEFAULT_MASTER_FX = JSON.parse(JSON.stringify(masterFX));
 
         const channelVUMeters = { kick: 0, snare: 0, hihat: 0, hihat_open: 0, tom_high: 0, tom_low: 0, tom_floor: 0, crash: 0, ride: 0 };
         const channelWaveTriggers = { kick: 0, snare: 0, hihat: 0, hihat_open: 0, tom_high: 0, tom_low: 0, tom_floor: 0, crash: 0, ride: 0 };
@@ -1940,6 +1951,9 @@
 
             reverbWetGain.gain.value = masterFX.reverbMix;
             reverbNode.buffer = createReverbImpulseResponse(masterFX.reverbSize, 3.0);
+            // 이전 버전엔 delayWetGain에 값을 지정하지 않아 WebAudio 기본값(1.0=100% 웨트)이 그대로 걸려있었음.
+            // delaySend가 있는 채널(스네어/탐/크래시/라이드)마다 피드백과 겹쳐 상시 에코가 들리던 근본 원인이라 명시적으로 설정.
+            delayWetGain.gain.value = masterFX.delayMix;
 
             masterHighpass.type = 'highpass';
             masterHighpass.frequency.value = masterFX.highpass;
@@ -2256,7 +2270,48 @@
                 masterFX.reverbMix = val;
                 reverbWetGain.gain.setValueAtTime(val, audioCtx.currentTime);
                 document.getElementById('label-fx-reverbMix').innerText = Math.round(val * 100) + '%';
+            } else if (param === 'delayMix') {
+                masterFX.delayMix = val;
+                delayWetGain.gain.setValueAtTime(val, audioCtx.currentTime);
+                document.getElementById('label-fx-delayMix').innerText = Math.round(val * 100) + '%';
             }
+        }
+
+        // FX 랙을 의도된 기본값(DEFAULT_MASTER_FX)으로 되돌리는 초기화 함수.
+        // 오디오 노드 값과 슬라이더 UI(값+라벨)를 모두 함께 갱신한다.
+        function resetMasterFX() {
+            Object.assign(masterFX, JSON.parse(JSON.stringify(DEFAULT_MASTER_FX)));
+
+            masterCompressor.threshold.setValueAtTime(masterFX.compThreshold, audioCtx.currentTime);
+            masterCompressor.ratio.setValueAtTime(masterFX.compRatio, audioCtx.currentTime);
+            updateSaturationCurve(masterFX.saturation);
+            masterChorusLFOGain.gain.setValueAtTime(masterFX.chorus * 0.0001, audioCtx.currentTime);
+            delayNode.delayTime.setValueAtTime(masterFX.delayTime, audioCtx.currentTime);
+            delayFeedbackNode.gain.setValueAtTime(masterFX.delayFeedback, audioCtx.currentTime);
+            delayWetGain.gain.setValueAtTime(masterFX.delayMix, audioCtx.currentTime);
+            reverbNode.buffer = createReverbImpulseResponse(masterFX.reverbSize, 3.0);
+            reverbWetGain.gain.setValueAtTime(masterFX.reverbMix, audioCtx.currentTime);
+
+            document.getElementById('comp-threshold').value = masterFX.compThreshold;
+            document.getElementById('label-comp-thresh').innerText = masterFX.compThreshold + 'dB';
+            document.getElementById('comp-ratio').value = masterFX.compRatio;
+            document.getElementById('label-comp-ratio').innerText = masterFX.compRatio.toFixed(1) + ':1';
+            document.getElementById('fx-saturate').value = masterFX.saturation;
+            document.getElementById('label-fx-sat').innerText = masterFX.saturation + '%';
+            document.getElementById('fx-chorus').value = masterFX.chorus;
+            document.getElementById('label-fx-chorus').innerText = masterFX.chorus + '%';
+            document.getElementById('param-fx-delayTime').value = masterFX.delayTime * 10;
+            document.getElementById('label-fx-delayTime').innerText = masterFX.delayTime.toFixed(1) + 's';
+            document.getElementById('param-fx-delayFeedback').value = masterFX.delayFeedback * 10;
+            document.getElementById('label-fx-delayFeedback').innerText = Math.round(masterFX.delayFeedback * 100) + '%';
+            document.getElementById('param-fx-delayMix').value = masterFX.delayMix * 10;
+            document.getElementById('label-fx-delayMix').innerText = Math.round(masterFX.delayMix * 100) + '%';
+            document.getElementById('param-fx-reverbSize').value = masterFX.reverbSize * 10;
+            document.getElementById('label-fx-reverbSize').innerText = masterFX.reverbSize.toFixed(1) + 's';
+            document.getElementById('param-fx-reverbMix').value = masterFX.reverbMix * 10;
+            document.getElementById('label-fx-reverbMix').innerText = Math.round(masterFX.reverbMix * 100) + '%';
+
+            showToast('FX 랙이 기본값으로 초기화되었습니다.');
         }
 
         function syncMetronomeToggle(isChecked) {
@@ -4534,7 +4589,7 @@
 
             document.getElementById('onboarding-screen').style.display = 'none';
             document.getElementById('app-container').style.display = 'flex';
-            showToast("SOUNDGLUCK | Drum Tulz v4.12.0 콘솔이 안전하게 가동되었습니다!");
+            showToast("SOUNDGLUCK | Drum Tulz v4.13.0 콘솔이 안전하게 가동되었습니다!");
         }
 
         function bypassOnboardingDirectly() {
